@@ -1,0 +1,314 @@
+:root{
+    --backgroundColor: rgba(221, 222, 238, .5);
+    --backgroundCard: #FAFAFA;
+    --textColor: #DC2626;
+    --buttonColor: #017AE9;
+    --textColor2: #FFFFFF;
+    --buttonColorSearch: #DC2626;
+}
+label{
+    color: black;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.roles-create__container{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--backgroundColor);
+    padding: 2rem;
+    width: 100%;
+}
+.roles-create__form{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backgroundCard);
+    width: 100%;
+    padding: 2rem;
+    height: auto;
+    border-radius: 1rem;
+    margin-top: 5%;
+}
+
+.roles-create__h2{
+    text-align: center;
+}
+
+.input-name,
+.input-search{
+    background-color: var(--backgroundColor);
+    padding: 1rem;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 30rem;
+    
+}
+.table-permission{
+    width: 100%;
+    margin-top: 2rem;
+}
+.table-permission__tbody{
+    font-weight: bold;
+}
+.table-permission__thead{
+    font-weight: bold;
+    width: 100%;
+}
+.table-permission__thead--options{
+    display: flex;
+    justify-content: end;
+}
+.table-permission__tbody--input{
+    margin-left: 1.5rem;
+
+}
+.table-permission__tbody--input-edit{
+    margin-left: 2rem;
+}
+.table-permission__tbody--input-delete{
+    margin-left: 2rem;
+}
+.table-permission__tbody--tr td{
+    padding-left: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+}
+.table-permission__tbody--tr:nth-child(odd){
+    background-color: var(--backgroundColor);
+
+}
+.table-permission__thead--options th{
+    padding: 1%;
+}
+.button-send{
+    margin-top: 2rem;
+    background-color: #017AE9;
+    padding: 1rem;
+    color: var(--textColor2);
+    border: none;
+    border-radius: 0.5rem;
+}
+.roles-table__container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--backgroundColor);
+    padding: 2rem;
+    width: 100%;
+
+}
+.roles-table__h2{
+    width: 50%;
+    background-color: var(--backgroundCard);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 1rem;
+    color: var(--textColor);
+    margin-bottom: 2rem;
+}
+.roles-table__h2 h2{
+    text-align: center;
+}
+table{
+    border: 1px solid var(--backgroundColor);
+    border-radius: 1rem;
+    width: 100%;
+    padding: 1rem;
+}
+.roles-table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--backgroundCard);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+}
+.roles-search{
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.roles-table__table{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.roles-table__thead{
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid var(--backgroundColor);
+    color: var(--textColor);  
+    display: flex;
+    justify-content: space-evenly;
+}
+.roles-table__tbody{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.table-button__action{
+    border: none;
+    background-color: var(--backgroundCard);
+    margin-left: 1rem;
+}
+.button-search{
+    width: 100%;
+    background-color: var(--buttonColorSearch);
+    color: var(--textColor2);
+    border: none;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+@media (width >= 355px) and (width <= 600px){
+    .roles-create__form{
+        margin-top: 5%;        
+    }
+    .table-permission__thead--options{
+        display: flex;
+        justify-content: space-between;
+    }
+    .table-permission__tbody--options{
+        display: flex;
+        justify-content: space-between;
+        margin-left: .5rem;
+    }
+    .table-permission__tbody--input{
+        margin-left: -5%;
+    }
+    .table-permission__tbody--input-edit{
+        margin-left: -3%;
+    }
+    .table-permission__tbody--input-delete{
+        margin-right: 2rem;
+    }
+    .button-search{
+        width: 100%;
+        max-width: 20rem;
+
+    }
+
+}
+@media (width >= 601px) and (width <= 1024px){
+    .roles-create__form{
+        width: 60%;
+        margin-left: 10%;
+        margin-top: 10%;
+    }
+    .table-permission__thead--options{
+        display: flex;
+        justify-content: space-between;
+    }
+    .table-permission__tbody--options{
+        display: flex;
+        justify-content: space-between;
+        margin-left: .5rem;
+    }
+    .table-permission__tbody--input{
+        margin-left: -5%;
+    }
+    .table-permission__tbody--input-edit{
+        margin-left: -3%;
+    }
+    .table-permission__tbody--input-delete{
+        margin-right: 2rem;
+    }
+    .roles-table{
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+    .roles-table__container{
+        align-items: normal;
+    }
+    .roles-table__h2{
+        margin-left: 20%;
+        width: 60%;
+        max-width: 20rem;
+    }
+    .roles-table{
+        width: 60%;
+    }
+    .roles-table__tbody,
+    .roles-table__thead{
+        justify-content: space-between;
+    }
+    .roles-table__table{
+        padding-right: 2rem;
+        padding-left:2rem ;
+    }
+    .button-search{
+        width: 100%;
+        height: 3.9rem;
+        max-width: 20rem;
+
+    }
+}
+@media (width >= 1025px) and (width <= 1450px){
+
+    .roles-create__form{
+        width: 60%;
+        margin-top: 5rem;
+    }
+    .table-permission__thead--options{
+        display: flex;
+        justify-content: space-between;
+    }
+    .table-permission__tbody--options{
+        display: flex;
+        justify-content: space-between;
+        margin-left: .5rem;
+    }
+    .table-permission__tbody--input{
+        margin-left: -5%;
+    }
+    .table-permission__tbody--input-edit{
+        margin-left: -3%;
+    }
+    .table-permission__tbody--input-delete{
+        margin-right: 2rem;
+    }
+    .roles-table{
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+    .roles-table__container{
+        align-items: normal;
+    }
+    .roles-table__h2{
+        margin-left: 20%;
+        width: 60%;
+        max-width: 20rem;
+    }
+    .roles-search{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .roles-table__tbody,
+    .roles-table__thead{
+        justify-content: space-between;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .button-send{
+        width: 20%;
+    }
+    .button-search{
+        width: 100%;
+        height: 3.9rem;
+        max-width: 20rem;
+
+    }
+}
