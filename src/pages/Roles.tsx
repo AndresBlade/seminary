@@ -5,7 +5,7 @@ import { RolesTable } from '../features/roles/components/RolesTable'
 export const Roles = () => {
     return (
         <div className={RolesStyle['roles-container']}>
-            <RolesTable />
+            <RolesCreate />
         </div>
     )
 }

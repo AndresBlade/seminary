@@ -4,26 +4,21 @@ import Roles from '../styles/roles.module.css'
 export const RolesCreate = () => {
     const [nameRole, setNameRole] = React.useState('')
     const [permissionsRoles, setPermissionsRoles] = React.useState(new Array(28).fill(false));
-
-    const handleOnChange = (position: number)=> {
-        const updatedPermission = permissionsRoles.map((permission, index) => {
-            if(index === position){
-                return !permission
-            }else{
-                return permission
-            }
-
-        })
-        setPermissionsRoles(updatedPermission)
-    }
+    console.log(permissionsRoles)
+    
 
     return (
         <div className={Roles['roles-create__container']}>
+            <div className={Roles['roles-create__h2--title']}>
+                <h2>Agregar rol de usuario</h2>
+            </div>
             <form action="POST" className={Roles['form']}>
                 <div className={Roles['roles-create__form']}>
                     <h2 className={Roles['roles-create__h2']}>Crear Rol</h2>
                     <label htmlFor="name">Nombre * </label>
-                    <input onChange={(e)=>setNameRole(e.target.value)} type="text" name="name" id="name" className={Roles['input-name']} />
+                    <input type="text" name="name" id="name" className={Roles['input-name']} onChange={(e)=>setNameRole(e.target.value)}  />
+                    <label htmlFor="description">Descripción</label>
+                    <textarea name="description" id="description" className={Roles['input-name']}></textarea>
                     <table className={Roles['table-permission']}>
                         <thead className={Roles['table-permission__thead']}>
                             <tr>
@@ -40,69 +35,181 @@ export const RolesCreate = () => {
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>seminaristas</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={9} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={10} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={11} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={12} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>Etapa</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={17} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={18} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={19} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={20} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>Instructor</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={1} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={2} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={3} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={4} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>Usuario</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={5} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={6} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={7} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={8} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>Examen</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={13} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={14} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={15} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={16} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>Curso</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={21} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={22} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={23} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={24} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                             <tr className={Roles['table-permission__tbody--tr']}>
                                 <td>Materias</td>
                                 <tr className={Roles['table-permission__tbody--options']}>
-                                    <td><input type="checkbox" id="permission" /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} /></td>
-                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} /></td>
+                                    <td><input type="checkbox" id="permission" value={25} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input']} value={26} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-edit']} value={27} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
+                                    <td><input type="checkbox" id="permission"  className={Roles['table-permission__tbody--input-delete']} value={28} onChange={(e:any)=>{setPermissionsRoles(prevPermissions => {
+                                        const updatedPermissions = [...prevPermissions];
+                                        updatedPermissions[e.target.value] = !updatedPermissions[e.target.value];
+                                        return updatedPermissions;
+                                    })}} /></td>
                                 </tr>
                             </tr>
                         </tbody>
                     </table>
-                    <button type="submit" className={Roles['button-send']}>Create</button>
+                    <button type="submit" className={Roles['button-send']}>Crear</button>
                 </div>
             </form>
         </div>
