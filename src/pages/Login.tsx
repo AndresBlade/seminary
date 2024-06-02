@@ -1,3 +1,4 @@
+import LoginDashboard from "../features/login/components/LoginDashboard";
 export const Login = () => {
-	return <>En el login</>;
+	return <LoginDashboard />;
 };
