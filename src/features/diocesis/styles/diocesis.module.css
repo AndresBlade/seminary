@@ -1,0 +1,172 @@
+:root{
+    --backgroundColor: rgba(221, 222, 238, .5);
+    --backgroundCard: #FAFAFA;
+    --textColor: #DC2626;
+    --buttonColor: #017AE9;
+    --textColor2: #FFFFFF;
+    --buttonColorSearch: #DC2626;
+    --buttonColorReset:#818181;
+}
+.diocesis-create__container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--backgroundColor);
+    padding: 2rem;
+}
+.diocesis-create__h1-title h1{
+    border-bottom: 0.5rem solid #DC2626;
+    width: 22%;
+}
+.diocesis-create__h2-title{
+    background-color: var(--backgroundCard);
+    width: 80%;
+    padding: 1rem;
+    border-radius: 2.5rem;
+    margin-bottom: 3rem;
+}
+.diocesis-create__h2-title h2{
+    color: var(--textColor);
+    font-weight: bold;
+    text-align: center;
+}
+.diocesis-create__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--backgroundCard);
+    width: 100%;
+    padding: 2rem;
+    border-radius: 1.5rem;
+}
+.diocesis-create__form-inputs{
+    width: 90%;
+    margin-bottom: 1rem;
+}
+.diocesis-create__form-name,
+.diocesis-create__form-obispo{
+    margin-bottom: 2rem;
+}
+.diocesis-create__form-name,
+.diocesis-create__form-obispo{
+    margin-bottom: 2rem;
+}
+.diocesis-create__form-name--label,
+.diocesis-create__form-obispo--label{
+    font-weight: bold;
+}
+.diocesis-create__form-name input,
+.diocesis-create__form-obispo input{
+    width: 100%;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: var(--backgroundColor);
+    border: none;
+    margin-top:1rem ;
+}
+.diocesis-create__form-group{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 2rem;
+}
+.diocesis-create__form-button--save{
+    background-color: var(--buttonColor);
+    color: var(--textColor2);
+    width: 100%;
+    padding: 2rem;
+    border-radius: .5rem;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+.diocesis-create__form-button--reset{
+    background-color: var(--buttonColorReset);
+    color: var(--textColor2);
+    width: 100%;
+    padding: 2rem;
+    border-radius: .5rem;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+@media (width >= 601px) and (width <= 1024px){
+    .diocesis-create__container{    
+        height: 100vh;
+        width: 100%;
+    }
+    .diocesis-create__container--titles{
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin-left: 15%
+    }
+    .diocesis-create__h1-title h1{
+        border-bottom: 0.5rem solid #DC2626;
+        width: 8%;
+    }
+
+    .diocesis-create__form{
+        width: 70%;
+        align-items: start;
+        margin: 0 auto;
+    }
+    .diocesis-create__h2-title{
+        width: 30%;
+    }
+    .diocesis-create__form-group{
+        justify-content: start;
+    }
+    .diocesis-create__form-name--label,
+    .diocesis-create__form-obispo--label{
+        width: 100%;
+    }
+    .diocesis-create__form-name input,
+    .diocesis-create__form-obispo input{
+        width: 100%;
+    }
+    .diocesis-create__form-button--save,
+    .diocesis-create__form-button--reset{
+        width: 20%;
+    }
+}
+@media (width >= 1025px) and (width<=1440px) { 
+    .diocesis-create__container{    
+        height: 100vh;
+        width: 100%;
+    }
+    .diocesis-create__container--titles{
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin-left: 15%
+    }
+    .diocesis-create__h1-title h1{
+        border-bottom: 0.5rem solid #DC2626;
+        width: 5.5%;
+    }
+
+    .diocesis-create__form{
+        width: 70%;
+        align-items: start;
+        margin: 0 auto;
+    }
+    .diocesis-create__h2-title{
+        width: 30%;
+    }
+    .diocesis-create__form-group{
+        justify-content: start;
+    }
+    .diocesis-create__form-name--label,
+    .diocesis-create__form-obispo--label{
+        width: 100%;
+    }
+    .diocesis-create__form-name input,
+    .diocesis-create__form-obispo input{
+        width: 100%;
+    }
+    .diocesis-create__form-button--save,
+    .diocesis-create__form-button--reset{
+        width: 20%;
+    }
+}
