@@ -14,6 +14,7 @@ label{
     flex-direction: column;
     align-items: center;
     width: 100%;
+
 }
 .roles-create__container{
     display: flex;
@@ -22,18 +23,20 @@ label{
     align-content: start;
     height: auto;
     background-color: var(--backgroundColor);
-    padding: 2rem;
     width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 .roles-create__form{
     display: flex;
     flex-direction: column;
     background-color: var(--backgroundCard);
     width: 100%;
-    padding: 2rem;
     height: auto;
     border-radius: 1rem;
     margin-top: 5%;
+    padding: 2rem
+
 }
 
 .roles-create__h2,
@@ -53,9 +56,14 @@ label{
     max-width: 30rem;
     
 }
+.table-permission__container{
+    width: 100%;
+    overflow-y: scroll;
+}
 .table-permission{
     width: 100%;
     margin-top: 2rem;
+    padding-right: 2rem;
 }
 .table-permission__tbody{
     font-weight: bold;
@@ -99,8 +107,7 @@ label{
     border: none;
     border-radius: 0.5rem;
 }
-.roles-table__container,
-.roles-create__container{
+.roles-table__container{
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -119,10 +126,7 @@ label{
     color: var(--textColor);
     margin-bottom: 2rem;
 }
-.roles-create__h2--title{
-    margin-top: 20%;
-    margin-bottom: 0rem;
-}
+
 .roles-table__h2 h2{
     text-align: center;
 }
@@ -187,11 +191,12 @@ table{
         align-content: start;
         height: auto;
         background-color: var(--backgroundColor);
-        padding: 2rem;
-        width: 100%;
+        max-width: 100%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
     .roles-create__form{
-        margin-top: 5%;        
+        margin-top: 5%;
     }
     .table-permission__thead--options{
         display: flex;
@@ -221,7 +226,6 @@ table{
 @media (width >= 601px) and (width <= 1024px){
     .form{
         display: flex;
-        margin-bottom: 220rem;
     }
     .roles-create__container{
         display: flex;
