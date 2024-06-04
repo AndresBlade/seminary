@@ -3,6 +3,7 @@ import arrowIconPath from '../../../../assets/MaterialSymbolsArrowForwardIos.svg
 import sidebarCSS from '../styles/sidebar.module.css';
 import { useState } from 'react';
 import { Submenu } from './Submenu';
+import { useDelayUnmount } from '../hooks/useDelayUnmount';
 
 interface Props {
 	data: SidebarItemData;
@@ -10,14 +11,10 @@ interface Props {
 
 export const Item = ({ data }: Props) => {
 	const [isSubmenuShowing, setisSubmenuShowing] = useState(false);
-	const itemContainerStyle = !isSubmenuShowing
-		? sidebarCSS.itemContainer
-		: sidebarCSS.clickedItemContainer;
+	const shouldRender = useDelayUnmount(isSubmenuShowing, 300);
 	const arrowStyle = !isSubmenuShowing
 		? sidebarCSS.arrow
 		: sidebarCSS.rotatedArrow;
-	console.log(isSubmenuShowing);
-	console.log(arrowStyle);
 	const itemStyle = !isSubmenuShowing
 		? sidebarCSS.item
 		: sidebarCSS.clickedItemWithSubmenu;
@@ -27,13 +24,12 @@ export const Item = ({ data }: Props) => {
 		: sidebarCSS.clickedItemLogo;
 
 	return (
-		<li className={itemContainerStyle}>
+		<li className={sidebarCSS.itemContainer}>
 			<div
 				className={itemStyle}
 				onClick={() => {
 					if (data.children)
 						setisSubmenuShowing(show => {
-							console.log(show);
 							return !show;
 						});
 				}}
@@ -52,10 +48,12 @@ export const Item = ({ data }: Props) => {
 					/>
 				)}
 			</div>
-			<Submenu
-				submenuItemData={data.children}
-				isSubmenuShowing={isSubmenuShowing}
-			/>
+			{data.children && shouldRender && (
+				<Submenu
+					submenuItemData={data.children}
+					isSubmenuShowing={isSubmenuShowing}
+				/>
+			)}
 		</li>
 	);
 };

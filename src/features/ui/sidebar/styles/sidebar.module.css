@@ -18,6 +18,7 @@ li {
 
 .header {
 	display: flex;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 	gap: 4rem;
@@ -30,7 +31,7 @@ li {
 }
 
 .headerLogo {
-	size: 9rem;
+	width: 9rem;
 	object-fit: scale-down;
 }
 
@@ -45,7 +46,6 @@ li {
 	width: 80%;
 	color: #818181;
 	box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
-	overflow: scroll;
 }
 
 .sidebar > *:not(:last-child) {
@@ -120,38 +120,11 @@ li {
 .hiddenSubmenu {
 	display: grid;
 	grid-template-rows: 0fr;
-	transition: grid-template-rows 0.3s ease;
+	transition: grid-template-rows 0.3s;
 }
 .submenu {
 	composes: hiddenSubmenu;
 	grid-template-rows: 1fr;
-}
-
-@keyframes showSubmenu {
-	0% {
-		display: none;
-		opacity: 0;
-		max-height: 0;
-	}
-
-	100% {
-		display: block;
-		opacity: 1;
-		max-height: 20rem;
-	}
-}
-
-@keyframes hideSubmenu {
-	0% {
-		opacity: 1;
-		display: block;
-		max-height: 20rem;
-	}
-	100% {
-		opacity: 0;
-		display: none;
-		max-height: 0;
-	}
 }
 
 .submenuItem {
@@ -166,4 +139,51 @@ li {
 	width: 1.2rem;
 	height: 1.2rem;
 	filter: var(--svg-red);
+}
+
+@media (min-width: 48rem) {
+	.header {
+		gap: 2.4rem;
+	}
+	.headerLogo {
+		width: 5rem;
+	}
+
+	.headerText {
+		font-size: 3rem;
+	}
+	.sidebar {
+		width: 20rem;
+		position: static;
+		overflow: none;
+		box-shadow: none;
+		font-size: 1rem;
+		box-shadow: 1px 0 2px 0 #d0d0d0;
+		height: 100vh;
+	}
+
+	.item {
+		height: 2.5rem;
+	}
+
+	.items {
+		gap: 1rem;
+	}
+
+	.itemLogo {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	.arrow {
+		height: 0.8rem;
+	}
+
+	.submenuItem {
+		height: 2.5rem;
+	}
+
+	.submenuItemLogo {
+		height: 0.8rem;
+	}
 }
