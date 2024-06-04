@@ -17,10 +17,14 @@ export const RolesCreate = () => {
     })
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        const name = nameRole;
-        const description = descriptionRole;
-        const numbers = permissionRolesIndex;
-        useRolePost({name, description, numbers});
+        if(nameRole.length === 0 || descriptionRole.length === 0 || permissionRolesIndex.length === 0){
+            return alert('Todos los campos son obligatorios');
+        }else{
+            const name = nameRole;
+            const description = descriptionRole;
+            const numbers = permissionRolesIndex;
+            useRolePost({name, description, numbers});
+        }
     }    
     return (
         <div className={Roles['roles-create__container']}>
