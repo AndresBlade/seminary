@@ -2,7 +2,14 @@ import React from 'react'
 import Roles from '../styles/roles.module.css'
 import DeleteIcon from '../../../assets/deleteIcon.svg'
 import EditIcon from '../../../assets/editIcon.svg'
+import useApiGet from '../hooks/useApiGet'
+
 export const RolesTable = () => {
+    
+    const apiUrl = 'https://localhost:3000/role/';
+    const {data, loading, error} = useApiGet(apiUrl);
+
+    console.log(data, loading, error);
     return (
         <div className={Roles['roles-table__container']}>
             <div className={Roles['roles-table__h2']}>

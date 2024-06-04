@@ -107,6 +107,9 @@ label{
     border: none;
     border-radius: 0.5rem;
 }
+.button-send:disabled{
+    background-color: var(--backgroundColor);
+}
 .roles-table__container{
     display: flex;
     flex-direction: column;

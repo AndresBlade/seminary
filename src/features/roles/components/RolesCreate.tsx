@@ -1,31 +1,39 @@
 import React from 'react'
 import Roles from '../styles/roles.module.css'
+import {useRolePost} from '../hooks/useRolePost';
+
 
 export const RolesCreate = () => {
     const [nameRole, setNameRole] = React.useState('');
+    const [descriptionRole, setDescriptionRole] = React.useState('');
     const [permissionsRoles, setPermissionsRoles] = React.useState<number[]>([]);
-    
-    const permissionRolesindex = ([] as number[])
+
+    const permissionRolesIndex = ([] as number[])
 
     permissionsRoles.map((permission, index) => {
         if(permission === 1){
-            permissionRolesindex.push(index);
+            permissionRolesIndex.push(index);
         }
     })
-    console.log(permissionRolesindex);
-    
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        const name = nameRole;
+        const description = descriptionRole;
+        const numbers = permissionRolesIndex;
+        useRolePost({name, description, numbers});
+    }    
     return (
         <div className={Roles['roles-create__container']}>
             <div className={Roles['roles-create__h2--title']}>
                 <h2>Agregar rol de usuario</h2>
             </div>
-            <form action="POST" className={Roles['form']}>
+            <form action="POST" className={Roles['form']} onSubmit={handleSubmit}>
                 <div className={Roles['roles-create__form']}>
                     <h2 className={Roles['roles-create__h2']}>Crear Rol</h2>
                     <label htmlFor="name">Nombre * </label>
-                    <input type="text" name="name" id="name" className={Roles['input-name']} onChange={(e)=>setNameRole(e.target.value)}  />
+                    <input type="text" name="name" id="name" className={Roles['input-name']} onChange={(e)=>setNameRole(e.target.value)} autoFocus />
                     <label htmlFor="description">Descripción</label>
-                    <textarea name="description" id="description" className={Roles['input-name']}></textarea>
+                    <textarea name="description" id="description" className={Roles['input-name']} onChange={(e)=>setDescriptionRole(e.target.value)} ></textarea>
                     <div className={Roles['table-permission__container']}>
                     <table className={Roles['table-permission']}>
                         <thead className={Roles['table-permission__thead']}>
@@ -218,8 +226,10 @@ export const RolesCreate = () => {
                         </tbody>
                     </table>
                     </div>
+                    {
+                        nameRole.length === 0 || descriptionRole.length === 0 || permissionRolesIndex.length === 0 ? <button type="submit" id='send' className={Roles['button-send']} disabled={true} >Crear</button>  : <button type="submit" id='send' className={Roles['button-send']}>Crear</button>
+                    }
                     
-                    <button type="submit" className={Roles['button-send']}>Crear</button>
                 </div>
             </form>
         </div>
