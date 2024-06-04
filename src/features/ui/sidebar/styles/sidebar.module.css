@@ -2,11 +2,18 @@
 	--header-font: 'Sora', sans-serif;
 	--svg-grey: invert(50%) sepia(24%) saturate(9%) hue-rotate(126deg)
 		brightness(97%) contrast(91%);
+	--svg-red: invert(31%) sepia(85%) saturate(1684%) hue-rotate(337deg)
+		brightness(81%) contrast(117%);
+	--red: #dc2626;
 }
 p,
 ul {
 	margin: 0;
 	padding: 0;
+}
+
+li {
+	list-style: none;
 }
 
 .header {
@@ -19,7 +26,7 @@ ul {
 .headerText {
 	font-weight: 800;
 	font-size: 5rem;
-	color: #dc2626;
+	color: var(--red);
 }
 
 .headerLogo {
@@ -38,6 +45,7 @@ ul {
 	width: 80%;
 	color: #818181;
 	box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+	overflow: scroll;
 }
 
 .sidebar > *:not(:last-child) {
@@ -52,18 +60,35 @@ ul {
 	padding: 1.2rem 0;
 }
 
+.itemContainer {
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+}
+
 .item {
 	height: 5.8rem;
-	list-style-type: none;
 	display: flex;
 	align-items: center;
 	gap: 2.6rem;
+	transition: color 0.3s;
 }
 
 .itemLogo {
 	width: 3rem;
 	height: 3rem;
 	filter: var(--svg-grey);
+	transition: filter 0.3s;
+}
+
+.clickedItemLogo {
+	composes: itemLogo;
+	filter: var(--svg-red);
+}
+
+.clickedItemWithSubmenu {
+	composes: item;
+	color: var(--red);
 }
 
 .itemContent {
@@ -74,4 +99,71 @@ ul {
 	width: 1.2rem;
 	filter: var(--svg-grey);
 	height: 1.2rem;
+	transition-property: filter, transform;
+	transition-duration: 0.3s;
+}
+
+.rotatedArrow {
+	composes: arrow;
+	transform: rotate(90deg);
+	filter: var(--svg-red);
+}
+
+.submenu > div {
+	overflow: hidden;
+}
+
+.hiddenSubmenu > div {
+	overflow: hidden;
+}
+
+.hiddenSubmenu {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.3s ease;
+}
+.submenu {
+	composes: hiddenSubmenu;
+	grid-template-rows: 1fr;
+}
+
+@keyframes showSubmenu {
+	0% {
+		display: none;
+		opacity: 0;
+		max-height: 0;
+	}
+
+	100% {
+		display: block;
+		opacity: 1;
+		max-height: 20rem;
+	}
+}
+
+@keyframes hideSubmenu {
+	0% {
+		opacity: 1;
+		display: block;
+		max-height: 20rem;
+	}
+	100% {
+		opacity: 0;
+		display: none;
+		max-height: 0;
+	}
+}
+
+.submenuItem {
+	height: 5.8rem;
+	display: flex;
+	align-items: center;
+	gap: 2.6rem;
+	color: var(--red);
+}
+
+.submenuItemLogo {
+	width: 1.2rem;
+	height: 1.2rem;
+	filter: var(--svg-red);
 }

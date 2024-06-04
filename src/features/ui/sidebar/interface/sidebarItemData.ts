@@ -4,6 +4,6 @@ export interface SidebarItemData {
 	children?: SidebarItemChildrenData[];
 }
 
-interface SidebarItemChildrenData {
+export interface SidebarItemChildrenData {
 	content: string;
 }
