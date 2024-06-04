@@ -36,7 +36,7 @@ li {
 }
 
 .sidebar {
-	height: 100%;
+	height: 100vh;
 	padding: 1.8rem;
 	font-family: var(--header-font);
 	display: flex;
@@ -45,7 +45,82 @@ li {
 	font-weight: 600;
 	width: 80%;
 	color: #818181;
-	box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+
+	animation-name: openingSidebar;
+	animation-duration: 0.5s;
+	animation-timing-function: ease;
+	animation-fill-mode: forwards;
+}
+
+.sidebar > * {
+	animation-name: appearingSidebarContent;
+	animation-duration: 0.7s;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+
+.hiddenSidebar > * {
+	animation-name: disappearingSidebarContent;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+
+@keyframes appearingSidebarContent {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes disappearingSidebarContent {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes openingSidebar {
+	0% {
+		left: calc(0px - 80%);
+		box-shadow: none;
+	}
+
+	100% {
+		left: 0;
+		box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+	}
+}
+
+.hiddenSidebar {
+	composes: sidebar;
+	animation-name: closingSidebar;
+}
+
+@keyframes closingSidebar {
+	0% {
+		left: 0;
+		box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+	}
+
+	100% {
+		left: calc(0px - 80%);
+		box-shadow: none;
+	}
 }
 
 .sidebar > *:not(:last-child) {
@@ -141,9 +216,67 @@ li {
 	filter: var(--svg-red);
 }
 
+.closeButton {
+	width: 4rem;
+	height: 4rem;
+	border: none;
+	border-radius: 100%;
+	padding: 0;
+	margin: 0;
+	position: fixed;
+	left: calc(90% - 2rem);
+	background-color: #ffffff;
+	top: 4rem;
+	outline: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation-name: growingCloseButton;
+	animation-duration: 0.7s;
+	animation-timing-function: ease;
+	animation-fill-mode: both;
+}
+
+.hiddenCloseButton {
+	composes: closeButton;
+	animation-name: shrinkingCloseButton;
+	animation-duration: 0.3s;
+}
+
+.closeButtonImg {
+	filter: contrast(0.3);
+	height: 50%;
+	width: 50%;
+}
+
+@keyframes growingCloseButton {
+	0% {
+		transform: scale(0);
+	}
+
+	50% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes shrinkingCloseButton {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(0);
+	}
+}
+
 @media (min-width: 48rem) {
 	.header {
 		gap: 2.4rem;
+		cursor: pointer;
 	}
 	.headerLogo {
 		width: 5rem;
@@ -159,11 +292,20 @@ li {
 		box-shadow: none;
 		font-size: 1rem;
 		box-shadow: 1px 0 2px 0 #d0d0d0;
-		height: 100vh;
+		animation-name: none;
+	}
+
+	.sidebar > * {
+		animation-name: none;
+	}
+
+	.closeButton {
+		display: none;
 	}
 
 	.item {
 		height: 2.5rem;
+		cursor: pointer;
 	}
 
 	.items {
@@ -181,6 +323,8 @@ li {
 
 	.submenuItem {
 		height: 2.5rem;
+		font-size: 0.8rem;
+		cursor: pointer;
 	}
 
 	.submenuItemLogo {
