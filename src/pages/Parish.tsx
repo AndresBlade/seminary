@@ -1,8 +1,9 @@
 import React from 'react'
 import ParishCreate from '../features/parish/components/ParishCreate'
+import ParishTable from '../features/parish/components/ParishTable'
 export const Parish = () => {
     return (
-        <ParishCreate/>
+        <ParishTable/>
     )
 }
 
