@@ -9,10 +9,15 @@ import { useIsDeviceSizeLess } from '../hooks/useIsDeviceSizeLess';
 
 interface Props {
 	isSidebarOpen: boolean;
+	className: string;
 	setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: Props) => {
+export const Sidebar = ({
+	isSidebarOpen,
+	setIsSidebarOpen,
+	className,
+}: Props) => {
 	const sidebarStyle = isSidebarOpen
 		? sidebarCSS.sidebar
 		: sidebarCSS.hiddenSidebar;
@@ -36,7 +41,9 @@ export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: Props) => {
 				if (sidebarRef.current && !sidebarRef.current.contains(target))
 					setIsSidebarOpen(false);
 			};
-			document.addEventListener('click', handleClickOutsideSidebar);
+			setTimeout(() => {
+				document.addEventListener('click', handleClickOutsideSidebar);
+			}, 700);
 			return () =>
 				document.removeEventListener(
 					'click',
@@ -47,7 +54,7 @@ export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: Props) => {
 
 	return (
 		<>
-			<aside className={sidebarStyle} ref={sidebarRef}>
+			<aside className={`${sidebarStyle} ${className}`} ref={sidebarRef}>
 				<SidebarHeader />
 				<ul className={sidebarCSS.items}>
 					{sidebarData.map((sidebarItem, index) => (
