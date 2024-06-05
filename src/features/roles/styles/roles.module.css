@@ -172,6 +172,7 @@ table{
     align-items: center;
     justify-content: space-evenly;
 }
+
 .table-button__action{
     border: none;
     background-color: var(--backgroundCard);
@@ -360,6 +361,12 @@ table{
         justify-content: space-between;
         padding-left: 2rem;
         padding-right: 2rem;
+    }
+    .roles-table__tbody--tr{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     .button-send{
         width: 20%;

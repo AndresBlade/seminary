@@ -1,13 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Roles from '../styles/roles.module.css'
 import DeleteIcon from '../../../assets/deleteIcon.svg'
 import EditIcon from '../../../assets/editIcon.svg'
 import useApiGet from '../hooks/useApiGet'
+import useApiDelete from '../hooks/useApiDelete'
+
 
 export const RolesTable = () => {
-    
-    const apiUrl = 'https://localhost:3000/role/';
-    const {data, loading, error} = useApiGet(apiUrl);
+    const [roleDelete, setRoleDelete] = React.useState<number>(0);
+    const apiUrl = 'http://localhost:3000/role/';
+    const {data, loading, error} = useApiGet(apiUrl);      
+    const {deleteData} = useApiDelete(apiUrl,roleDelete);
+
+    useEffect(() => {
+        if (roleDelete !== 0) {
+            deleteData();
+            window.location.reload();
+        }
+    }, [roleDelete]);
 
     console.log(data, loading, error);
     return (
@@ -30,15 +40,39 @@ export const RolesTable = () => {
                         </tr>
                     </thead>
                     <tbody className={Roles['roles-table__tbody']}>
-                        <tr className={Roles['roles-table__tbody--tr']}>
-                            <td>Administrador</td>
-                        </tr>     
-                        <tr>
-                            <td>
-                                <button className={Roles['table-button__action']}><img src={EditIcon} alt="Editar" /></button>
-                                <button className={Roles['table-button__action']}><img src={DeleteIcon} alt="Eliminar" /></button>
-                            </td>
-                        </tr>
+                        {
+                            loading ? 
+                                <tr>
+                                    <td className={Roles['animation-loading']}></td>
+                                    <td className={Roles['animation-loading__two']}></td>
+                                    <td>Cargando...</td>
+                                </tr>
+                            : error ? 
+                                <tr>
+                                    <td>Error al cargar los datos</td>
+                                    </tr> 
+                            : data?.map((role:{name:string, id:number, description:string}) => {
+                                return(
+                                <tr className={Roles['roles-table__tbody--tr']} key={role.id}>
+                                    <td className={Roles['roles-table__tbody--td']}>
+                                        <div>{role.name}</div>
+                                    </td>     
+                                    <td>
+                                        <div>
+                                            <button className={Roles['table-button__action']}><img src={EditIcon} alt="Editar"  /></button>
+                                            <button className={Roles['table-button__action']}
+                                                onClick={
+                                                    ()=>{
+                                                        setRoleDelete(role.id)
+                                                }
+                                            }><img src={DeleteIcon} alt="Eliminar"  />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                        )})}
+                        
+                        
                     </tbody>
                 </table>
             </div>
