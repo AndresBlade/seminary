@@ -42,15 +42,14 @@ export const RolesTable = () => {
                     <tbody className={Roles['roles-table__tbody']}>
                         {
                             loading ? 
-                                <tr>
+                                <tr className={Roles['animation-container']}>
                                     <td className={Roles['animation-loading']}></td>
                                     <td className={Roles['animation-loading__two']}></td>
-                                    <td>Cargando...</td>
                                 </tr>
                             : error ? 
                                 <tr>
                                     <td>Error al cargar los datos</td>
-                                    </tr> 
+                                </tr> 
                             : data?.map((role:{name:string, id:number, description:string}) => {
                                 return(
                                 <tr className={Roles['roles-table__tbody--tr']} key={role.id}>
