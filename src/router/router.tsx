@@ -3,6 +3,7 @@ import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
 import { AuthenticatedLayout } from '../features/ui/layout/AuthenticatedLayout';
+import { Worker } from '../pages/Worker'; // Import the Worker component
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -11,7 +12,10 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				element: <AuthenticatedLayout />,
-				children: [{ path: 'home', element: <Home /> }],
+				children: [
+					{ path: 'home', element: <Home /> },
+					{ path: 'worker', element: <Worker /> }, // Add a comma after the first object
+				],
 			},
 		],
 	},

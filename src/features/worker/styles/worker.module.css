@@ -1,0 +1,213 @@
+:root{
+    --backgroundColor: rgba(221, 222, 238, .5);
+    --backgroundCard: #FAFAFA;
+    --textColor: #DC2626;
+    --buttonColor: #017AE9;
+    --textColor2: #FFFFFF;
+    --buttonColorSearch: #DC2626;
+    --buttonColorReset:#818181;
+}
+
+.worker-create__container,
+.worker-create__form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--backgroundColor);
+    padding: 2rem;
+}
+.worker-create__h1-title h1,
+.worker-table__h1-title h1{
+    border-bottom: 0.5rem solid #DC2626;
+    width: 22%;
+}
+.worker-create__h2-title,
+.worker-table__h2-title{
+    background-color: var(--backgroundCard);
+    width: 80%;
+    padding: 1rem;
+    border-radius: 2.5rem;
+    margin-bottom: 3rem;
+}
+.worker-create__h2-title h2,
+.worker-table__h2-title h2{
+    color: var(--textColor);
+    font-weight: bold;
+    text-align: center;
+}
+.worker-create__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--backgroundCard);
+    width: 100%;
+    padding: 2rem;
+    border-radius: 1.5rem;
+}
+.worker-create__form--inputs{
+    width: 90%;
+    margin-bottom: 1rem;
+}
+
+.worker-create__form--name,
+.worker-create__form--lastName,
+.worker-create__form--id,
+.worker-create__form--date,
+.worker-create__form--post,
+.worker-create__form--blood,
+.worker-create__form--condition,
+.worker-create__form--phone,
+.worker-create__form--email,
+.worker-create__form--phoneFamily,
+.worker-create__form--nameContact,
+.worker-create__form--facebook,
+.worker-create__form--instagram,
+.worker-create__form--twitter,
+.worker-create__form--linkedin{
+    margin-bottom: 2rem;
+}
+.worker-create__form-name--label,
+.worker-create__form-lastName--label,
+.worker-create__form-id--label,
+.worker-create__form-date--label,
+.worker-create__form-post--label,
+.worker-create__form-blood--label,
+.worker-create__form-condition--label,
+.worker-create__form-phone--label,
+.worker-create__form-email--label,
+.worker-create__form-phoneFamily--label,
+.worker-create__form-nameContact--label,
+.worker-create__form-facebook--label,
+.worker-create__form-instagram--label,
+.worker-create__form-twitter--label,
+.worker-create__form-linkedin--label{
+    font-weight: bold;
+}
+.worker-create__form--name input,
+.worker-create__form--lastName input,
+.worker-create__form--id input,
+.worker-create__form--date input,
+.worker-create__form--post select,
+.worker-create__form--blood select,
+.worker-create__form--condition input,
+.worker-create__form--personal input,
+.worker-create__form--email input,
+.worker-create__form--phoneFamily input,
+.worker-create__form--phone input,
+.worker-create__form--email input,
+.worker-create__form--phoneFamily input,
+.worker-create__form--nameContact input,
+.worker-create__form--facebook input,
+.worker-create__form--instagram input,
+.worker-create__form--twitter input,
+.worker-create__form--linkedin input{
+    width: 100%;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: var(--backgroundColor);
+    border: none;
+    margin-top:1rem ;
+}
+.worker-create__form--button{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 2rem;
+}
+.worker-create__form-button--next,
+.worker-create__form-button--back{
+    background-color: var(--backgroundCard);
+    color: var(--buttonColorReset);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.worker-create__form-button--next img,
+.worker-create__form-button--back img{
+    margin-left: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.worker-create__form--buttonAdd{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 2rem;
+}
+.worker-create__form--buttonAdd button{
+    width: 100%;
+    background-color: var(--buttonColor);
+    color: var(--textColor2);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+}
+.worker-create__form--modal-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(1px);
+    
+}
+.worker-create__form--inputs-media{
+    overflow-y: scroll;
+}
+.worker-create__form--modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--backgroundCard);
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.worker-create__form--modal-options{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.worker-create__form--modal-options button{
+    background-color: var(--backgroundCard);
+    width: 100%;
+    height: 10rem;
+    border: none;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 6px 16px -6px rgba(0,0,0,0.46);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.worker-create__form--modal-options button img{
+    width: 5rem;
+    height: 5rem;
+}
+.worker-create__form--modal-close{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin-top: 2rem;
+
+}
+.worker-create__form--modal-close button{
+    background-color: var(--backgroundCard);
+    width: 100%;
+    border: none;
+    display: flex;
+    justify-content: end;
+}
