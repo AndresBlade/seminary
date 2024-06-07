@@ -2,8 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
-import { AuthenticatedLayout } from '../features/ui/layout/AuthenticatedLayout';
-import { Worker } from '../pages/Worker'; // Import the Worker component
+import { AuthenticatedLayout } from '../features/ui/layout/components/AuthenticatedLayout';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },

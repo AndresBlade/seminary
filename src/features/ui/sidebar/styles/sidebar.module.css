@@ -279,7 +279,7 @@ li {
 	}
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 480px) {
 	.header {
 		gap: 2.4rem;
 		cursor: pointer;
@@ -294,11 +294,9 @@ li {
 	.sidebar {
 		width: 20rem;
 		position: sticky;
-		z-index: 1000;
 		height: 100vh;
-		box-shadow: none;
 		font-size: 1.2rem;
-		box-shadow: 1px 0 2px 0 #d0d0d0;
+		box-shadow: 1px 0 4px 0 #0000000c;
 		animation-name: none;
 	}
 
