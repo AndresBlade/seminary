@@ -3,7 +3,7 @@ import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
 import { AuthenticatedLayout } from '../features/ui/layout/components/AuthenticatedLayout';
-
+import { Worker } from '../pages/Worker';
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
 	{

@@ -32,7 +32,7 @@ const WorkerCreate = () => {
 
             <form className={Worker['worker-create__form']}>
                 {number === 1 ?
-                    <div>
+                    <div key={1}>
                         <div className={Worker['worker-create__form-inputs']}>
                     <h2>Información Personal</h2>
                     <div className={Worker['worker-create__form--personal']}>
@@ -69,7 +69,7 @@ const WorkerCreate = () => {
                 </div>
                     </div>
                 : number === 2 ?
-                    <div>
+                    <div key={2}>
                         <div className={Worker['worker-create__form-inputs']}>
                             <h2>Información laboral</h2>
                             <div className={Worker['worker-create__form--personal']}>
@@ -118,7 +118,7 @@ const WorkerCreate = () => {
                         </div>
                     </div> 
                     : number === 3 ?
-                        <div>
+                        <div key={3}>
                             <div className={Worker['worker-create__form-inputs']}>
                                 <h2>Información de contacto</h2>
                                 <div className={Worker['worker-create__form--personal']}>
@@ -165,7 +165,7 @@ const WorkerCreate = () => {
                             </div>
                         </div>
                         : number === 4 ? 
-                            <div className='worker-create__form--inputs-media'>
+                            <div className='worker-create__form--inputs-media' key={4}>
                                 <div className={Worker['worker-create__form-inputs']}>
                                     <h2>Redes Sociales</h2>
                                     <div className={Worker['worker-create__form--socialMedia']}>
@@ -311,7 +311,7 @@ const WorkerCreate = () => {
                                 </div>
                             </div>
                         : number === 5 ?
-                        <div>
+                        <div key={5}>
                                 <div className={Worker['worker-create__form-inputs']}>
                                     <h2>Foto del trabajador</h2>
                                     <div className={Worker['worker-create__form--photo']}>

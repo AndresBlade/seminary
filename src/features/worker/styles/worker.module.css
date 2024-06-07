@@ -13,10 +13,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     background-color: var(--backgroundColor);
     padding: 2rem;
 }
+
 .worker-create__h1-title h1,
 .worker-table__h1-title h1{
     border-bottom: 0.5rem solid #DC2626;
@@ -156,9 +157,6 @@
     background-color: rgba(0, 0, 0, .5);
     backdrop-filter: blur(1px);
     
-}
-.worker-create__form--inputs-media{
-    overflow-y: scroll;
 }
 .worker-create__form--modal{
     position: absolute;
