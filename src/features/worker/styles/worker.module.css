@@ -13,11 +13,23 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
     background-color: var(--backgroundColor);
     padding: 2rem;
 }
+.vacio{
+    position: absolute;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    min-width: calc(100%);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 
+}
+.hidden{
+    display: none;
+}
 .worker-create__h1-title h1,
 .worker-table__h1-title h1{
     border-bottom: 0.5rem solid #DC2626;
@@ -65,7 +77,10 @@
 .worker-create__form--facebook,
 .worker-create__form--instagram,
 .worker-create__form--twitter,
-.worker-create__form--linkedin{
+.worker-create__form--linkedin,
+.worker-create__form--youtube,
+.worker-create__form--tiktok{
+
     margin-bottom: 2rem;
 }
 .worker-create__form-name--label,
@@ -82,7 +97,10 @@
 .worker-create__form-facebook--label,
 .worker-create__form-instagram--label,
 .worker-create__form-twitter--label,
-.worker-create__form-linkedin--label{
+.worker-create__form-linkedin--label,
+.worker-create__form-youtube--label,
+.worker-create__form-tiktok--label{
+    
     font-weight: bold;
 }
 .worker-create__form--name input,
@@ -102,7 +120,9 @@
 .worker-create__form--facebook input,
 .worker-create__form--instagram input,
 .worker-create__form--twitter input,
-.worker-create__form--linkedin input{
+.worker-create__form--linkedin input,
+.worker-create__form--youtube input,
+.worker-create__form--tiktok input{
     width: 100%;
     padding: 1rem;
     border-radius: .5rem;
@@ -154,13 +174,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .5);
-    backdrop-filter: blur(1px);
-    
+    z-index: 111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-out forwards;
+
 }
 .worker-create__form--modal{
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--backgroundCard);
@@ -169,10 +192,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fadeIn 1s ease-out forwards;
+    
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 .worker-create__form--modal-options{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -191,6 +225,27 @@
     align-items: center;
 
 }
+.worker-create__form--facebook div,
+.worker-create__form--instagram div,
+.worker-create__form--twitter div,
+.worker-create__form--linkedin div
+.worker-create__form--youtube div,
+.worker-create__form--tiktok div{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.worker-create__form--facebook div button,
+.worker-create__form--instagram div button,
+.worker-create__form--twitter div button,
+.worker-create__form--linkedin div button,
+.worker-create__form--youtube div button,
+.worker-create__form--tiktok div button{
+    background-color: var(--backgroundCard);
+    border: none;
+
+}
 .worker-create__form--modal-options button img{
     width: 5rem;
     height: 5rem;
@@ -201,6 +256,9 @@
     width: 100%;
     margin-top: 2rem;
 
+}
+.worker-create__form--modal-title h2{
+    text-align: center;
 }
 .worker-create__form--modal-close button{
     background-color: var(--backgroundCard);

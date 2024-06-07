@@ -8,6 +8,7 @@ import IconTwitter from '../../../assets/XIcon.svg'
 import IconLinkedin from '../../../assets/LinkedinIcon.svg'
 import IconYoutube from '../../../assets/YoutubeIcon.svg'
 import IconTiktok from '../../../assets/TiktokIcon.svg'
+import Close from '../../../assets/MaterialSymbolsCloseSmallOutlineRounded.svg'
 
 const WorkerCreate = () => {
     const [number, setNumber] = useState<number>(1)
@@ -17,10 +18,11 @@ const WorkerCreate = () => {
     const [linkedin, setLinkedin] = useState<boolean>(false)
     const [youtube, setYoutube] = useState<boolean>(false)
     const [tiktok, setTiktok] = useState<boolean>(false)
-    const [modal, setModal] = useState<boolean>(true)
+    const [modal, setModal] = useState<boolean>(false)
 
     return (
         <div className={Worker['worker-create__container']}>
+            <div className={modal ? Worker['vacio'] : Worker['hidden']}></div>
             <div className={Worker['worker-create__container--titles']}>
                 <div className={Worker['worker-create__h1-title']}>
                     <h1>Trabajador</h1>
@@ -171,32 +173,69 @@ const WorkerCreate = () => {
                                     <div className={Worker['worker-create__form--socialMedia']}>
                                         {facebook ?
                                             <div className={Worker['worker-create__form--facebook']}>
-                                                <label htmlFor="facebook" className={Worker['worker-create__form-facebook--label']}>Facebook</label>
+                                                <div>
+                                                    <label htmlFor="facebook" className={Worker['worker-create__form-facebook--label']}>Facebook</label>
+                                                    <button className={Worker['']} >
+                                                        <img src={Close} alt="close" />
+                                                    </button>
+                                                </div>
+                                                
                                                 <input type="text" name="facebook" id="facebook" />
                                             </div>
                                             : instagram ?
                                             <div className={Worker['worker-create__form--instagram']}>
-                                                <label htmlFor="instagram" className={Worker['worker-create__form-instagram--label']}>Instagram</label>
-                                                <input type="text" name="instagram" id="instagram" />
+                                                <div>
+
+                                                    <label htmlFor="instagram" className={Worker['worker-create__form-instagram--label']}>Instagram</label>
+                                                    <button className={Worker['']} >
+                                                        <img src={Close} alt="close" />
+                                                    </button>
+                                                </div>
+                                                    <input type="text" name="instagram" id="instagram" />
                                             </div>
                                             : twitter ?
                                             <div className={Worker['worker-create__form--twitter']}>
-                                                <label htmlFor="twitter" className={Worker['worker-create__form-twitter--label']}>Twitter</label>
-                                                <input type="text" name="twitter" id="twitter" />
+                                                <div>
+
+                                                    <label htmlFor="twitter" className={Worker['worker-create__form-twitter--label']}>Twitter</label>
+                                                    <button className={Worker['']} >
+                                                        <img src={Close} alt="close" />
+                                                    </button>
+                                                </div>
+                                                    <input type="text" name="twitter" id="twitter" />
                                             </div>
                                             : linkedin ?
                                             <div className={Worker['worker-create__form--linkedin']}>
-                                                <label htmlFor="linkedin" className={Worker['worker-create__form-linkedin--label']}>Linkedin</label>
+                                                <div>
+
+                                                    <label htmlFor="linkedin" className={Worker['worker-create__form-linkedin--label']}>Linkedin</label>
+                                                    <button className={Worker['']} >
+                                                        <img src={Close} alt="close" />
+                                                    </button>
+                                                    
+                                                </div>
                                                 <input type="text" name="linkedin" id="linkedin" />
                                             </div>
                                             : youtube ?
                                             <div className={Worker['worker-create__form--youtube']}>
-                                                <label htmlFor="Youtube" className={Worker['worker-create__form-youtube--label']}>Youtube</label>
+                                                <div>
+                                                    <label htmlFor="Youtube" className={Worker['worker-create__form-youtube--label']}>Youtube</label>
+                                                    <button className={Worker['']} >
+                                                        <img src={Close} alt="close" />
+                                                    </button>
+                                                </div>
+                                                
                                                 <input type="text" name="youtube" id="youtube" />
                                             </div>
                                             : tiktok ?
                                             <div className={Worker['worker-create__form--tiktok']}>
-                                                <label htmlFor="tiktok" className={Worker['worker-create__form-tiktok--label']}>Tiktok</label>
+                                                <div>
+
+                                                    <label htmlFor="tiktok" className={Worker['worker-create__form-tiktok--label']}>Tiktok</label>
+                                                    <button className={Worker['']} >
+                                                        <img src={Close} alt="close" />
+                                                    </button>
+                                                </div>
                                                 <input type="text" name="tiktok" id="tiktok" />
                                             </div>
                                             : null
@@ -217,7 +256,7 @@ const WorkerCreate = () => {
                                                             e.preventDefault()
                                                             setModal(false)
                                                         }}>
-                                                            X
+                                                            <img src={Close} alt="close" />
                                                         </button>
                                                     </div>
                                                     <div className={Worker['worker-create__form--modal-title']}>
