@@ -100,7 +100,7 @@
 .worker-create__form-linkedin--label,
 .worker-create__form-youtube--label,
 .worker-create__form-tiktok--label{
-    
+
     font-weight: bold;
 }
 .worker-create__form--name input,
@@ -132,7 +132,6 @@
 }
 .worker-create__form--button{
     display: flex;
-    justify-content: center;
     width: 100%;
     gap: 2rem;
 }
@@ -179,7 +178,6 @@
     justify-content: center;
     align-items: center;
     animation: fadeIn 1s ease-out forwards;
-
 }
 .worker-create__form--modal{
     position: absolute;
@@ -203,6 +201,16 @@
     100% {
         opacity: 1;
     }
+}
+.worker-create__form--facebook,
+.worker-create__form--instagram,
+.worker-create__form--twitter,
+.worker-create__form--linkedi,
+.worker-create__form--youtube,
+.worker-create__form--tiktok{
+    box-shadow: 0px 6px 16px -6px rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 1rem;
 }
 .worker-create__form--modal-options{
     display: grid;
@@ -231,10 +239,21 @@
 .worker-create__form--linkedin div
 .worker-create__form--youtube div,
 .worker-create__form--tiktok div{
+    animation: fadeIn 1s ease-out forwards;
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
+}
+.worker-create__form--facebook div label,
+.worker-create__form--instagram div label,
+.worker-create__form--twitter div label,
+.worker-create__form--linkedin div label,
+.worker-create__form--youtube div label,
+.worker-create__form--tiktok div label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 .worker-create__form--facebook div button,
 .worker-create__form--instagram div button,

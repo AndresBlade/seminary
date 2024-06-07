@@ -19,6 +19,7 @@ const WorkerCreate = () => {
     const [youtube, setYoutube] = useState<boolean>(false)
     const [tiktok, setTiktok] = useState<boolean>(false)
     const [modal, setModal] = useState<boolean>(false)
+    
 
     return (
         <div className={Worker['worker-create__container']}>
@@ -174,8 +175,15 @@ const WorkerCreate = () => {
                                         {facebook ?
                                             <div className={Worker['worker-create__form--facebook']}>
                                                 <div>
-                                                    <label htmlFor="facebook" className={Worker['worker-create__form-facebook--label']}>Facebook</label>
-                                                    <button className={Worker['']} >
+
+                                                    <label htmlFor="facebook" className={Worker['worker-create__form-facebook--label']}>
+                                                        <img src={IconFacebook} alt="" />
+                                                        Facebook
+                                                    </label>
+                                                    <button className={Worker['']} onClick={(e)=>{
+                                                        e.preventDefault()
+                                                        setFacebook(false)
+                                                    }} >
                                                         <img src={Close} alt="close" />
                                                     </button>
                                                 </div>
@@ -186,8 +194,13 @@ const WorkerCreate = () => {
                                             <div className={Worker['worker-create__form--instagram']}>
                                                 <div>
 
-                                                    <label htmlFor="instagram" className={Worker['worker-create__form-instagram--label']}>Instagram</label>
-                                                    <button className={Worker['']} >
+                                                    <label htmlFor="instagram" className={Worker['worker-create__form-instagram--label']}>
+                                                        <img src={IconInstagram} alt="" />
+                                                        Instagram</label>
+                                                    <button className={Worker['']} onClick={(e)=>{
+                                                        e.preventDefault()
+                                                        setInstagram(false)
+                                                    }} >
                                                         <img src={Close} alt="close" />
                                                     </button>
                                                 </div>
@@ -197,8 +210,13 @@ const WorkerCreate = () => {
                                             <div className={Worker['worker-create__form--twitter']}>
                                                 <div>
 
-                                                    <label htmlFor="twitter" className={Worker['worker-create__form-twitter--label']}>Twitter</label>
-                                                    <button className={Worker['']} >
+                                                    <label htmlFor="twitter" className={Worker['worker-create__form-twitter--label']}>
+                                                        <img src={IconTwitter} alt="" />
+                                                        Twitter</label>
+                                                    <button className={Worker['']} onClick={(e)=>{
+                                                        e.preventDefault()
+                                                        setTwitter(false)
+                                                    }} >
                                                         <img src={Close} alt="close" />
                                                     </button>
                                                 </div>
@@ -208,8 +226,13 @@ const WorkerCreate = () => {
                                             <div className={Worker['worker-create__form--linkedin']}>
                                                 <div>
 
-                                                    <label htmlFor="linkedin" className={Worker['worker-create__form-linkedin--label']}>Linkedin</label>
-                                                    <button className={Worker['']} >
+                                                    <label htmlFor="linkedin" className={Worker['worker-create__form-linkedin--label']}>
+                                                        <img src={IconLinkedin} alt="" />
+                                                        Linkedin</label>
+                                                    <button className={Worker['']} onClick={(e)=>{
+                                                        e.preventDefault()
+                                                        setLinkedin(false)
+                                                    }}  >
                                                         <img src={Close} alt="close" />
                                                     </button>
                                                     
@@ -219,8 +242,13 @@ const WorkerCreate = () => {
                                             : youtube ?
                                             <div className={Worker['worker-create__form--youtube']}>
                                                 <div>
-                                                    <label htmlFor="Youtube" className={Worker['worker-create__form-youtube--label']}>Youtube</label>
-                                                    <button className={Worker['']} >
+                                                    <label htmlFor="Youtube" className={Worker['worker-create__form-youtube--label']}>
+                                                        <img src={IconYoutube} alt="" />
+                                                        Youtube</label>
+                                                    <button className={Worker['']} onClick={(e)=>{
+                                                        e.preventDefault()
+                                                        setYoutube(false)
+                                                    }} >
                                                         <img src={Close} alt="close" />
                                                     </button>
                                                 </div>
@@ -231,8 +259,13 @@ const WorkerCreate = () => {
                                             <div className={Worker['worker-create__form--tiktok']}>
                                                 <div>
 
-                                                    <label htmlFor="tiktok" className={Worker['worker-create__form-tiktok--label']}>Tiktok</label>
-                                                    <button className={Worker['']} >
+                                                    <label htmlFor="tiktok" className={Worker['worker-create__form-tiktok--label']}>
+                                                        <img src={IconTiktok} alt="" />
+                                                        Tiktok</label>
+                                                    <button className={Worker['']} onClick={(e)=>{
+                                                        e.preventDefault()
+                                                        setTiktok(false)
+                                                    }} >
                                                         <img src={Close} alt="close" />
                                                     </button>
                                                 </div>
