@@ -17,6 +17,7 @@
     background-color: var(--backgroundColor);
     padding: 2rem;
 }
+
 .vacio{
     position: absolute;
     z-index: 11;
