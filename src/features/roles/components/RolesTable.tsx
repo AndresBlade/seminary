@@ -5,6 +5,11 @@ import EditIcon from '../../../assets/editIcon.svg'
 import useApiGet from '../hooks/useApiGet'
 import useApiDelete from '../hooks/useApiDelete'
 
+interface Role {   
+    name: string;
+    id: number;
+    description: string;
+}
 
 export const RolesTable = () => {
     const [roleDelete, setRoleDelete] = React.useState<number>(0);
@@ -14,10 +19,10 @@ export const RolesTable = () => {
 
     useEffect(() => {
         if (roleDelete !== 0) {
-            deleteData();
+            deleteData().catch(console.error);
             window.location.reload();
         }
-    }, [roleDelete]);
+    }, [roleDelete, deleteData]);
 
     console.log(data, loading, error);
     return (
@@ -50,7 +55,7 @@ export const RolesTable = () => {
                                 <tr>
                                     <td>Error al cargar los datos</td>
                                 </tr> 
-                            : data?.map((role:{name:string, id:number, description:string}) => {
+                            : (data as Role[])?.map((role: Role) => {
                                 return(
                                 <tr className={Roles['roles-table__tbody--tr']} key={role.id}>
                                     <td className={Roles['roles-table__tbody--td']}>

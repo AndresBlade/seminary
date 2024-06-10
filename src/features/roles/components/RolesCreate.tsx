@@ -1,6 +1,6 @@
 import React from 'react'
 import Roles from '../styles/roles.module.css'
-import {useRolePost} from '../hooks/useRolePost';
+import {createRole} from '../hooks/createRole';
 
 
 export const RolesCreate = () => {
@@ -23,9 +23,10 @@ export const RolesCreate = () => {
             const name = nameRole;
             const description = descriptionRole;
             const numbers = permissionRolesIndex;
-            useRolePost({name, description, numbers});
+            createRole({name, description, numbers}).catch((error)=> console.log(error));
         }
     }    
+    console.log(nameRole, descriptionRole, permissionRolesIndex);
     return (
         <div className={Roles['roles-create__container']}>
             <div className={Roles['roles-create__h2--title']}>
@@ -35,7 +36,7 @@ export const RolesCreate = () => {
                 <div className={Roles['roles-create__form']}>
                     <h2 className={Roles['roles-create__h2']}>Crear Rol</h2>
                     <label htmlFor="name">Nombre * </label>
-                    <input type="text" name="name" id="name" className={Roles['input-name']} onChange={(e)=>setNameRole(e.target.value)} autoFocus />
+                    <input type="text" name="name" id="name" className={Roles['input-name']} onChange={(e)=>setNameRole(e.target.value)} autoFocus/>
                     <label htmlFor="description">Descripción</label>
                     <textarea name="description" id="description" className={Roles['input-name']} onChange={(e)=>setDescriptionRole(e.target.value)} ></textarea>
                     <div className={Roles['table-permission__container']}>

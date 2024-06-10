@@ -1,4 +1,10 @@
-async function useRolePost({name,description,numbers}: {name:string, description: string, numbers:number[]}){
+interface RoleResponse {
+    name: string;
+    description: string;
+    numbers: number[];
+}
+
+async function createRole({name,description,numbers}: {name:string, description: string, numbers:number[]}): Promise<RoleResponse> {
     const response = await fetch('http://127.0.0.1:3000/role/',{
         method:'POST',
         mode: 'cors', // no-cors, *cors, same-origin
@@ -12,19 +18,17 @@ async function useRolePost({name,description,numbers}: {name:string, description
             numbers:numbers
         })
             
-    }).then(Response=>{
-        console.log(Response)
-        if(!Response.ok){
-            
+    }).then((response: Response) => {
+        console.log(response)
+        if(!response.ok){
             throw new Error(`Error ${response.status}: ${response.statusText}`);
-    
-            alert(Response.statusText);
+            alert(response.statusText);
         }
-        return Response.json();
+        return response.json() as Promise<RoleResponse>;
     })
     console.log(response);
 
-
     return response;
+
 }
-export {useRolePost};
+export {createRole};

@@ -28,9 +28,9 @@ function useApiDelete(apiUrl: string,roleDelete:number) {
             // const data = await response.json();
             // console.log(data);
 
-            setLoading(false);
         } catch (error) {
             setError(error);
+        }finally{
             setLoading(false);
         }
     };
