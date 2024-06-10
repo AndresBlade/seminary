@@ -1,0 +1,353 @@
+:root {
+	--header-font: 'Sora', sans-serif;
+	--svg-grey: invert(50%) sepia(24%) saturate(9%) hue-rotate(126deg)
+		brightness(97%) contrast(91%);
+	--svg-red: invert(31%) sepia(85%) saturate(1684%) hue-rotate(337deg)
+		brightness(81%) contrast(117%);
+	--red: #dc2626;
+}
+p,
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+.header {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	gap: 4rem;
+}
+
+.headerText {
+	font-weight: 800;
+	font-size: 5rem;
+	color: var(--red);
+}
+
+.headerLogo {
+	width: 9rem;
+	object-fit: scale-down;
+}
+
+.sidebar {
+	height: 100%;
+	padding: 1.8rem;
+	font-family: var(--header-font);
+	display: flex;
+	position: fixed;
+	flex-direction: column;
+	font-weight: 600;
+	width: 80%;
+	left: 0;
+	overflow: auto;
+	top: 0;
+	color: #818181;
+	z-index: 1000;
+	background-color: #fff;
+
+	animation-name: openingSidebar;
+	animation-duration: 0.5s;
+	animation-timing-function: ease;
+	animation-fill-mode: forwards;
+}
+
+.sidebar > * {
+	animation-name: appearingSidebarContent;
+	animation-duration: 0.7s;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+
+.hiddenSidebar > * {
+	animation-name: disappearingSidebarContent;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+
+@keyframes appearingSidebarContent {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes disappearingSidebarContent {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes openingSidebar {
+	0% {
+		left: calc(0px - 80%);
+		box-shadow: none;
+	}
+
+	100% {
+		left: 0;
+		box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+	}
+}
+
+.hiddenSidebar {
+	composes: sidebar;
+	animation-name: closingSidebar;
+}
+
+@keyframes closingSidebar {
+	0% {
+		left: 0;
+		box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+	}
+
+	100% {
+		left: calc(0px - 80%);
+		box-shadow: none;
+	}
+}
+
+.sidebar > *:not(:last-child) {
+	border-bottom: #efefef solid 1px;
+	padding-bottom: 1.2rem;
+}
+
+.items {
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
+	padding: 1.2rem 0;
+}
+
+.itemContainer {
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+}
+
+.item {
+	height: 5.8rem;
+	display: flex;
+	align-items: center;
+	gap: 2.6rem;
+	transition: color 0.3s;
+}
+
+.itemLogo {
+	width: 3rem;
+	height: 3rem;
+	filter: var(--svg-grey);
+	transition: filter 0.3s;
+}
+
+.clickedItemLogo {
+	composes: itemLogo;
+	filter: var(--svg-red);
+}
+
+.clickedItemWithSubmenu {
+	composes: item;
+	color: var(--red);
+}
+
+.itemContent {
+	flex: 1 1 0;
+}
+
+.arrow {
+	width: 1.2rem;
+	filter: var(--svg-grey);
+	height: 1.2rem;
+	transition-property: filter, transform;
+	transition-duration: 0.3s;
+}
+
+.rotatedArrow {
+	composes: arrow;
+	transform: rotate(90deg);
+	filter: var(--svg-red);
+}
+
+.submenu > div {
+	overflow: hidden;
+}
+
+.hiddenSubmenu > div {
+	overflow: hidden;
+}
+
+.hiddenSubmenu {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.3s;
+}
+.submenu {
+	composes: hiddenSubmenu;
+	grid-template-rows: 1fr;
+}
+
+.submenuItem {
+	height: 5.8rem;
+	display: flex;
+	align-items: center;
+	gap: 2.6rem;
+	color: var(--red);
+}
+
+.submenuItemLogo {
+	width: 1.2rem;
+	height: 1.2rem;
+	filter: var(--svg-red);
+}
+
+.closeButton {
+	width: 4rem;
+	height: 4rem;
+	border: none;
+	border-radius: 100%;
+	z-index: 1000;
+	padding: 0;
+	margin: 0;
+	position: fixed;
+	left: calc(90% - 2rem);
+	background-color: #ffffff;
+	top: 4rem;
+	outline: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation-name: growingCloseButton;
+	animation-duration: 0.7s;
+	animation-timing-function: ease;
+	animation-fill-mode: both;
+}
+
+.hiddenCloseButton {
+	composes: closeButton;
+	animation-name: shrinkingCloseButton;
+	animation-duration: 0.3s;
+}
+
+.closeButtonImg {
+	filter: contrast(0.3);
+	height: 50%;
+	width: 50%;
+}
+
+@keyframes growingCloseButton {
+	0% {
+		transform: scale(0);
+	}
+
+	50% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes shrinkingCloseButton {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(0);
+	}
+}
+
+@media (min-width: 480px) {
+	.header {
+		gap: 2.4rem;
+		cursor: pointer;
+	}
+	.headerLogo {
+		width: 5rem;
+	}
+
+	.headerText {
+		font-size: 3rem;
+	}
+	.sidebar {
+		width: 20rem;
+		position: sticky;
+		height: 100vh;
+		font-size: 1.2rem;
+		box-shadow: 1px 0 4px 0 #0000000c;
+		animation-name: none;
+	}
+
+	.sidebar::-webkit-scrollbar {
+		width: 3px;
+	}
+
+	.sidebar::-webkit-scrollbar-track {
+		background: #f1f1f1;
+		border-radius: 20rem;
+	}
+
+	/* Handle */
+	.sidebar::-webkit-scrollbar-thumb {
+		background: #ccc;
+		border-radius: 20rem;
+	}
+
+	.sidebar > * {
+		animation-name: none;
+	}
+
+	.closeButton {
+		display: none;
+	}
+
+	.item {
+		height: 3rem;
+		cursor: pointer;
+	}
+
+	.items {
+		gap: 1.6rem;
+	}
+
+	.itemLogo {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	.arrow {
+		height: 0.8rem;
+	}
+
+	.submenuItem {
+		height: 2.5rem;
+		font-size: 1rem;
+		cursor: pointer;
+	}
+
+	.submenuItemLogo {
+		height: 0.8rem;
+	}
+}

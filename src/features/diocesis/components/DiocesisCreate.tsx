@@ -1,4 +1,3 @@
-import React from 'react'
 import Diocesis from '../styles/diocesis.module.css'
 export const DiocesisCreate = () => {
     return (
