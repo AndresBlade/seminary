@@ -1,0 +1,66 @@
+:root {
+	--header-font: 'Sora', sans-serif;
+}
+
+.header {
+	background-color: #fff;
+	position: sticky;
+	top: 0;
+	height: 7rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 1rem 3.2rem;
+	box-shadow: 0 1px 4px 0 #0000000c;
+	align-items: center;
+	font-family: var(--header-font);
+}
+
+.menuButton {
+	border: none;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+}
+
+.menuButtonImg {
+	filter: contrast(0);
+	height: 80%;
+}
+
+.personalInformation {
+	display: flex;
+	gap: 2.4rem;
+	align-items: center;
+}
+
+.profilePicture {
+	border-radius: 100%;
+	width: 5rem;
+	filter: contrast(0); /*While we add the new profile pictures*/
+}
+
+.username {
+	display: none;
+}
+
+@media (min-width: 480px) {
+	.header {
+		padding: 2rem 12rem;
+	}
+	.menuButtonImg {
+		display: none;
+	}
+
+	.profilePicture {
+		width: 4rem;
+		cursor: pointer;
+	}
+
+	.username {
+		display: initial;
+	}
+}
