@@ -14,6 +14,7 @@
     height: 100vh;
     background-color: var(--backgroundColor);
     padding: 2rem;
+    overflow-y: scroll;
 }
 .diocesis-create__form{
     display: flex;
@@ -80,7 +81,6 @@
     flex-direction: column;
     background-color: var(--backgroundCard);
     width: 100%;
-    height: auto;
     padding: .5rem;
     border-radius: 1.5rem;
     padding: 1rem;
@@ -88,6 +88,7 @@
 .diocesis-table__table{
     width: 100%;
     border-collapse: collapse;
+    overflow-y: scroll;
 }
 .diocesis-table__table--thead{
     border: 1px solid var(--backgroundColor);
@@ -102,6 +103,9 @@
     padding: 1rem;
 }
 .diocesis-table__table--tbody{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--backgroundColor);
     border-radius: 0 0 1rem 1rem;
     padding: 1rem;
@@ -123,20 +127,72 @@
     border: none;
     transition: .3s;
 }
+.animation-container{
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    margin: 0 auto;
+    padding: 3rem;
+}
 
+.animation-container .animation-loading{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    border: solid 0.4rem transparent;
+    border-top-color: #DC2626;
+    border-left-color: #DC2626;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+}
+.animation-container .animation-loading__two{
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    border: solid 0.4rem transparent;
+    border-top-color: #017AE9;
+    border-left-color: #017AE9;
+    border-radius: 50%;
+    animation: spin__two 1.2s linear infinite;
+
+}
+@keyframes spin{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+}
+@keyframes spin__two{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(-360deg);
+    }
+}
 @media (width >= 601px) and (width <= 1024px){
     .diocesis-create__container,
     .diocesis-table__container{    
         height: 100vh;
         width: 100%;
+        overflow-y: hidden;
     }
     .diocesis-table__table{
         width: 100%;
+        overflow: none;
     }
     .diocesis-table__table--container{
         margin: 0 auto;
         width: 70%;
-
+        max-height: 18%;
+        overflow-y: none;
+    
     }
     .diocesis-create__form{
         width: 70%;
@@ -146,6 +202,7 @@
     .diocesis-table__table{
         width: 100%;
         border-collapse: collapse;
+        overflow-y: none;
     }
     .diocesis-table__table--tbody-tr-obispo{
         width: 30%;
@@ -186,14 +243,24 @@
     .diocesis-table__container{    
         height: 100vh;
         width: 100%;
+        overflow-y: hidden;
     }
     
     .diocesis-table__table{
         width: 100%;
+        overflow-y: visible;
     }
     .diocesis-table__table--container{
         margin: 0 auto;
-        width: 70%;
+        max-width: 70%;
+        max-height: 18%;
+        overflow-y: scroll;
+    }
+    .diocesis-table__table--container-loading{
+        margin: 0 auto;
+        max-width: 70%;
+        max-height: 18%;
+        overflow-y:visible ;
     }
     .diocesis-table__table--tbody-tr-obispo{
         width: 20%;
