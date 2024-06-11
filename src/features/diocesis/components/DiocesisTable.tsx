@@ -1,19 +1,12 @@
-import React from 'react'
 import Diocesis from '../styles/diocesis.module.css'
 import DeleteIcon from '../../../assets/deleteIcon.svg'
 import EditIcon from '../../../assets/editIcon.svg'
+import ContentTitle from '../../ui/contentTitle/components/ContentTitle'
 
 export const DiocesisTable = () => {
     return (
         <div className={Diocesis['diocesis-table__container']}>
-            <div className={Diocesis['diocesis-table__container--titles']}>
-                <div className={Diocesis['diocesis-table__h1-title']}>
-                    <h1>Ecleciástico</h1>
-                </div>
-                <div className={Diocesis['diocesis-table__h2-title']}>
-                    <h2>Agregar Diócesis</h2>
-                </div>
-            </div> 
+            <ContentTitle title="Diocesis" subtitle="Lista Diocesis" />
             <div className={Diocesis['diocesis-table__table']}>
                 <table className={Diocesis['diocesis-table__table--container']}>
                     <thead className={Diocesis['diocesis-table__table--thead']}>

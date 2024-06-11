@@ -15,25 +15,6 @@
     background-color: var(--backgroundColor);
     padding: 2rem;
 }
-.diocesis-create__h1-title h1,
-.diocesis-table__h1-title h1{
-    border-bottom: 0.5rem solid #DC2626;
-    width: 22%;
-}
-.diocesis-create__h2-title,
-.diocesis-table__h2-title{
-    background-color: var(--backgroundCard);
-    width: 80%;
-    padding: 1rem;
-    border-radius: 2.5rem;
-    margin-bottom: 3rem;
-}
-.diocesis-create__h2-title h2,
-.diocesis-table__h2-title h2{
-    color: var(--textColor);
-    font-weight: bold;
-    text-align: center;
-}
 .diocesis-create__form{
     display: flex;
     flex-direction: column;
@@ -149,13 +130,6 @@
         height: 100vh;
         width: 100%;
     }
-    .diocesis-create__container--titles,
-    .diocesis-table__container--titles{
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        margin-left: 15%
-    }
     .diocesis-table__table{
         width: 100%;
     }
@@ -164,27 +138,14 @@
         width: 70%;
 
     }
-    .diocesis-create__h1-title h1,
-    .diocesis-table__h1-title h1{
-        border-bottom: 0.5rem solid #DC2626;
-        width: 8%;
-    }
-
     .diocesis-create__form{
         width: 70%;
         align-items: start;
         margin: 0 auto;
     }
-    .diocesis-create__h2-title,
-    .diocesis-table__h2-title{
-        width: 30%;
-    }
     .diocesis-table__table{
         width: 100%;
         border-collapse: collapse;
-    }
-    .diocesis-table__table--thead tr{
-
     }
     .diocesis-table__table--tbody-tr-obispo{
         width: 30%;
@@ -226,18 +187,7 @@
         height: 100vh;
         width: 100%;
     }
-    .diocesis-create__container--titles,
-    .diocesis-table__container--titles{
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        margin-left: 15%
-    }
-    .diocesis-create__h1-title h1,
-    .diocesis-table__h1-title h1{
-        border-bottom: 0.5rem solid #DC2626;
-        width: 5.5%;
-    }
+    
     .diocesis-table__table{
         width: 100%;
     }
@@ -253,10 +203,7 @@
         align-items: start;
         margin: 0 auto;
     }
-    .diocesis-create__h2-title,
-    .diocesis-table__h2-title{
-        width: 30%;
-    }
+
     .diocesis-create__form-group{
         justify-content: start;
     }
