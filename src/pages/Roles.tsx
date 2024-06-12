@@ -1,10 +1,9 @@
-import RolesStyle from '../features/roles/styles/roles.module.css'
-import { RolesCreate } from '../features/roles/components/RolesCreate'
+import RolesStyle from '../features/roles/styles/roles.module.css';
+import { RolesTable } from '../features/roles/components/RolesTable';
 export const Roles = () => {
-    return (
-        <div className={RolesStyle['roles-container']}>
-            <RolesCreate />
-        </div>
-    )
-}
-
+	return (
+		<div className={RolesStyle['roles-container']}>
+			<RolesTable />
+		</div>
+	);
+};

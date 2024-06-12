@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import RolesCSS from '../styles/roles.module.css';
-import { useRolePost } from '../hooks/useRolePost';
+import { createRole } from '../helpers/createRole';
 import { usePermissions } from '../hooks/usePermissions';
-import { Row } from './Row';
 import { Permission } from '../interfaces/Permission';
+import { useForm } from '../hooks/useForm';
+import { CheckedPermission } from '../interfaces/CheckedPermission';
+import { PermissionsTable } from './PermissionsTable';
 
 interface SubmitFormProps {
 	e: React.FormEvent<HTMLFormElement>;
 	roleName: string;
 	roleDescription: string;
-	checkedPermissions: { id: number; checked: boolean }[];
+	checkedPermissions: CheckedPermission[];
 }
 
 const handleSubmit = ({
@@ -20,9 +22,9 @@ const handleSubmit = ({
 }: SubmitFormProps) => {
 	e.preventDefault();
 	if (
-		roleName.length === 0 ||
-		roleDescription.length === 0 ||
-		checkedPermissions?.every(
+		!roleName.length ||
+		!roleDescription.length ||
+		checkedPermissions.every(
 			checkedPermission => !checkedPermission.checked
 		)
 	) {
@@ -33,27 +35,24 @@ const handleSubmit = ({
 		const numbers = checkedPermissions
 			.filter(permission => permission.checked)
 			.map(permission => permission.id);
-		useRolePost({ name, description, numbers });
+		createRole({ name, description, numbers })
+			.then(data => console.log(data))
+			.catch(err => console.log(err));
 	}
 };
 
 export const RolesCreate = () => {
-	const [roleName, setRoleName] = React.useState('');
-
-	const [roleDescription, setRoleDescription] = React.useState('');
+	const { roleName, roleDescription, onInputChange } = useForm({
+		roleName: '',
+		roleDescription: '',
+	});
 
 	const permissions = usePermissions();
 	const [checkedPermissions, setCheckedPermissions] = useState<
-		{ id: number; checked: boolean }[] | null
+		CheckedPermission[] | null
 	>(null);
 
-	useEffect(() => {
-		setCheckedPermissions(
-			permissions?.map(({ id }) => ({ id, checked: false })) ?? null
-		);
-	}, [permissions]);
-
-	const permissionsByTable = permissions?.reduce(
+	const permissionsByRoute = permissions?.reduce(
 		(group: Record<string, Permission[]>, permission: Permission) => {
 			const { table } = permission;
 
@@ -66,9 +65,13 @@ export const RolesCreate = () => {
 		{}
 	);
 
-	console.log(checkedPermissions);
+	const tables = permissionsByRoute && Object.keys(permissionsByRoute);
 
-	const tables = permissionsByTable && Object.keys(permissionsByTable);
+	useEffect(() => {
+		setCheckedPermissions(
+			permissions?.map(({ id }) => ({ id, checked: false })) ?? null
+		);
+	}, [permissions]);
 
 	return (
 		<div className={RolesCSS['roles-create__container']}>
@@ -93,77 +96,46 @@ export const RolesCreate = () => {
 					<label htmlFor="name">Nombre * </label>
 					<input
 						type="text"
-						name="name"
+						name="roleName"
+						placeholder="Ej: Supervisor estudiantil"
 						id="name"
 						className={RolesCSS['input-name']}
 						value={roleName}
-						onChange={e => setRoleName(e.target.value)}
+						onChange={onInputChange}
 						autoFocus
 					/>
 					<label htmlFor="description">Descripción</label>
-					<textarea
-						name="description"
+					<input
+						type="text"
+						name="roleDescription"
 						id="description"
+						placeholder="Ej: Supervisa las notas de nuevo ingreso"
 						value={roleDescription}
 						className={RolesCSS['input-name']}
-						onChange={e => setRoleDescription(e.target.value)}
-					></textarea>
-					<div className={RolesCSS['table-permission__container']}>
-						<table className={RolesCSS['table-permission']}>
-							<thead
-								className={RolesCSS['table-permission__thead']}
-							>
-								<tr>
-									<th>Ruta</th>
-									<tr
-										className={
-											RolesCSS[
-												'table-permission__thead--options'
-											]
-										}
-									>
-										<th>Ver</th>
-										<th>crear</th>
-										<th>editar</th>
-										<th>eliminar</th>
-									</tr>
-								</tr>
-							</thead>
-							<tbody
-								className={RolesCSS['table-permission__tbody']}
-							>
-								{tables?.map(
-									(table, index) =>
-										permissionsByTable && (
-											<Row
-												checkedPermissions={
-													checkedPermissions
-												}
-												setCheckedPermissions={
-													setCheckedPermissions
-												}
-												key={index}
-												tableName={table}
-												permissions={
-													permissionsByTable[table]
-												}
-											/>
-										)
-								)}
-							</tbody>
-						</table>
-					</div>
+						onChange={onInputChange}
+					></input>
 
-					<button
-						type="submit"
-						id="send"
-						className={RolesCSS['button-send']}
-						disabled={checkedPermissions?.every(
-							permission => !permission.checked
-						)}
-					>
-						Crear
-					</button>
+					{tables && checkedPermissions && (
+						<PermissionsTable
+							tables={tables}
+							permissionsByRoute={permissionsByRoute}
+							checkedPermissions={checkedPermissions}
+							setCheckedPermissions={setCheckedPermissions}
+						/>
+					)}
+
+					<div className={RolesCSS.buttons}>
+						<button
+							type="submit"
+							id="send"
+							className={RolesCSS['button-send']}
+							disabled={checkedPermissions?.every(
+								permission => !permission.checked
+							)}
+						>
+							Crear
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>

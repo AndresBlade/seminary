@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Permission } from '../interfaces/Permission';
 import { PermissionType } from '../interfaces/PermissionType';
 import RolesCSS from '../styles/roles.module.css';
 import { Field } from './Field';
 
 interface Props {
-	tableName: string;
 	permissions: Permission[];
 	setCheckedPermissions: React.Dispatch<
 		React.SetStateAction<{ id: number; checked: boolean }[] | null>
@@ -20,100 +20,79 @@ function PermissionTypeValue(type: PermissionType): number {
 }
 
 export const Row = ({
-	tableName,
 	permissions,
 	setCheckedPermissions,
 	checkedPermissions,
 }: Props) => {
+	const [totalAccess, setTotalAccess] = useState(false);
+
+	useEffect(() => {
+		if (!checkedPermissions) return;
+		const rowPermissions = checkedPermissions.filter(checkedPermission =>
+			permissions.find(
+				permission => permission.id === checkedPermission.id
+			)
+		);
+
+		const areAllPermissionsChecked = rowPermissions.every(
+			permission => permission.checked
+		);
+
+		setTotalAccess(areAllPermissionsChecked);
+	}, [checkedPermissions, permissions]);
+
 	permissions.sort(
 		(permissionA, permissionB) =>
 			PermissionTypeValue(permissionA.type) -
 			PermissionTypeValue(permissionB.type)
 	);
 	return (
-		<tr className={RolesCSS['table-permission__tbody--tr']}>
-			<td>{tableName}</td>
-			<tr className={RolesCSS['table-permission__tbody--options']}>
-				{permissions.map((permission, index) => (
-					<Field
-						checkedPermissions={checkedPermissions}
-						setCheckedPermissions={setCheckedPermissions}
-						key={index}
-						permission={permission}
-					/>
-				))}
-				{/* <td>
-					<input
-						type="checkbox"
-						id="permission"
-						value={9}
-						onChange={(e: any) => {
-							setPermissionsRoles(prevPermissions => {
-								const updatedPermissions = [...prevPermissions];
-								updatedPermissions[e.target.value] = Number(
-									!updatedPermissions[e.target.value]
+		<div className={RolesCSS.row}>
+			<input
+				type="checkbox"
+				id="permission"
+				name="permissions"
+				className={RolesCSS.permissionInput}
+				checked={totalAccess}
+				onChange={({ target: { checked } }) => {
+					setCheckedPermissions(previousPermissions => {
+						if (!previousPermissions) return null;
+						const rowPermissions = previousPermissions.filter(
+							checkedPermission =>
+								permissions.find(
+									permission =>
+										permission.id === checkedPermission.id
+								)
+						);
+
+						const newPermissions = previousPermissions.map(
+							previousPermission => {
+								const rowPermission = rowPermissions.find(
+									rowPermission =>
+										rowPermission.id ===
+										previousPermission.id
 								);
-								return updatedPermissions;
-							});
-						}}
-					/>
-				</td>
-				<td>
-					<input
-						type="checkbox"
-						id="permission"
-						className={RolesCSS['table-permission__tbody--input']}
-						value={10}
-						onChange={(e: any) => {
-							setPermissionsRoles(prevPermissions => {
-								const updatedPermissions = [...prevPermissions];
-								updatedPermissions[e.target.value] = Number(
-									!updatedPermissions[e.target.value]
-								);
-								return updatedPermissions;
-							});
-						}}
-					/>
-				</td>
-				<td>
-					<input
-						type="checkbox"
-						id="permission"
-						className={
-							RolesCSS['table-permission__tbody--input-edit']
-						}
-						value={11}
-						onChange={(e: any) => {
-							setPermissionsRoles(prevPermissions => {
-								const updatedPermissions = [...prevPermissions];
-								updatedPermissions[e.target.value] = Number(
-									!updatedPermissions[e.target.value]
-								);
-								return updatedPermissions;
-							});
-						}}
-					/>
-				</td>
-				<td>
-					<input
-						type="checkbox"
-						id="permission"
-						className={
-							RolesCSS['table-permission__tbody--input-delete']
-						}
-						value={12}
-						onChange={(e: any) => {
-							setPermissionsRoles(prevPermissions => {
-								const updatedPermissions = [...prevPermissions];
-								updatedPermissions[e.target.value] = Number(
-									!updatedPermissions[e.target.value]
-								);
-								return updatedPermissions;
-							});
-						}}
-					/>
-				</td> */}
-			</tr>
-		</tr>
+								if (rowPermission) {
+									rowPermission.checked = checked;
+									return rowPermission;
+								}
+								return previousPermission;
+							}
+						);
+
+						return newPermissions;
+					});
+					setTotalAccess(checked);
+				}}
+			/>
+			{permissions.map((permission, index) => (
+				<Field
+					checkedPermissions={checkedPermissions}
+					setCheckedPermissions={setCheckedPermissions}
+					key={index}
+					permission={permission}
+				/>
+			))}
+		</div>
 	);
 };
