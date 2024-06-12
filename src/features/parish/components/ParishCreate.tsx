@@ -1,16 +1,9 @@
 import Parish from '../styles/parish.module.css'
-
+import ContentTitle from '../../ui/contentTitle/components/ContentTitle'
 const ParishCreate = () => {
     return (
         <div className={Parish['parish-create__container']}>
-            <div className={Parish['parish-create__container--titles']}>
-                <div className={Parish['parish-create__h1-title']}>
-                    <h1>Ecleciástico</h1>
-                </div>
-                <div className={Parish['parish-create__h2-title']}>
-                    <h2>Agregar parroquia</h2>
-                </div>
-            </div>
+            <ContentTitle title="Eclesiástico" subtitle="Agregar parroquia" />
             <form className={Parish['parish-create__form']}>
                 <div className={Parish['parish-create__form-inputs']}>
                     <div className={Parish['parish-create__form-name']}>
