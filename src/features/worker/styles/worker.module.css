@@ -18,7 +18,7 @@
     padding: 2rem;
 }
 
-.vacio{
+.worker-create__background--modal{
     position: absolute;
     z-index: 11;
     left: 0;
@@ -28,7 +28,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 
 }
-.hidden{
+.worker-create__background--hidden{
     display: none;
 }
 .worker-create__h1-title h1,
