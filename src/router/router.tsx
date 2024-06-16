@@ -3,6 +3,8 @@ import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
 import { AuthenticatedLayout } from '../features/ui/layout/components/AuthenticatedLayout';
+import { Roles } from '../pages/Roles';
+import { RoleForm } from '../pages/RoleForm';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -11,7 +13,20 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				element: <AuthenticatedLayout />,
-				children: [{ path: 'home', element: <Home /> }],
+				children: [
+					{ path: 'home', element: <Home /> },
+					{
+						path: 'roles',
+						children: [
+							{
+								index: true,
+								element: <Roles />,
+							},
+							{ path: 'new', element: <RoleForm /> },
+							{ path: ':id', element: <RoleForm /> },
+						],
+					},
+				],
 			},
 		],
 	},
