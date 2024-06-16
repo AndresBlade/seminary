@@ -18,12 +18,12 @@ function useApiGet<T>(apiUrl: string) {
 			setError(Error);
 			setLoading(false);
 		}
-	}, []);
+	}, [apiUrl]);
 	useEffect(() => {
 		fetchData().catch(console.error);
 	}, [apiUrl, fetchData]);
 
-	return { data, loading, error };
+	return { data, loading, error, setData };
 }
 
 export default useApiGet;

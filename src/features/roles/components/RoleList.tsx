@@ -7,10 +7,11 @@ interface Props {
 	roles: Role[];
 	loading: boolean;
 	error: unknown;
-	setRoleToDelete: React.Dispatch<React.SetStateAction<number>>;
+
+	setRoles: React.Dispatch<React.SetStateAction<Role[] | null>>;
 }
 
-export const RoleList = ({ roles, loading, error, setRoleToDelete }: Props) => {
+export const RoleList = ({ roles, loading, error, setRoles }: Props) => {
 	return (
 		<div className={RolesCSS['roles-table__tbody']}>
 			{loading ? (
@@ -22,11 +23,7 @@ export const RoleList = ({ roles, loading, error, setRoleToDelete }: Props) => {
 			) : (
 				roles?.map((role, index) => {
 					return (
-						<RoleRow
-							key={index}
-							role={role}
-							setRoleToDelete={setRoleToDelete}
-						/>
+						<RoleRow key={index} role={role} setRoles={setRoles} />
 					);
 				})
 			)}
