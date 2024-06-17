@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Diocesis from '../styles/diocesis.module.css'
 import { CreateDiocesis } from '../helpers/createDiocesis'
+import { editDiocesis } from '../helpers/editDiocesis';
+import { useParams, useNavigate } from 'react-router-dom';
+import useGet from '../../../shared/hooks/useGet'
 
 interface DiocesisFormProps {
     e: React.FormEvent<HTMLFormElement>;
@@ -11,11 +14,34 @@ interface Diocesis{
     name: string;
     obispo: string;
 }
-
+interface DiocesisData{
+    mjs: string;    
+    diocese:{
+        id:number,
+        name: string;
+        holder: string;
+    }
+    
+}
 export const DiocesisForm = () => {
     const [diocesisName, setDiocesisName] = useState('');
     const [obispoName, setObispoName] = useState('');
     const [error, setError] = useState<boolean>();
+    const {id}= useParams();
+    const apiUrl = `http://localhost:3000/Diocese/${Number(id)}`
+    const {data} = useGet<DiocesisData>(apiUrl);
+    const navigate = useNavigate();
+    
+    useEffect(()=>{
+        if(isNaN(Number(id))) return;
+        if(!data) return;
+
+        setDiocesisName(data?.diocese.name);
+        setObispoName(data?.diocese.holder);
+
+    },[data, id])
+
+    console.log(data)
     const handleSubmit = ({
         e,
         diocesisName,
@@ -27,20 +53,33 @@ export const DiocesisForm = () => {
         }else{
             const name = diocesisName;
             const obispo = obispoName;
-            CreateDiocesis({name, obispo}).then((response)=>{
+            if(isNaN(Number(id))){
+                CreateDiocesis({name, obispo}).then((response)=>{
+                    if(response.status === 200){
+                        setError(false)
+                    }else{
+                        setError(true)
+                    }
+                    navigate('..')
+                }).catch((error) => {
+                    console.log(error);
+                });
+                return;
+            }
+            editDiocesis({id:Number(id),name, obispo}).then((response)=>{
                 if(response.status === 200){
                     setError(false)
                 }else{
                     setError(true)
                 }
+                navigate('..')
             }).catch((error) => {
                 console.log(error);
             });
-            
         }
     };
-
-    console.log(error);
+    
+    console.log(id);
 
     return (
         <form action='POST' onSubmit={(e)=>{handleSubmit({e,diocesisName,obispoName})}} className={Diocesis['diocesis-create__form']}>

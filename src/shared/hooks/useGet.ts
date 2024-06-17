@@ -24,7 +24,7 @@ function UseGet<T>(apiUrl: string) {
         fetchData().catch(console.error);
     },[apiUrl, fetchData]);
 
-    return {data, loading, error};
+    return {data, loading, error, setData};
 }
 
 export default UseGet;

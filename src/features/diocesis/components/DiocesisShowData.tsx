@@ -4,26 +4,28 @@ import EditIcon from '../../../assets/editIcon.svg'
 import UseGet from '../../../shared/hooks/useGet'
 import useApiDelete from '../../../shared/hooks/useDelete'
 import { useEffect, useState } from 'react'
-
+import { useNavigate } from 'react-router-dom'
+import { getDiocese } from '../helpers/getDiocese'
 interface Diocesis{
     id: number;
     name: string;
     holder: string;
 
 }
-
 const DiocesisShowData = () => {
     const apiUrl = 'http://127.0.0.1:3000/Diocese/';
     const [diocesisDelete, setDiocesisDelete] = useState<number>(0); // [1
-    const {data, loading, error} = UseGet(apiUrl);
+    const {data, loading, error, setData:setDiocese} = UseGet(apiUrl);
     const {deleteData} = useApiDelete({apiUrl,idDelete:diocesisDelete}); 
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(diocesisDelete !== 0){
-            deleteData().catch(console.error);
+            deleteData().then(()=>{
+                return getDiocese()
+            }).then(diocesis => setDiocese(diocesis)).catch(console.error);
         }
-    },[diocesisDelete,deleteData])
-
+    },[diocesisDelete,deleteData,setDiocese])
 
     return (
         <div className={Diocesis['diocesis-table__table']}>
@@ -48,11 +50,15 @@ const DiocesisShowData = () => {
                 (data as [])?.map((diocesis:Diocesis)=>{
                     return (
                         <tr key={diocesis.id} className={Diocesis['diocesis-table__table--tbody-tr']}>
-                            <td>{diocesis.name}</td>
+                            <td className={Diocesis['diocesis-table__table--tbody-tr-name']}>{diocesis.name}</td>
                             <td className={Diocesis['diocesis-table__table--tbody-tr-obispo']} >{diocesis.holder}</td>
                             <td className={Diocesis['diocesis-table__button--container']}>
                                 <button className={Diocesis['diocesis-table__button--edit']}>
-                                    <img src={EditIcon} alt="Editar"  />
+                                    <img src={EditIcon} alt="Editar"  
+                                        onClick={()=>{
+                                            navigate(`./${diocesis.id}`)
+                                        }}
+                                    />
                                 </button>
                                 <button className={Diocesis['diocesis-table__button--delete']} onClick={()=>{
                                         setDiocesisDelete(diocesis.id);

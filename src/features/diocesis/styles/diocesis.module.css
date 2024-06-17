@@ -238,22 +238,24 @@
         width: 20%;
     }
 }
-@media (width >= 1025px) and (width<=1440px) { 
+@media (width >= 1025px){ 
     .diocesis-create__container,
     .diocesis-table__container{    
         height: 100vh;
         width: 100%;
-        overflow-y: hidden;
+        overflow: auto;
     }
     
     .diocesis-table__table{
         width: 100%;
-        overflow-y: visible;
+        height: 100vh;
+        overflow: auto;
     }
     .diocesis-table__table--container{
         margin: 0 auto;
         max-width: 70%;
-        max-height: 18%;
+        height: 80%;
+        max-height: 200rem;
         overflow-y: scroll;
     }
     .diocesis-table__table--container-loading{
@@ -265,12 +267,30 @@
     .diocesis-table__table--tbody-tr-obispo{
         width: 20%;
     }
+    .diocesis-table__table--tbody-tr-name{
+        width: 30%;
+        overflow-x: scroll;
+    }
+    .diocesis-table__table--tbody-tr-obispo::-webkit-scrollbar,
+    .diocesis-table__table--tbody-tr-name::-webkit-scrollbar{
+        display: none;
+    }
     .diocesis-create__form{
         width: 70%;
         align-items: start;
         margin: 0 auto;
     }
-
+    .diocesis-table__table--tbody-tr{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: none;
+        margin: 0;
+        padding: 2rem;
+        border-bottom: 1px solid var(--backgroundColor);
+    }
+    
     .diocesis-create__form-group{
         justify-content: start;
     }
