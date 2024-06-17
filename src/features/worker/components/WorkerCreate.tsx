@@ -8,9 +8,61 @@ import WorkerFormPhoto from './WorkerFormPhoto'
 import WorkerFormButtons from './WorkerFormButtons'
 import ContentTitle from '../../ui/contentTitles/components/ContentTitle'
 
+export interface SocialMedia{
+    category?: number
+    link: string
+}
+interface WorkerPersonalInfo{
+    name: string
+    lastName: string
+    id: string
+    birthDate: string
+}
+export interface WorkerContactInfo{
+    phone: string
+    description: string
+    phoneFamily: string
+    descriptionFamily: string
+    email: string
+}
+export interface WorkerJobAndMedical{
+    jobPosition: string
+    blood: string
+    condition: string
+}
+
+type WorkerPhoto =FileList | null
+
+
+
 const WorkerCreate = () => {
     const [number, setNumber] = useState<number>(1)
     const [modal, setModal] = useState<boolean>(false)
+
+    const [workerPersonalInfo, setWorkerPersonal] = useState<WorkerPersonalInfo>({
+        name: '',
+        lastName: '',
+        id: '',
+        birthDate: ''
+    })
+    const [workerPhone, setWorkerPhone] = useState<WorkerContactInfo>(
+        {
+            phone: '',
+            description: '',
+            phoneFamily: '',
+            descriptionFamily: '',
+            email: ''
+        }
+    )
+    const [workerSocialMedia, setWorkerSocialMedia] = useState<SocialMedia[]>([])
+    const [workerPhoto, setWorkerPhoto] = useState<WorkerPhoto>(null)
+    const [workerJobPositionAndMedical, setWorkerJobPositionAndMedical] = useState<WorkerJobAndMedical>({
+        blood: '',
+        condition: '',
+        jobPosition: ''
+    })
+    console.log(workerPhone)
+    console.log(workerSocialMedia.length)
     return (
         <div className={Worker['worker-create__container']}>
             <div className={modal ? Worker['worker-create__background--modal'] : Worker['worker-create__background--hidden']}></div>
@@ -18,7 +70,12 @@ const WorkerCreate = () => {
             <form className={Worker['worker-create__form']}>
                 {number === 1 ?
                     <div key={1}>
-                        <WokerFormPersonal />
+                        <WokerFormPersonal
+                            name= {workerPersonalInfo.name}
+                            lastName={workerPersonalInfo.lastName}
+                            id={workerPersonalInfo.id}
+                            birthDate={workerPersonalInfo.birthDate}
+                        />
                         <WorkerFormButtons 
                             initial
                             setNumber={setNumber}
@@ -26,13 +83,23 @@ const WorkerCreate = () => {
                     </div>
                 : number === 2 ?
                     <div key={2}>
-                        <WorkerFormLabor />
+                        <WorkerFormLabor 
+                            jobPosition={workerJobPositionAndMedical.jobPosition}
+                            blood= {workerJobPositionAndMedical.blood}
+                            condition= {workerJobPositionAndMedical.condition}
+                            setWorkerJobPositionAndMedical={setWorkerJobPositionAndMedical}
+
+                        />
                         <WorkerFormButtons 
                             setNumber={setNumber}/>
                     </div> 
                 : number === 3 ?
                     <div key={3}>
-                        <WorkerFormContact />
+                        <WorkerFormContact
+                            workerPhone={workerPhone}
+                            setWorkerPhone={setWorkerPhone}
+                            email={workerPhone.email}
+                        />
                         <WorkerFormButtons 
                             setNumber={setNumber}/>
                         
@@ -42,13 +109,18 @@ const WorkerCreate = () => {
                         <WorkerFormSocialMedia
                             setModal={setModal}
                             modal={modal}
+                            workerSocialMedia = {workerSocialMedia}
+                            setWorkerSocialMedia={setWorkerSocialMedia}
                         />
                         <WorkerFormButtons 
+                            
                             setNumber={setNumber}/>
                     </div>
                 : number === 5 ?
                     <div key={5}>
-                        <WorkerFormPhoto />
+                        <WorkerFormPhoto
+                            workerPhoto={workerPhoto}
+                        />
                         <WorkerFormButtons
                             final 
                             setNumber={setNumber}/>

@@ -18,6 +18,7 @@
     padding: 2rem;
 }
 
+
 .worker-create__background--modal{
     position: absolute;
     z-index: 11;
@@ -75,12 +76,17 @@
 .worker-create__form--email,
 .worker-create__form--phoneFamily,
 .worker-create__form--nameContact,
-.worker-create__form--facebook,
-.worker-create__form--instagram,
-.worker-create__form--twitter,
-.worker-create__form--linkedin,
-.worker-create__form--youtube,
-.worker-create__form--tiktok{
+.worker-create__form--Facebook,
+.worker-create__form--Instagram,
+.worker-create__form--Twitter,
+.worker-create__form--LinkedIn,
+.worker-create__form--YouTube,
+.worker-create__form--Tiktok,
+.worker-create__form--Twitch,
+.worker-create__form--Discord,
+.worker-create__form--Threads,
+.worker-create__form--GitHub,
+.worker-create__form--Pinterest{
 
     margin-bottom: 2rem;
 }
@@ -95,13 +101,17 @@
 .worker-create__form-email--label,
 .worker-create__form-phoneFamily--label,
 .worker-create__form-nameContact--label,
-.worker-create__form-facebook--label,
-.worker-create__form-instagram--label,
-.worker-create__form-twitter--label,
-.worker-create__form-linkedin--label,
-.worker-create__form-youtube--label,
-.worker-create__form-tiktok--label{
-
+.worker-create__form-Facebook--label,
+.worker-create__form-Instagram--label,
+.worker-create__form-Twitter--label,
+.worker-create__form-LinkedIn--label,
+.worker-create__form-YouTube--label,
+.worker-create__form-Tiktok--label,
+.worker-create__form-Twitch--label,
+.worker-create__form-Discord--label,
+.worker-create__form-Threads--label,
+.worker-create__form-GitHub--label,
+.worker-create__form-Pinterest--label{
     font-weight: bold;
 }
 .worker-create__form--name input,
@@ -118,12 +128,17 @@
 .worker-create__form--email input,
 .worker-create__form--phoneFamily input,
 .worker-create__form--nameContact input,
-.worker-create__form--facebook input,
-.worker-create__form--instagram input,
-.worker-create__form--twitter input,
-.worker-create__form--linkedin input,
-.worker-create__form--youtube input,
-.worker-create__form--tiktok input{
+.worker-create__form--Facebook input,
+.worker-create__form--Instagram input,
+.worker-create__form--Twitter input,
+.worker-create__form--LinkedIn input,
+.worker-create__form--YouTube input,
+.worker-create__form--Tiktok input,
+.worker-create__form--Twitch input,
+.worker-create__form--Discord input,
+.worker-create__form--Threads input,
+.worker-create__form--GitHub input,
+.worker-create__form--Pinterest input{
     width: 100%;
     padding: 1rem;
     border-radius: .5rem;
@@ -179,11 +194,13 @@
     justify-content: center;
     align-items: center;
     animation: fadeIn 1s ease-out forwards;
+
 }
 .worker-create__form--modal{
-    position: absolute;
+    position: relative;
     top: 30%;
-    left: 50%;
+    left: 30%;
+    height: 50rem;
     transform: translate(-50%, -50%);
     background-color: var(--backgroundCard);
     padding: 2rem;
@@ -192,9 +209,12 @@
     flex-direction: column;
     align-items: center;
     animation: fadeIn 1s ease-out forwards;
+    overflow-y:scroll ;
     
 }
-
+.worker-create__form--modal::-webkit-scrollbar{
+    background-color: transparent;
+}
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -203,12 +223,17 @@
         opacity: 1;
     }
 }
-.worker-create__form--facebook,
-.worker-create__form--instagram,
-.worker-create__form--twitter,
-.worker-create__form--linkedi,
-.worker-create__form--youtube,
-.worker-create__form--tiktok{
+.worker-create__form--Facebook,
+.worker-create__form--Instagram,
+.worker-create__form--Twitter,
+.worker-create__form--LinkedIn,
+.worker-create__form--YouTube,
+.worker-create__form--Tiktok,
+.worker-create__form--Twitch,
+.worker-create__form--Discord,
+.worker-create__form--Threads,
+.worker-create__form--GitHub,
+.worker-create__form--Pinterest{
     box-shadow: 0px 6px 16px -6px rgba(0,0,0,0.3);
     padding: 1rem;
     border-radius: 1rem;
@@ -218,6 +243,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-top: 2rem;
+    max-height: 80%;
 }
 .worker-create__form--modal-options button{
     background-color: var(--backgroundCard);
@@ -234,34 +260,58 @@
     align-items: center;
 
 }
-.worker-create__form--facebook div,
-.worker-create__form--instagram div,
-.worker-create__form--twitter div,
-.worker-create__form--linkedin div
-.worker-create__form--youtube div,
-.worker-create__form--tiktok div{
-    animation: fadeIn 1s ease-out forwards;
+.worker-create__form--Facebook div,
+.worker-create__form--Instagram div,
+.worker-create__form--Twitter div,
+.worker-create__form--LinkedIn div
+.worker-create__form--YouTube div,
+.worker-create__form--Tiktok div,
+.worker-create__form--Twitch div,
+.worker-create__form--Discord div,
+.worker-create__form--Threads div,
+.worker-create__form--GitHub div,
+.worker-create__form--Pinterest div{
     display: flex;
+    animation: fadeIn 1s ease-out forwards;
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
 }
-.worker-create__form--facebook div label,
-.worker-create__form--instagram div label,
-.worker-create__form--twitter div label,
-.worker-create__form--linkedin div label,
-.worker-create__form--youtube div label,
-.worker-create__form--tiktok div label {
+.worker-create__form--LinkedIn div,
+.worker-create__form--YouTube div{
+    display: flex;
+    animation: fadeIn 1s ease-out forwards;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.worker-create__form--Facebook div label,
+.worker-create__form--Instagram div label,
+.worker-create__form--Twitter div label,
+.worker-create__form--LinkedIn div label,
+.worker-create__form--YouTube div label,
+.worker-create__form--Tiktok div label,
+.worker-create__form--Twitch div label,
+.worker-create__form--Discord div label,
+.worker-create__form--Threads div label,
+.worker-create__form--GitHub div label,
+.worker-create__form--Pinterest div label{
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-.worker-create__form--facebook div button,
-.worker-create__form--instagram div button,
-.worker-create__form--twitter div button,
-.worker-create__form--linkedin div button,
-.worker-create__form--youtube div button,
-.worker-create__form--tiktok div button{
+
+.worker-create__form--Facebook div button,
+.worker-create__form--Instagram div button,
+.worker-create__form--Twitter div button,
+.worker-create__form--LinkedIn div button,
+.worker-create__form--YouTube div button,
+.worker-create__form--Tiktok div button,
+.worker-create__form--Twitch div button,
+.worker-create__form--Discord div button,
+.worker-create__form--Threads div button,
+.worker-create__form--GitHub div button,
+.worker-create__form--Pinterest div button{
     background-color: var(--backgroundCard);
     border: none;
 
@@ -286,4 +336,219 @@
     border: none;
     display: flex;
     justify-content: end;
+}
+/*AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA*/
+.data-show__container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--backgroundCard);
+    padding: 2rem;
+    border-radius: 2rem;
+}
+.data-show__title{
+    display: flex;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--textColor);
+    justify-content: space-between;
+    border: #dddeee 1px solid;
+    border-radius: 1rem 1rem 0 0;
+    padding: 0.5rem
+}
+.data-content{
+    display: flex;
+    justify-content: flex-start;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    align-items: center;
+    border: #dddeee 1px solid;
+    border-top: none;
+    text-align: end;
+    gap: 3rem;
+}
+.data-content:last-child{
+    border-radius: 0 0 1rem 1rem;
+}
+.data-info{
+    overflow-x: scroll;
+}
+.data-buttons{
+    display: flex;
+}
+.data-buttons button{
+    background-color: #FFFFFF;
+    border: none;
+    
+}
+.data-buttons button img{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+/*ANIMACION*/
+.animation-container{
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    margin: 0 auto;
+    padding: 3rem;
+}
+
+.animation-container .animation-loading{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    border: solid 0.4rem transparent;
+    border-top-color: #DC2626;
+    border-left-color: #DC2626;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+}
+.animation-container .animation-loading__two{
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    border: solid 0.4rem transparent;
+    border-top-color: #017AE9;
+    border-left-color: #017AE9;
+    border-radius: 50%;
+    animation: spin__two 1.2s linear infinite;
+
+}
+@keyframes spin{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+}
+@keyframes spin__two{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(-360deg);
+    }
+}
+/*ANIMACION*/
+.animation-container{
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    margin: 0 auto;
+    padding: 3rem;
+}
+
+.animation-container .animation-loading{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    border: solid 0.4rem transparent;
+    border-top-color: #DC2626;
+    border-left-color: #DC2626;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+}
+.animation-container .animation-loading__two{
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    border: solid 0.4rem transparent;
+    border-top-color: #017AE9;
+    border-left-color: #017AE9;
+    border-radius: 50%;
+    animation: spin__two 1.2s linear infinite;
+
+}
+@keyframes spin{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+}
+@keyframes spin__two{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(-360deg);
+    }
+}
+
+@media (width >= 601px) and (width <= 1024px){
+    .worker-create__container{
+        width: 100%;
+        height: 100vh;
+    }
+    .worker-create__form{
+        margin: 0 auto;
+        width: 70%;
+        height: 100vh;
+    }
+    .worker-create__form--modal{
+        position: absolute;
+        top: 30%;
+        left: 30%;
+        height: 50rem;
+        transform: translate(-50%, -50%);
+        background-color: var(--backgroundCard);
+        padding: 2rem;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 1s ease-out forwards;
+        overflow-y:scroll ;
+        
+    }
+}
+@media (width >= 1024px){
+    .worker-create__container{
+        width: 100%;
+        height: 100vh;
+    }
+    .worker-create__form{
+        margin: 0 auto;
+        width: 70%;
+        height: 80vh;
+        overflow-y: scroll;
+    }
+    .worker-create__form::-webkit-scrollbar{
+        background-color: transparent;
+    }
+    .worker-create__form--inputs{
+        width: 90%;
+        margin-bottom: 1rem;
+        overflow-y: scroll;
+    }
+    .worker-create__form--modal-options{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .worker-create__form--modal{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 50rem;
+        transform: translate(-50%, -50%);
+        background-color: var(--backgroundCard);
+        padding: 2rem;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 1s ease-out forwards;
+        overflow-y:scroll ;
+        
+    }
 }
