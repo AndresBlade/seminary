@@ -6,6 +6,8 @@ import useApiDelete from '../../../shared/hooks/useDelete'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getDiocese } from '../helpers/getDiocese'
+import { getDioceseByName } from '../helpers/getDioceseByName'
+
 interface Diocesis{
     id: number;
     name: string;
@@ -15,8 +17,10 @@ interface Diocesis{
 const DiocesisShowData = () => {
     const apiUrl = 'http://127.0.0.1:3000/Diocese/';
     const [diocesisDelete, setDiocesisDelete] = useState<number>(0); // [1
-    const {data, loading, error, setData:setDiocese} = UseGet(apiUrl);
+    const {data, loading, error, setData:setDiocese} = UseGet<Diocesis[]>(apiUrl);
     const {deleteData} = useApiDelete({apiUrl,idDelete:diocesisDelete}); 
+    const [diocesisFind, setDiocesisFind] = useState('')
+    const [find, setFind] = useState('')
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -25,11 +29,29 @@ const DiocesisShowData = () => {
                 return getDiocese()
             }).then(diocesis => setDiocese(diocesis)).catch(console.error);
         }
-    },[diocesisDelete,deleteData,setDiocese])
+        if(!diocesisFind){
+            getDiocese().then(diocesis => setDiocese(diocesis)).catch(console.error);
+            return;
+        }
+        if(find){
+            getDioceseByName({name:diocesisFind}).then(diocesis => setDiocese(diocesis)).catch(console.error);
+            setFind('');
+            return;
+        }
+    },[diocesisDelete,deleteData,setDiocese,find,diocesisFind])
 
     return (
         <div className={Diocesis['diocesis-table__table']}>
+            <div className={Diocesis['diocesis-find']}>
+                <input type="search" placeholder='Nombre de la Diocesis' value={diocesisFind} onChange={(e)=>{
+                    setDiocesisFind(e.target.value)
+                }} />
+                <button type='button' onClick={()=>{
+                    setFind(diocesisFind)
+                }}>Buscar</button>
+            </div>
         <table className={!loading ? Diocesis['diocesis-table__table--container'] : Diocesis['diocesis-table__table--container-loading']}>
+                
             <thead className={Diocesis['diocesis-table__table--thead']}>
                 <tr>
                     <th>Diócesis</th>
@@ -47,7 +69,8 @@ const DiocesisShowData = () => {
                 
                     error ? <tr><td>Error al cargar los datos</td></tr>
                 :
-                (data as [])?.map((diocesis:Diocesis)=>{
+                data?.length === 0 ? <tr><td>No hay datos</td></tr>:
+                data?.map((diocesis:Diocesis)=>{
                     return (
                         <tr key={diocesis.id} className={Diocesis['diocesis-table__table--tbody-tr']}>
                             <td className={Diocesis['diocesis-table__table--tbody-tr-name']}>{diocesis.name}</td>

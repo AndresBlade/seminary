@@ -127,6 +127,9 @@
     border: none;
     transition: .3s;
 }
+/********ESTILOS DE LA BARRA DE BUSQUEDA***********/
+
+
 .animation-container{
     position: relative;
     width: 8rem;
@@ -245,18 +248,47 @@
         width: 100%;
         overflow: auto;
     }
-    
+    .diocesis-find{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem 7rem 2rem 6rem;
+    }
+    .diocesis-find input{
+        width: 40%;
+        padding: 1rem;
+        border-radius: .5rem;
+        border: none;
+        background-color: var(--backgroundColor);
+    }
+    .diocesis-find button{
+        width: 30%;
+        padding: 1rem;
+        border-radius: .5rem;
+        border: none;
+        background-color: var(--buttonColorSearch);
+        color: var(--textColor2);
+        cursor: pointer;
+        transition: .3s;
+    }
     .diocesis-table__table{
-        width: 100%;
+        background-color: var(--backgroundCard);
+        width: 70%;
         height: 100vh;
         overflow: auto;
+        margin: 0 auto;
+        border-radius: 1rem;
     }
     .diocesis-table__table--container{
         margin: 0 auto;
-        max-width: 70%;
+        max-width: 90%;
         height: 80%;
         max-height: 200rem;
         overflow-y: scroll;
+    }
+    .diocesis-table__table--container::-webkit-scrollbar{
+        display: none;
     }
     .diocesis-table__table--container-loading{
         margin: 0 auto;
