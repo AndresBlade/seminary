@@ -223,6 +223,7 @@ li {
 	gap: 2.6rem;
 	color: var(--red);
 	text-decoration: none;
+	transition: background-color 0.5s;
 }
 
 .activeSubmenuItem {
