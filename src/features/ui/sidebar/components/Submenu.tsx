@@ -2,6 +2,7 @@ import { SidebarItemChildrenData } from '../interface/sidebarItemData';
 import sidebarCSS from '../styles/sidebar.module.css';
 import arrowIconPath from '../../../../assets/MaterialSymbolsArrowForwardIos.svg';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 interface Props {
 	submenuItemData?: SidebarItemChildrenData[];
@@ -26,7 +27,16 @@ export const Submenu = ({ submenuItemData, isSubmenuShowing }: Props) => {
 		>
 			<div>
 				{submenuItemData?.map((submenuItem, index) => (
-					<div className={sidebarCSS.submenuItem} key={index}>
+					<NavLink
+						to={submenuItem.path}
+						className={({ isActive }) =>
+							isActive
+								? sidebarCSS.activeSubmenuItem
+								: sidebarCSS.submenuItem
+						}
+						key={index}
+						end
+					>
 						<img
 							src={arrowIconPath}
 							alt={submenuItem.content}
@@ -35,7 +45,7 @@ export const Submenu = ({ submenuItemData, isSubmenuShowing }: Props) => {
 						<p className={sidebarCSS.itemContent}>
 							{submenuItem.content}
 						</p>
-					</div>
+					</NavLink>
 				))}
 			</div>
 		</div>

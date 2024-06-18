@@ -138,6 +138,7 @@ table {
 
 	border: 1px solid var(--backgroundColor);
 	border-radius: 2rem;
+	overflow: auto;
 }
 .roles-table__thead {
 	font-weight: bold;

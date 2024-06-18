@@ -152,6 +152,7 @@ li {
 	align-items: center;
 	gap: 2.6rem;
 	transition: color 0.3s;
+	padding: 0 4px;
 }
 
 .itemLogo {
@@ -161,6 +162,11 @@ li {
 	transition: filter 0.3s;
 }
 
+.itemLink {
+	text-decoration: none;
+	color: inherit;
+	border-radius: 2px;
+}
 .clickedItemLogo {
 	composes: itemLogo;
 	filter: var(--svg-red);
@@ -181,6 +187,10 @@ li {
 	height: 1.2rem;
 	transition-property: filter, transform;
 	transition-duration: 0.3s;
+}
+
+.hiddenArrow {
+	display: none;
 }
 
 .rotatedArrow {
@@ -213,6 +223,12 @@ li {
 	align-items: center;
 	gap: 2.6rem;
 	color: var(--red);
+	text-decoration: none;
+}
+
+.activeSubmenuItem {
+	composes: submenuItem;
+	background-color: #b21d1d1a;
 }
 
 .submenuItemLogo {
@@ -342,7 +358,7 @@ li {
 	}
 
 	.submenuItem {
-		height: 2.5rem;
+		height: 3rem;
 		font-size: 1rem;
 		cursor: pointer;
 	}
