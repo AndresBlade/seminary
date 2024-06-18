@@ -19,7 +19,7 @@ interface SubmitFormProps {
 	navigate: NavigateFunction;
 }
 
-const handleSubmit = ({
+const handleSubmit = async ({
 	e,
 	roleName,
 	roleDescription,
@@ -38,14 +38,11 @@ const handleSubmit = ({
 		.map(permission => permission.id);
 
 	if (id) {
-		editRole({ id, name, description, numbers })
-			.then(data => console.log(data))
-			.catch(err => console.log(err));
+		await editRole({ id, name, description, numbers });
+		navigate('../');
 		return;
 	}
-	createRole({ name, description, numbers })
-		.then(data => console.log(data))
-		.catch(err => console.log(err));
+	await createRole({ name, description, numbers });
 
 	navigate('../');
 };
@@ -147,7 +144,7 @@ export const RoleForm = () => {
 							checkedPermissions,
 							id: Number(id),
 							navigate,
-						});
+						}).catch(err => console.log(err));
 				}}
 			>
 				<div className={RolesCSS['roles-create__form']}>
