@@ -98,14 +98,13 @@ const WorkerCreate = () => {
                         <WorkerFormContact
                             workerPhone={workerPhone}
                             setWorkerPhone={setWorkerPhone}
-                            email={workerPhone.email}
                         />
                         <WorkerFormButtons 
                             setNumber={setNumber}/>
                         
                     </div>
                 : number === 4 ? 
-                    <div className='worker-create__form--inputs-media' key={4}>
+                    <div className={Worker['worker-create__form--inputs-media']} key={4}>
                         <WorkerFormSocialMedia
                             setModal={setModal}
                             modal={modal}
@@ -117,7 +116,7 @@ const WorkerCreate = () => {
                             setNumber={setNumber}/>
                     </div>
                 : number === 5 ?
-                    <div key={5}>
+                    <div key={5} className={Worker['worker-create__photo']}>
                         <WorkerFormPhoto
                             workerPhoto={workerPhoto}
                         />

@@ -53,8 +53,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorke
                         }}/>
                     </div>
                     )
-                })} 
-                    
+                })}      
                 </div>
                 <div className={Worker['worker-create__form--buttonAdd']}>
                         <button onClick={(e)=>{
@@ -64,6 +63,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorke
                             Agregar red social
                         </button>
                     </div>
+                
                 {
                 modal ?
                     <div className={Worker['worker-create__form--modal-container']}>
