@@ -2,8 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
-import { Parish } from '../pages/Parish';
+import { ParishShowData } from '../pages/ParishShowData';
 import { AuthenticatedLayout } from '../features/ui/layout/components/AuthenticatedLayout';
+import {ParishCreate} from '../pages/ParishCreate';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -13,7 +14,14 @@ export const router = createBrowserRouter([
 			{
 				element: <AuthenticatedLayout />,
 				children: [{ path: 'home', element: <Home /> },
-					{path: 'parish', element: <Parish />},
+					{path: 'parish', children:[
+						{
+							index:true,
+							element:<ParishShowData />
+						},
+						{path: 'new', element:<ParishCreate />},
+						{path: ':id', element:<ParishCreate />}
+					]}
 				],
 
 

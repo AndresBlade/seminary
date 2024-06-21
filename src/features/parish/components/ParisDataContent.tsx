@@ -3,6 +3,7 @@ import Parish from '../styles/parish.module.css'
 import EditIcon from '../../../assets/editIcon.svg'
 import DeleteIcon from '../../../assets/deleteIcon.svg'
 import useDelete from '../../../shared/hooks/useDelete'
+import { useNavigate } from 'react-router-dom'
 interface ParisDataContentProps {
     parroquia: string
     parroco: string
@@ -12,9 +13,10 @@ interface ParisDataContentProps {
 export type ParisDataContentProp = HTMLAttributes<HTMLDivElement> & ParisDataContentProps;
 
 const ParisDataContent: FC<ParisDataContentProps> = ({id,parroquia,parroco}) => {
-    const apiUrl = 'http://localhost:3001/parish/';
+    const apiUrl = 'http://localhost:3000/parish/';
     const [parroquiaDelete, setParroquiaDelete] = useState<number>(0);
     const {deleteData} = useDelete({apiUrl,idDelete:parroquiaDelete});
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(parroquiaDelete !== 0){
@@ -31,7 +33,9 @@ const ParisDataContent: FC<ParisDataContentProps> = ({id,parroquia,parroco}) => 
             <p>{parroquia}</p>
             <p>{parroco}</p>
             <div className={Parish['data-buttons']}>
-                <button>
+                <button onClick={()=>{
+                    navigate(`./${id}`)
+                }}>
                     <img src={EditIcon} alt="Editar"/>                     
                 </button>
                 <button type='button' onClick={()=>{
