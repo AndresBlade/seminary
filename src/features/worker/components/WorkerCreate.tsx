@@ -62,8 +62,7 @@ const WorkerCreate = () => {
 			condition: '',
 			jobPosition: '',
 		});
-	console.log(workerPhone);
-	console.log(workerSocialMedia.length);
+	console.log(workerSocialMedia);
 	return (
 		<div className={Worker['worker-create__container']}>
 			<div
@@ -76,7 +75,7 @@ const WorkerCreate = () => {
 			<ContentTitle title="Trabajador" subtitle="Agregar Trabajador" />
 			<form className={Worker['worker-create__form']}>
 				{number === 1 ? (
-					<div className={Worker['worker-create__personal']}>
+					<>
 						<WokerFormPersonal
 							name={workerPersonalInfo.name}
 							lastName={workerPersonalInfo.lastName}
@@ -85,9 +84,9 @@ const WorkerCreate = () => {
 							setWorkerPersonal={setWorkerPersonal}
 						/>
 						<WorkerFormButtons initial setNumber={setNumber} />
-					</div>
+					</>
 				) : number === 2 ? (
-					<div>
+					<>
 						<WorkerFormLabor
 							jobPosition={
 								workerJobPositionAndMedical.jobPosition
@@ -99,19 +98,17 @@ const WorkerCreate = () => {
 							}
 						/>
 						<WorkerFormButtons setNumber={setNumber} />
-					</div>
+					</>
 				) : number === 3 ? (
-					<div>
+					<>
 						<WorkerFormContact
 							workerPhone={workerPhone}
 							setWorkerPhone={setWorkerPhone}
 						/>
 						<WorkerFormButtons setNumber={setNumber} />
-					</div>
+					</>
 				) : number === 4 ? (
-					<div
-						className={Worker['worker-create__form--inputs-media']}
-					>
+					<>
 						<WorkerFormSocialMedia
 							setModal={setModal}
 							modal={modal}
@@ -119,9 +116,9 @@ const WorkerCreate = () => {
 							setWorkerSocialMedia={setWorkerSocialMedia}
 						/>
 						<WorkerFormButtons setNumber={setNumber} />
-					</div>
+					</>
 				) : number === 5 ? (
-					<div>
+					<>
 						<ProfilePictureForm
 							setProfilePicture={setWorkerProfilePicture}
 							title="Foto del trabajador"
@@ -129,7 +126,7 @@ const WorkerCreate = () => {
 							content="Subir foto del trabajador"
 						/>
 						<WorkerFormButtons final setNumber={setNumber} />
-					</div>
+					</>
 				) : null}
 			</form>
 		</div>

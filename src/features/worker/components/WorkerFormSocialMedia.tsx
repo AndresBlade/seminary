@@ -18,11 +18,11 @@ interface WorkerFormSocialMediaProps{
     }[]
     setWorkerSocialMedia: Dispatch<SetStateAction<SocialMedia[]>>
 }
-const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorkerSocialMedia, }:WorkerFormSocialMediaProps) => {
+const WorkerFormSocialMedia = ({workerSocialMedia,setModal,modal,setWorkerSocialMedia, }:WorkerFormSocialMediaProps) => {
     const apiUrl= 'http://localhost:3000/worker/socials/'
     const {data,loading,error} = UseGet(apiUrl)
     const [input,setInput] = useState<WorkerModalProps[]>([])
-
+    
     return (
         <div className={Worker['worker-create__form-inputs']}>
             <h2>Redes Sociales</h2>
@@ -38,6 +38,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorke
                             <button
                                 onClick={(e)=>{
                                     e.preventDefault()
+                                    setWorkerSocialMedia((socialInfo)=>socialInfo.filter((social)=>social.category !== socialMedia.id))
                                     setInput((socialInfo)=>{
                                         return socialInfo.filter((social)=>social.id !== socialMedia.id)
                                     })
@@ -45,10 +46,18 @@ const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorke
                             ><img src={Close} alt="Cerrar" /></button>
                         </div>
                         
-                        <input type="text" name={socialMedia.description} id={socialMedia.description} value={link}  onChange={(e)=>{
+                        <input type="text" name={socialMedia.description} id={socialMedia.description} value={workerSocialMedia.find(workerSocialMediaElement=>{
+                            return workerSocialMediaElement.category === socialMedia.id
+                        })?.link} onChange={(e)=>{
                             e.preventDefault()
                             setWorkerSocialMedia((social)=>{
-                                return {...social, category: socialMedia.id, link: e.target.value}
+                                const filterSocial = social.map((socialMediaFilter)=>{
+                                    if(socialMediaFilter.category === socialMedia.id){
+                                        return {...socialMediaFilter, link: e.target.value}
+                                    }
+                                    return socialMediaFilter
+                                })
+                                return filterSocial
                             })
                         }}/>
                     </div>
@@ -89,6 +98,9 @@ const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorke
                                     return(
                                         <button key={social.id} onClick={(e)=>{
                                             e.preventDefault()
+                                            setWorkerSocialMedia((socialMediaInfo)=>{
+                                                return[...socialMediaInfo, {category: social.id, link: ''} ]
+                                            })
                                             setInput((socialInfo)=>{
                                                 return [...socialInfo, social]
                                             })
