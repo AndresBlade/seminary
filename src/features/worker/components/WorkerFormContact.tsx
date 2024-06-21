@@ -30,7 +30,7 @@ const WorkerFormContact = ({workerPhone:{phone,description,phoneFamily,descripti
                     }} />
                 </div>
                 <div className={Worker['worker-create__form--email']}>
-                    <label htmlFor="email" className={Worker['worker-create__form-email--label']}>Descripcion</label>
+                    <label htmlFor="description" className={Worker['worker-create__form-email--label']}>Descripcion</label>
                     <input type="description" name="description" id="description" value={description} onChange={(e)=>{
                         setWorkerPhone((worker)=>{
                             return{...worker, description: e.target.value}
@@ -46,7 +46,7 @@ const WorkerFormContact = ({workerPhone:{phone,description,phoneFamily,descripti
                     }}/>
                 </div>
                 <div className={Worker['worker-create__form--phoneFamily']}>
-                    <label htmlFor="address" className={Worker['worker-create__form-phoneFamily--label']}>Telefono de contacto familiar</label>
+                    <label htmlFor="phoneFamily" className={Worker['worker-create__form-phoneFamily--label']}>Telefono de contacto familiar</label>
                     <input type="text" name="phoneFamily" id="phoneFamily" value={phoneFamily} onChange={(e)=>{
                         setWorkerPhone((worker)=>{
                             return{...worker, phoneFamily: e.target.value}
@@ -54,7 +54,7 @@ const WorkerFormContact = ({workerPhone:{phone,description,phoneFamily,descripti
                     }} />
                 </div>
                 <div className={Worker['worker-create__form--nameContact']}>
-                    <label htmlFor="address" className={Worker['worker-create__form-nameContact--label']}>Descripcion</label>
+                    <label htmlFor="nameContact" className={Worker['worker-create__form-nameContact--label']}>Descripcion</label>
                     <input type="text" name="nameContact" id="nameContact" value={descriptionFamily} onChange={(e)=>{
                         setWorkerPhone((worker)=>{
                             return{...worker, descriptionFamily: e.target.value}

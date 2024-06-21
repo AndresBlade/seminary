@@ -516,7 +516,7 @@
 @media (width >= 1024px){
     .worker-create__container{
         width: 100%;
-        height: auto;
+        height: 100%;
     }
     .worker-create__form{
         margin: 0 auto;
@@ -556,5 +556,10 @@
         justify-content: space-between;
         height: 100%;
         min-height: 40rem;
+    }
+    .worker-create__form--personal{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
     }
 }
