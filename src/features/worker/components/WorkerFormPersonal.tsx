@@ -1,10 +1,11 @@
 import Worker from '../styles/worker.module.css'
-
+import { WorkerPersonalInfo } from './WorkerCreate'
 interface WorkerFormPersonalProps{
     name: string
     lastName: string
     id: string
     birthDate: string
+    setWorkerPersonal: React.Dispatch<React.SetStateAction<WorkerPersonalInfo>>
 }
 
 

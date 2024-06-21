@@ -505,6 +505,9 @@ input{
         overflow-y:scroll ;
         
     }
+	.worker-create__personal{
+		width: 100%;
+	}
     .worker-create__photo,
     .worker-create__form--inputs-media{
         display: flex;

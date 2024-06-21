@@ -12,7 +12,7 @@ export interface SocialMedia {
 	category?: number;
 	link: string;
 }
-interface WorkerPersonalInfo {
+export interface WorkerPersonalInfo {
 	name: string;
 	lastName: string;
 	id: string;
@@ -76,12 +76,13 @@ const WorkerCreate = () => {
 			<ContentTitle title="Trabajador" subtitle="Agregar Trabajador" />
 			<form className={Worker['worker-create__form']}>
 				{number === 1 ? (
-					<div>
+					<div className={Worker['worker-create__personal']}>
 						<WokerFormPersonal
 							name={workerPersonalInfo.name}
 							lastName={workerPersonalInfo.lastName}
 							id={workerPersonalInfo.id}
 							birthDate={workerPersonalInfo.birthDate}
+							setWorkerPersonal={setWorkerPersonal}
 						/>
 						<WorkerFormButtons initial setNumber={setNumber} />
 					</div>
