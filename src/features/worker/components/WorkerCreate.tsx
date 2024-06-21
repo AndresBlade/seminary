@@ -76,7 +76,7 @@ const WorkerCreate = () => {
 			<ContentTitle title="Trabajador" subtitle="Agregar Trabajador" />
 			<form className={Worker['worker-create__form']}>
 				{number === 1 ? (
-					<div key={1}>
+					<div>
 						<WokerFormPersonal
 							name={workerPersonalInfo.name}
 							lastName={workerPersonalInfo.lastName}
@@ -86,7 +86,7 @@ const WorkerCreate = () => {
 						<WorkerFormButtons initial setNumber={setNumber} />
 					</div>
 				) : number === 2 ? (
-					<div key={2}>
+					<div>
 						<WorkerFormLabor
 							jobPosition={
 								workerJobPositionAndMedical.jobPosition
@@ -100,7 +100,7 @@ const WorkerCreate = () => {
 						<WorkerFormButtons setNumber={setNumber} />
 					</div>
 				) : number === 3 ? (
-					<div key={3}>
+					<div>
 						<WorkerFormContact
 							workerPhone={workerPhone}
 							setWorkerPhone={setWorkerPhone}
@@ -108,7 +108,9 @@ const WorkerCreate = () => {
 						<WorkerFormButtons setNumber={setNumber} />
 					</div>
 				) : number === 4 ? (
-					<div className="worker-create__form--inputs-media" key={4}>
+					<div
+						className={Worker['worker-create__form--inputs-media']}
+					>
 						<WorkerFormSocialMedia
 							setModal={setModal}
 							modal={modal}
@@ -118,11 +120,12 @@ const WorkerCreate = () => {
 						<WorkerFormButtons setNumber={setNumber} />
 					</div>
 				) : number === 5 ? (
-					<div key={5}>
+					<div>
 						<ProfilePictureForm
 							setProfilePicture={setWorkerProfilePicture}
 							title="Foto del trabajador"
 							profilePicture={workerProfilePicture}
+							content="Subir foto del trabajador"
 						/>
 						<WorkerFormButtons final setNumber={setNumber} />
 					</div>

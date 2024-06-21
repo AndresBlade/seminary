@@ -1,10 +1,11 @@
 import { ElementRef, useRef } from 'react';
-import Worker from '../styles/worker.module.css';
+import ProfilePictureFormCSS from '../styles/profilePictureForm.module.css';
 
 interface Props {
 	setProfilePicture: React.Dispatch<React.SetStateAction<FileList | null>>;
 	profilePicture: FileList | null;
 	title: string;
+	content: string;
 }
 
 const handleFileChange = (
@@ -31,24 +32,26 @@ export const ProfilePictureForm = ({
 	setProfilePicture,
 	profilePicture,
 	title,
+	content,
 }: Props) => {
 	const profilePictureRef = useRef<ElementRef<'img'>>(null);
 	return (
-		<div className={Worker['worker-create__form-inputs']}>
+		<div>
 			<h2>{title}</h2>
-			<div className={Worker['worker-create__form--photo']}>
-				<div className={Worker['worker-create__form--facebook']}>
+			<div className={ProfilePictureFormCSS.container}>
+				<div className={ProfilePictureFormCSS.profilePictureContainer}>
 					{profilePicture && (
-						<img ref={profilePictureRef} alt="foto de perfil" />
+						<img
+							src={URL.createObjectURL(profilePicture[0])}
+							ref={profilePictureRef}
+							alt="foto de perfil"
+							className={ProfilePictureFormCSS.profilePicture}
+						/>
 					)}
-					<label
-						htmlFor="facebook"
-						className={
-							Worker['worker-create__form-facebook--label']
-						}
-					>
-						Seleccione una foto
-					</label>
+				</div>
+
+				<div className={ProfilePictureFormCSS.fileInputContainer}>
+					<p>{content}</p>
 					<input
 						type="file"
 						onChange={e => {
