@@ -30,7 +30,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia:{link},setModal,modal,setWorke
                 {(input as [])?.map((socialMedia:WorkerModalProps)=>{
                     return(
                         <div className={Worker[`worker-create__form--${socialMedia.description}`]} key={socialMedia.id}>
-                        <div>
+                        <div className={Worker['worker-create__form--close']}>
                             <label htmlFor={socialMedia.description} className={Worker[`worker-create__form-${socialMedia.description}--label`]}>
                                 <img src={`http://${socialMedia.icon}`} alt={socialMedia.description} />
                                 {socialMedia.description}

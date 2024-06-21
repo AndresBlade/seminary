@@ -65,86 +65,20 @@
     margin-bottom: 1rem;
 }
 
-.worker-create__form--name,
-.worker-create__form--lastName,
-.worker-create__form--id,
-.worker-create__form--date,
-.worker-create__form--post,
-.worker-create__form--blood,
-.worker-create__form--condition,
-.worker-create__form--phone,
-.worker-create__form--email,
-.worker-create__form--phoneFamily,
-.worker-create__form--nameContact,
-.worker-create__form--Facebook,
-.worker-create__form--Instagram,
-.worker-create__form--Twitter,
-.worker-create__form--LinkedIn,
-.worker-create__form--YouTube,
-.worker-create__form--Tiktok,
-.worker-create__form--Twitch,
-.worker-create__form--Discord,
-.worker-create__form--Threads,
-.worker-create__form--GitHub,
-.worker-create__form--Pinterest{
-
+.worker-create__form--personal div{
     margin-bottom: 2rem;
 }
-.worker-create__form-name--label,
-.worker-create__form-lastName--label,
-.worker-create__form-id--label,
-.worker-create__form-date--label,
-.worker-create__form-post--label,
-.worker-create__form-blood--label,
-.worker-create__form-condition--label,
-.worker-create__form-phone--label,
-.worker-create__form-email--label,
-.worker-create__form-phoneFamily--label,
-.worker-create__form-nameContact--label,
-.worker-create__form-Facebook--label,
-.worker-create__form-Instagram--label,
-.worker-create__form-Twitter--label,
-.worker-create__form-LinkedIn--label,
-.worker-create__form-YouTube--label,
-.worker-create__form-Tiktok--label,
-.worker-create__form-Twitch--label,
-.worker-create__form-Discord--label,
-.worker-create__form-Threads--label,
-.worker-create__form-GitHub--label,
-.worker-create__form-Pinterest--label{
+label{
+    display: inline-block;
+    margin-bottom: 1rem;
     font-weight: bold;
 }
-.worker-create__form--name input,
-.worker-create__form--lastName input,
-.worker-create__form--id input,
-.worker-create__form--date input,
-.worker-create__form--post select,
-.worker-create__form--blood select,
-.worker-create__form--condition input,
-.worker-create__form--personal input,
-.worker-create__form--email input,
-.worker-create__form--phoneFamily input,
-.worker-create__form--phone input,
-.worker-create__form--email input,
-.worker-create__form--phoneFamily input,
-.worker-create__form--nameContact input,
-.worker-create__form--Facebook input,
-.worker-create__form--Instagram input,
-.worker-create__form--Twitter input,
-.worker-create__form--LinkedIn input,
-.worker-create__form--YouTube input,
-.worker-create__form--Tiktok input,
-.worker-create__form--Twitch input,
-.worker-create__form--Discord input,
-.worker-create__form--Threads input,
-.worker-create__form--GitHub input,
-.worker-create__form--Pinterest input{
+input{
     width: 100%;
     padding: 1rem;
     border-radius: .5rem;
     background-color: var(--backgroundColor);
     border: none;
-    margin-top:1rem ;
 }
 .worker-create__form--button{
     display: flex;
@@ -260,17 +194,7 @@
     align-items: center;
 
 }
-.worker-create__form--Facebook div,
-.worker-create__form--Instagram div,
-.worker-create__form--Twitter div,
-.worker-create__form--LinkedIn div
-.worker-create__form--YouTube div,
-.worker-create__form--Tiktok div,
-.worker-create__form--Twitch div,
-.worker-create__form--Discord div,
-.worker-create__form--Threads div,
-.worker-create__form--GitHub div,
-.worker-create__form--Pinterest div{
+.worker-create__form--socialMedia div{
     display: flex;
     animation: fadeIn 1s ease-out forwards;
     gap: 1rem;
@@ -285,17 +209,10 @@
     align-items: center;
     justify-content: space-between;
 }
-.worker-create__form--Facebook div label,
-.worker-create__form--Instagram div label,
-.worker-create__form--Twitter div label,
-.worker-create__form--LinkedIn div label,
-.worker-create__form--YouTube div label,
-.worker-create__form--Tiktok div label,
-.worker-create__form--Twitch div label,
-.worker-create__form--Discord div label,
-.worker-create__form--Threads div label,
-.worker-create__form--GitHub div label,
-.worker-create__form--Pinterest div label{
+.worker-create__form--close{
+    display: flex;
+}
+.worker-create__form--socialMedia div label{
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -557,9 +474,30 @@
         height: 100%;
         min-height: 40rem;
     }
+    .worker-create__form--inputs-media{
+        text-align: center;
+        align-items: center;
+        width: 100%;
+    }
+    .worker-create__form--buttonAdd{
+        display: inline-block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 20rem;
+        
+    }
     .worker-create__form--personal{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
+    }
+    .worker-create__form--socialMedia{
+        composes:worker-create__form--personal;
+        width: 100%;
+    }
+    .worker-labor__medicalrecord{
+        composes: worker-create__form--personal;
+        grid-column: 1/3;
+        align-items: end;
     }
 }

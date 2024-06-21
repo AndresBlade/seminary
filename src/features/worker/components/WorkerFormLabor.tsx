@@ -26,28 +26,30 @@ const WorkerFormLabor = ({blood,condition,jobPosition,setWorkerJobPositionAndMed
                     }}
                 />
             </div>
-            <h2>Información de salud</h2>
-            <div className={Worker['worker-create__form--blood']}>
-                <label htmlFor="blood" className={Worker['worker-create__form-lastName--label']}>Tipo de sangre</label>
-                <input type="text" name='blood' id='blood' value={blood} onChange={(e)=>{
-                        
-                        setWorkerJobPositionAndMedical((worker)=>{
-                            return{...worker, blood: e.target.value}
-                        })
-                    }} />
-            </div>    
-            <div className={Worker['worker-create__form--condition']}>                        
-                <label htmlFor="condition" className={Worker['worker-create__form-id--label']}>Condicion medica</label>
-                <input type="text" name="condition" id="condition" value={condition}
-                    onChange={(e)=>{
-                        
-                        setWorkerJobPositionAndMedical((worker)=>{
-                            return{...worker, condition: e.target.value}
-                        })
-                    }} 
-                />
+            <div className={Worker['worker-labor__medicalrecord']}>
+                <div className={Worker['worker-create__form--blood']}>
+                    <h2>Información de salud</h2>
+                    <label htmlFor="blood" className={Worker['worker-create__form-lastName--label']}>Tipo de sangre</label>
+                    <input type="text" name='blood' id='blood' value={blood} onChange={(e)=>{
+                            
+                            setWorkerJobPositionAndMedical((worker)=>{
+                                return{...worker, blood: e.target.value}
+                            })
+                        }} />
+                </div>    
+                <div className={Worker['worker-create__form--condition']}>                        
+                    <label htmlFor="condition" className={Worker['worker-create__form-id--label']}>Condicion medica</label>
+                    <input type="text" name="condition" id="condition" value={condition}
+                        onChange={(e)=>{
+                            
+                            setWorkerJobPositionAndMedical((worker)=>{
+                                return{...worker, condition: e.target.value}
+                            })
+                        }} 
+                    />
                 </div>
-                </div>
+            </div>
+            </div>
         </div>
 
     )
