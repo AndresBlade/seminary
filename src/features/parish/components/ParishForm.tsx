@@ -4,6 +4,7 @@ import useGet from '../../../shared/hooks/useGet'
 import { CreateParish } from '../helpers/CreateParish'
 import { useNavigate, useParams } from 'react-router-dom'
 import useGetEdit from '../../../shared/hooks/useGetEdit'
+import { EditParish } from '../helpers/EditParish'
 
 interface ParishFormProps{
     e: React.FormEvent<HTMLFormElement>
@@ -16,12 +17,7 @@ interface DiocesisProps {
     name: string,
     holder: string
 }
-interface ParishProps {
-    diocese_id: number,
-    name: string,
-    patron: string
 
-}
 interface ParishData{
     msj: string,
     parish: {
@@ -38,7 +34,6 @@ export const ParishForm = () => {
     const [parishName, setParishName] = useState('');
     const [parroco, setParroco] = useState('');
     const [diocesis, setDiocesis] = useState(0);
-    const [idEdit, setIdEdit] = useState(0);
     const {data} = useGet<DiocesisProps[]>(apiUrl);
     const {dataEdit} = useGetEdit<ParishData>(apiUrlParish);
     const navigate = useNavigate();
@@ -47,13 +42,11 @@ export const ParishForm = () => {
         if(isNaN(Number(id))) return;
         if(!dataEdit) return; 
 
-        setIdEdit(dataEdit?.parish.id)
         setDiocesis(dataEdit?.parish.diocese_id);
         setParishName(dataEdit?.parish.name);
         setParroco(dataEdit?.parish.patron);
     },[dataEdit,data,id])
 
-    console.log(dataEdit)
     const handleSubmit = ({e,parishName,parroco,diocesis}:ParishFormProps) => {
         e.preventDefault();
         if(parishName === '' || diocesis === 0 || parroco === ''){
@@ -61,6 +54,7 @@ export const ParishForm = () => {
             return
         }
         else{
+            if(isNaN(Number(id))){
             CreateParish({dioceseId:diocesis,name:parishName,parishPriest:parroco}).then((response)=>{
                 if(response.ok){
                     alert('Parroquia creada con éxito')
@@ -74,6 +68,19 @@ export const ParishForm = () => {
                 console.log(error)
                 return 
             })
+            }else{
+                EditParish({id:Number(id),diocesesId:diocesis,name:parishName,parishPriest:parroco}).then((response)=>{
+                    if(response.ok){
+                        alert('Parroquia editada con éxito')
+                        navigate('..')
+                    }
+                    return
+                }).catch((error)=>{
+                    alert('Error al editar la parroquia')
+                    console.log(error)
+                    return
+                })
+            }
         }
     }
     return (
@@ -117,5 +124,5 @@ export const ParishForm = () => {
                 </div>
             </form>
         </div>
-    )
-}
+       )
+    }
