@@ -9,7 +9,7 @@ import WorkerFormButtons from './WorkerFormButtons';
 import ContentTitle from '../../ui/contentTitles/components/ContentTitle';
 import { CreateWorker } from '../helpers/CreateWorker';
 export interface SocialMedia {
-	category?: number;
+	category: number;
 	link: string;
 }
 export interface WorkerPersonalInfo {
@@ -65,34 +65,37 @@ const WorkerCreate = () => {
 	const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const dataSent = {
-			"persona":{
-				"id":workerPersonalInfo.id,
-				"forename":workerPersonalInfo.name,
-				"surname":workerPersonalInfo.lastName,
-				"email":workerPhone.email,
-				"birthdate":workerPersonalInfo.birthDate,
-				"medical_record":workerJobPositionAndMedical.condition,
-				"BloodType":workerJobPositionAndMedical.blood
+			persona:{
+				id:"V-" + workerPersonalInfo.id,
+				forename:workerPersonalInfo.name,
+				surname:workerPersonalInfo.lastName,
+				email:workerPhone.email,
+				birthdate:workerPersonalInfo.birthDate,
+				medical_record:workerJobPositionAndMedical.condition,
+				BloodType:workerJobPositionAndMedical.blood
 			},
-			"telefono":[{
-				"phone_numbre":workerPhone.phone,
-				"description":workerPhone.description,
+			telefono:[{
+				phone_numbre:workerPhone.phone,
+				description:workerPhone.description,
 			},
 			{
-				"phone_numbre":workerPhone.phoneFamily,
-				"description":workerPhone.descriptionFamily,
+				phone_numbre:workerPhone.phoneFamily,
+				description:workerPhone.descriptionFamily,
 			}],
-			"social":
+			social:
 				workerSocialMedia.map((social)=>{
 					return{
-						"social_media_category":social.category,
-						"link":social.link
+						social_media_category:social.category,
+						link:social.link
 					}
 				}),
-			"job_position":workerJobPositionAndMedical.jobPosition
+			job_position:workerJobPositionAndMedical.jobPosition
 		}
-		const imageFile = ;
-		CreateWorker({data:dataSent,imageFile}).catch((error) => {
+		if(!workerProfilePicture) return
+	
+		const imageFile = workerProfilePicture[0];
+		
+		CreateWorker({data:dataSent,imageFile:imageFile}).catch((error) => {
 			console.log(error);
 		});
 		console.log(dataSent)

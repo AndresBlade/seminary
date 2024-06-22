@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useState } from 'react'
+import {Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Worker from '../styles/worker.module.css'
 import Close from '../../../assets/MaterialSymbolsCloseSmallOutlineRounded.svg'
 import UseGet from '../../../shared/hooks/useGet'
@@ -20,9 +20,22 @@ interface WorkerFormSocialMediaProps{
 }
 const WorkerFormSocialMedia = ({workerSocialMedia,setModal,modal,setWorkerSocialMedia, }:WorkerFormSocialMediaProps) => {
     const apiUrl= 'http://localhost:3000/worker/socials/'
-    const {data,loading,error} = UseGet(apiUrl)
+    const {data,loading,error} = UseGet<WorkerModalProps[]>(apiUrl)
     const [input,setInput] = useState<WorkerModalProps[]>([])
 
+    useEffect(()=>{
+        const newInputs = data?.filter((sociaCategory)=>{
+            return  workerSocialMedia.some((workerSocialMedia)=> workerSocialMedia.category === sociaCategory.id)
+        })
+        if(newInputs){
+            setInput(newInputs)
+        }
+        console.log(workerSocialMedia.some((workerSocialMedia)=>{
+            workerSocialMedia.category === 69
+        }))
+        console.log(data)
+        console.log(workerSocialMedia)
+    },[data,workerSocialMedia])
     
     return (
         <div className={Worker['worker-create__form-inputs']}>
@@ -96,7 +109,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia,setModal,modal,setWorkerSocial
                                 </div> : 
                                 error ? <p>Hubo un error</p> :
                                 
-                                ((data as []).filter((socialFilter:WorkerModalProps) => !input.some(inputItem => inputItem.id === socialFilter.id)).map((social:WorkerModalProps)=>{
+                                (data?.filter((socialFilter) => !input.some(inputItem => inputItem.id === socialFilter.id)).map((social)=>{
                                     return(
                                             <button key={social.id} onClick={(e)=>{
                                             e.preventDefault()
