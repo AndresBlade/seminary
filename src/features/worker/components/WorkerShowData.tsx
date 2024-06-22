@@ -6,7 +6,6 @@ interface WorkerData {
     id: string
     name: string
     job: string
-
 }
 
 const WorkerShowData = () => {

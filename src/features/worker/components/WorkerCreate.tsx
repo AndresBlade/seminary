@@ -7,7 +7,7 @@ import WorkerFormSocialMedia from './WorkerFormSocialMedia';
 import { ProfilePictureForm } from './ProfilePictureForm';
 import WorkerFormButtons from './WorkerFormButtons';
 import ContentTitle from '../../ui/contentTitles/components/ContentTitle';
-
+import { CreateWorker } from '../helpers/CreateWorker';
 export interface SocialMedia {
 	category?: number;
 	link: string;
@@ -62,7 +62,41 @@ const WorkerCreate = () => {
 			condition: '',
 			jobPosition: '',
 		});
-	console.log(workerSocialMedia);
+	const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const dataSent = {
+			"persona":{
+				"id":workerPersonalInfo.id,
+				"forename":workerPersonalInfo.name,
+				"surname":workerPersonalInfo.lastName,
+				"email":workerPhone.email,
+				"birthdate":workerPersonalInfo.birthDate,
+				"medical_record":workerJobPositionAndMedical.condition,
+				"BloodType":workerJobPositionAndMedical.blood
+			},
+			"telefono":[{
+				"phone_numbre":workerPhone.phone,
+				"description":workerPhone.description,
+			},
+			{
+				"phone_numbre":workerPhone.phoneFamily,
+				"description":workerPhone.descriptionFamily,
+			}],
+			"social":
+				workerSocialMedia.map((social)=>{
+					return{
+						"social_media_category":social.category,
+						"link":social.link
+					}
+				}),
+			"job_position":workerJobPositionAndMedical.jobPosition
+		}
+		const imageFile = ;
+		CreateWorker({data:dataSent,imageFile}).catch((error) => {
+			console.log(error);
+		});
+		console.log(dataSent)
+	}
 	return (
 		<div className={Worker['worker-create__container']}>
 			<div
@@ -73,61 +107,64 @@ const WorkerCreate = () => {
 				}
 			></div>
 			<ContentTitle title="Trabajador" subtitle="Agregar Trabajador" />
-			<form className={Worker['worker-create__form']}>
-				{number === 1 ? (
-					<>
-						<WokerFormPersonal
-							name={workerPersonalInfo.name}
-							lastName={workerPersonalInfo.lastName}
-							id={workerPersonalInfo.id}
-							birthDate={workerPersonalInfo.birthDate}
-							setWorkerPersonal={setWorkerPersonal}
-						/>
-						<WorkerFormButtons initial setNumber={setNumber} />
-					</>
-				) : number === 2 ? (
-					<>
-						<WorkerFormLabor
-							jobPosition={
-								workerJobPositionAndMedical.jobPosition
-							}
-							blood={workerJobPositionAndMedical.blood}
-							condition={workerJobPositionAndMedical.condition}
-							setWorkerJobPositionAndMedical={
-								setWorkerJobPositionAndMedical
-							}
-						/>
-						<WorkerFormButtons setNumber={setNumber} />
-					</>
-				) : number === 3 ? (
-					<>
-						<WorkerFormContact
-							workerPhone={workerPhone}
-							setWorkerPhone={setWorkerPhone}
-						/>
-						<WorkerFormButtons setNumber={setNumber} />
-					</>
-				) : number === 4 ? (
-					<>
-						<WorkerFormSocialMedia
-							setModal={setModal}
-							modal={modal}
-							workerSocialMedia={workerSocialMedia}
-							setWorkerSocialMedia={setWorkerSocialMedia}
-						/>
-						<WorkerFormButtons setNumber={setNumber} />
-					</>
-				) : number === 5 ? (
-					<>
-						<ProfilePictureForm
-							setProfilePicture={setWorkerProfilePicture}
-							title="Foto del trabajador"
-							profilePicture={workerProfilePicture}
-							content="Subir foto del trabajador"
-						/>
-						<WorkerFormButtons final setNumber={setNumber} />
-					</>
-				) : null}
+			<form action='POST' onSubmit={handleSubmit} className={Worker['worker-create__form']}>
+				<div className={Worker['worker-form__wrapper']}>
+					{number === 1 ? (
+						<>
+							<WokerFormPersonal
+								name={workerPersonalInfo.name}
+								lastName={workerPersonalInfo.lastName}
+								id={workerPersonalInfo.id}
+								birthDate={workerPersonalInfo.birthDate}
+								setWorkerPersonal={setWorkerPersonal}
+							/>
+							<WorkerFormButtons initial setNumber={setNumber} />
+						</>
+					) : number === 2 ? (
+						<>
+							<WorkerFormLabor
+								jobPosition={
+									workerJobPositionAndMedical.jobPosition
+								}
+								blood={workerJobPositionAndMedical.blood}
+								condition={workerJobPositionAndMedical.condition}
+								setWorkerJobPositionAndMedical={
+									setWorkerJobPositionAndMedical
+								}
+							/>
+							<WorkerFormButtons setNumber={setNumber} />
+						</>
+					) : number === 3 ? (
+						<>
+							<WorkerFormContact
+								workerPhone={workerPhone}
+								setWorkerPhone={setWorkerPhone}
+							/>
+							<WorkerFormButtons setNumber={setNumber} />
+						</>
+					) : number === 4 ? (
+						<>
+							<WorkerFormSocialMedia
+								setModal={setModal}
+								modal={modal}
+								workerSocialMedia={workerSocialMedia}
+								setWorkerSocialMedia={setWorkerSocialMedia}
+							/>
+							<WorkerFormButtons setNumber={setNumber} />
+						</>
+					) : number === 5 ? (
+						<>
+							<ProfilePictureForm
+								setProfilePicture={setWorkerProfilePicture}
+								title="Foto del trabajador"
+								profilePicture={workerProfilePicture}
+								content="Subir foto del trabajador"
+							/>
+							<WorkerFormButtons final setNumber={setNumber} />
+							<button type='submit' className={Worker['button-send']}>Enviar</button>
+						</>
+					) : null}
+				</div>
 			</form>
 		</div>
 	);

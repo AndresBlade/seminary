@@ -22,6 +22,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia,setModal,modal,setWorkerSocial
     const apiUrl= 'http://localhost:3000/worker/socials/'
     const {data,loading,error} = UseGet(apiUrl)
     const [input,setInput] = useState<WorkerModalProps[]>([])
+
     
     return (
         <div className={Worker['worker-create__form-inputs']}>
@@ -94,9 +95,10 @@ const WorkerFormSocialMedia = ({workerSocialMedia,setModal,modal,setWorkerSocial
                                     <div className={Worker['animation-loading__two']}></div>
                                 </div> : 
                                 error ? <p>Hubo un error</p> :
-                                (data as [])?.map((social:WorkerModalProps)=>{
+                                
+                                ((data as []).filter((socialFilter:WorkerModalProps) => !input.some(inputItem => inputItem.id === socialFilter.id)).map((social:WorkerModalProps)=>{
                                     return(
-                                        <button key={social.id} onClick={(e)=>{
+                                            <button key={social.id} onClick={(e)=>{
                                             e.preventDefault()
                                             setWorkerSocialMedia((socialMediaInfo)=>{
                                                 return[...socialMediaInfo, {category: social.id, link: ''} ]
@@ -110,7 +112,7 @@ const WorkerFormSocialMedia = ({workerSocialMedia,setModal,modal,setWorkerSocial
                                             {social.description}
                                         </button>
                                     )
-                                })}
+                                }))}
                             </div>
                         </div>
                     </div>
