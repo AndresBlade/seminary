@@ -11,25 +11,9 @@
 .parish-table__container{
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: auto;
     background-color: var(--backgroundColor);
     padding: 2rem;
-}
-.parish-create__h1-title h1{
-    border-bottom: 0.5rem solid #DC2626;
-    width: 22%;
-}
-.parish-create__h2-title{
-    background-color: var(--backgroundCard);
-    width: 80%;
-    padding: 1rem;
-    border-radius: 2.5rem;
-    margin-bottom: 3rem;
-}
-.parish-create__h2-title h2{
-    color: var(--textColor);
-    font-weight: bold;
-    text-align: center;
 }
 .parish-create__form{
     display: flex;
@@ -91,7 +75,26 @@
     cursor: pointer;
     transition: .3s;
 }
+.parish-find{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 2rem 0;
+    gap:1rem;
+}
+.parish-find input{
+    padding: 1rem;
+    border: 0.5px solid var(--buttonColorReset);
+    border-radius: 1rem;
 
+}
+.parish-find button{
+    padding: 1rem;
+    border: none;
+    color: var(--textColor2);
+    background-color: var(--buttonColorSearch);
+    border-radius: 1rem;
+}
 /*AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA*/
 .data-show__container{
     display: flex;
@@ -298,5 +301,26 @@
     .data-content__container{
         height: 50vh;
         overflow-y: scroll;
+    }
+    .parish-find{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: 2rem 0 2rem 0;
+    }
+    .parish-find input{
+        padding: 1.5rem;
+        border: 0.5px var(--buttonColorReset) solid;
+        width: 50%;
+        border-radius: 1rem;
+    }
+    .parish-find button{
+        background-color: var(--buttonColorSearch);
+        color: var(--textColor2);
+        padding: 1.5rem;
+        width: 30%;
+        border: none;
+        border-radius: 1rem;
     }
 }
