@@ -153,12 +153,12 @@ label{
     }
     
 }
-@media (width >= 901px) and (width <= 1500px){ 
+@media (width >= 901px){ 
     .login-container{
         flex-direction: row;
         padding:2rem;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-around;
     }
     .login-container__img img{
         margin-left: 15% ;
