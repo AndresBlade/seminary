@@ -21,7 +21,10 @@ function LoginUser({id,password}: {id:string,password:string}){
             password:password
         })
             
-    }).then((response)=> response.json() as Promise<LoggedUser>)
+    }).then((response)=> {
+        console.log(response.headers.get('auth'))
+        return response.json() as Promise<LoggedUser>
+    })
     
 }
 export {LoginUser};
