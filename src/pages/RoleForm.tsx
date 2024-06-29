@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import RolesCSS from '../features/roles/styles/roles.module.css';
 import { createRole } from '../features/roles/helpers/createRole';
 import { usePermissions } from '../features/roles/hooks/usePermissions';
@@ -9,6 +9,7 @@ import { PermissionsTable } from '../features/roles/components/PermissionsTable'
 import { useRoles } from '../features/roles/hooks/useRoles';
 import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { editRole } from '../features/roles/helpers/editRole';
+import { AuthContext } from '../features/login/context/AuthContext';
 
 interface SubmitFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -52,6 +53,7 @@ export const RoleForm = () => {
 		roleName: '',
 		roleDescription: '',
 	});
+	const {setUser}= useContext(AuthContext)
 
 	const navigate = useNavigate();
 
@@ -60,16 +62,16 @@ export const RoleForm = () => {
 
 	const { id } = useParams();
 
-	const roles = useRoles();
+	const rolesWrapper = useRoles();
 
-	const initialRole = roles?.find(role => role.id === Number(id));
+	const initialRole = rolesWrapper?.roles?.find(role => role.id === Number(id));
 
-	const permissions = usePermissions();
+	const permissionsWrapper = usePermissions();
 	const [checkedPermissions, setCheckedPermissions] = useState<
 		CheckedPermission[] | null
 	>(null);
 
-	const permissionsByRoute = permissions?.reduce(
+	const permissionsByRoute = permissionsWrapper?.permissions?.reduce(
 		(group: Record<string, Permission[]>, permission: Permission) => {
 			const { table } = permission;
 
@@ -83,11 +85,43 @@ export const RoleForm = () => {
 	);
 
 	const tables = permissionsByRoute && Object.keys(permissionsByRoute);
+	
+	useEffect(()=>{
+		if(rolesWrapper){
+			setUser((user)=>{
+				if(!user){
+					return null
+				}
+				if(!rolesWrapper.token){
+					return user
+				}
+				return {...user, token:rolesWrapper.token}
+			})
+			return
+		}
+		
+	},[rolesWrapper,setUser])
+
+	useEffect(()=>{
+		if(permissionsWrapper){
+			
+			setUser((user)=>{
+				if(!user){
+					return null
+				}
+				if(!permissionsWrapper.token){
+					return user
+				}
+				return {...user, token:permissionsWrapper.token}
+			})
+			return
+		}
+	},[permissionsWrapper,setUser])
 
 	useEffect(() => {
 		if (!checkedPermissions) {
 			setCheckedPermissions(
-				permissions?.map(({ id }) => ({ id, checked: false })) ?? null
+				permissionsWrapper?.permissions?.map(({ id }) => ({ id, checked: false })) ?? null
 			);
 			return;
 		}
@@ -121,8 +155,8 @@ export const RoleForm = () => {
 	}, [
 		checkedPermissions,
 		id,
-		permissions,
-		roles,
+		permissionsWrapper,
+		rolesWrapper?.roles,
 		setFormState,
 		initialRole,
 		formHasBeenSetToDefault,

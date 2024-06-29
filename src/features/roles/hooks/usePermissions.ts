@@ -1,17 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Permission } from '../interfaces/Permission';
-import { getAllPermissions } from '../helpers/getAllPermissions';
-import { useContext } from 'react';
-import { AuthContext } from '../../login/context/AuthContext';
+import { useEffect, useState } from "react";
+import { getAllPermissions } from "../helpers/getAllPermissions";
+import { useContext } from "react";
+import { AuthContext } from "../../login/context/AuthContext";
+import { PermissionWrapper } from "../interfaces/PermissionWrapper";
 export const usePermissions = () => {
-	const [permissions, setPermissions] = useState<null | Permission[]>(null);
-	const {user} = useContext(AuthContext);
-
-	useEffect(() => {
-		getAllPermissions('hola')
-			.then(data => setPermissions(data))
-			.catch(err => console.log(err));
-	}, []);
-
-	return permissions;
+  const [permissions, setPermissions] = useState<null | PermissionWrapper>(null);
+  const {user}= useContext(AuthContext)
+  useEffect(() => {
+    if(permissions){
+      return
+    }
+    if(!user){
+      return
+    }
+      getAllPermissions(user?.token).then((permissions)=>{
+        setPermissions(permissions)
+      }).catch((error)=>console.log(error))
+  }, [permissions,user]);
+  console.log(user);
+  return permissions;
 };

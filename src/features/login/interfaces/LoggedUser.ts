@@ -6,4 +6,5 @@ export interface LoggedUser{
     password:string,
     status: boolean,
     fecha:string
+    token:string
 }

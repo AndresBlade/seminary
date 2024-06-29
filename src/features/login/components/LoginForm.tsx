@@ -4,7 +4,7 @@ import { LoginUser } from '../helpers/LoginUser';
 import { useContext, useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-
+import { LoggedUser } from '../interfaces/LoggedUser';
 interface LoginFormProps{
     e: React.FormEvent<HTMLFormElement>,
     usuario:string,
@@ -21,11 +21,28 @@ export const LoginForm = () => {
         e.preventDefault();
         if(usuario.length >= 8 && password.length >= 3){
             LoginUser({id:usuario,password:password}).then((response)=>{
-                setUser(response)
-                navigate('/home')
-                console.log(response)
+                const token = response.headers.get('auth');
+
+                if(!token){
+                    throw new Error('Error al iniciar sesión')
+                }
+                if(response.ok){
+                    response.json().then((userData:LoggedUser)=>{
+                        userData.token = token;
+                        return setUser(userData)
+                    }).then(()=>{
+                        navigate('/home');
+                    }).catch((error)=>{
+                        alert(error)
+                    });
+                }
+                else{
+                    alert('verifique sus datos')
+                    return
+                }    
             }).catch((error)=>{
-                console.log(error)
+                alert(error)
+                return
             })
         }
         else{
