@@ -8,10 +8,9 @@ import { PermissionsTable } from '../features/roles/components/PermissionsTable'
 import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { editRole } from '../features/roles/helpers/editRole';
 import { AuthContext } from '../features/login/context/AuthContext';
-import { PermissionWrapper } from '../features/roles/interfaces/PermissionWrapper';
-import { getAllPermissions } from '../features/roles/helpers/getAllPermissions';
 import { RolesWrapper } from '../features/roles/interfaces/RolesWrapper';
 import { getRoles } from '../features/roles/helpers/getRoles';
+import { usePermissions } from '../features/roles/hooks/usePermissions';
 
 interface SubmitFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -68,8 +67,7 @@ export const RoleForm = () => {
 		role => role.id === Number(id)
 	);
 
-	const [permissionsWrapper, setPermissionsWrapper] =
-		useState<PermissionWrapper | null>(null);
+	const { permissionsWrapper } = usePermissions(rolesWrapper?.token ?? null);
 	const [checkedPermissions, setCheckedPermissions] = useState<
 		CheckedPermission[] | null
 	>(null);
@@ -94,28 +92,19 @@ export const RoleForm = () => {
 		if (!rolesWrapper) {
 			getRoles(user?.token)
 				.then(rolesWrapper => {
-					console.log(rolesWrapper);
 					setRolesWrapper(rolesWrapper);
 				})
 				.catch(error => console.log(error));
 			return;
 		}
 		const token = rolesWrapper.token;
-		console.log(typeof token === 'string');
-		console.log('pasado');
 		if (!token) return;
 
-		if (!permissionsWrapper)
-			getAllPermissions(token)
-				.then(permissionWrapperFromRequest => {
-					const newToken = permissionWrapperFromRequest.token;
-					setUser(user => {
-						if (!user) return null;
-						return { ...user, token: newToken };
-					});
-					setPermissionsWrapper(permissionWrapperFromRequest);
-				})
-				.catch(error => console.log(error));
+		if (permissionsWrapper && user.token !== permissionsWrapper.token)
+			setUser(user => {
+				if (!user) return null;
+				return { ...user, token: permissionsWrapper.token };
+			});
 
 		if (!checkedPermissions) {
 			setCheckedPermissions(
