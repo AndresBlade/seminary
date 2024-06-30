@@ -8,9 +8,8 @@ import { PermissionsTable } from '../features/roles/components/PermissionsTable'
 import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { editRole } from '../features/roles/helpers/editRole';
 import { AuthContext } from '../features/login/context/AuthContext';
-import { RolesWrapper } from '../features/roles/interfaces/RolesWrapper';
-import { getRoles } from '../features/roles/helpers/getRoles';
 import { usePermissions } from '../features/roles/hooks/usePermissions';
+import { useRoles } from '../features/roles/hooks/useRoles';
 
 interface SubmitFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -52,26 +51,26 @@ export const RoleForm = () => {
 		roleName: '',
 		roleDescription: '',
 	});
-	const { user, setUser } = useContext(AuthContext);
 
+	const { user, setUser } = useContext(AuthContext);
+	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const [formHasBeenSetToDefault, setFormHasBeenSetToDefault] =
-		useState(false);
-
-	const { id } = useParams();
-
-	const [rolesWrapper, setRolesWrapper] = useState<RolesWrapper | null>(null);
+	const rolesWrapper = useRoles(null, false);
+	const permissionsWrapper = usePermissions(
+		rolesWrapper?.token ?? null,
+		true
+	);
 
 	const initialRole = rolesWrapper?.roles?.find(
 		role => role.id === Number(id)
 	);
 
-	const { permissionsWrapper } = usePermissions(rolesWrapper?.token ?? null);
+	const [formHasBeenSetToDefault, setFormHasBeenSetToDefault] =
+		useState(false);
 	const [checkedPermissions, setCheckedPermissions] = useState<
 		CheckedPermission[] | null
 	>(null);
-
 	const permissionsByRoute = permissionsWrapper?.permissions.reduce(
 		(group: Record<string, Permission[]>, permission: Permission) => {
 			const { table } = permission;
@@ -84,28 +83,9 @@ export const RoleForm = () => {
 		},
 		{}
 	);
-
 	const tables = permissionsByRoute && Object.keys(permissionsByRoute);
 
 	useEffect(() => {
-		if (!user) return;
-		if (!rolesWrapper) {
-			getRoles(user?.token)
-				.then(rolesWrapper => {
-					setRolesWrapper(rolesWrapper);
-				})
-				.catch(error => console.log(error));
-			return;
-		}
-		const token = rolesWrapper.token;
-		if (!token) return;
-
-		if (permissionsWrapper && user.token !== permissionsWrapper.token)
-			setUser(user => {
-				if (!user) return null;
-				return { ...user, token: permissionsWrapper.token };
-			});
-
 		if (!checkedPermissions) {
 			setCheckedPermissions(
 				permissionsWrapper?.permissions.map(({ id }) => ({
