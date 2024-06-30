@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import RolesCSS from '../features/roles/styles/roles.module.css';
 import useApiGet from '../features/roles/hooks/useApiGet';
 import { SearchRoleInput } from '../features/roles/components/SearchRoleInput';

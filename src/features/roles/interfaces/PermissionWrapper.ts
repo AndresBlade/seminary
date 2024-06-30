@@ -1,6 +1,6 @@
-import { Permission } from "./Permission";
+import { Permission } from './Permission';
 
-export interface PermissionWrapper{
-    permissions: Permission[],
-    token:string | null
+export interface PermissionWrapper {
+	permissions: Permission[];
+	token: string;
 }

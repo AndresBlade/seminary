@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RolesCSS from '../features/roles/styles/roles.module.css';
 import { createRole } from '../features/roles/helpers/createRole';
-import { usePermissions } from '../features/roles/hooks/usePermissions';
 import { Permission } from '../features/roles/interfaces/Permission';
 import { useForm } from '../features/roles/hooks/useForm';
 import { CheckedPermission } from '../features/roles/interfaces/CheckedPermission';
 import { PermissionsTable } from '../features/roles/components/PermissionsTable';
-import { useRoles } from '../features/roles/hooks/useRoles';
 import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { editRole } from '../features/roles/helpers/editRole';
 import { AuthContext } from '../features/login/context/AuthContext';
+import { PermissionWrapper } from '../features/roles/interfaces/PermissionWrapper';
+import { getAllPermissions } from '../features/roles/helpers/getAllPermissions';
+import { RolesWrapper } from '../features/roles/interfaces/RolesWrapper';
+import { getRoles } from '../features/roles/helpers/getRoles';
 
 interface SubmitFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -29,8 +31,6 @@ const handleSubmit = async ({
 	navigate,
 }: SubmitFormProps) => {
 	e.preventDefault();
-
-	console.log({ roleName, roleDescription, checkedPermissions });
 
 	const name = roleName;
 	const description = roleDescription;
@@ -53,7 +53,7 @@ export const RoleForm = () => {
 		roleName: '',
 		roleDescription: '',
 	});
-	const {setUser}= useContext(AuthContext)
+	const { user, setUser } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 
@@ -62,16 +62,19 @@ export const RoleForm = () => {
 
 	const { id } = useParams();
 
-	const rolesWrapper = useRoles();
+	const [rolesWrapper, setRolesWrapper] = useState<RolesWrapper | null>(null);
 
-	const initialRole = rolesWrapper?.roles?.find(role => role.id === Number(id));
+	const initialRole = rolesWrapper?.roles?.find(
+		role => role.id === Number(id)
+	);
 
-	const permissionsWrapper = usePermissions();
+	const [permissionsWrapper, setPermissionsWrapper] =
+		useState<PermissionWrapper | null>(null);
 	const [checkedPermissions, setCheckedPermissions] = useState<
 		CheckedPermission[] | null
 	>(null);
 
-	const permissionsByRoute = permissionsWrapper?.permissions?.reduce(
+	const permissionsByRoute = permissionsWrapper?.permissions.reduce(
 		(group: Record<string, Permission[]>, permission: Permission) => {
 			const { table } = permission;
 
@@ -85,43 +88,41 @@ export const RoleForm = () => {
 	);
 
 	const tables = permissionsByRoute && Object.keys(permissionsByRoute);
-	
-	useEffect(()=>{
-		if(rolesWrapper){
-			setUser((user)=>{
-				if(!user){
-					return null
-				}
-				if(!rolesWrapper.token){
-					return user
-				}
-				return {...user, token:rolesWrapper.token}
-			})
-			return
-		}
-		
-	},[rolesWrapper,setUser])
-
-	useEffect(()=>{
-		if(permissionsWrapper){
-			
-			setUser((user)=>{
-				if(!user){
-					return null
-				}
-				if(!permissionsWrapper.token){
-					return user
-				}
-				return {...user, token:permissionsWrapper.token}
-			})
-			return
-		}
-	},[permissionsWrapper,setUser])
 
 	useEffect(() => {
+		if (!user) return;
+		if (!rolesWrapper) {
+			getRoles(user?.token)
+				.then(rolesWrapper => {
+					console.log(rolesWrapper);
+					setRolesWrapper(rolesWrapper);
+				})
+				.catch(error => console.log(error));
+			return;
+		}
+		const token = rolesWrapper.token;
+		console.log(typeof token === 'string');
+		console.log('pasado');
+		if (!token) return;
+
+		if (!permissionsWrapper)
+			getAllPermissions(token)
+				.then(permissionWrapperFromRequest => {
+					const newToken = permissionWrapperFromRequest.token;
+					setUser(user => {
+						if (!user) return null;
+						return { ...user, token: newToken };
+					});
+					setPermissionsWrapper(permissionWrapperFromRequest);
+				})
+				.catch(error => console.log(error));
+
 		if (!checkedPermissions) {
 			setCheckedPermissions(
-				permissionsWrapper?.permissions?.map(({ id }) => ({ id, checked: false })) ?? null
+				permissionsWrapper?.permissions.map(({ id }) => ({
+					id,
+					checked: false,
+				})) ?? null
 			);
 			return;
 		}
@@ -154,12 +155,14 @@ export const RoleForm = () => {
 		setFormHasBeenSetToDefault(true);
 	}, [
 		checkedPermissions,
-		id,
-		permissionsWrapper,
-		rolesWrapper?.roles,
-		setFormState,
-		initialRole,
 		formHasBeenSetToDefault,
+		initialRole,
+		permissionsWrapper?.permissions,
+		setFormState,
+		permissionsWrapper,
+		rolesWrapper,
+		setUser,
+		user,
 	]);
 
 	return (

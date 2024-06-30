@@ -1,24 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getRoles } from '../helpers/getRoles';
-import { AuthContext } from '../../login/context/AuthContext';
 import { RolesWrapper } from '../interfaces/RolesWrapper';
 
-export const useRoles = () => {
+export const useRoles = (token: string | null) => {
 	const [roles, setRoles] = useState<RolesWrapper | null>(null);
-	const {user} = useContext(AuthContext)
-
 	useEffect(() => {
-		if(!user){
-			return
-		}
-		if(!roles){
-			return
-		}
-		getRoles(user.token).then((rolesWrappers)=>{
-			setRoles(rolesWrappers)
-		}).catch((error)=>console.log(error))	
-		
-	}, [roles,user]);
+		if (!token) return;
+		getRoles(token)
+			.then(rolesWrapper => {
+				setRoles(rolesWrapper);
+			})
+			.catch(error => console.log(error));
+	}, [token]);
 
 	return roles;
 };

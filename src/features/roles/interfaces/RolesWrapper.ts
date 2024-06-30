@@ -1,6 +1,6 @@
-import { Role } from "./Role";
+import { Role } from './Role';
 
-export interface RolesWrapper{
-    roles: Role[],
-    token:string |null
+export interface RolesWrapper {
+	roles: Role[];
+	token: string;
 }
