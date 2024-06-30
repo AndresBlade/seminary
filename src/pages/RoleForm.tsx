@@ -18,6 +18,7 @@ interface SubmitFormProps {
 	checkedPermissions: CheckedPermission[];
 	id?: number;
 	navigate: NavigateFunction;
+	token: string;
 }
 
 const handleSubmit = async ({
@@ -27,6 +28,7 @@ const handleSubmit = async ({
 	checkedPermissions,
 	id,
 	navigate,
+	token,
 }: SubmitFormProps) => {
 	e.preventDefault();
 
@@ -36,12 +38,14 @@ const handleSubmit = async ({
 		.filter(permission => permission.checked)
 		.map(permission => permission.id);
 
+	console.log(token);
+
 	if (id) {
-		await editRole({ id, name, description, numbers });
+		await editRole({ id, name, description, numbers, token });
 		navigate('../');
 		return;
 	}
-	await createRole({ name, description, numbers });
+	await createRole({ name, description, numbers, token });
 
 	navigate('../');
 };
@@ -56,22 +60,17 @@ export const RoleForm = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const rolesWrapper = useRoles(null, false);
-	const permissionsWrapper = usePermissions(
-		rolesWrapper?.token ?? null,
-		true
-	);
+	const roles = useRoles();
+	const permissions = usePermissions();
 
-	const initialRole = rolesWrapper?.roles?.find(
-		role => role.id === Number(id)
-	);
+	const initialRole = roles?.find(role => role.id === Number(id));
 
 	const [formHasBeenSetToDefault, setFormHasBeenSetToDefault] =
 		useState(false);
 	const [checkedPermissions, setCheckedPermissions] = useState<
 		CheckedPermission[] | null
 	>(null);
-	const permissionsByRoute = permissionsWrapper?.permissions.reduce(
+	const permissionsByRoute = permissions?.reduce(
 		(group: Record<string, Permission[]>, permission: Permission) => {
 			const { table } = permission;
 
@@ -88,7 +87,7 @@ export const RoleForm = () => {
 	useEffect(() => {
 		if (!checkedPermissions) {
 			setCheckedPermissions(
-				permissionsWrapper?.permissions.map(({ id }) => ({
+				permissions?.map(({ id }) => ({
 					id,
 					checked: false,
 				})) ?? null
@@ -126,10 +125,9 @@ export const RoleForm = () => {
 		checkedPermissions,
 		formHasBeenSetToDefault,
 		initialRole,
-		permissionsWrapper?.permissions,
+		permissions,
 		setFormState,
-		permissionsWrapper,
-		rolesWrapper,
+		roles,
 		setUser,
 		user,
 	]);
@@ -142,15 +140,17 @@ export const RoleForm = () => {
 			<form
 				className={RolesCSS.form}
 				onSubmit={e => {
-					if (checkedPermissions)
-						handleSubmit({
-							e,
-							roleName,
-							roleDescription,
-							checkedPermissions,
-							id: Number(id),
-							navigate,
-						}).catch(err => console.log(err));
+					if (!checkedPermissions) return;
+					if (!user?.token) return;
+					handleSubmit({
+						e,
+						roleName,
+						roleDescription,
+						checkedPermissions,
+						id: Number(id),
+						navigate,
+						token: user.token,
+					}).catch(err => console.log(err));
 				}}
 			>
 				<div className={RolesCSS['roles-create__form']}>

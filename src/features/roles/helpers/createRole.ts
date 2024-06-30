@@ -2,10 +2,12 @@ async function createRole({
 	name,
 	description,
 	numbers,
+	token,
 }: {
 	name: string;
 	description: string;
 	numbers: number[];
+	token: string;
 }): Promise<void> {
 	const response = await fetch('http://127.0.0.1:3000/role/', {
 		method: 'POST',
@@ -13,6 +15,7 @@ async function createRole({
 		credentials: 'same-origin',
 		headers: {
 			'Content-Type': 'application/json',
+			auth: token,
 		},
 		body: JSON.stringify({
 			name: name,

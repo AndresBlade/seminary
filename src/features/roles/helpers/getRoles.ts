@@ -1,14 +1,7 @@
 import { Role } from '../interfaces/Role';
-import { RolesWrapper } from '../interfaces/RolesWrapper';
-export const getRoles = async (token: string): Promise<RolesWrapper> => {
-	const response = await fetch(`http://127.0.0.1:3000/role/search`, {
+export const getRoles = (token: string): Promise<Role[]> =>
+	fetch(`http://127.0.0.1:3000/role/search`, {
 		headers: {
 			auth: token,
 		},
-	});
-
-	const roles = (await response.json()) as Role[];
-	const newToken = response.headers.get('auth')!;
-
-	return { roles, token: newToken };
-};
+	}).then(response => response.json() as Promise<Role[]>);
