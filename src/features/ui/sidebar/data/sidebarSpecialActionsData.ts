@@ -12,7 +12,6 @@ export const sidebarSpecialActionsData: SidebarItemData[] = [
 	{
 		content: 'Salir',
 		iconPath: exitIcon,
-		type: 'item',
-		path: '',
+		type: 'logout',
 	},
 ];

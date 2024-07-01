@@ -5,6 +5,7 @@ import { Submenu } from './Submenu';
 import { useDelayUnmount } from '../hooks/useDelayUnmount';
 import { NavLink, matchPath, useLocation } from 'react-router-dom';
 import { Item } from './Item';
+import { useLogout } from '../../../login/hooks/useLogout';
 
 interface Props {
 	data: SidebarItemData;
@@ -14,6 +15,7 @@ export const ItemContainer = ({ data }: Props) => {
 	const [isSubmenuShowing, setIsSubmenuShowing] = useState(false);
 	const shouldRender = useDelayUnmount(isSubmenuShowing, 300);
 	const location = useLocation();
+	const logout = useLogout();
 
 	useEffect(() => {
 		if (data.type === 'submenu') {
@@ -25,7 +27,7 @@ export const ItemContainer = ({ data }: Props) => {
 	}, [data, location.pathname]);
 
 	const arrowStyle =
-		data.type === 'item'
+		data.type === 'item' || data.type === 'logout'
 			? sidebarCSS.hiddenArrow
 			: !isSubmenuShowing
 			? sidebarCSS.arrow
@@ -39,9 +41,19 @@ export const ItemContainer = ({ data }: Props) => {
 		: sidebarCSS.clickedItemLogo;
 	const handleClick = () => {
 		console.log('aguas');
-		setIsSubmenuShowing(show => {
-			return !show;
-		});
+
+		if (data.type === 'item') return;
+
+		if (data.type === 'submenu') {
+			setIsSubmenuShowing(show => {
+				return !show;
+			});
+			return;
+		}
+
+		console.log('will log out');
+
+		logout();
 	};
 
 	return (
@@ -56,6 +68,14 @@ export const ItemContainer = ({ data }: Props) => {
 						handleClick={handleClick}
 					/>
 				</NavLink>
+			) : data.type === 'logout' ? (
+				<Item
+					data={data}
+					arrowStyle={arrowStyle}
+					itemLogoStyle={itemLogoStyle}
+					itemStyle={itemStyle}
+					handleClick={handleClick}
+				/>
 			) : (
 				<>
 					<Item

@@ -1,5 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 
+interface SidebarItemForLoggingOut {
+	type: 'logout';
+}
+
 interface SidebarItemWithSubmenu {
 	children: SidebarItemChildrenData[];
 	type: 'submenu';
@@ -18,4 +22,8 @@ export interface SidebarItemChildrenData {
 export type SidebarItemData = {
 	content: string;
 	iconPath: string;
-} & (SidebarItemWithSubmenu | SidebarItemWithoutSubmenu);
+} & (
+	| SidebarItemWithSubmenu
+	| SidebarItemWithoutSubmenu
+	| SidebarItemForLoggingOut
+);
