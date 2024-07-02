@@ -5,6 +5,8 @@ import { ProtectedRoutes } from './ProtectedRoutes';
 import { AuthenticatedLayout } from '../features/ui/layout/components/AuthenticatedLayout';
 import { Roles } from '../pages/Roles';
 import { RoleForm } from '../pages/RoleForm';
+import { Subjects } from '../pages/Subjects';
+import { SubjectForm } from '../pages/SubjectForm';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -24,6 +26,13 @@ export const router = createBrowserRouter([
 							},
 							{ path: 'new', element: <RoleForm /> },
 							{ path: ':id', element: <RoleForm /> },
+						],
+					},
+					{
+						path: 'subject',
+						children: [
+							{ index: true, element: <Subjects /> },
+							{ path: 'new', element: <SubjectForm /> },
 						],
 					},
 				],

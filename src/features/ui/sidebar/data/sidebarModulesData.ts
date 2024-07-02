@@ -6,6 +6,7 @@ import churchIcon from '../../../../assets/MaterialSymbolsChurchOutline.svg';
 import graphicIcon from '../../../../assets/MaterialSymbolsBarChart4BarsRounded.svg';
 import personIcon from '../../../../assets/MaterialSymbolsPerson.svg';
 import { SidebarItemData } from '../interface/sidebarItemData';
+import subjectIcon from '../../../../assets/MaterialSymbolsBook.svg';
 
 export const sidebarData: SidebarItemData[] = [
 	{ content: 'Inicio', path: 'home', iconPath: homeIcon, type: 'item' },
@@ -58,6 +59,15 @@ export const sidebarData: SidebarItemData[] = [
 			{ content: 'Lista de usuarios', path: '' },
 			{ content: 'Crear rol de usuario', path: 'roles/new' },
 			{ content: 'Lista de roles', path: 'roles' },
+		],
+	},
+	{
+		content: 'Materias',
+		iconPath: subjectIcon,
+		type: 'submenu',
+		children: [
+			{ content: 'Agregar Materia', path: 'subject/new' },
+			{ content: 'Lista de materias', path: 'subject' },
 		],
 	},
 	{
