@@ -3,16 +3,6 @@
 	--subtitle-red: #dc2626;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0;
-	padding: 0;
-}
-
 .list {
 	display: flex;
 	flex-direction: column;
@@ -31,9 +21,23 @@ h6 {
 	font-weight: 600;
 }
 
+@keyframes underlineGrow {
+	0% {
+		width: 0;
+	}
+
+	100% {
+		width: 6rem;
+	}
+}
+
 .underline {
-	width: 6rem;
 	border-bottom: 4px solid var(--underline-red);
+	animation-name: underlineGrow;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+	border-radius: 1rem;
 }
 
 .subtitleContainer {

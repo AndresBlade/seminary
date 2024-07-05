@@ -2,7 +2,7 @@ import { SidebarItemData } from '../interface/sidebarItemData';
 import sidebarCSS from '../styles/sidebar.module.css';
 import { useEffect, useState } from 'react';
 import { Submenu } from './Submenu';
-import { useDelayUnmount } from '../hooks/useDelayUnmount';
+import { useDelayUnmount } from '../../../../shared/hooks/useDelayUnmount';
 import { NavLink, matchPath, useLocation } from 'react-router-dom';
 import { Item } from './Item';
 import { useLogout } from '../../../login/hooks/useLogout';

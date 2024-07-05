@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import RolesCSS from '../features/roles/styles/roles.module.css';
 import { createRole } from '../features/roles/helpers/createRole';
 import { Permission } from '../features/roles/interfaces/Permission';
-import { useForm } from '../features/roles/hooks/useForm';
+import { useForm } from '../shared/hooks/useForm';
 import { CheckedPermission } from '../features/roles/interfaces/CheckedPermission';
 import { PermissionsTable } from '../features/roles/components/PermissionsTable';
 import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
@@ -157,7 +157,9 @@ export const RoleForm = () => {
 					<h2 className={RolesCSS['roles-create__h2']}>
 						{initialRole ? 'Editar' : 'Agregar'} Rol
 					</h2>
-					<label htmlFor="name">Nombre * </label>
+					<label className={RolesCSS.label} htmlFor="name">
+						Nombre *{' '}
+					</label>
 					<input
 						type="text"
 						name="roleName"
@@ -168,7 +170,9 @@ export const RoleForm = () => {
 						onChange={onInputChange}
 						autoFocus
 					/>
-					<label htmlFor="description">Descripción</label>
+					<label className={RolesCSS.label} htmlFor="description">
+						Descripción
+					</label>
 					<input
 						type="text"
 						name="roleDescription"

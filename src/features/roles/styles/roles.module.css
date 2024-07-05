@@ -7,11 +7,8 @@
 	--textColor2: #ffffff;
 	--buttonColorSearch: #dc2626;
 }
-p {
-	padding: 0;
-	margin: 0;
-}
-label {
+
+.label {
 	color: black;
 }
 .form {

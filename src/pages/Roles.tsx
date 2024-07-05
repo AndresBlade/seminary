@@ -5,7 +5,7 @@ import useApiGet from '../features/roles/hooks/useApiGet';
 import { SearchRoleInput } from '../features/roles/components/SearchRoleInput';
 import { Role } from '../features/roles/interfaces/Role';
 import { RoleTable } from '../features/roles/components/RoleTable';
-import { useForm } from '../features/roles/hooks/useForm';
+import { useForm } from '../shared/hooks/useForm';
 
 const apiUrl = 'http://localhost:3000/role/search';
 

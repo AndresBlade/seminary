@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Sidebar } from '../../sidebar/components/Sidebar';
-import { useDelayUnmount } from '../../sidebar/hooks/useDelayUnmount';
+import { useDelayUnmount } from '../../../../shared/hooks/useDelayUnmount';
 import { Outlet } from 'react-router-dom';
 import { useIsDeviceSizeLess } from '../../sidebar/hooks/useIsDeviceSizeLess';
 import { Header } from '../../header/components/Header';
 import layoutCSS from '../styles/layout.module.css';
+import { PageContainer } from '../../container/components/PageContainer';
 export const AuthenticatedLayout = () => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -31,7 +32,9 @@ export const AuthenticatedLayout = () => {
 				/>
 			)}
 			<div className={layoutCSS.content}>
-				<Outlet />
+				<PageContainer>
+					<Outlet />
+				</PageContainer>
 			</div>
 		</div>
 	);
