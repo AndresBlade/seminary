@@ -10,43 +10,47 @@ interface LoginData {
 
 const LoginInputs = ({ setUsuario, setPassword }: LoginData) => {
 	return (
-		<div>
-			<div className={LoginStyles['login-container__user']}>
-				<img
-					src={LoginInputUser}
-					alt="Usuario"
-					className={LoginStyles['login-input__img']}
+		<div className={LoginStyles.fields}>
+			<div className={LoginStyles.field}>
+				<div className={LoginStyles['login-container__user']}>
+					<img
+						src={LoginInputUser}
+						alt="Usuario"
+						className={LoginStyles['login-input__img']}
+					/>
+					<label htmlFor="username" className={LoginStyles.label}>
+						Usuario
+					</label>
+				</div>
+				<input
+					type="text"
+					id="username"
+					name="username"
+					className={LoginStyles['login-input__username']}
+					placeholder="Cédula"
+					onChange={e => setUsuario(e.target.value)}
 				/>
-				<label htmlFor="username" className={LoginStyles.label}>
-					Usuario
-				</label>
 			</div>
-			<input
-				type="text"
-				id="username"
-				name="username"
-				className={LoginStyles['login-input__username']}
-				placeholder="Cédula"
-				onChange={e => setUsuario(e.target.value)}
-			/>
-			<div className={LoginStyles['login-container__password']}>
-				<img
-					src={LoginInputPassword}
-					alt="Contraseña"
-					className={LoginStyles['login-input__img']}
+			<div className={LoginStyles.field}>
+				<div className={LoginStyles['login-container__password']}>
+					<img
+						src={LoginInputPassword}
+						alt="Contraseña"
+						className={LoginStyles['login-input__img']}
+					/>
+					<label htmlFor="password" className={LoginStyles.label}>
+						Contraseña
+					</label>
+				</div>
+				<input
+					type="password"
+					id="password"
+					name="password"
+					className={LoginStyles['login-input__password']}
+					placeholder="Contraseña"
+					onChange={e => setPassword(e.target.value)}
 				/>
-				<label htmlFor="password" className={LoginStyles.label}>
-					Contraseña
-				</label>
 			</div>
-			<input
-				type="password"
-				id="password"
-				name="password"
-				className={LoginStyles['login-input__password']}
-				placeholder="Contraseña"
-				onChange={e => setPassword(e.target.value)}
-			/>
 		</div>
 	);
 };
