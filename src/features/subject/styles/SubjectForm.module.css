@@ -68,6 +68,12 @@
 	background-color: var(--buttonBlue);
 	color: #fff;
 	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.sendButton:hover {
+	background-color: #219af9;
 }
 
 @keyframes appearAndFade {
