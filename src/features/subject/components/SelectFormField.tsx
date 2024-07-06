@@ -1,24 +1,20 @@
 import { OptionHTMLAttributes, SelectHTMLAttributes } from 'react';
 
 import FormCSS from '../styles/SubjectForm.module.css';
+import { Label } from './Label';
+import { FormField } from './FormField';
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 	labelText?: string;
-	mandatory: boolean;
 	options: OptionHTMLAttributes<HTMLOptionElement>[];
 	onSelectChange: ({ target }: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const SelectFormField = (props: Props) => {
-	const { labelText, mandatory, options, onSelectChange, id, ...rest } =
-		props;
+	const { labelText, options, onSelectChange, id, ...rest } = props;
 	return (
-		<div className={FormCSS.formField}>
-			{labelText && (
-				<label htmlFor={id} className={FormCSS.label}>
-					{labelText} {mandatory && '*'}
-				</label>
-			)}
+		<FormField>
+			{labelText && <Label labelText={labelText} htmlFor={id} />}
 			<select
 				{...rest}
 				className={FormCSS.select}
@@ -30,6 +26,6 @@ export const SelectFormField = (props: Props) => {
 					</option>
 				))}
 			</select>
-		</div>
+		</FormField>
 	);
 };

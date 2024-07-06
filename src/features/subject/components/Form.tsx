@@ -62,8 +62,7 @@ export const Form = () => {
 					<InputFormField
 						type="text"
 						name="name"
-						labelText="Nombre de la materia"
-						mandatory
+						labelText="Nombre de la materia *"
 						placeholder="Ej. Catecismo de la iglesia católica I"
 						autoComplete="Off"
 						id="code"
@@ -75,16 +74,14 @@ export const Form = () => {
 						name="code"
 						type="text"
 						placeholder="Ej. CIC-1"
-						labelText="Código de la materia"
-						mandatory
+						labelText="Código de la materia *"
 						id="code"
 						value={code}
 						onInputChange={onInputChange}
 					/>
 
 					<SelectFormField
-						labelText="Curso"
-						mandatory
+						labelText="Curso *"
 						name="course"
 						id="course"
 						options={[
@@ -96,8 +93,7 @@ export const Form = () => {
 					/>
 
 					<SelectFormField
-						labelText="Semestre"
-						mandatory
+						labelText="Semestre *"
 						name="semester"
 						id="semester"
 						options={[
@@ -130,8 +126,7 @@ export const Form = () => {
 					{isTherePrecedent && (
 						<SelectFormField
 							name="precedent"
-							labelText="Materia previa requerida"
-							mandatory
+							labelText="Materia previa requerida *"
 							id="precedent"
 							options={[
 								{ content: 'FIS-1', value: 'FIS-1' },
