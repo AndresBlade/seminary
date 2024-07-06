@@ -26,7 +26,10 @@ export const SearchRoleInput = ({
 				onChange={setValue}
 			/>
 			<button
-				onClick={() => setRoleNameToSearch(value)}
+				onClick={e => {
+					e.preventDefault();
+					setRoleNameToSearch(value);
+				}}
 				className={RolesCSS['button-search']}
 			>
 				Buscar
