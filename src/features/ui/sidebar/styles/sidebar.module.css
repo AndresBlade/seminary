@@ -1,5 +1,4 @@
 :root {
-	--header-font: 'Sora', sans-serif;
 	--svg-grey: invert(50%) sepia(24%) saturate(9%) hue-rotate(126deg)
 		brightness(97%) contrast(91%);
 	--svg-red: invert(31%) sepia(85%) saturate(1684%) hue-rotate(337deg)
@@ -38,7 +37,6 @@ li {
 .sidebar {
 	height: 100%;
 	padding: 1.8rem;
-	font-family: var(--header-font);
 	display: flex;
 	position: fixed;
 	flex-direction: column;
@@ -161,6 +159,11 @@ li {
 	transition: filter 0.3s;
 }
 
+.itemLink {
+	text-decoration: none;
+	color: inherit;
+	border-radius: 2px;
+}
 .clickedItemLogo {
 	composes: itemLogo;
 	filter: var(--svg-red);
@@ -181,6 +184,10 @@ li {
 	height: 1.2rem;
 	transition-property: filter, transform;
 	transition-duration: 0.3s;
+}
+
+.hiddenArrow {
+	display: none;
 }
 
 .rotatedArrow {
@@ -213,6 +220,13 @@ li {
 	align-items: center;
 	gap: 2.6rem;
 	color: var(--red);
+	text-decoration: none;
+	transition: background-color 0.5s;
+}
+
+.activeSubmenuItem {
+	composes: submenuItem;
+	background-color: #b21d1d1a;
 }
 
 .submenuItemLogo {
@@ -342,7 +356,7 @@ li {
 	}
 
 	.submenuItem {
-		height: 2.5rem;
+		height: 3rem;
 		font-size: 1rem;
 		cursor: pointer;
 	}

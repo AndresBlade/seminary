@@ -4,50 +4,82 @@ import professorIcon from '../../../../assets/MaterialSymbolsInteractiveSpaceOut
 import engineerIcon from '../../../../assets/MaterialSymbolsEngineeringOutline.svg';
 import churchIcon from '../../../../assets/MaterialSymbolsChurchOutline.svg';
 import graphicIcon from '../../../../assets/MaterialSymbolsBarChart4BarsRounded.svg';
+import personIcon from '../../../../assets/MaterialSymbolsPerson.svg';
 import { SidebarItemData } from '../interface/sidebarItemData';
+import subjectIcon from '../../../../assets/MaterialSymbolsBook.svg';
 
 export const sidebarData: SidebarItemData[] = [
-	{ content: 'Inicio', iconPath: homeIcon },
+	{ content: 'Inicio', path: 'home', iconPath: homeIcon, type: 'item' },
 	{
 		content: 'Seminarista',
 		iconPath: graduationCapIcon,
+		type: 'submenu',
+
 		children: [
-			{ content: 'Añadir seminarista' },
-			{ content: 'Eliminar seminarista' },
+			{ content: 'Añadir seminarista', path: '' },
+			{ content: 'Eliminar seminarista', path: '' },
 		],
 	},
 	{
 		content: 'Profesor',
+		type: 'submenu',
 		iconPath: professorIcon,
+
 		children: [
-			{ content: 'Añadir Profesor' },
-			{ content: 'Eliminar Profesor' },
+			{ content: 'Añadir Profesor', path: '' },
+			{ content: 'Eliminar Profesor', path: '' },
 		],
 	},
 	{
 		content: 'Formador',
+		type: 'submenu',
+
 		iconPath: professorIcon,
 		children: [
-			{ content: 'Añadir Formador' },
-			{ content: 'Eliminar Formador' },
+			{ content: 'Añadir Formador', path: '' },
+			{ content: 'Eliminar Formador', path: '' },
 		],
 	},
 	{
 		content: 'Trabajador',
+		type: 'submenu',
 		iconPath: engineerIcon,
+
 		children: [
-			{ content: 'Añadir Trabajador' },
-			{ content: 'Eliminar Trabajador' },
+			{ content: 'Añadir Trabajador', path: '' },
+			{ content: 'Eliminar Trabajador', path: '' },
+		],
+	},
+	{
+		content: 'Usuario',
+		iconPath: personIcon,
+		type: 'submenu',
+		children: [
+			{ content: 'Agregar usuario', path: '' },
+			{ content: 'Lista de usuarios', path: '' },
+			{ content: 'Crear rol de usuario', path: 'roles/new' },
+			{ content: 'Lista de roles', path: 'roles' },
+		],
+	},
+	{
+		content: 'Materias',
+		iconPath: subjectIcon,
+		type: 'submenu',
+		children: [
+			{ content: 'Agregar Materia', path: 'subject/new' },
+			{ content: 'Lista de materias', path: 'subject' },
 		],
 	},
 	{
 		content: 'Eclesiástico',
+		type: 'submenu',
 		iconPath: churchIcon,
-		children: [{ content: 'Gestionar diócesis' }],
+		children: [{ content: 'Gestionar diócesis', path: '' }],
 	},
 	{
 		content: 'Reportes',
+		type: 'submenu',
 		iconPath: graphicIcon,
-		children: [{ content: 'Gestionar diócesis' }],
+		children: [{ content: 'Gestionar diócesis', path: '' }],
 	},
 ];
