@@ -1,0 +1,218 @@
+:root {
+        --backgroundColor: rgba(221, 222, 238, 0.5);
+        --backgroundCard: #fafafa;
+        --textColor: #dc2626;
+        --buttonColor: #017ae9;
+        --textColor2: #ffffff;
+        --buttonColorSearch: #dc2626;
+        --buttonColorReset: #818181;
+}
+.registerForm{
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    position: relative;
+}
+.containerForm{
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 40rem;
+    background-color: var(--backgroundCard);
+    border-radius: 2rem;
+}
+.personalInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+}
+.inputForm{
+    width: 100%;
+    background-color: var(--backgroundColor);
+    border-radius: 1rem;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+}
+.selectForm{
+    composes:inputForm;
+}
+.buttonsNextBack{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.imgButton{
+    width: 2rem;
+}
+.buttonNext{
+    display: flex;
+    justify-content: center;
+    
+    color: #747474;
+    width: 50%;
+    height: 4rem;
+    background-color: transparent;
+    border: none;
+}
+.buttonBack{
+    composes:buttonNext;
+}
+.seminarianExternal{
+    width: 100%;
+    display: flex;
+    font-size: 2rem;
+    align-items: center;
+}
+
+.seminarianExternal input{
+    margin-top: 2%;
+    width: 10%;
+}
+/*************ESTILOS PARA EL BOTÓN Y LA MODAL****************/
+.addSocialMedia{
+    width: 100%;
+    height: 4rem;
+    text-align: center;
+    background-color: var(--buttonColor);
+    color: var(--textColor2);
+    border: none;
+    border-radius: 5rem;
+} 
+.modalContainer{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modalBody{
+    margin: 15% auto;
+    width: 90%;
+    background-color: var(--backgroundCard);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 1rem;
+    animation: fadeIn 1s ease-out forwards;
+
+}
+.modalHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modalHeader button{
+    width: 3rem;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+.modalContent{
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 12rem;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 2fr));
+    justify-items: center;
+    align-items: center;
+    height: 35rem;
+    overflow-y: scroll;
+    padding: 1rem;
+}
+.socialMediaButton{
+    background-color: var(--backgroundCard);
+    border: none;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    box-shadow: 12px 6px 41px -35px rgba(0,0,0,0.75);
+}
+.socialMediaImg{
+    width: 5rem;
+}
+.closeModal{
+    width: 2rem;
+}
+
+/*****************Estilos para la red social seleccionada*********************/
+.socialMediaSelected{
+    background-color: var(--backgroundCard);
+    box-shadow: 4px 10px 55px -24px rgba(0,0,0,0.75);
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    animation: fadeIn 1s ease-out forwards;
+
+}
+.socialMediaSelectedInfo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.socialMediaSelectedInfo div{
+    display: flex;
+    align-items: center;
+}
+.buttonSelected{
+    background-color: transparent;
+    border: none;
+}
+.closeSocialMediaSelected{
+    composes:closeModal;
+    
+}
+
+/********************ANIMACION PARA LA MODAL CUANDO SE ABRA Y LOS INPUTS SELECCIONADOS***********************/
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/************************MEDIA QUERY PARA PC************************/
+@media (width >= 1024px) { 
+    .containerForm{
+        width: 70%;
+    }
+    .personalInfo{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .personalInfo h2{
+        grid-column: 1/3;
+    }
+    .contactInfo{
+        composes:personalInfo
+    }
+    .academicCareer{
+        composes:personalInfo
+    }
+    .personalInfo .seminarianExternalContainer{
+        grid-column: 1/3;    
+    }
+
+    /****************ESTILOS PARA LA MODAL******************/
+    .modalBody{
+        width:30%;
+    }
+
+}

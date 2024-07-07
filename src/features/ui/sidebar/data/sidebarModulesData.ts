@@ -24,8 +24,9 @@ export const sidebarData: SidebarItemData[] = [
 		type: 'submenu',
 		iconPath: professorIcon,
 
+
 		children: [
-			{ content: 'Añadir Profesor', path: '' },
+			{ content: 'Añadir Profesor', path: 'Profesor/new' },
 			{ content: 'Eliminar Profesor', path: '' },
 		],
 	},

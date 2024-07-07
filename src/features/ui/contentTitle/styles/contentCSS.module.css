@@ -1,0 +1,53 @@
+.title-h1 h1{
+    border-bottom: 0.5rem solid #ECAA19;
+    width: 22%;
+}
+.title-h2{
+    background-color: var(--backgroundCard);
+    width: 80%;
+    padding: 1rem;
+    border-radius: 2.5rem;
+    margin-bottom: 3rem;
+}
+.title-h2 h2{
+    color: #ECAA19;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+@media (min-width: 601px) and (max-width: 1024px){
+    .content-title__container{
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin-left: 15%
+    }
+    .title-h1 h1{
+        border-bottom: 0.5rem solid #ECAA19;
+        width: 8%;
+    }
+
+    .title-h2{
+        width: 30%;
+    }
+    
+}
+@media (min-width: 1025px){
+    .content-title__container{
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        margin-left: 15%
+    }
+    .title-h1 h1{
+        border-bottom: 0.5rem solid #ECAA19;
+        width: 5.5%;
+    }
+
+    .title-h2{
+        width: 30%;
+    }
+
+}
