@@ -74,7 +74,10 @@ export const sidebarData: SidebarItemData[] = [
 		content: 'Eclesiástico',
 		type: 'submenu',
 		iconPath: churchIcon,
-		children: [{ content: 'Gestionar diócesis', path: '' }],
+		children: [
+			{ content: 'Lista de diócesis', path: 'diocese' },
+			{ content: 'Crear diócesis', path: 'diocese/new' },
+		],
 	},
 	{
 		content: 'Reportes',

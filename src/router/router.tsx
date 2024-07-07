@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
 						],
 					},
 					{
-						path: 'diocesis',
+						path: 'diocese',
 						children: [
 							{
 								index: true,
