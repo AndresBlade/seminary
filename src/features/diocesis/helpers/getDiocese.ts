@@ -5,7 +5,7 @@ interface Diocese {
 }
 
 export const getDiocese = (token: string): Promise<Diocese[]> => {
-	return fetch('http://localhost:3000/Diocese/', {
+	return fetch('http://127.0.0.1:3000/Diocese/', {
 		headers: {
 			auth: token,
 		},
