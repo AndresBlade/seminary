@@ -6,6 +6,7 @@ import churchIcon from '../../../../assets/MaterialSymbolsChurchOutline.svg';
 import graphicIcon from '../../../../assets/MaterialSymbolsBarChart4BarsRounded.svg';
 import personIcon from '../../../../assets/MaterialSymbolsPerson.svg';
 import { SidebarItemData } from '../interface/sidebarItemData';
+import subjectIcon from '../../../../assets/MaterialSymbolsBook.svg';
 
 export const sidebarData: SidebarItemData[] = [
 	{ content: 'Inicio', path: 'home', iconPath: homeIcon, type: 'item' },
@@ -62,10 +63,22 @@ export const sidebarData: SidebarItemData[] = [
 		],
 	},
 	{
+		content: 'Materias',
+		iconPath: subjectIcon,
+		type: 'submenu',
+		children: [
+			{ content: 'Agregar Materia', path: 'subject/new' },
+			{ content: 'Lista de materias', path: 'subject' },
+		],
+	},
+	{
 		content: 'Eclesiástico',
 		type: 'submenu',
 		iconPath: churchIcon,
-		children: [{ content: 'Gestionar diócesis', path: '' }],
+		children: [
+			{ content: 'Lista de diócesis', path: 'diocese' },
+			{ content: 'Crear diócesis', path: 'diocese/new' },
+		],
 	},
 	{
 		content: 'Reportes',

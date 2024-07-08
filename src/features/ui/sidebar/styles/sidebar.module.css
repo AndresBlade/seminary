@@ -1,5 +1,4 @@
 :root {
-	--header-font: 'Sora', sans-serif;
 	--svg-grey: invert(50%) sepia(24%) saturate(9%) hue-rotate(126deg)
 		brightness(97%) contrast(91%);
 	--svg-red: invert(31%) sepia(85%) saturate(1684%) hue-rotate(337deg)
@@ -38,7 +37,6 @@ li {
 .sidebar {
 	height: 100%;
 	padding: 1.8rem;
-	font-family: var(--header-font);
 	display: flex;
 	position: fixed;
 	flex-direction: column;

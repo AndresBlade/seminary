@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import RolesCSS from '../features/roles/styles/roles.module.css';
 import { createRole } from '../features/roles/helpers/createRole';
 import { Permission } from '../features/roles/interfaces/Permission';
-import { useForm } from '../features/roles/hooks/useForm';
+import { useForm } from '../shared/hooks/useForm';
 import { CheckedPermission } from '../features/roles/interfaces/CheckedPermission';
 import { PermissionsTable } from '../features/roles/components/PermissionsTable';
 import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
@@ -10,6 +10,14 @@ import { editRole } from '../features/roles/helpers/editRole';
 import { AuthContext } from '../features/login/context/AuthContext';
 import { usePermissions } from '../features/roles/hooks/usePermissions';
 import { useRoles } from '../features/roles/hooks/useRoles';
+import { ContentContainer } from '../features/ui/container/components/ContentContainer';
+import { TitleList } from '../features/ui/title/components/TitleList';
+import { Title } from '../features/ui/title/components/Title';
+import { BackgroundColoredSubtitle } from '../features/ui/title/components/BackgroundColoredSubtitle';
+import { InputFormField } from '../features/subject/components/InputFormField';
+import { FormFields } from '../features/subject/components/FormFields';
+import { FormField } from '../features/subject/components/FormField';
+import { Label } from '../features/subject/components/Label';
 
 interface SubmitFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -133,60 +141,66 @@ export const RoleForm = () => {
 	]);
 
 	return (
-		<div className={RolesCSS['roles-create__container']}>
-			<div className={RolesCSS['roles-create__h2--title']}>
-				<h2>{initialRole ? 'Editar' : 'Agregar'} rol de usuario</h2>
-			</div>
-			<form
-				className={RolesCSS.form}
-				onSubmit={e => {
-					if (!checkedPermissions) return;
-					if (!user?.token) return;
-					handleSubmit({
-						e,
-						roleName,
-						roleDescription,
-						checkedPermissions,
-						id: Number(id),
-						navigate,
-						token: user.token,
-					}).catch(err => console.log(err));
-				}}
-			>
-				<div className={RolesCSS['roles-create__form']}>
-					<h2 className={RolesCSS['roles-create__h2']}>
-						{initialRole ? 'Editar' : 'Agregar'} Rol
-					</h2>
-					<label htmlFor="name">Nombre * </label>
-					<input
-						type="text"
-						name="roleName"
-						placeholder="Ej: Supervisor estudiantil"
-						id="name"
-						className={RolesCSS['input-name']}
-						value={roleName}
-						onChange={onInputChange}
-						autoFocus
-					/>
-					<label htmlFor="description">Descripción</label>
-					<input
-						type="text"
-						name="roleDescription"
-						id="description"
-						placeholder="Ej: Supervisa las notas de nuevo ingreso"
-						value={roleDescription}
-						className={RolesCSS['input-name']}
-						onChange={onInputChange}
-					></input>
-
-					{tables && checkedPermissions && (
-						<PermissionsTable
-							tables={tables}
-							permissionsByRoute={permissionsByRoute}
-							checkedPermissions={checkedPermissions}
-							setCheckedPermissions={setCheckedPermissions}
+		<>
+			<TitleList>
+				<Title content="Roles" />
+				<BackgroundColoredSubtitle
+					content={`${
+						initialRole ? 'Editar' : 'Agregar'
+					} rol de usuario`}
+				/>
+			</TitleList>
+			<ContentContainer>
+				<form
+					onSubmit={e => {
+						if (!checkedPermissions) return;
+						if (!user?.token) return;
+						handleSubmit({
+							e,
+							roleName,
+							roleDescription,
+							checkedPermissions,
+							id: Number(id),
+							navigate,
+							token: user.token,
+						}).catch(err => console.log(err));
+					}}
+				>
+					<FormFields>
+						<InputFormField
+							type="text"
+							labelText="Nombre *"
+							name="roleName"
+							placeholder="Ej: Supervisor estudiantil"
+							id="name"
+							value={roleName}
+							onInputChange={onInputChange}
+							autoFocus
 						/>
-					)}
+						<InputFormField
+							labelText="Descripción *"
+							type="text"
+							name="roleDescription"
+							id="description"
+							placeholder="Ej: Supervisa las notas de nuevo ingreso"
+							value={roleDescription}
+							onInputChange={onInputChange}
+						/>
+
+						{tables && checkedPermissions && (
+							<FormField>
+								<Label labelText="Permisos *" />
+								<PermissionsTable
+									tables={tables}
+									permissionsByRoute={permissionsByRoute}
+									checkedPermissions={checkedPermissions}
+									setCheckedPermissions={
+										setCheckedPermissions
+									}
+								/>
+							</FormField>
+						)}
+					</FormFields>
 
 					<div className={RolesCSS.buttons}>
 						<button
@@ -204,8 +218,8 @@ export const RoleForm = () => {
 							Enviar
 						</button>
 					</div>
-				</div>
-			</form>
-		</div>
+				</form>
+			</ContentContainer>
+		</>
 	);
 };

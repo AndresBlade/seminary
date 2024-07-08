@@ -1,17 +1,14 @@
 :root {
 	--backgroundColor: rgba(221, 222, 238, 0.5);
-	--inputColor: #dddeee;
+	--inputColor: #dddeee80;
 	--backgroundCard: #fafafa;
 	--textColor: #dc2626;
 	--buttonColor: #017ae9;
 	--textColor2: #ffffff;
 	--buttonColorSearch: #dc2626;
 }
-p {
-	padding: 0;
-	margin: 0;
-}
-label {
+
+.label {
 	color: black;
 }
 .form {
@@ -38,7 +35,6 @@ label {
 	width: 100%;
 	height: auto;
 	border-radius: 1rem;
-	margin-top: 5%;
 	padding: 2rem;
 }
 

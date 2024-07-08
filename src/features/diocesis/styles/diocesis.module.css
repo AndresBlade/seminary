@@ -1,0 +1,350 @@
+:root {
+	--backgroundColor: rgba(221, 222, 238, 0.5);
+	--backgroundCard: #fafafa;
+	--textColor: #dc2626;
+	--buttonColor: #017ae9;
+	--textColor2: #ffffff;
+	--buttonColorSearch: #dc2626;
+	--buttonColorReset: #818181;
+}
+.diocesis-create__container,
+.diocesis-table__container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background-color: var(--backgroundColor);
+	padding: 2rem;
+	overflow-y: scroll;
+}
+.diocesis-create__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--backgroundCard);
+	width: 100%;
+	padding: 2rem;
+	border-radius: 1.5rem;
+}
+.diocesis-create__form-inputs {
+	width: 90%;
+	margin-bottom: 1rem;
+}
+.diocesis-create__form-name,
+.diocesis-create__form-obispo {
+	margin-bottom: 2rem;
+}
+.diocesis-create__form-name,
+.diocesis-create__form-obispo {
+	margin-bottom: 2rem;
+}
+.diocesis-create__form-name--label,
+.diocesis-create__form-obispo--label {
+	font-weight: bold;
+}
+.diocesis-create__form-name input,
+.diocesis-create__form-obispo input {
+	width: 100%;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: var(--backgroundColor);
+	border: none;
+	margin-top: 1rem;
+}
+.diocesis-create__form-group {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	gap: 2rem;
+}
+.diocesis-create__form-button--save {
+	background-color: var(--buttonColor);
+	color: var(--textColor2);
+	width: 100%;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.diocesis-create__form-button--reset {
+	background-color: var(--buttonColorReset);
+	color: var(--textColor2);
+	width: 100%;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.diocesis-table__table--container {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--backgroundCard);
+	width: 100%;
+	padding: 0.5rem;
+	border-radius: 1.5rem;
+	padding: 1rem;
+}
+.diocesis-table__table {
+	width: 100%;
+	border-collapse: collapse;
+	overflow-y: scroll;
+}
+.diocesis-table__table--thead {
+	border: 1px solid var(--backgroundColor);
+	border-radius: 1rem 1rem 0 0;
+}
+.diocesis-table__table--thead tr {
+	display: flex;
+	justify-content: space-between;
+	color: var(--textColor);
+	font-weight: bold;
+	padding: 1rem;
+}
+.diocesis-table__table--tbody {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	border-radius: 0 0 1rem 1rem;
+	padding: 1rem;
+}
+.diocesis-table__table--tbody-tr {
+	display: flex;
+	justify-content: space-between;
+	gap: 2rem;
+	margin-bottom: 1rem;
+}
+.diocesis-table__button--container {
+	display: flex;
+}
+.diocesis-table__button--edit,
+.diocesis-table__button--delete {
+	background-color: var(--backgroundCard);
+	color: var(--textColor2);
+	border: none;
+	transition: 0.3s;
+}
+/********ESTILOS DE LA BARRA DE BUSQUEDA***********/
+
+.animation-container {
+	position: relative;
+	width: 8rem;
+	height: 8rem;
+	margin: 0 auto;
+	padding: 3rem;
+}
+
+.animation-container .animation-loading {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	border: solid 0.4rem transparent;
+	border-top-color: #dc2626;
+	border-left-color: #dc2626;
+	border-radius: 50%;
+	animation: spin 1.2s linear infinite;
+}
+.animation-container .animation-loading__two {
+	position: absolute;
+	width: 70%;
+	height: 70%;
+	top: 50%;
+	left: 50%;
+	border: solid 0.4rem transparent;
+	border-top-color: #017ae9;
+	border-left-color: #017ae9;
+	border-radius: 50%;
+	animation: spin__two 1.2s linear infinite;
+}
+
+.diocesis-find {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+
+.diocesis-find input {
+	padding: 1.5rem 2rem;
+	border-radius: 0.5rem;
+	border: none;
+	background-color: var(--backgroundColor);
+	width: 100%;
+}
+.diocesis-find button {
+	padding: 1.5rem 0;
+
+	width: 100%;
+	border-radius: 0.5rem;
+	border: none;
+	background-color: var(--buttonColorSearch);
+	color: var(--textColor2);
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.tableContainer {
+	overflow: auto;
+}
+
+@keyframes spin {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+@keyframes spin__two {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(-360deg);
+	}
+}
+@media (width >= 601px) and (width <= 1024px) {
+	.diocesis-find {
+		flex-direction: row;
+	}
+
+	.diocesis-find input {
+		flex: 1 1 80%;
+	}
+
+	.diocesis-find button {
+		flex: 1 1 20%;
+	}
+
+	.diocesis-create__container,
+	.diocesis-table__container {
+		height: 100vh;
+		width: 100%;
+		overflow-y: hidden;
+	}
+	.diocesis-table__table {
+		width: 100%;
+		overflow: none;
+	}
+	.diocesis-table__table--container {
+		margin: 0 auto;
+		width: 70%;
+		max-height: 18%;
+		overflow-y: none;
+	}
+	.diocesis-create__form {
+		width: 70%;
+		align-items: start;
+		margin: 0 auto;
+	}
+	.diocesis-table__table {
+		width: 100%;
+		border-collapse: collapse;
+		overflow-y: none;
+	}
+	.diocesis-table__table--tbody-tr-obispo {
+		width: 30%;
+	}
+	.diocesis-table__table--tbody-tr {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2rem;
+		margin-bottom: 1rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	.diocesis-create__form-name--label,
+	.diocesis-create__form-obispo--label {
+		width: 100%;
+	}
+	.diocesis-create__form-name input,
+	.diocesis-create__form-obispo input {
+		width: 100%;
+	}
+	.diocesis-table__button--container {
+		display: flex;
+		align-items: center;
+		justify-content: start;
+	}
+}
+@media (width >= 1025px) {
+	.diocesis-find {
+		flex-direction: row;
+	}
+
+	.diocesis-find input {
+		flex: 1 1 80%;
+	}
+
+	.diocesis-find button {
+		flex: 1 1 20%;
+	}
+	.diocesis-create__container,
+	.diocesis-table__container {
+		height: 100vh;
+		width: 100%;
+		overflow: auto;
+	}
+
+	.diocesis-table__table {
+		background-color: var(--backgroundCard);
+		width: 70%;
+		height: 100vh;
+		overflow: auto;
+		margin: 0 auto;
+		border-radius: 1rem;
+	}
+	.diocesis-table__table--container {
+		margin: 0 auto;
+		max-width: 90%;
+		height: 80%;
+		max-height: 200rem;
+		overflow-y: scroll;
+	}
+	.diocesis-table__table--container::-webkit-scrollbar {
+		display: none;
+	}
+	.diocesis-table__table--container-loading {
+		margin: 0 auto;
+		max-width: 70%;
+		max-height: 18%;
+		overflow-y: visible;
+	}
+	.diocesis-table__table--tbody-tr-obispo {
+		width: 20%;
+	}
+	.diocesis-table__table--tbody-tr-name {
+		width: 30%;
+		overflow-x: scroll;
+	}
+	.diocesis-table__table--tbody-tr-obispo::-webkit-scrollbar,
+	.diocesis-table__table--tbody-tr-name::-webkit-scrollbar {
+		display: none;
+	}
+	.diocesis-create__form {
+		width: 70%;
+		align-items: start;
+		margin: 0 auto;
+	}
+	.diocesis-table__table--tbody-tr {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+		gap: none;
+		margin: 0;
+		padding: 2rem;
+	}
+	.diocesis-create__form-name--label,
+	.diocesis-create__form-obispo--label {
+		width: 100%;
+	}
+	.diocesis-create__form-name input,
+	.diocesis-create__form-obispo input {
+		width: 100%;
+	}
+}
