@@ -1,7 +1,3 @@
-:root {
-	--header-font: 'Sora', sans-serif;
-}
-
 .header {
 	background-color: #fff;
 	position: sticky;
@@ -13,7 +9,6 @@
 	padding: 1rem 3.2rem;
 	box-shadow: 0 1px 4px 0 #0000000c;
 	align-items: center;
-	font-family: var(--header-font);
 }
 
 .menuButton {

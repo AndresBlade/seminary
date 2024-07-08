@@ -1,0 +1,210 @@
+:root {
+	--buttonColor: #d8a618;
+	--Black: #000000;
+}
+.label {
+	font-weight: bold;
+	font-size: 1.8rem;
+}
+.login-container {
+	display: flex;
+	padding: 2.5rem;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+}
+.logo-img {
+	max-width: 20rem;
+}
+.login-h3 {
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+}
+.login-h2 {
+	font-size: 3rem;
+	font-weight: bold;
+	text-align: center;
+}
+.login-container__form {
+	background: linear-gradient(
+		180deg,
+		rgba(56, 189, 248, 1) 0%,
+		rgba(250, 250, 250, 1) 100%
+	);
+	border-radius: 1.5rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 2rem 4rem;
+
+	gap: 3rem;
+}
+.login-container__form__title {
+	text-align: center;
+}
+.login-container__form--login {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+.login-container__user,
+.login-container__password {
+	display: flex;
+	align-items: center;
+}
+
+.login-container__submit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	width: 100%;
+}
+.login-input__img {
+	width: 3rem;
+}
+.login-input__username,
+.login-input__password {
+	border-radius: 2.5rem;
+	height: 4rem;
+	padding: 0 2rem;
+	border: none;
+	width: 100%;
+}
+.login-input__username::placeholder {
+	background-image: url(../../../assets/MdiLightAccount.svg);
+	background-size: 2.7rem;
+	background-repeat: no-repeat;
+	background-position: 0.5rem;
+	padding-left: 3.5rem;
+}
+.login-input__password::placeholder {
+	background-image: url(../../../assets/LoginIconLock.svg);
+	background-size: 2.2rem;
+	background-repeat: no-repeat;
+	background-position: 0.5rem;
+	padding-left: 3.5rem;
+}
+.login-container__input-submit {
+	padding: 1rem;
+	border-radius: 2.5rem;
+	border: none;
+	background: var(--buttonColor);
+	font-weight: bold;
+	width: 75%;
+	cursor: pointer;
+}
+.login-container__form__forgot-password {
+	text-align: center;
+	color: var(--Black);
+	text-decoration: none;
+}
+
+.login-container__img {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 100%;
+}
+
+.fields {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+@media (width >=700px) and (width <= 900px) {
+	.login-container {
+		flex-direction: row;
+		padding: 2rem;
+		height: 100dvh;
+		justify-content: space-evenly;
+	}
+	.login-container__user,
+	.login-container__password {
+		display: flex;
+		align-items: center;
+	}
+
+	.login-h2 {
+		visibility: hidden;
+	}
+	.login-h3 {
+		text-align: center;
+		font-size: 3rem;
+	}
+	.login-container__form {
+		width: 50%;
+		height: 30rem;
+	}
+	.login-container__form--login {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+	}
+	.login-input__username,
+	.login-input__password {
+		width: 100%;
+	}
+	.logo-img {
+		max-width: 25rem;
+	}
+}
+@media (width >= 901px) {
+	.login-container {
+		flex-direction: row;
+
+		justify-content: space-evenly;
+		height: 100dvh;
+		padding: 2rem;
+		align-items: center;
+	}
+	.login-container__user,
+	.login-container__password {
+		display: flex;
+		align-items: center;
+	}
+	.login-h2 {
+		visibility: hidden;
+	}
+	.login-h3 {
+		text-align: center;
+		font-size: 3rem;
+	}
+	.logo-img {
+		max-width: 40rem;
+	}
+	.login-container__form {
+		width: 35%;
+		height: 45rem;
+	}
+	.login-container__form--login {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.login-input__password,
+	.login-input__username {
+		width: 100%;
+	}
+	.login-container__form__submit {
+		width: 60%;
+		position: relative;
+	}
+	.login-input__img--submit {
+		position: absolute;
+		z-index: 1;
+		width: 2rem;
+	}
+}

@@ -1,5 +1,5 @@
 import { sidebarData } from '../data/sidebarModulesData';
-import { Item } from './Item';
+import { ItemContainer } from './ItemContainer';
 import { SidebarHeader } from './SidebarHeader';
 import sidebarCSS from '../styles/sidebar.module.css';
 import { sidebarSpecialActionsData } from '../data/sidebarSpecialActionsData';
@@ -58,12 +58,12 @@ export const Sidebar = ({
 				<SidebarHeader />
 				<ul className={sidebarCSS.items}>
 					{sidebarData.map((sidebarItem, index) => (
-						<Item key={index} data={sidebarItem} />
+						<ItemContainer key={index} data={sidebarItem} />
 					))}
 				</ul>
 				<ul className={sidebarCSS.items}>
 					{sidebarSpecialActionsData.map((sidebarItem, index) => (
-						<Item key={index} data={sidebarItem} />
+						<ItemContainer key={index} data={sidebarItem} />
 					))}
 				</ul>
 			</aside>
