@@ -3,14 +3,17 @@ import { ContainerForm } from '././small_components/ContainerForm'
 import { PersonalInfoForm } from './PersonalInfoForm'
 import { ContactInfoForm } from './ContactInfoForm'
 import { AcademicCareer } from './AcademicCareer'
+import { ProfessionalCareer } from './ProfessionalCareer'
 import { ButtonNextBackForm } from '././small_components/ButtonNextBackForm'
 import { SocialMediaForm } from './SocialMediaForm'
-import {SocialMediaProps} from '../interfaces/Form'
+import {contactInfoProps, SocialMediaProps, seminarianInfo, professionalInfo} from '../interfaces/Form'
+import { personalInfoProps } from '../interfaces/Form'
 const RegisterCreate = () => {
     const [number, setNumber]=useState(1);
     const [modal, setModal]=useState(false);
+    const rol= 'seminarista';
 
-    const [personalInfo,setPersonalInfo]= useState<>({
+    const [personalInfo,setPersonalInfo]= useState<personalInfoProps>({
         name: '',
         lastName: '',
         id: '',
@@ -20,26 +23,33 @@ const RegisterCreate = () => {
         rol:''
     })
 
-    const [contactInfo,setContactInfo]=useState<>({
+    const [contactInfo,setContactInfo]=useState<contactInfoProps>({
         phone: '',
-		description: '',
 		phoneFamily: '',
 		descriptionFamily: '',
-		email: '',
+		email: ''
     })
     const [socialMedia, setSocialMedia] = useState<SocialMediaProps[]>([])
-    const [seminarianInfo] = useState<>({
+    const [seminarianInfo, setSeminarianInfo] = useState<seminarianInfo>({
         academicTraining: '',
         stage:'',
+        linkTitle:'',
         diocese:'',
         parish: '',
         apostolates:'',
         ministriesReceived:'',
         condition:'',
         status:'',
-        
+        nameSeminaryExternal:'',
+        yearOfIncome:'',
     })
 
+    const [professionalInfo,setProfessionalInfo]=useState<professionalInfo>({
+        academicTraining:'',
+        linkTitle:'',
+        ordinationDate:'',
+        ministryYears:''
+    })
     return (
         <ContainerForm>
             
@@ -49,12 +59,24 @@ const RegisterCreate = () => {
                     number === 1 ? (
                         <>
                             <PersonalInfoForm
+                                name={personalInfo.name}
+                                lastName={personalInfo.lastName}
+                                id={personalInfo.id}
+                                birthDate={personalInfo.birthDate}
+                                bloodType={personalInfo.bloodType}
+                                medicalRecord={personalInfo.medicalRecord}
+                                rol={personalInfo.rol}
+                                setPersonalInfo={setPersonalInfo}
                             />
                             <ButtonNextBackForm initial setNumber={setNumber}/>
                         </>
                     ) : number === 2 ? (
                         <>
-                            <ContactInfoForm/>
+                            <ContactInfoForm
+                                contactInfo={contactInfo}
+                                setContactInfo={setContactInfo}
+                            
+                            />
                             <ButtonNextBackForm setNumber={setNumber}/>
                         </>
                     ) : number === 3 ? (
@@ -70,7 +92,33 @@ const RegisterCreate = () => {
 
                     ): number ===4 ?(
                         <>
-                            <AcademicCareer/>
+                            { rol === 'seminarista' ?
+                                (   
+                                    <AcademicCareer
+                                        academicTraining={seminarianInfo.academicTraining}
+                                        stage={seminarianInfo.stage}
+                                        linkTitle={seminarianInfo.linkTitle}
+                                        diocese={seminarianInfo.diocese}
+                                        parish={seminarianInfo.parish}
+                                        apostolates={seminarianInfo.apostolates}
+                                        ministriesReceived={seminarianInfo.ministriesReceived}
+                                        condition={seminarianInfo.condition}
+                                        status={seminarianInfo.status}
+                                        nameSeminaryExternal={seminarianInfo.nameSeminaryExternal}
+                                        yearOfIncome={seminarianInfo.yearOfIncome}
+                                        setSeminarianInfo={setSeminarianInfo}
+                                        
+                                    />
+                                ):
+                                    <ProfessionalCareer
+                                        academicTraining={professionalInfo.academicTraining}
+                                        linkTitle={professionalInfo.linkTitle}
+                                        ordinationDate={professionalInfo.ordinationDate}
+                                        ministryYears={professionalInfo.ministryYears}
+                                        setProfessionalInfo={setProfessionalInfo}
+                                    />
+                                
+                            }
                             <ButtonNextBackForm setNumber={setNumber}/>
                             
                         </>

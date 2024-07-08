@@ -54,7 +54,6 @@ export interface personalInfoProps{
 
 export interface contactInfoProps{
     phone: string,
-    description: string,
     phoneFamily: string,
     descriptionFamily: string,
     email: string,
@@ -63,10 +62,20 @@ export interface contactInfoProps{
 export interface seminarianInfo{
     academicTraining: string,
     stage:string,
+    linkTitle:string
     diocese:string,
     parish: string,
     apostolates:string,
     ministriesReceived:string,
     condition:string,
-    status:string
+    status:string,
+    nameSeminaryExternal:string,
+    yearOfIncome:string
+}
+
+export interface professionalInfo{
+    academicTraining:string,
+    linkTitle:string,
+    ordinationDate:string,
+    ministryYears:string
 }
