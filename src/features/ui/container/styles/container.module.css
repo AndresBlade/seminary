@@ -17,4 +17,8 @@
 		width: unset;
 		min-width: 60vw;
 	}
+
+	.contentContainer {
+		min-height: 40rem;
+	}
 }

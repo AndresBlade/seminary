@@ -109,4 +109,9 @@
 	.sendButton {
 		width: 20rem;
 	}
+
+	.form {
+		height: 100%;
+		justify-content: space-evenly;
+	}
 }
