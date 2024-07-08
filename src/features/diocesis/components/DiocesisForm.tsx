@@ -5,6 +5,10 @@ import { editDiocesis } from '../helpers/editDiocesis';
 import { useParams, useNavigate } from 'react-router-dom';
 import useGet from '../../../shared/hooks/useGet';
 import { AuthContext } from '../../login/context/AuthContext';
+import { ContentContainer } from '../../ui/container/components/ContentContainer';
+import { InputFormField } from '../../subject/components/InputFormField';
+import { FormFields } from '../../subject/components/FormFields';
+import FormCSS from '../../subject/styles/SubjectForm.module.css';
 
 interface DiocesisFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -87,67 +91,51 @@ export const DiocesisForm = () => {
 	console.log(id);
 
 	return (
-		<form
-			action="POST"
-			onSubmit={e => {
-				handleSubmit({ e, diocesisName, obispoName });
-			}}
-			className={Diocesis['diocesis-create__form']}
-		>
-			<div className={Diocesis['diocesis-create__form-inputs']}>
-				<div className={Diocesis['diocesis-create__form-name']}>
-					<label
-						htmlFor="name"
-						className={
-							Diocesis['diocesis-create__form-name--label']
-						}
-					>
-						Nombre de la diocesis*
-					</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						onChange={e => {
+		<ContentContainer>
+			<form
+				action="POST"
+				onSubmit={e => {
+					handleSubmit({ e, diocesisName, obispoName });
+				}}
+				className={FormCSS.form}
+			>
+				<FormFields>
+					<InputFormField
+						onInputChange={e => {
 							setDiocesisName(e.target.value);
 						}}
-						value={diocesisName}
-					/>
-				</div>
-				<div className={Diocesis['diocesis-create__form-obispo']}>
-					<label
-						htmlFor="description"
-						className={
-							Diocesis['diocesis-create__form-obispo--label']
-						}
-					>
-						Obispo que la dirige
-					</label>
-					<input
+						labelText="Nombre de la diócesis *"
+						id="name"
 						type="text"
-						id="obispo"
-						name="obispo"
-						onChange={e => {
+					/>
+					<InputFormField
+						onInputChange={e => {
 							setObispoName(e.target.value);
 						}}
-						value={obispoName}
+						labelText="Obispo que la dirige"
+						id="obispo"
+						type="text"
 					/>
+				</FormFields>
+				<div className={Diocesis['diocesis-create__form-group']}>
+					<button
+						type="submit"
+						className={
+							Diocesis['diocesis-create__form-button--save']
+						}
+					>
+						Guardar
+					</button>
+					<button
+						type="reset"
+						className={
+							Diocesis['diocesis-create__form-button--reset']
+						}
+					>
+						Limpiar
+					</button>
 				</div>
-			</div>
-			<div className={Diocesis['diocesis-create__form-group']}>
-				<button
-					type="submit"
-					className={Diocesis['diocesis-create__form-button--save']}
-				>
-					Guardar
-				</button>
-				<button
-					type="reset"
-					className={Diocesis['diocesis-create__form-button--reset']}
-				>
-					Limpiar
-				</button>
-			</div>
-		</form>
+			</form>
+		</ContentContainer>
 	);
 };
