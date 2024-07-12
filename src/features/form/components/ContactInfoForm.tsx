@@ -9,6 +9,7 @@ interface contactInfoPropsForm{
     contactInfo:{
         phone:string
         phoneFamily:string
+        description:string
         descriptionFamily:string
         email:string
     }
@@ -16,7 +17,7 @@ interface contactInfoPropsForm{
 }
 
 
-export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,descriptionFamily,email},setContactInfo}:contactInfoPropsForm) => {
+export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,descriptionFamily,email},setContactInfo}:contactInfoPropsForm) => {
     return (
         <div className={FormCSS['contactInfo']} >
             <TitleForm title='Información de contacto' />
@@ -30,7 +31,14 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,descriptionFamil
                     })
                 }}/>
             </div>
-
+            <div>
+                <LabelForm>Descripcion del telefono</LabelForm>
+                <InputForm type="text" id='descriptionPhone' value={description} onChange={(e)=>{
+                    setContactInfo((contact)=>{
+                        return{...contact, description:e.target.value}
+                    })
+                }} />
+            </div>
             <div>
                 <LabelForm>Correo Electronico</LabelForm>
                 <InputForm type='text' id='email' value={email} onChange={(e)=>{

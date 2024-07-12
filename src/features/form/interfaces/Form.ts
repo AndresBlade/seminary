@@ -8,6 +8,18 @@ export interface labelProps extends React.LabelHTMLAttributes<HTMLLabelElement>{
 
 export interface selectProps extends React.SelectHTMLAttributes<HTMLSelectElement>{}
 
+export interface DataContent extends React.AllHTMLAttributes<HTMLDivElement>{}
+
+export interface getUserProps{
+
+}
+
+export interface getParishByDioceseProps{
+    id:number
+    diocese_id:number
+    name:string
+    patron:string
+}
 export interface SocialMediaProps{
     category:number
     link:string
@@ -50,11 +62,14 @@ export interface personalInfoProps{
     bloodType:string,
     medicalRecord:string,
     rol:string
+    diocese:string,
+    parish: string,
 }
 
 export interface contactInfoProps{
     phone: string,
     phoneFamily: string,
+    description:string,
     descriptionFamily: string,
     email: string,
 }
@@ -63,8 +78,6 @@ export interface seminarianInfo{
     academicTraining: string,
     stage:string,
     linkTitle:string
-    diocese:string,
-    parish: string,
     apostolates:string,
     ministriesReceived:string,
     condition:string,
@@ -76,6 +89,7 @@ export interface seminarianInfo{
 export interface professionalInfo{
     academicTraining:string,
     linkTitle:string,
-    ordinationDate:string,
-    ministryYears:string
+    startingDate:string,
 }
+
+export type blood = Record<string,string>

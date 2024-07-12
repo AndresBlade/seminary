@@ -1,16 +1,11 @@
-import { useContext } from "react"
-import { AuthContext } from "../../login/context/AuthContext"
+import { blood } from "../interfaces/Form"
 
-export const GetBlood = ()=>{
-    const {user} = useContext(AuthContext)
-    
-    if(!user) return
-
+export const GetBlood = (token:string)=>{
     return fetch('http://127.0.0.1:3000/extras/blood/',{
         headers:{
-            auth:user?.token,
+            auth:token,
         },
     }).then((response)=>{
-        return response.json()
+        return response.json() as Promise<blood>
     })
 }

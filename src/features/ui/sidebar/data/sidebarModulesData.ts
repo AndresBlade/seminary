@@ -57,7 +57,7 @@ export const sidebarData: SidebarItemData[] = [
 		type: 'submenu',
 		children: [
 			{ content: 'Agregar usuario', path: '' },
-			{ content: 'Lista de usuarios', path: '' },
+			{ content: 'Lista de usuarios', path: 'user/list' },
 			{ content: 'Crear rol de usuario', path: 'roles/new' },
 			{ content: 'Lista de roles', path: 'roles' },
 		],

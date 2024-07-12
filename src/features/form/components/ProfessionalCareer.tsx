@@ -8,46 +8,50 @@ import { Dispatch, SetStateAction } from 'react'
 interface professionaInfoPropsForm{
     academicTraining:string
     linkTitle:string
-    ordinationDate:string
-    ministryYears:string
+    startingDate:string
     setProfessionalInfo: Dispatch<SetStateAction<professionalInfo>>
+    rol:string
 }
 
-export const ProfessionalCareer = ({academicTraining,linkTitle,ordinationDate,ministryYears,
-    setProfessionalInfo}:professionaInfoPropsForm) => {
+export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
+    setProfessionalInfo,rol}:professionaInfoPropsForm) => {
+
+
     return (
-        <div>
+        <div className={FormCSS['professionalCareer']}>
             <TitleForm title={'Trayectoria profesional'} />
 
-            <LabelForm>Estudios realizados</LabelForm>
-            <InputForm type='text' value={academicTraining} onChange={(e)=>{
-                setProfessionalInfo((professional)=>{
-                    return{...professional, academicTraining:e.target.value}
-                })
-            }}/>
-            <LabelForm>Enlace al titulo</LabelForm>
-            <InputForm type='text' value={linkTitle} onChange={(e)=>{
-                setProfessionalInfo((professional)=>{
-                    return{...professional, linkTitle:e.target.value}
-                })
-            }}/>
-        
-            <LabelForm>Fecha de ordenacion</LabelForm>
-            <InputForm type='date' value={ordinationDate} onChange={(e)=>{
-                setProfessionalInfo((professional)=>{
-                    return{...professional, ordinationDate:e.target.value}
-                })
-
-            }}/>
-
-            <LabelForm>Años de ministerio</LabelForm>
-            <InputForm value={ministryYears} onChange={(e)=>{
-                setProfessionalInfo((professional)=>{
-                    return{...professional, ministryYears:e.target.value}
-                })
-
-            }}/>
-        
+            <div className={FormCSS['']}>
+                <LabelForm>Estudios realizados</LabelForm>
+                <InputForm type='text' value={academicTraining} onChange={(e)=>{
+                    setProfessionalInfo((professional)=>{
+                        return{...professional, academicTraining:e.target.value}
+                    })
+                }}/>
+            </div>
+            <div>
+                <LabelForm>Enlace al titulo</LabelForm>
+                <InputForm type='text' value={linkTitle} onChange={(e)=>{
+                    setProfessionalInfo((professional)=>{
+                        return{...professional, linkTitle:e.target.value}
+                    })
+                }}/>
+            </div>
+            {rol === 'formador' ? (
+                <div className={FormCSS['professionalCareerTrainer']}>
+                    <div>
+                        <LabelForm>Fecha de ordenacion</LabelForm>
+                        <InputForm type='date' value={startingDate} onChange={(e)=>{
+                            setProfessionalInfo((professional)=>{
+                                return{...professional, startingDate:e.target.value}
+                            })
+                        
+                        }}/>
+                    </div>
+                </div>
+                
+            ): null
+            }
         </div>
     )
 }

@@ -11,8 +11,6 @@ interface academicCareerPropsForm{
     academicTraining:string
     stage:string
     linkTitle:string
-    diocese:string
-    parish:string
     apostolates:string
     ministriesReceived:string
     condition:string
@@ -20,13 +18,14 @@ interface academicCareerPropsForm{
     nameSeminaryExternal:string
     yearOfIncome:string
     setSeminarianInfo:Dispatch<SetStateAction<seminarianInfo>>
+    setAnotherSeminary:Dispatch<SetStateAction<boolean>>
+    anotherSeminary:boolean
 }
 
 
-export const AcademicCareer = ({academicTraining,stage,linkTitle,diocese,parish,apostolates,     ministriesReceived,condition,status,nameSeminaryExternal,yearOfIncome,setSeminarianInfo}:academicCareerPropsForm) => {
-    const [anotherSeminary, setAnotherSeminary]=useState(false)
+export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,     ministriesReceived,condition,status,nameSeminaryExternal,yearOfIncome,setSeminarianInfo,setAnotherSeminary,anotherSeminary}:academicCareerPropsForm) => {
 
-    console.log(anotherSeminary)
+    console.log(nameSeminaryExternal)
 
     return (
         <div className={FormCSS['academicCareer']}>
@@ -34,37 +33,77 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,diocese,parish,
 
             <div>
                 <LabelForm>Formacion academica</LabelForm>
-                <SelectForm></SelectForm>
+                <InputForm type='text' value={academicTraining} onChange={(e)=>{
+                    setSeminarianInfo((seminarian)=>{
+                        return {...seminarian, academicTraining:e.target.value}
+                    })
+                }} />
             </div>
 
-            <div>
+            {/* <div>
                 <LabelForm>Status</LabelForm>
                 <SelectForm></SelectForm>
-            </div>
+            </div> */}
 
             <div>
                 <LabelForm>Enlace a titulo</LabelForm>
-                <InputForm type='text'/>
+                <InputForm type='text' value={linkTitle} onChange={(e)=>{
+                    setSeminarianInfo((seminarian)=>{
+                        return{...seminarian, linkTitle:e.target.value}
+                    })
+                }}/>
             </div>
 
             <div>
                 <LabelForm>Apostolados</LabelForm>
-                <SelectForm></SelectForm>
+                <InputForm type='text' value={apostolates} onChange={(e)=>{
+                    setSeminarianInfo((seminarian)=>{
+                        return{...seminarian, apostolates:e.target.value}
+                    })
+                }}/>
             </div>
 
-            <div>
-                <LabelForm>Ministerios recibidos</LabelForm>
-                <SelectForm></SelectForm>
-            </div>
+            {stage === '3' ? (
+                    <div>
+                        <LabelForm>Ministerios recibidos</LabelForm>
+                        <SelectForm value={ministriesReceived} onChange={(e)=>{
+                            setSeminarianInfo((seminarian)=>{
+                                return{...seminarian, ministriesReceived:e.target.value}
+                            })
+                        }}>
+                            <option value="Unkown">Unknow</option>
+                            <option value="Admisión">Admisión</option>
+                            <option value="Lectorado">Lectorado</option>
+                            <option value="Acolitado">Acolitado</option>
+                        </SelectForm>
+                    </div>
+                ):
+                null
+            }
 
             <div>
                 <LabelForm>Condición</LabelForm>
-                <SelectForm></SelectForm>
+                <SelectForm value={condition} onChange={(e)=>{
+                            setSeminarianInfo((seminarian)=>{
+                                return{...seminarian, condition:e.target.value}
+                            })
+                        }}>
+                    <option value="Interno">Interno</option>
+                    <option value="Externo">Externo</option>
+                </SelectForm>
             </div>
             
             <div>
                 <LabelForm>Etapa</LabelForm>
-                <SelectForm></SelectForm>
+                <SelectForm value={stage} onChange={(e)=>{
+                    setSeminarianInfo((seminarian)=>{
+                        return{...seminarian, stage:e.target.value}
+                    })
+                }}>
+                    <option value="1">PROPEDEUTICO</option>
+                    <option value="2">DISCIPULADO</option>
+                    <option value="3">CONFIGURATIVA</option>
+                </SelectForm>
             </div>
 
             <div className={FormCSS['seminarianExternalContainer']} >
@@ -79,7 +118,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,diocese,parish,
                 </div>
             </div>
             {anotherSeminary ? (
-                <div>
+                <div className={FormCSS['anotherSeminary']}>
                     <div>
                         <LabelForm>Nombre del seminario donde proviene</LabelForm>
                         <InputForm type='text' onChange={(e)=>{

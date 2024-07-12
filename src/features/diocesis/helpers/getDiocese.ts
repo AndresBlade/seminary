@@ -1,4 +1,4 @@
-interface Diocese {
+export interface Diocese {
 	id: number;
 	name: string;
 	holder: string;

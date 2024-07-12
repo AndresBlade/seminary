@@ -33,6 +33,12 @@ export const router = createBrowserRouter([
 						],
 					},
 					{
+						path:'user',
+						children:[
+							{path:'list',element:<RegisterTable/>}
+						]
+					},
+					{
 						path:'profesor',
 						children:[
 							{
