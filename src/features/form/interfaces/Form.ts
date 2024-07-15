@@ -76,14 +76,14 @@ export interface contactInfoProps{
 
 export interface seminarianInfo{
     academicTraining: string,
-    stage:string,
+    stage?:string,
     linkTitle:string
     apostolates:string,
-    ministriesReceived:string,
+    ministriesReceived?:string,
     condition:string,
     status:string,
-    nameSeminaryExternal:string,
-    yearOfIncome:string
+    nameSeminaryExternal?:string,
+    yearOfIncome?:string
 }
 
 export interface professionalInfo{
@@ -93,3 +93,42 @@ export interface professionalInfo{
 }
 
 export type blood = Record<string,string>
+
+export interface userEditProps{
+    id:string
+    apostleships:string
+    location:string
+    Ministery?:string
+    status:string
+    person:{
+        id:string
+        profile_picture_path:string
+        forename:string
+        surname:string
+        email:string
+        birthdate:string
+        medical_record:string
+        BloodType:string
+        cellpones:[
+            {
+                phone_number:string
+                description:string
+            },
+            {
+                phone_number:string
+                description:string
+            }
+        ],
+        medias:[{
+            social_Cate:string
+            link:string
+            }
+        ]
+    }
+    foreing_Data?:{
+        seminary_name:string
+        stage:string
+        stage_year:4
+    }
+    
+}

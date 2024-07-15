@@ -1,4 +1,4 @@
-import React, {useContext, useState } from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 import { PersonalInfoForm } from './PersonalInfoForm';
 import { ContactInfoForm } from './ContactInfoForm';
 import { AcademicCareer } from './AcademicCareer';
@@ -12,15 +12,21 @@ import { ProfilePictureForm } from './ProfilePictureForm';
 import { CreateSeminarian } from '../helpers/CreateSeminarian';
 import { AuthContext } from '../../login/context/AuthContext';
 import { CreateProfessor } from '../helpers/CreateProfessor';
+import { useNavigate, useParams } from 'react-router-dom';
+import UseGet from '../../../shared/hooks/useGet';
+import { userEditProps } from '../interfaces/Form';
 
 type ProfilePicture = FileList | null;
-
 
 const RegisterCreate = () => {
 	const {user} =useContext(AuthContext)
 	const [number, setNumber] = useState(1);
 	const [modal, setModal] = useState(false);
     const [anotherSeminary, setAnotherSeminary]=useState(false)
+	const navigate = useNavigate();
+	const { id } = useParams();
+	const apiUrl = `http://127.0.0.1:3000/seminarian?id=${id}`
+	const {data} = UseGet<userEditProps[]>(apiUrl)
 
 	const [personalInfo, setPersonalInfo] = useState<personalInfoProps>({
 		name: '',
@@ -64,6 +70,56 @@ const RegisterCreate = () => {
 
     let rol = personalInfo.rol;
 
+	useEffect(() => {
+		if (isNaN(Number(id))) return;
+		if (!data) return;
+
+		data.map((infoUserEdit)=>{
+			setPersonalInfo({
+				id: infoUserEdit.id,
+				name: infoUserEdit.person.forename,
+				lastName:infoUserEdit.person.surname,
+				birthDate:infoUserEdit.person.birthdate,
+				bloodType:infoUserEdit.person.birthdate,
+				medicalRecord:infoUserEdit.person.medical_record,
+				rol:'Seminarista',
+				diocese:'1',
+				parish:'1'
+			})
+			setContactInfo({
+				phone:infoUserEdit.person.cellpones[0].phone_number,
+				description:infoUserEdit.person.cellpones[0].description,
+				phoneFamily:infoUserEdit.person.cellpones[1].phone_number,
+				descriptionFamily:infoUserEdit.person.cellpones[1].phone_number,
+				email:infoUserEdit.person.email
+			})
+			setSocialMedia(
+				infoUserEdit.person.medias.map((user)=>
+					({
+						category:parseInt(user.social_Cate),
+						link:user.link
+					})					
+				)
+			)
+			setSeminarianInfo({
+				academicTraining:'ola',
+				stage:infoUserEdit.foreing_Data?.stage,
+				linkTitle:'ola',
+				apostolates:infoUserEdit.apostleships,
+				ministriesReceived:infoUserEdit.Ministery,
+				condition:infoUserEdit.location,
+				status:infoUserEdit.status,
+				nameSeminaryExternal:infoUserEdit.foreing_Data?.seminary_name,
+				yearOfIncome:infoUserEdit.foreing_Data?.stage_year.toString()
+			})
+			setProfilePicture(
+				infoUserEdit.person.profile_picture_path
+			)
+			
+		})
+	}, [data, id]);
+
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
 		e.preventDefault()
 		if(personalInfo.rol === 'seminarista'){
@@ -95,6 +151,10 @@ const RegisterCreate = () => {
 				}),
 			},
 				user:{
+					degree:[{
+						description:seminarianInfo.academicTraining,
+						link: seminarianInfo.linkTitle
+					}],
 					parish_id:1
 				},
 
@@ -238,6 +298,7 @@ const RegisterCreate = () => {
 								nameSeminaryExternal={
 									seminarianInfo.nameSeminaryExternal
 								}
+								id={id}
 								setAnotherSeminary={setAnotherSeminary}
 								anotherSeminary={anotherSeminary}
 								yearOfIncome={seminarianInfo.yearOfIncome}

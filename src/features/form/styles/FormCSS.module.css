@@ -253,9 +253,13 @@
 		border-radius: 0 0 1rem 1rem ;
 	}
 	.showDataBody p{
+		width: 10rem;
+		max-width:10rem;
 		margin-top: 1rem;
 		overflow-x: scroll;
+		text-align: center;
 	}
+
 	.showDataBody p::-webkit-scrollbar{
 		background-color: transparent;
 	}

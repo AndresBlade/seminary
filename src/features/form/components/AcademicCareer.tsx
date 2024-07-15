@@ -20,10 +20,11 @@ interface academicCareerPropsForm{
     setSeminarianInfo:Dispatch<SetStateAction<seminarianInfo>>
     setAnotherSeminary:Dispatch<SetStateAction<boolean>>
     anotherSeminary:boolean
+    id:string
 }
 
 
-export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,     ministriesReceived,condition,status,nameSeminaryExternal,yearOfIncome,setSeminarianInfo,setAnotherSeminary,anotherSeminary}:academicCareerPropsForm) => {
+export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,     ministriesReceived,condition,status,nameSeminaryExternal,yearOfIncome,setSeminarianInfo,setAnotherSeminary,anotherSeminary,id}:academicCareerPropsForm) => {
 
     console.log(nameSeminaryExternal)
 
@@ -40,10 +41,16 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                 }} />
             </div>
 
-            {/* <div>
-                <LabelForm>Status</LabelForm>
-                <SelectForm></SelectForm>
-            </div> */}
+            {id ? (  
+                <div>
+                    <LabelForm>Status</LabelForm>
+                    <SelectForm value={status} onChange={(e)=>{
+                        setSeminarianInfo((seminarian)=>{
+                            return{...seminarian, status:e.target.value}
+                        })
+                    }}></SelectForm>
+                </div> ): null
+            }
 
             <div>
                 <LabelForm>Enlace a titulo</LabelForm>
