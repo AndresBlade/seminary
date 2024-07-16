@@ -8,7 +8,6 @@ interface seminarian{
         birthdate:string
         medical_record:string | null
         BloodType:string
-    
         phone:{
             phone_numbre:string,
             description:string | null
@@ -19,9 +18,15 @@ interface seminarian{
         }[]
     }
     user:{
+        degree:[
+            {
+                description:string
+                link:string
+            }
+        ],
         parish_id:number
     }
-    ForeingSeminarian:{
+    ForeingSeminarian?:{
         seminary_name:string
         stage:string
         stage_year:string

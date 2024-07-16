@@ -2,7 +2,7 @@ import FormCSS from '../styles/FormCSS.module.css'
 import { DataContent } from '../interfaces/Form'
 const DataContent = ({children,...DataContent}:DataContent) => {
     return (
-        <div className={FormCSS['dataContent']}
+        <div className={FormCSS.dataContent}
             {...DataContent}
 
         >

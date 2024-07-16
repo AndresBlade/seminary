@@ -16,9 +16,8 @@ interface professionaInfoPropsForm{
 export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
     setProfessionalInfo,rol}:professionaInfoPropsForm) => {
 
-
     return (
-        <div className={FormCSS['professionalCareer']}>
+        <div className={FormCSS.professionalCareer}>
             <TitleForm title={'Trayectoria profesional'} />
 
             <div className={FormCSS['']}>
@@ -38,7 +37,7 @@ export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
                 }}/>
             </div>
             {rol === 'formador' ? (
-                <div className={FormCSS['professionalCareerTrainer']}>
+                <div className={FormCSS.professionalCareerTrainer}>
                     <div>
                         <LabelForm>Fecha de ordenacion</LabelForm>
                         <InputForm type='date' value={startingDate} onChange={(e)=>{

@@ -19,7 +19,7 @@ interface contactInfoPropsForm{
 
 export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,descriptionFamily,email},setContactInfo}:contactInfoPropsForm) => {
     return (
-        <div className={FormCSS['contactInfo']} >
+        <div className={FormCSS.contactInfo} >
             <TitleForm title='Información de contacto' />
 
             <div>

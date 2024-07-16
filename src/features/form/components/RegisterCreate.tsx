@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState } from 'react';
+import FormCSS from '../styles/FormCSS.module.css'
 import { PersonalInfoForm } from './PersonalInfoForm';
 import { ContactInfoForm } from './ContactInfoForm';
 import { AcademicCareer } from './AcademicCareer';
@@ -16,7 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import UseGet from '../../../shared/hooks/useGet';
 import { userEditProps } from '../interfaces/Form';
 
-type ProfilePicture = FileList | null;
+type ProfilePicture = File | null;
 
 const RegisterCreate = () => {
 	const {user} =useContext(AuthContext)
@@ -79,12 +80,12 @@ const RegisterCreate = () => {
 				id: infoUserEdit.id,
 				name: infoUserEdit.person.forename,
 				lastName:infoUserEdit.person.surname,
-				birthDate:infoUserEdit.person.birthdate,
+				birthDate:infoUserEdit.person.date_String,
 				bloodType:infoUserEdit.person.birthdate,
 				medicalRecord:infoUserEdit.person.medical_record,
 				rol:'Seminarista',
-				diocese:'1',
-				parish:'1'
+				diocese:infoUserEdit.diocesi_id.toString(),
+				parish:infoUserEdit.parish_id.toString()
 			})
 			setContactInfo({
 				phone:infoUserEdit.person.cellpones[0].phone_number,
@@ -102,9 +103,9 @@ const RegisterCreate = () => {
 				)
 			)
 			setSeminarianInfo({
-				academicTraining:'ola',
+				academicTraining:infoUserEdit.degrees?.[0].description,
 				stage:infoUserEdit.foreing_Data?.stage,
-				linkTitle:'ola',
+				linkTitle:infoUserEdit.degrees?.[0].link,
 				apostolates:infoUserEdit.apostleships,
 				ministriesReceived:infoUserEdit.Ministery,
 				condition:infoUserEdit.location,
@@ -112,10 +113,10 @@ const RegisterCreate = () => {
 				nameSeminaryExternal:infoUserEdit.foreing_Data?.seminary_name,
 				yearOfIncome:infoUserEdit.foreing_Data?.stage_year.toString()
 			})
-			setProfilePicture(
-				infoUserEdit.person.profile_picture_path
-			)
-			
+			fetch(`${infoUserEdit.person.profile_picture_path}`).then(response => response.blob()).then((myBlob) => {
+				const myFile = new File([myBlob], 'image.jpeg', {type: myBlob.type})
+				setProfilePicture(myFile)
+			}).catch(error => console.log(error))
 		})
 	}, [data, id]);
 
@@ -134,11 +135,11 @@ const RegisterCreate = () => {
 				BloodType:personalInfo.bloodType,
 				
 				phone:[{
-					phone_numbre:contactInfo.phone,
+					phone_number:contactInfo.phone,
 					description:'hola',
 				},
 				{
-					phone_numbre:contactInfo.phone,
+					phone_number:contactInfo.phone,
 					description:contactInfo.descriptionFamily,
 				},
 				],
@@ -162,7 +163,7 @@ const RegisterCreate = () => {
 					seminary_name:seminarianInfo.nameSeminaryExternal,
 					stage:seminarianInfo.stage,
 					stage_year:seminarianInfo.yearOfIncome
-				} : null
+				} : undefined
 				,
 				location:seminarianInfo.condition,
 				apostleships:seminarianInfo.apostolates,
@@ -172,10 +173,9 @@ const RegisterCreate = () => {
 			if(!anotherSeminary){
 				delete dataSent.ForeingSeminarian
 			}
-
 			
 			if(!profilePicture) return
-			const imageFile = profilePicture[0];
+			const imageFile = profilePicture;
 			if(!user) return
 
 			CreateSeminarian({data:dataSent,imageFile:imageFile,token:user?.token}).catch((error) => {
@@ -215,7 +215,7 @@ const RegisterCreate = () => {
 						parish_id:1,
 						degree:[{
 							description: professionalInfo.academicTraining,
-    						link: professionalInfo.linkTitle
+							link: professionalInfo.linkTitle
 						}]
 					},
 					instructor:personalInfo.rol === 'formador'?{
@@ -229,7 +229,7 @@ const RegisterCreate = () => {
 					}
 				}
 				if(!profilePicture) return
-				const imageFile = profilePicture[0];
+				const imageFile = profilePicture;
 				if(!user) return
 
 
@@ -324,8 +324,10 @@ const RegisterCreate = () => {
 						profilePicture={profilePicture}
 						title='foto'
 						content='Subir foto'/>
-						<ButtonNextBackForm final setNumber={setNumber}/>
-						<button type='submit'>SEND</button>
+						<div className={FormCSS.buttonContainer}>
+							<button type='submit' className={FormCSS.buttonSaveForm}>Guardar</button>
+						</div>		
+						<ButtonNextBackForm final setNumber={setNumber}/>			
 					</>
 					
 				):null}

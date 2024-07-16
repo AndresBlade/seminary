@@ -4,23 +4,22 @@ import { InputForm } from './small_components/InputForm'
 import { SelectForm } from './small_components/SelectForm'
 import { TitleForm } from './small_components/TitleForm'
 import {seminarianInfo} from '../interfaces/Form'
-
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 interface academicCareerPropsForm{
-    academicTraining:string
-    stage:string
-    linkTitle:string
+    academicTraining?:string
+    stage?:string
+    linkTitle?:string
     apostolates:string
-    ministriesReceived:string
+    ministriesReceived?:string
     condition:string
     status:string
-    nameSeminaryExternal:string
-    yearOfIncome:string
+    nameSeminaryExternal?:string
+    yearOfIncome?:string
     setSeminarianInfo:Dispatch<SetStateAction<seminarianInfo>>
     setAnotherSeminary:Dispatch<SetStateAction<boolean>>
     anotherSeminary:boolean
-    id:string
+    id?:string
 }
 
 
@@ -29,7 +28,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
     console.log(nameSeminaryExternal)
 
     return (
-        <div className={FormCSS['academicCareer']}>
+        <div className={FormCSS.academicCareer}>
             <TitleForm title={'Trayectoria académica'} />
 
             <div>
@@ -70,7 +69,8 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                 }}/>
             </div>
 
-            {stage === '3' ? (
+            {!stage ? null :
+            stage >= '3' ? (
                     <div>
                         <LabelForm>Ministerios recibidos</LabelForm>
                         <SelectForm value={ministriesReceived} onChange={(e)=>{
@@ -113,11 +113,11 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                 </SelectForm>
             </div>
 
-            <div className={FormCSS['seminarianExternalContainer']} >
+            <div className={FormCSS.seminarianExternalContainer} >
                 <LabelForm>
                     ¿Proviene de otro seminario?
                 </LabelForm>
-                <div className={FormCSS['seminarianExternal']}>
+                <div className={FormCSS.seminarianExternal}>
                     <InputForm type='checkbox' id='anotherSeminary' onChange={(e)=>{
                         setAnotherSeminary(e.target.checked)
                     }}/>
@@ -125,7 +125,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                 </div>
             </div>
             {anotherSeminary ? (
-                <div className={FormCSS['anotherSeminary']}>
+                <div className={FormCSS.anotherSeminary}>
                     <div>
                         <LabelForm>Nombre del seminario donde proviene</LabelForm>
                         <InputForm type='text' onChange={(e)=>{

@@ -31,24 +31,24 @@ export const SocialMediaForm = ({setModal, modal, setSocialMedia,socialMedia}:so
 
 
     return (
-        <div className={FormCSS['socialMediaInfo']}>
-            <div className={FormCSS['socialMediaInfoGrid']}>
+        <div className={FormCSS.socialMediaInfo}>
+            <div className={FormCSS.socialMediaInfoGrid}>
                 {(input as [])?.map((socialMediaMap:SocialMediaInputProps)=>{
                     return(
-                        <div className={FormCSS['socialMediaSelected']} key={socialMediaMap.id}>
-                            <div className={FormCSS['socialMediaSelectedInfo']}>
+                        <div className={FormCSS.socialMediaSelected} key={socialMediaMap.id}>
+                            <div className={FormCSS.socialMediaSelectedInfo}>
                                 <div>
-                                    <img src={`http://${socialMediaMap.icon}`} alt={socialMediaMap.description} className={FormCSS['imgSelected']} />
+                                    <img src={`http://${socialMediaMap.icon}`} alt={socialMediaMap.description} className={FormCSS.imgSelected} />
                                     <LabelForm>{socialMediaMap.description}</LabelForm>
                                 </div>
-                                <button className={FormCSS['buttonSelected']} onClick={(e)=>{
+                                <button className={FormCSS.buttonSelected} onClick={(e)=>{
                                     e.preventDefault()
                                     setSocialMedia((socialInfo)=>socialInfo.filter((social)=>social.category !== socialMediaMap.id))
                                     setInput((socialInfo)=>{
                                         return socialInfo.filter((social)=>social.id !== socialMediaMap.id)
                                     })
                                 }}>
-                                    <img src={IconClose} alt='cerrar' className={FormCSS['closeSocialMediaSelected']}/>
+                                    <img src={IconClose} alt='cerrar' className={FormCSS.closeSocialMediaSelected}/>
 
                                 </button>
                             </div>
@@ -77,7 +77,7 @@ export const SocialMediaForm = ({setModal, modal, setSocialMedia,socialMedia}:so
             </div>
 
             <button
-                className={FormCSS['addSocialMedia']}
+                className={FormCSS.addSocialMedia}
                 onClick={(e)=>{
                         e.preventDefault()
                         setModal(true)
@@ -88,9 +88,9 @@ export const SocialMediaForm = ({setModal, modal, setSocialMedia,socialMedia}:so
             </button>
 
             {modal ? 
-                <div className={FormCSS['modalContainer']}>
-                    <div className={FormCSS['modalBody']}>
-                        <div className={FormCSS['modalHeader']}>
+                <div className={FormCSS.modalContainer}>
+                    <div className={FormCSS.modalBody}>
+                        <div className={FormCSS.modalHeader}>
                             <TitleForm title='Seleccionar red social'/>
                             <button
                                 onClick={(e)=>{
@@ -101,7 +101,7 @@ export const SocialMediaForm = ({setModal, modal, setSocialMedia,socialMedia}:so
                                 <img src={IconClose} alt="Cerrar" className='closeModal' />
                             </button>
                         </div>
-                        <div className={FormCSS['modalContent']}>
+                        <div className={FormCSS.modalContent}>
                             {
                                 data?.filter((socialFilter)=> !input.some(inputItem => inputItem.id === socialFilter.id)).map((socialMediaData)=>{
                                     return(
@@ -119,7 +119,7 @@ export const SocialMediaForm = ({setModal, modal, setSocialMedia,socialMedia}:so
                                                 
                                             }}
                                         >
-                                            <img src={`http://${socialMediaData.icon}`} alt={socialMediaData.description} className={FormCSS['socialMediaImg']} />
+                                            <img src={`http://${socialMediaData.icon}`} alt={socialMediaData.description} className={FormCSS.socialMediaImg} />
                                             {socialMediaData.description}
                                         </SocialMediaCard>
                                     )

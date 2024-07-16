@@ -11,9 +11,9 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../login/context/AuthContext'
 import { DeleteUser } from '../helpers/DeleteUser'
 import { GetUsers } from '../helpers/GetUsers'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { GetUserByType } from '../helpers/GetUserByType'
-import { GetUserFind, userPropsWrapper } from '../helpers/GetUserFind'
+import { GetUserFind } from '../helpers/GetUserFind'
 export interface userProps{
   person:{
       id:string
@@ -35,7 +35,7 @@ export interface userProps{
 
 export const ShowDataContent = () => {
   const apiUrl = 'http://127.0.0.1:3000/user/'
-  const {data,loading,error, setData}=UseGet<userProps[]>(apiUrl)
+  const {data,error, setData}=UseGet<userProps[]>(apiUrl)
   const [userDelete,setUserDelete] = useState<string>('');
   const [infoUserDelete, setInfoUserDelete] = useState<string | undefined>(undefined);
   const [userFind, setUserFind] = useState<string>('');
@@ -96,7 +96,7 @@ export const ShowDataContent = () => {
   return (
     <ContentContainer>
       <TitleForm title={'Lista de usuarios'}/>
-      <div className={FormCSS['showDataOptions']}>
+      <div className={FormCSS.showDataOptions}>
         <InputForm placeholder='Buscar por nombre' value={userFind} onChange={(e)=>{
           setUserFind(e.target.value)
         }}/> 
@@ -112,7 +112,7 @@ export const ShowDataContent = () => {
         }}>Buscar</button>
       </div>
       <div>
-        <div className={FormCSS['showDataHeader']}>
+        <div className={FormCSS.showDataHeader}>
           <p>Cédula</p>
           <p>Nombre</p>
           <p>Tipo</p>
@@ -120,7 +120,7 @@ export const ShowDataContent = () => {
           <p>Status</p>
           <p>Acciones</p>
         </div>
-        <div className={FormCSS['showDataBody']}>
+        <div className={FormCSS.showDataBody}>
           {
             error ? (
               <p>Error al cargar los datos</p>
@@ -138,15 +138,15 @@ export const ShowDataContent = () => {
                     user.professor?.instructor?.instructor_position
                   }
                 </p>
-                <p className={FormCSS['showDataBodyStatus']}>{user.professor?.status_id === 0 ? 'Retirado' :
+                <p className={FormCSS.showDataBodyStatus}>{user.professor?.status_id === 0 ? 'Retirado' :
                     user.professor?.instructor?.status === 1 ? 'Activo' :
                     user.seminarian?.status
                   }</p>
                 <div>
-                  <button className={FormCSS['buttonActions']} onClick={()=>{
+                  <button className={FormCSS.buttonActions} onClick={()=>{
                     navigate(`../../Profesor/${user.person?.id}`)
                   }}><img src={editIcon} alt="" /></button>
-                  <button className={FormCSS['buttonActions']} onClick={(e)=>{
+                  <button className={FormCSS.buttonActions} onClick={(e)=>{
                     e.preventDefault()
                     setUserDelete(user.person.id)
                     {

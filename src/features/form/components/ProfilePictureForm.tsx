@@ -2,8 +2,8 @@ import { ElementRef, useRef } from 'react';
 import ProfilePictureFormCSS from '../styles/profilePictureForm.module.css';
 
 interface Props {
-	setProfilePicture: React.Dispatch<React.SetStateAction<FileList | null>>;
-	profilePicture: FileList | null;
+	setProfilePicture: React.Dispatch<React.SetStateAction<File | null>>;
+	profilePicture: File | null;
 	title: string;
 	content: string;
 }
@@ -42,7 +42,7 @@ export const ProfilePictureForm = ({
 				<div className={ProfilePictureFormCSS.profilePictureContainer}>
 					{profilePicture && (
 						<img
-							src={URL.createObjectURL(profilePicture[0])}
+							src={URL.createObjectURL(profilePicture)}
 							ref={profilePictureRef}
 							alt="foto de perfil"
 							className={ProfilePictureFormCSS.profilePicture}
@@ -55,7 +55,7 @@ export const ProfilePictureForm = ({
 					<input
 						type="file"
 						onChange={e => {
-							setProfilePicture(e.target.files);
+							setProfilePicture(e.target.files?.[0] ?? null);
 							handleFileChange(e, profilePictureRef);
 						}}
 						name="photo"

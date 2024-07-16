@@ -75,9 +75,9 @@ export interface contactInfoProps{
 }
 
 export interface seminarianInfo{
-    academicTraining: string,
+    academicTraining?: string,
     stage?:string,
-    linkTitle:string
+    linkTitle?:string
     apostolates:string,
     ministriesReceived?:string,
     condition:string,
@@ -95,6 +95,16 @@ export interface professionalInfo{
 export type blood = Record<string,string>
 
 export interface userEditProps{
+    parish_id:number
+    diocesi_id:number
+    degrees?:[
+        {
+            id:number
+            description:string
+            link:string
+            user_id:string
+        }
+    ]
     id:string
     apostleships:string
     location:string
@@ -123,7 +133,8 @@ export interface userEditProps{
             social_Cate:string
             link:string
             }
-        ]
+        ],
+        date_String:string
     }
     foreing_Data?:{
         seminary_name:string

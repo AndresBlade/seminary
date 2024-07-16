@@ -64,7 +64,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
     console.log(diocese)
     return (
-        <div className={FormCSS['personalInfo']}>
+        <div className={FormCSS.personalInfo}>
             <TitleForm title='Información General'/>
             
             <div>
