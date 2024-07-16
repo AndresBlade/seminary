@@ -1,12 +1,15 @@
-import Parish from '../features/parish/styles/parish.module.css'
-import ContentTitle from '../features/ui/contentTitle/components/ContentTitle'
-import {ParishForm} from '../features/parish/components/ParishForm'
+import { ParishForm } from '../features/parish/components/ParishForm';
+import { TitleList } from '../features/ui/title/components/TitleList';
+import { Title } from '../features/ui/title/components/Title';
+import { BackgroundColoredSubtitle } from '../features/ui/title/components/BackgroundColoredSubtitle';
 export const ParishCreate = () => {
-    return (
-        <div className={Parish['parish-create__container']}>
-            <ContentTitle title="Eclesiástico" subtitle="Agregar parroquia" />
-            <ParishForm />
-        </div>
-    )
-}
-
+	return (
+		<>
+			<TitleList>
+				<Title content="Parroquias" />
+				<BackgroundColoredSubtitle content="Agregar parroquia" />
+			</TitleList>
+			<ParishForm />
+		</>
+	);
+};

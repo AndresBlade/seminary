@@ -1,326 +1,314 @@
-:root{
-    --backgroundColor: rgba(221, 222, 238, .5);
-    --backgroundCard: #FAFAFA;
-    --textColor: #DC2626;
-    --buttonColor: #017AE9;
-    --textColor2: #FFFFFF;
-    --buttonColorSearch: #DC2626;
-    --buttonColorReset:#818181;
+:root {
+	--backgroundColor: rgba(221, 222, 238, 0.5);
+	--backgroundCard: #fafafa;
+	--textColor: #dc2626;
+	--buttonColor: #017ae9;
+	--textColor2: #ffffff;
+	--buttonColorSearch: #dc2626;
+	--buttonColorReset: #818181;
 }
 .parish-create__container,
-.parish-table__container{
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    background-color: var(--backgroundColor);
-    padding: 2rem;
+.parish-table__container {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	background-color: var(--backgroundColor);
+	padding: 2rem;
 }
-.parish-create__form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--backgroundCard);
-    width: 100%;
-    padding: 2rem;
-    border-radius: 1.5rem;
+.parish-create__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--backgroundCard);
+	width: 100%;
+	padding: 2rem;
+	border-radius: 1.5rem;
 }
-.parish-create__form-inputs{
-    width: 90%;
-    margin-bottom: 1rem;
+.parish-create__form-inputs {
+	width: 90%;
+	margin-bottom: 1rem;
 }
 
 .parish-create__form-name,
-.parish-create__form-parroco{
-    margin-bottom: 2rem;
+.parish-create__form-parroco {
+	margin-bottom: 2rem;
 }
 .parish-create__form-name--label,
 .parish-create__form-parroco--label,
-.parish-create__form-diocesis--label{
-    font-weight: bold;
+.parish-create__form-diocesis--label {
+	font-weight: bold;
 }
 .parish-create__form-name input,
 .parish-create__form-parroco input,
-.parish-create__form-select select{
-    width: 100%;
-    padding: 1rem;
-    border-radius: .5rem;
-    background-color: var(--backgroundColor);
-    border: none;
-    margin-top:1rem ;
+.parish-create__form-select select {
+	width: 100%;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: var(--backgroundColor);
+	border: none;
 }
-.parish-create__form-group{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 2rem;
-    margin-top: 2rem;
+.parish-create__form-group {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	gap: 2rem;
 }
-.parish-create__form-button--save{
-    background-color: var(--buttonColor);
-    color: var(--textColor2);
-    width: 100%;
-    padding: 2rem;
-    border-radius: .5rem;
-    border: none;
-    cursor: pointer;
-    transition: .3s;
+.parish-create__form-button--save {
+	background-color: var(--buttonColor);
+	color: var(--textColor2);
+	width: 100%;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	transition: 0.3s;
 }
-.parish-create__form-button--reset{
-    background-color: var(--buttonColorReset);
-    color: var(--textColor2);
-    width: 100%;
-    padding: 2rem;
-    border-radius: .5rem;
-    border: none;
-    cursor: pointer;
-    transition: .3s;
+.parish-create__form-button--reset {
+	background-color: var(--buttonColorReset);
+	color: var(--textColor2);
+	width: 100%;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	transition: 0.3s;
 }
-.parish-find{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 0 2rem 0;
-    gap:1rem;
+.parish-find {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 2rem 0 2rem 0;
+	gap: 1rem;
 }
-.parish-find input{
-    padding: 1rem;
-    border: 0.5px solid var(--buttonColorReset);
-    border-radius: 1rem;
-
+.parish-find input {
+	padding: 1rem;
+	border-radius: 1rem;
 }
-.parish-find button{
-    padding: 1rem;
-    border: none;
-    color: var(--textColor2);
-    background-color: var(--buttonColorSearch);
-    border-radius: 1rem;
+.parish-find button {
+	padding: 1rem;
+	border: none;
+	color: var(--textColor2);
+	background-color: var(--buttonColorSearch);
+	border-radius: 1rem;
 }
 /*AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA*/
-.data-show__container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: var(--backgroundCard);
-    padding: 2rem;
-    border-radius: 2rem;
-    width: 70%;
-    margin: 0 auto;
+.data-show__container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background-color: var(--backgroundCard);
+	padding: 2rem;
+	border-radius: 2rem;
+	width: 70%;
+	margin: 0 auto;
 }
-.data-show__title{
-    display: flex;
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--textColor);
-    justify-content: space-between;
-    border: #dddeee 1px solid;
-    border-radius: 1rem 1rem 0 0;
-    padding: 0.5rem
+.data-show__title {
+	display: flex;
+	font-size: 1rem;
+	font-weight: bold;
+	color: var(--textColor);
+	justify-content: space-between;
+	border: #dddeee 1px solid;
+	border-radius: 1rem 1rem 0 0;
+	padding: 0.5rem;
 }
-.data-content{
-    display: flex;
-    justify-content: flex-start;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-    align-items: center;
-    border: #dddeee 1px solid;
-    border-top: none;
-    text-align: end;
-    gap: 3rem;
+.data-content {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 0.5rem 1rem 0.5rem;
+	align-items: center;
+	border: #dddeee 1px solid;
+	border-top: none;
+	text-align: end;
+	gap: 3rem;
 }
-.data-content__container{
-    height: 80vh;
-    overflow-y: scroll;
-
+.data-content__container {
+	height: 80vh;
+	overflow-y: auto;
 }
-.data-content:last-child{
-    border-radius: 0 0 1rem 1rem;
+.data-content:last-child {
+	border-radius: 0 0 1rem 1rem;
 }
-.data-buttons{
-    display: flex;
+.data-buttons {
+	display: flex;
 }
-.data-buttons button{
-    background-color: #FFFFFF;
-    border: none;
-    
+.data-buttons button {
+	background-color: #ffffff;
+	border: none;
 }
-.data-buttons button img{
-    width: 2.5rem;
-    height: 2.5rem;
+.data-buttons button img {
+	width: 2.5rem;
+	height: 2.5rem;
 }
 /****************ESTILOS DE LA ANIMACIÓN********************/
-.animation-container{
-    position: relative;
-    width: 8rem;
-    height: 8rem;
-    margin: 0 auto;
-    padding: 3rem;
+.animation-container {
+	position: relative;
+	width: 8rem;
+	height: 8rem;
+	margin: 0 auto;
+	padding: 3rem;
 }
 
-.animation-container .animation-loading{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    border: solid 0.4rem transparent;
-    border-top-color: #DC2626;
-    border-left-color: #DC2626;
-    border-radius: 50%;
-    animation: spin 1.2s linear infinite;
+.animation-container .animation-loading {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	border: solid 0.4rem transparent;
+	border-top-color: #dc2626;
+	border-left-color: #dc2626;
+	border-radius: 50%;
+	animation: spin 1.2s linear infinite;
 }
-.animation-container .animation-loading__two{
-    position: absolute;
-    width: 70%;
-    height: 70%;
-    top: 50%;
-    left: 50%;
-    border: solid 0.4rem transparent;
-    border-top-color: #017AE9;
-    border-left-color: #017AE9;
-    border-radius: 50%;
-    animation: spin__two 1.2s linear infinite;
-
+.animation-container .animation-loading__two {
+	position: absolute;
+	width: 70%;
+	height: 70%;
+	top: 50%;
+	left: 50%;
+	border: solid 0.4rem transparent;
+	border-top-color: #017ae9;
+	border-left-color: #017ae9;
+	border-radius: 50%;
+	animation: spin__two 1.2s linear infinite;
 }
-@keyframes spin{
-    0%{
-        transform: translate(-50%,-50%) rotate(0deg);
-    }
-    100%{
-        transform: translate(-50%,-50%) rotate(360deg);
-    }
+@keyframes spin {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
 }
-@keyframes spin__two{
-    0%{
-        transform: translate(-50%,-50%) rotate(0deg);
-    }
-    100%{
-        transform: translate(-50%,-50%) rotate(-360deg);
-    }
+@keyframes spin__two {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(-360deg);
+	}
 }
-@media (width >= 601px) and (width <= 1024px){
-    .parish-create__container,
-    .parish-table__container{    
-        height: 100vh;
-        width: 100%;
-    }
-    .parish-create__container--titles{
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        margin-left: 15%
-    }
+@media (width >= 601px) and (width <= 1024px) {
+	.parish-create__container,
+	.parish-table__container {
+		height: 100vh;
+		width: 100%;
+	}
+	.parish-create__container--titles {
+		display: flex;
+		flex-direction: column;
+		max-width: 100%;
+		margin-left: 15%;
+	}
 
-    .parish-create__h1-title h1{
-        border-bottom: 0.5rem solid #DC2626;
-        width: 8%;
-    }
+	.parish-create__h1-title h1 {
+		border-bottom: 0.5rem solid #dc2626;
+		width: 8%;
+	}
 
-    .parish-create__form{
-        width: 70%;
-        align-items: start;
-        margin: 0 auto;
-    }
-    .parish-create__form-inputs{
-        width:100%;
-    }
-    .parish-create__h2-title{
-        width: 30%;
-    }
-    .parish-create__form-group{
-        justify-content: start;
-    }
-    .parish-create__form-name--label,
-    .parish-create__form-parroco--label{
-        width: 100%;
-    }
-    .parish-create__form-name input{
-        width: 100%;
-    }
-    .parish-create__form-button--save,
-    .parish-create__form-button--reset{
-        width: 20%;
-    }
-    /*AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA*/
-    
-
-
+	.parish-create__form {
+		width: 70%;
+		align-items: start;
+		margin: 0 auto;
+	}
+	.parish-create__form-inputs {
+		width: 100%;
+	}
+	.parish-create__h2-title {
+		width: 30%;
+	}
+	.parish-create__form-group {
+		justify-content: start;
+	}
+	.parish-create__form-name--label,
+	.parish-create__form-parroco--label {
+		width: 100%;
+	}
+	.parish-create__form-name input {
+		width: 100%;
+	}
+	.parish-create__form-button--save,
+	.parish-create__form-button--reset {
+		width: 20%;
+	}
+	/*AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA*/
 }
-@media (width >= 1025px){ 
-    .parish-create__container{    
-        height: 100vh;
-        width: 100%;
-    }
-    .parish-create__container--titles{
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        margin-left: 15%
-    }
-    .parish-create__h1-title h1{
-        border-bottom: 0.5rem solid #DC2626;
-        width: 5.5%;
-    }
-    .parish-create__form{
-        width: 70%;
-        align-items: start;
-        margin: 0 auto;
-    }
-    .parish-create__form-inputs{
-        width:100%;
-    }
-    .parish-create__h2-title,
-    .parish-table__h2-title{
-        width: 30%;
-    }
-    .parish-create__form-group{
-        justify-content: start;
-    }
-    .parish-create__form-name--label,
-    .parish-create__form-parroco--label{
-        width: 100%;
-    }
-    .parish-create__form-name input{
-        width: 100%;
-    }
-    .parish-create__form-button--save,
-    .parish-create__form-button--reset{
-        width: 20%;
-    }
-    /****************AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA******************/
-    .data-content{
-        display: flex;
-        justify-content: space-between;
-        padding: 1rem;
-    }
-    .data-content p{
-        width: 30%;
-        text-align: start;
-    }
-    .data-show__title{
-        padding: 1rem;
-    }
-    .data-content__container{
-        height: 50vh;
-        overflow-y: scroll;
-    }
-    .parish-find{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        padding: 2rem 0 2rem 0;
-    }
-    .parish-find input{
-        padding: 1.5rem;
-        border: 0.5px var(--buttonColorReset) solid;
-        width: 50%;
-        border-radius: 1rem;
-    }
-    .parish-find button{
-        background-color: var(--buttonColorSearch);
-        color: var(--textColor2);
-        padding: 1.5rem;
-        width: 30%;
-        border: none;
-        border-radius: 1rem;
-    }
+@media (width >= 1025px) {
+	.parish-create__container {
+		height: 100vh;
+		width: 100%;
+	}
+	.parish-create__container--titles {
+		display: flex;
+		flex-direction: column;
+		max-width: 100%;
+		margin-left: 15%;
+	}
+	.parish-create__h1-title h1 {
+		border-bottom: 0.5rem solid #dc2626;
+		width: 5.5%;
+	}
+	.parish-create__form {
+		width: 70%;
+		align-items: start;
+		margin: 0 auto;
+	}
+	.parish-create__form-inputs {
+		width: 100%;
+	}
+	.parish-create__h2-title,
+	.parish-table__h2-title {
+		width: 30%;
+	}
+	.parish-create__form-group {
+		justify-content: start;
+	}
+	.parish-create__form-name--label,
+	.parish-create__form-parroco--label {
+		width: 100%;
+	}
+	.parish-create__form-name input {
+		width: 100%;
+	}
+	.parish-create__form-button--save,
+	.parish-create__form-button--reset {
+		width: 20%;
+	}
+	/****************AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA******************/
+	.data-content {
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem;
+	}
+	.data-content p {
+		width: 30%;
+		text-align: start;
+	}
+	.data-show__title {
+		padding: 1rem;
+	}
+	.data-content__container {
+		height: 50vh;
+	}
+	.parish-find {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		padding: 2rem 0 2rem 0;
+	}
+	.parish-find input {
+		padding: 1.5rem;
+		border-radius: 1rem;
+		height: 100%;
+	}
+	.parish-find button {
+		background-color: var(--buttonColorSearch);
+		color: var(--textColor2);
+		padding: 1.5rem;
+		width: 30%;
+		border: none;
+		border-radius: 1rem;
+	}
 }

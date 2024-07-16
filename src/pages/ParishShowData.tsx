@@ -1,11 +1,15 @@
 import Parish from '../features/parish/styles/parish.module.css';
 import ParisDataContent from '../features/parish/components/ParisDataContent';
-import ContentTitle from '../features/ui/contentTitle/components/ContentTitle';
 import UseGet from '../shared/hooks/useGet';
 import { GetParish } from '../features/parish/helpers/GetParish';
 import { useEffect, useState } from 'react';
 import useDelete from '../shared/hooks/useDelete';
 import { GetParishByName } from '../features/parish/helpers/GetParishByName';
+import { TitleList } from '../features/ui/title/components/TitleList';
+import { Title } from '../features/ui/title/components/Title';
+import { BackgroundColoredSubtitle } from '../features/ui/title/components/BackgroundColoredSubtitle';
+import { ContentContainer } from '../features/ui/container/components/ContentContainer';
+import { Input } from '../features/subject/components/FormInput';
 
 interface ParishDataProps {
 	msj: string;
@@ -69,19 +73,30 @@ export const ParishShowData = () => {
 		}
 	}, [parroquiaDelete, setParish, deleteData, find, parishFind]);
 	return (
-		<div className={Parish['parish-table__container']}>
-			<ContentTitle title="Eclesiástico" subtitle="Lista parroquias" />
+		<>
+			<TitleList>
+				<Title content="Parroquias" />
+				<BackgroundColoredSubtitle content="Agregar parroquia" />
+			</TitleList>
 
-			<section className={Parish['data-show__container']}>
+			<ContentContainer>
 				<div className={Parish['parish-find']}>
-					<input
+					<Input
+						type="search"
+						onInputChange={e => {
+							setParishFind(e.target.value);
+						}}
+						placeholder="Nombre de la parroquia"
+						value={parishFind}
+					/>
+					{/* <input
 						type="search"
 						placeholder="Nombre de la Parroquia"
 						value={parishFind}
 						onChange={e => {
 							setParishFind(e.target.value);
 						}}
-					/>
+					/> */}
 					<button
 						type="button"
 						onClick={() => {
@@ -128,7 +143,7 @@ export const ParishShowData = () => {
 						})
 					)}
 				</div>
-			</section>
-		</div>
+			</ContentContainer>
+		</>
 	);
 };
