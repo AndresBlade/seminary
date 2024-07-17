@@ -11,6 +11,7 @@ import { createSubject } from '../helpers/createSubject';
 import { AuthContext } from '../../login/context/AuthContext';
 import { RadioFormField } from './RadioFormField';
 import { useSubjects } from '../hooks/useSubjects';
+import { useCourses } from '../hooks/useCourses';
 
 interface Form {
 	name: string;
@@ -91,6 +92,7 @@ export const Form = () => {
 	const [error, setError] = useState<string | null>(null);
 	const { user } = useContext(AuthContext);
 	const subjects = useSubjects();
+	const courses = useCourses();
 	const navigate = useNavigate();
 
 	console.log(homologated);
@@ -132,17 +134,23 @@ export const Form = () => {
 						onInputChange={onInputChange}
 					/>
 
-					<SelectFormField
-						labelText="Curso *"
-						name="course"
-						id="course"
-						options={[
-							{ content: 'Filosofía 1', value: '1' },
-							{ content: 'Filosofía 2', value: '2' },
-						]}
-						value={course}
-						onSelectChange={onSelectChange}
-					/>
+					{courses && (
+						<SelectFormField
+							labelText="Curso *"
+							name="course"
+							id="course"
+							// options={[
+							// 	{ content: 'Filosofía 1', value: '1' },
+							// 	{ content: 'Filosofía 2', value: '2' },
+							// ]}
+							options={courses.map(course => ({
+								content: course.description,
+								value: course.id,
+							}))}
+							value={course}
+							onSelectChange={onSelectChange}
+						/>
+					)}
 
 					<SelectFormField
 						labelText="Semestre *"
