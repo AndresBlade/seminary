@@ -9,6 +9,8 @@ import { Roles } from '../pages/Roles';
 import { RoleForm } from '../pages/RoleForm';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
+import { PeriodCreate } from '../pages/PeriodCreate';
+
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -48,6 +50,15 @@ export const router = createBrowserRouter([
 							{ path: 'new', element: <SubjectForm /> },
 						],
 					},
+					{
+						path:'periodo',
+						children:[
+							{
+								index:true,
+								element: <PeriodCreate/>
+							}
+						]
+					}
 				],
 			},
 		],
