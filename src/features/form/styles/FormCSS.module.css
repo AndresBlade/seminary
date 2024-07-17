@@ -285,17 +285,20 @@
 	.dataContent{
 		display: flex;
 		justify-content: space-between;
-		padding: 1.4rem 2.4rem;
+		padding: 1rem 2rem;
+		margin: 0;
+		border-bottom: 1px solid #DDDEEE;
 	}
 	.showDataHeader{
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-evenly;
 		color: var(--textColor);
 		font-weight: bold;
-		padding: 1.6rem 2.4rem;
+		padding: 1rem 2rem;
 		font-size: 1.8rem;
 		line-height: normal;
 		font-style: normal;
+		text-align: start;
 		border-bottom: 1px solid #DDDEEE ;
 		border-top: 1px solid #DDDEEE;
 		border-right:1px solid #DDDEEE ; 
@@ -310,11 +313,11 @@
 		border-radius: 0 0 1rem 1rem ;
 	}
 	.showDataBody p{
-		width: 10rem;
+		width: 100%;
 		max-width:10rem;
 		margin-top: 1rem;
 		overflow-x: scroll;
-		text-align: center;
+		text-align:center;
 	}
 
 	.showDataBody p::-webkit-scrollbar{

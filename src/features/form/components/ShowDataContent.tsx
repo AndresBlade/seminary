@@ -45,13 +45,6 @@ export const ShowDataContent = () => {
   const {user} = useContext(AuthContext);
   const navigate = useNavigate()
   
-
-  console.log(infoUserDelete)
-  console.log(userDelete)
-  console.log(getUserByType)
-  console.log(data)
-  console.log(dataUserFind)
-
   useEffect(()=>{
     if(!user) return
 
@@ -139,8 +132,9 @@ export const ShowDataContent = () => {
                     user.professor?.instructor?.instructor_position
                   }
                 </p>
-                <p className={FormCSS.showDataBodyStatus}>{user.professor?.status_id === 0 ? 'Retirado' :
+                <p className={FormCSS.showDataBodyStatus}>{user.professor?.status_id === 0 ? 'Retirado' : 
                     user.professor?.instructor?.status === 1 ? 'Activo' :
+                    user.professor?.status_id === 1 ? 'Activo':
                     user.seminarian?.status
                   }</p>
                 <div>
