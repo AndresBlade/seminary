@@ -2,7 +2,7 @@ import { ContentContainer } from '../../ui/container/components/ContentContainer
 import { InputFormField } from './InputFormField';
 import FormCSS from '../styles/SubjectForm.module.css';
 import { useForm } from '../../../shared/hooks/useForm';
-import { FormEvent, useContext, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import { SelectFormField } from './SelectFormField';
 import { ErrorBox } from './ErrorBox';
 import { FormField } from './FormField';
@@ -12,6 +12,7 @@ import { AuthContext } from '../../login/context/AuthContext';
 import { RadioFormField } from './RadioFormField';
 import { useSubjects } from '../hooks/useSubjects';
 import { useCourses } from '../hooks/useCourses';
+import { useAcademicFields } from '../hooks/useAcademicFields';
 
 interface Form {
 	name: string;
@@ -88,15 +89,35 @@ export const Form = () => {
 		academicField: '2',
 		homologated: '1',
 	});
-	// const [isSubjectHomologated, setIsSubjectHomologated] = useState(true);
+
 	const [error, setError] = useState<string | null>(null);
 	const { user } = useContext(AuthContext);
 	const subjects = useSubjects();
 	const courses = useCourses();
+	const academicFields = useAcademicFields();
 	const navigate = useNavigate();
+	const selectSubjectOptions = subjects?.filter(
+		subject => subject.course_id < +course
+		//&& subject.semester > +semester
+	);
 
-	console.log(homologated);
+	const canThereBePrecedents = !!selectSubjectOptions?.length;
 
+	useEffect(() => {
+		if (courses)
+			setFormState(formState => ({
+				...formState,
+				course: courses[0].id.toString(),
+			}));
+	}, [courses, setFormState]);
+
+	useEffect(() => {
+		if (academicFields)
+			setFormState(formState => ({
+				...formState,
+				course: academicFields[0].id.toString(),
+			}));
+	}, [academicFields, setFormState]);
 	return (
 		<ContentContainer>
 			<form
@@ -164,38 +185,24 @@ export const Form = () => {
 						onSelectChange={onSelectChange}
 					/>
 
-					<SelectFormField
-						labelText="Área de estudio *"
-						name="academicField"
-						id="academicField"
-						options={[
-							{ content: 'Instrumentales', value: '1' },
-							{ content: 'Filosofía Cultural', value: '2' },
-						]}
-						value={academicField}
-						onSelectChange={onSelectChange}
-					/>
-
-					{/* <FormField>
-						<label className={FormCSS.label}>
-							¿Esta materia es NO homologada?
-						</label>
-						<div className={FormCSS.checkboxFormFieldDivider}>
-							<input
-								type="checkbox"
-								id="homologatedSubjectCheckbox"
-								className={FormCSS.precedentCheckbox}
-								checked={isSubjectHomologated}
-								onChange={e =>
-									setIsSubjectHomologated(e.target.checked)
-								}
-							/>
-							<label htmlFor="homologatedSubjectCheckbox">
-								Sí, es necesario aprobar una materia previa para
-								cursarla
-							</label>
-						</div>
-					</FormField> */}
+					{academicFields && (
+						<SelectFormField
+							labelText="Área de estudio *"
+							name="academicField"
+							id="academicField"
+							options={academicFields
+								.filter(
+									academicField =>
+										academicField.stage.id === +course
+								)
+								.map(academicFieldFromDB => ({
+									content: academicFieldFromDB.description,
+									value: academicFieldFromDB.id,
+								}))}
+							value={academicField}
+							onSelectChange={onSelectChange}
+						/>
+					)}
 
 					<RadioFormField
 						labelText="Tipo de Materia *"
@@ -226,16 +233,21 @@ export const Form = () => {
 								type="checkbox"
 								id="precedentCheckbox"
 								className={FormCSS.precedentCheckbox}
-								checked={precedent !== null}
-								onChange={
-									e =>
+								disabled={!canThereBePrecedents}
+								checked={
+									canThereBePrecedents
+										? precedent !== null
+										: false
+								}
+								onChange={e => {
+									if (selectSubjectOptions)
 										setFormState(formState => ({
 											...formState,
 											precedent: e.target.checked
-												? 1
+												? selectSubjectOptions[0].id
 												: null,
-										})) //We have to put the first academic field id once the endpoint is created
-								}
+										})); //We have to put the first academic field id once the endpoint is created
+								}}
 							/>
 							<label htmlFor="precedentCheckbox">
 								Sí, es necesario aprobar una materia previa para
@@ -244,23 +256,21 @@ export const Form = () => {
 						</div>
 					</FormField>
 
-					{precedent !== null && subjects && (
-						<SelectFormField
-							name="precedent"
-							labelText="Materia previa requerida *"
-							id="precedent"
-							// options={[
-							// 	{ content: 'FIS-1', value: 'FIS-1' },
-							// 	{ content: 'FIS-2', value: 'FIS-2' },
-							// ]}
-							options={subjects.map(subject => ({
-								content: subject.description,
-								value: subject.id,
-							}))}
-							value={precedent}
-							onSelectChange={onSelectChange}
-						/>
-					)}
+					{precedent !== null &&
+						canThereBePrecedents &&
+						selectSubjectOptions && (
+							<SelectFormField
+								name="precedent"
+								labelText="Materia previa requerida *"
+								id="precedent"
+								options={selectSubjectOptions.map(subject => ({
+									content: subject.description,
+									value: subject.id,
+								}))}
+								value={precedent}
+								onSelectChange={onSelectChange}
+							/>
+						)}
 				</div>
 
 				{error && <ErrorBox error={error} setError={setError} />}
