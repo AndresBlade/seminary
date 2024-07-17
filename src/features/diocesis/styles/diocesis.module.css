@@ -124,6 +124,19 @@
 	border: none;
 	transition: 0.3s;
 }
+.diocesis-table__table--tbody-tr-name,
+.diocesis-table__table--tbody-tr-obispo,
+.diocesis-table__button--container{
+	min-width: 10rem;
+	max-width: 10rem;
+	overflow-y: scroll;
+}
+
+.diocesis-table__table--tbody-tr-name::-webkit-scrollbar,
+.diocesis-table__table--tbody-tr-obispo::-webkit-scrollbar,
+.diocesis-table__button--container::-webkit-scrollbar{
+	background-color: transparent;
+}
 /********ESTILOS DE LA BARRA DE BUSQUEDA***********/
 
 .animation-container {
