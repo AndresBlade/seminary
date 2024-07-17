@@ -76,6 +76,11 @@
 	background-color: #219af9;
 }
 
+.radioField {
+	display: flex;
+	gap: 1rem;
+}
+
 @keyframes appearAndFade {
 	0% {
 		opacity: 0;
