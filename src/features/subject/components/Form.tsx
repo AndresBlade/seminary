@@ -10,6 +10,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { createSubject } from '../helpers/createSubject';
 import { AuthContext } from '../../login/context/AuthContext';
 import { RadioFormField } from './RadioFormField';
+import { useSubjects } from '../hooks/useSubjects';
 
 interface Form {
 	name: string;
@@ -89,6 +90,7 @@ export const Form = () => {
 	// const [isSubjectHomologated, setIsSubjectHomologated] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const { user } = useContext(AuthContext);
+	const subjects = useSubjects();
 	const navigate = useNavigate();
 
 	console.log(homologated);
@@ -234,15 +236,19 @@ export const Form = () => {
 						</div>
 					</FormField>
 
-					{precedent !== null && (
+					{precedent !== null && subjects && (
 						<SelectFormField
 							name="precedent"
 							labelText="Materia previa requerida *"
 							id="precedent"
-							options={[
-								{ content: 'FIS-1', value: 'FIS-1' },
-								{ content: 'FIS-2', value: 'FIS-2' },
-							]}
+							// options={[
+							// 	{ content: 'FIS-1', value: 'FIS-1' },
+							// 	{ content: 'FIS-2', value: 'FIS-2' },
+							// ]}
+							options={subjects.map(subject => ({
+								content: subject.description,
+								value: subject.id,
+							}))}
 							value={precedent}
 							onSelectChange={onSelectChange}
 						/>
