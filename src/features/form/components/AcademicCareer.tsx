@@ -47,7 +47,14 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                         setSeminarianInfo((seminarian)=>{
                             return{...seminarian, status:e.target.value}
                         })
-                    }}></SelectForm>
+                    }}>
+                        <option value="Activo">Activo</option>
+                        <option value="Retirado">Retirado</option>
+                        <option value="Pastoral">Año Pastoral</option>
+                        <option value="Culminado">Culminado</option>
+
+
+                    </SelectForm>
                 </div> ): null
             }
 

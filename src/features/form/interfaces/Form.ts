@@ -130,7 +130,7 @@ export interface userEditProps{
             }
         ],
         medias:[{
-            social_Cate:string
+            social_media_category:number
             link:string
             }
         ],

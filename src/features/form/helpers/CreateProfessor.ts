@@ -26,7 +26,6 @@ interface professor{
                 description:string
                 link:string
             }[] 
-        
     }
     instructor:{
         is_instructor:boolean

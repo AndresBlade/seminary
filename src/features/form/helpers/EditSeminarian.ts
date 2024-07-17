@@ -34,17 +34,18 @@ interface seminarian{
     location:string
     apostleships:string
     ministery:string
+    status:string
 }
 
 
 
-async function CreateSeminarian({data, imageFile,token}:{data:seminarian, imageFile:File,token:string}):Promise<Response>{
+async function EditSeminarian({data, imageFile,token}:{data:seminarian, imageFile:File,token:string}):Promise<Response>{
     const formData = new FormData();
     formData.append('picture',imageFile);
     formData.append('data',JSON.stringify(data))
 
     const response = await fetch(`http://127.0.0.1:3000/seminarian/${data.persona.id}`,{
-        method:'POST',
+        method:'PUT',
         mode:'cors',
         credentials:'same-origin',
         headers:{
@@ -56,4 +57,4 @@ async function CreateSeminarian({data, imageFile,token}:{data:seminarian, imageF
     return response
 }
 
-export {CreateSeminarian}
+export {EditSeminarian}

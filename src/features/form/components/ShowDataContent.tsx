@@ -40,6 +40,7 @@ export const ShowDataContent = () => {
   const [infoUserDelete, setInfoUserDelete] = useState<string | undefined>(undefined);
   const [userFind, setUserFind] = useState<string>('');
   const [dataUserFind, setDataUserFind] = useState<string>('')
+  const [typeUserUpdate, setTypeUserUpdate]= useState<string>('')
 	const [getUserByType,setGetUserByType]=useState<string>('')
   const {user} = useContext(AuthContext);
   const navigate = useNavigate()
@@ -145,7 +146,11 @@ export const ShowDataContent = () => {
                 <div>
                   <button className={FormCSS.buttonActions} onClick={()=>{
                     navigate(`../../Profesor/${user.person?.id}`)
-                  }}><img src={editIcon} alt="" /></button>
+                    {user.seminarian?.status == undefined && user.professor?.status_id == undefined ? setTypeUserUpdate('N/A'):
+                      user.seminarian?.status ? setTypeUserUpdate('seminarista') :
+                      user.professor?.status_id && user.professor?.instructor?.status === undefined ? setTypeUserUpdate('profesor') :
+                      user.professor?.instructor?.status  ? setTypeUserUpdate('formador'): 'N/A'
+                  }}}><img src={editIcon} alt="" /></button>
                   <button className={FormCSS.buttonActions} onClick={(e)=>{
                     e.preventDefault()
                     setUserDelete(user.person.id)
@@ -158,7 +163,6 @@ export const ShowDataContent = () => {
                 </div>
               </DataContent>
             )
-            
           }
         </div>
       </div>
