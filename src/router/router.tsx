@@ -2,7 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
+import { ParishShowData } from '../pages/ParishShowData';
 import { AuthenticatedLayout } from '../features/ui/layout/components/AuthenticatedLayout';
+import { ParishCreate } from '../pages/ParishCreate';
 import { DiocesisCreate } from '../pages/DiocesisCreate';
 import { DiocesisTable } from '../pages/DiocesisTable';
 import { Roles } from '../pages/Roles';
@@ -46,6 +48,17 @@ export const router = createBrowserRouter([
 						children: [
 							{ index: true, element: <Subjects /> },
 							{ path: 'new', element: <SubjectForm /> },
+						],
+					},
+					{
+						path: 'parish',
+						children: [
+							{
+								index: true,
+								element: <ParishShowData />,
+							},
+							{ path: 'new', element: <ParishCreate /> },
+							{ path: ':id', element: <ParishCreate /> },
 						],
 					},
 				],

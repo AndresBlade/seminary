@@ -77,6 +77,8 @@ export const sidebarData: SidebarItemData[] = [
 		children: [
 			{ content: 'Lista de diócesis', path: 'diocese' },
 			{ content: 'Crear diócesis', path: 'diocese/new' },
+			{ content: 'Lista de parroquias', path: 'parish' },
+			{ content: 'Crear parroquia', path: 'parish/new' },
 		],
 	},
 	{
