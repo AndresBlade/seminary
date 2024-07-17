@@ -205,7 +205,7 @@ console.log(personalInfo.bloodType)
 				CreateSeminarian({data:dataSent,imageFile:imageFile,token:user?.token}).then((response)=>{
 					if(response.ok){
 						alert("Seminarista Creado");
-						navigate('../../user/list')
+						navigate('user/list')
 						location.reload()
 					}else{
 						throw new Error();
@@ -220,7 +220,7 @@ console.log(personalInfo.bloodType)
 				EditSeminarian({data:dataSent,imageFile:imageFile,token:user?.token}).then((response)=>{
 					if(response.ok){
 						alert("Seminarista actualizado");
-						navigate('../../user/list')
+						navigate('user/list')
 					}else{
 						throw new Error();
 					}
@@ -265,7 +265,7 @@ console.log(personalInfo.bloodType)
 				CreateProfessor({data:dataSent,imageFile:imageFile,token:user.token}).then((response)=>{
 					if(response.ok){
 						alert("Usuario creado correctamente")
-						navigate('../../user/list')
+						navigate('user/list')
 					}
 				}).catch((error)=>{
 					alert('Hubo un problema al crear usuario')
