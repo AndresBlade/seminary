@@ -244,6 +244,22 @@
 .showDataBody .dataContent p::-webkit-scrollbar{
 	background-color: transparent;
 }
+
+.buttonContainer{
+	width: 100%;
+	display: flex;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+.buttonSaveForm{
+	height: 5rem;
+	width: 100%;
+	background-color: var(--buttonColor);
+	border-radius: 1rem;
+	border: none;
+	color: white;
+	
+}
 /************************MEDIA QUERY PARA PC************************/
 @media (width >= 1024px) {
 	.containerForm {

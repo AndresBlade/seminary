@@ -14,10 +14,11 @@ import { CreateSeminarian } from '../helpers/CreateSeminarian';
 import { AuthContext } from '../../login/context/AuthContext';
 import { CreateProfessor } from '../helpers/CreateProfessor';
 import { useNavigate, useParams } from 'react-router-dom';
-import UseGet from '../../../shared/hooks/useGet';
+//import UseGet from '../../../shared/hooks/useGet';
 import { userEditProps } from '../interfaces/Form';
 import { EditSeminarian } from '../helpers/EditSeminarian';
-
+import { GetSeminarianEdit } from '../helpers/GetSeminarianEdit';
+import { ContainerForm } from './small_components/ContainerForm';
 type ProfilePicture = File | null;
 
 const RegisterCreate = () => {
@@ -27,10 +28,12 @@ const RegisterCreate = () => {
     const [anotherSeminary, setAnotherSeminary]=useState(false)
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const apiUrl = `http://127.0.0.1:3000/seminarian/getsem?id=${id}`
-	const {data} = UseGet<userEditProps[]>(apiUrl)
+	//const apiUrl = `http:	127.0.0.1:3000/seminarian/getsem?id=${id}`
+	//const {data} = UseGet<userEditProps[]>(apiUrl)
 
+	const [data, setData]= useState<userEditProps[]>([])
 
+	
 	const [personalInfo, setPersonalInfo] = useState<personalInfoProps>({
 		name: '',
 		lastName: '',
@@ -73,13 +76,25 @@ const RegisterCreate = () => {
 
     let rol = personalInfo.rol;
 
-	console.log(socialMedia)
-	console.log(personalInfo.birthDate)
-	console.log(personalInfo.name)
-	console.log(seminarianInfo.status)
+	useEffect(()=>{
+		if(id === undefined) return
+		if(!user?.token) return
+
+		GetSeminarianEdit(id,user?.token).then((response)=>{
+			return(
+				setData(response)
+			)
+		}).catch((error)=>{
+			alert('Error al traer la informacion del seminarista para editar')
+			console.log(error)
+		})
+
+	},[id])
+
 	useEffect(() => {
 		if (id === undefined) return;
 		if (!data) return;
+
 
 		data.map((infoUserEdit)=>{
 			setPersonalInfo({
@@ -110,9 +125,9 @@ const RegisterCreate = () => {
 				)
 			)
 			setSeminarianInfo({
-				academicTraining:infoUserEdit.degrees?.[0].description,
+				academicTraining:infoUserEdit.degrees?.[0]?.description,
 				stage:infoUserEdit.foreing_Data?.stage,
-				linkTitle:infoUserEdit.degrees?.[0].link,
+				linkTitle:infoUserEdit.degrees?.[0]?.link,
 				apostolates:infoUserEdit.apostleships,
 				ministriesReceived:infoUserEdit.Ministery,
 				condition:infoUserEdit.location,
@@ -125,8 +140,10 @@ const RegisterCreate = () => {
 				setProfilePicture(myFile)
 			}).catch(error => console.log(error))
 		})
-	}, [data, id]);
-console.log(personalInfo.bloodType)
+	}, [data, id,user?.token]);
+
+
+
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
 		e.preventDefault()
