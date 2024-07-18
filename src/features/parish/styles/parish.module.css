@@ -111,16 +111,28 @@
 	border: #dddeee 1px solid;
 	border-radius: 1rem 1rem 0 0;
 	padding: 0.5rem;
+	overflow-y:scroll ;
+}
+.data-show__title h2{
+	min-width: 10rem;
+	max-width: 10rem;
+
 }
 .data-content {
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem 0.5rem 1rem 0.5rem;
-	align-items: center;
 	border: #dddeee 1px solid;
 	border-top: none;
-	text-align: end;
-	gap: 3rem;
+	border-right: none;
+}
+.data-content p{
+	min-width: 10rem;
+	max-width: 10rem;
+	overflow-y: scroll;
+}
+.data-content p::-webkit-scrollbar{
+	background-color: transparent;
 }
 .data-content__container {
 	height: 80vh;
