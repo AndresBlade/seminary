@@ -24,7 +24,7 @@ function useGetEdit<T>(apiUrl: string) {
         fetchData().catch(console.error);
     },[apiUrl, fetchData]);
 
-    return {dataEdit, loading, error};
+    return {dataEdit, loading, error,setDataEdit};
 }
 
 export default useGetEdit;

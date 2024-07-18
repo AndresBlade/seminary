@@ -110,7 +110,7 @@ const DiocesisShowData = () => {
 								<tr>
 									<td>Error al cargar los datos</td>
 								</tr>
-							) : data?.length === 0 ? (
+							) : data === undefined ? (
 								<tr>
 									<td>No hay datos</td>
 								</tr>

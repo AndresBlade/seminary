@@ -40,6 +40,7 @@ export const ParishShowData = () => {
 			deleteData()
 				.then(() => {
 					alert('Parroquia eliminada');
+					setParroquiaDelete(0)
 					return GetParish();
 				})
 				.then(parroquia => setParish(parroquia))
@@ -124,7 +125,7 @@ export const ParishShowData = () => {
 						<div>
 							<p>Error al cargar los datos</p>
 						</div>
-					) : data?.parishrepository.length === 0 ? (
+					) : data?.parishrepository === undefined ? (
 						<tr>
 							<td>No hay datos</td>
 						</tr>

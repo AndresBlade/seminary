@@ -105,6 +105,7 @@ export const DiocesisForm = () => {
 							setDiocesisName(e.target.value);
 						}}
 						labelText="Nombre de la diócesis *"
+						value={diocesisName}
 						id="name"
 						type="text"
 					/>
@@ -113,6 +114,7 @@ export const DiocesisForm = () => {
 							setObispoName(e.target.value);
 						}}
 						labelText="Obispo que la dirige"
+						value={obispoName}
 						id="obispo"
 						type="text"
 					/>

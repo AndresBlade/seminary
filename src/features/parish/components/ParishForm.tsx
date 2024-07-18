@@ -40,7 +40,7 @@ export const ParishForm = () => {
 	const [parroco, setParroco] = useState('');
 	const [diocesis, setDiocesis] = useState(0);
 	const { data } = useGet<DiocesisProps[]>(apiUrl);
-	const { dataEdit } = useGetEdit<ParishData>(apiUrlParish);
+	const { dataEdit,setDataEdit } = useGetEdit<ParishData>(apiUrlParish);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -118,6 +118,7 @@ export const ParishForm = () => {
 						labelText="Nombre de la parroquia *"
 						id="name"
 						type="text"
+						value={parishName}
 						onInputChange={e => {
 							setParishName(e.target.value);
 						}}
@@ -127,6 +128,7 @@ export const ParishForm = () => {
 						labelText="Parroco"
 						id="parroco"
 						type="text"
+						value={parroco}
 						onInputChange={e => {
 							setParroco(e.target.value);
 						}}
@@ -146,71 +148,6 @@ export const ParishForm = () => {
 						/>
 					)}
 				</FormFields>
-				{/* <div className={Parish['parish-create__form-inputs']}>
-					<div className={Parish['parish-create__form-name']}>
-						<label
-							htmlFor="name"
-							className={
-								Parish['parish-create__form-name--label']
-							}
-						>
-							Nombre de la parroquia*
-						</label>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							value={parishName}
-							onChange={e => {
-								setParishName(e.target.value);
-							}}
-						/>
-					</div>
-					<div className={Parish['parish-create__form-parroco']}>
-						<label
-							htmlFor="description"
-							className={
-								Parish['parish-create__form-parroco--label']
-							}
-						>
-							Parroco
-						</label>
-						<input
-							type="text"
-							id="parroco"
-							name="parroco"
-							value={parroco}
-							onChange={e => {
-								setParroco(e.target.value);
-							}}
-						/>
-					</div>
-					<div className={Parish['parish-create__form-select']}>
-						<label
-							htmlFor="diocesis"
-							className={
-								Parish['parish-create__form-diocesis--label']
-							}
-						>
-							Diocesis a la que pertenece
-						</label>
-						<select
-							name="diocesis"
-							id="diocesis"
-							value={diocesis}
-							onChange={e => {
-								setDiocesis(parseInt(e.target.value));
-							}}
-						>
-							<option value="0">Selecciona una diocesis</option>
-							{data?.map(diocesis => (
-								<option key={diocesis.id} value={diocesis.id}>
-									{diocesis.name}
-								</option>
-							))}
-						</select>
-					</div>
-				</div> */}
 				<div className={Parish['parish-create__form-group']}>
 					<button
 						type="submit"
