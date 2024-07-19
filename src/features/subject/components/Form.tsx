@@ -9,7 +9,6 @@ import { FormField } from './FormField';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { createSubject } from '../helpers/createSubject';
 import { AuthContext } from '../../login/context/AuthContext';
-import { RadioFormField } from './RadioFormField';
 import { useSubjects } from '../hooks/useSubjects';
 import { useCourses } from '../hooks/useCourses';
 import { useAcademicFields } from '../hooks/useAcademicFields';
@@ -21,7 +20,6 @@ interface Form {
 	semester: '1' | '2';
 	precedent: number | null;
 	academicField: string;
-	homologated: '0' | '1';
 }
 
 interface HandleSubmitProps {
@@ -42,11 +40,7 @@ const handleSubmit = ({
 	e.preventDefault();
 	if (!form.name) return setError('Incluya el nombre de la materia');
 	if (!form.code) return setError('Incluya el código de la materia');
-
-	const homologado = +form.homologated;
 	const semester = +form.semester;
-
-	if (homologado !== 0 && homologado !== 1) return;
 	if (semester !== 1 && semester !== 2) return;
 
 	createSubject({
@@ -54,7 +48,6 @@ const handleSubmit = ({
 			description: form.name,
 			academic_field_id: +form.academicField,
 			course_id: +form.course,
-			homologado,
 			precedent: form.precedent,
 			semester,
 		},
@@ -74,11 +67,9 @@ export const Form = () => {
 		semester,
 		precedent,
 		academicField,
-		homologated,
 		formState,
 		onInputChange,
 		onSelectChange,
-		onRadioChange,
 		setFormState,
 	} = useForm<Form>({
 		name: '',
@@ -87,7 +78,6 @@ export const Form = () => {
 		semester: '1',
 		precedent: null,
 		academicField: '2',
-		homologated: '1',
 	});
 
 	const [error, setError] = useState<string | null>(null);
@@ -97,7 +87,9 @@ export const Form = () => {
 	const academicFields = useAcademicFields();
 	const navigate = useNavigate();
 	const selectSubjectOptions = subjects?.filter(
-		subject => subject.course_id < +course
+		subject =>
+			subject.course_id < +course ||
+			(subject.course_id === +course && subject.semester < +semester)
 		//&& subject.semester > +semester
 	);
 
@@ -118,6 +110,11 @@ export const Form = () => {
 				course: academicFields[0].id.toString(),
 			}));
 	}, [academicFields, setFormState]);
+
+	useEffect(() => {
+		if (!canThereBePrecedents)
+			setFormState(formState => ({ ...formState, precedent: null }));
+	}, [canThereBePrecedents, setFormState]);
 	return (
 		<ContentContainer>
 			<form
@@ -204,26 +201,6 @@ export const Form = () => {
 						/>
 					)}
 
-					<RadioFormField
-						labelText="Tipo de Materia *"
-						onRadioChange={onRadioChange}
-						value={homologated}
-						options={[
-							{
-								content: 'Homologada',
-								name: 'homologated',
-								value: '1',
-								id: 'homologated',
-							},
-							{
-								content: 'NO Homologada',
-								name: 'homologated',
-								value: '0',
-								id: 'notHomologated',
-							},
-						]}
-					/>
-
 					<FormField>
 						<label className={FormCSS.label}>
 							¿Se requiere aprobar una materia previa?
@@ -234,11 +211,7 @@ export const Form = () => {
 								id="precedentCheckbox"
 								className={FormCSS.precedentCheckbox}
 								disabled={!canThereBePrecedents}
-								checked={
-									canThereBePrecedents
-										? precedent !== null
-										: false
-								}
+								checked={precedent !== null}
 								onChange={e => {
 									if (selectSubjectOptions)
 										setFormState(formState => ({
