@@ -31,11 +31,11 @@ export interface userProps{
       instructor_position: string | null
     }
   } | null
-} 
+}
 
 export const ShowDataContent = () => {
   const apiUrl = 'http://127.0.0.1:3000/user/'
-  const {data,error, setData}=UseGet<userProps[]>(apiUrl)
+  const {data,error, setData,setError}=UseGet<userProps[] | undefined>(apiUrl)
   const [userDelete,setUserDelete] = useState<string>('');
   const [infoUserDelete, setInfoUserDelete] = useState<string | undefined>(undefined);
   const [userFind, setUserFind] = useState<string>('');
@@ -71,22 +71,34 @@ export const ShowDataContent = () => {
         console.log(error)
       })
     }
-    if(dataUserFind){
-      GetUserFind({data:dataUserFind, token:user.token}).then((userInfo)=>{
-        
-        setData([userInfo.user])
+    if(!userFind){
+      GetUsers(user.token).then(users => setData(users)).catch((error)=>{
+        return (
+          console.log(error),
+          alert('Error al listar los datos')
+        )
       })
-      .catch((error)=>{
-        alert(error)
-        console.log(error)
-        setDataUserFind('')
-      })
+      return
     }
-      //
+    if(dataUserFind){
+      GetUserFind({data:dataUserFind, token:user.token}).then((response)=>{
+        if(response.user){
+          setData([response.user])
+        }else{
+          throw new Error()
+        }
+      }).catch(()=>{
+        alert('No hay datos')
+        console.log(Error)
+      });
+      setDataUserFind('');
+      return;
+    }
+  },[infoUserDelete,userDelete,user,setData,getUserByType,userFind,dataUserFind])
 
-  },[infoUserDelete,userDelete,user,dataUserFind,setData,getUserByType])
-
-  console.log(data)
+  console.log(
+    
+  )
   return (
     <ContentContainer>
       <TitleForm title={'Lista de usuarios'}/>
@@ -117,7 +129,7 @@ export const ShowDataContent = () => {
         <div className={FormCSS.showDataBody}>
           {
             error ? (
-              <p>Error al cargar los datos</p>
+              <p>Error al cargar los datos ó no existen datos</p>
             ):
             data?.map((user)=>
               <DataContent key={user.person?.id}>
@@ -128,8 +140,10 @@ export const ShowDataContent = () => {
                 user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'Profesor' :
                 user.professor?.instructor?.status  ? 'Formador': 'N/A'
                 }</p> 
-                <p>{user.professor?.instructor?.instructor_position === undefined ? 'N/A':
-                    user.professor?.instructor?.instructor_position
+                <p>{user.seminarian?.status == undefined && user.professor?.status_id == undefined ? 'N/A':
+                user.seminarian?.status ? 'Seminarista' :
+                user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'Profesor' :
+                user.professor?.instructor?.status  ? 'Formador': 'N/A'
                   }
                 </p>
                 <p className={FormCSS.showDataBodyStatus}>{user.professor?.status_id === 0 ? 'Retirado' : 

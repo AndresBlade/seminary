@@ -33,7 +33,7 @@ function UseGet<T>(apiUrl: string) {
 		fetchData(user.token).catch(console.error);
 	}, [apiUrl, fetchData, user]);
 
-	return { data, loading, error, setData };
+	return { data, loading, error, setData,setError };
 }
 
 export default UseGet;

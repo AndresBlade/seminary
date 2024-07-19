@@ -41,6 +41,7 @@ export interface userPropsWrapper{
 
 export const GetUserFind = ({data, token}:{data:string,token:string}):Promise<userPropsWrapper>=>{
     return fetch(`http://127.0.0.1:3000/user/${data}`,{
+        method:'GET',
         headers:{
             auth:token
         }

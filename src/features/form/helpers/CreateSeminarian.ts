@@ -43,7 +43,7 @@ async function CreateSeminarian({data, imageFile,token}:{data:seminarian, imageF
     formData.append('picture',imageFile);
     formData.append('data',JSON.stringify(data))
 
-    const response = await fetch(`http://127.0.0.1:3000/seminarian/${data.persona.id}`,{
+    const response = await fetch(`http://127.0.0.1:3000/seminarian/create/${data.persona.id}`,{
         method:'POST',
         mode:'cors',
         credentials:'same-origin',
