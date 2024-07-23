@@ -4,9 +4,12 @@ import { router } from './router/router';
 import './globalStyles/normalize.css';
 import './globalStyles/styles.css';
 import AuthProvider from './features/login/context/AuthProvider';
+import React from 'react';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<AuthProvider>
-		<RouterProvider router={router}></RouterProvider>
-	</AuthProvider>
+	<React.StrictMode>
+		<AuthProvider>
+			<RouterProvider router={router}></RouterProvider>
+		</AuthProvider>
+	</React.StrictMode>
 );

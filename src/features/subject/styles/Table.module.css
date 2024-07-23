@@ -1,0 +1,72 @@
+:root {
+	--font-orange: #e8671e;
+}
+
+.table {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	overflow-x: auto;
+	border-radius: 2rem;
+	border: #dddeee solid 1px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	min-height: 6rem;
+	padding: 0 2rem;
+	gap: 3rem;
+	width: 100%;
+}
+
+.headers {
+	composes: row;
+	border-bottom: #dddeee solid 1px;
+}
+
+.header {
+	height: 4rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	font-weight: 700;
+	cursor: pointer;
+	gap: 1.5rem;
+	color: var(--font-orange);
+	user-select: none;
+}
+
+.rows {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.cell {
+	width: 100%;
+}
+
+.arrows {
+	display: flex;
+	flex-direction: column;
+}
+
+.arrow {
+	width: 8px;
+	transform: scale(3);
+	filter: contrast(0.2);
+}
+
+.content {
+	height: 4rem;
+	display: flex;
+	align-items: center;
+}
+
+.action {
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}

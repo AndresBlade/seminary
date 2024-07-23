@@ -15,7 +15,6 @@ import { useAcademicFields } from '../hooks/useAcademicFields';
 
 interface Form {
 	name: string;
-	code: string;
 	course: string;
 	semester: '1' | '2';
 	precedent: number | null;
@@ -39,7 +38,6 @@ const handleSubmit = ({
 }: HandleSubmitProps) => {
 	e.preventDefault();
 	if (!form.name) return setError('Incluya el nombre de la materia');
-	if (!form.code) return setError('Incluya el código de la materia');
 	const semester = +form.semester;
 	if (semester !== 1 && semester !== 2) return;
 
@@ -62,7 +60,6 @@ const handleSubmit = ({
 export const Form = () => {
 	const {
 		name,
-		code,
 		course,
 		semester,
 		precedent,
@@ -73,7 +70,6 @@ export const Form = () => {
 		setFormState,
 	} = useForm<Form>({
 		name: '',
-		code: '',
 		course: '1',
 		semester: '1',
 		precedent: null,
@@ -82,7 +78,7 @@ export const Form = () => {
 
 	const [error, setError] = useState<string | null>(null);
 	const { user } = useContext(AuthContext);
-	const subjects = useSubjects();
+	const { subjects } = useSubjects();
 	const courses = useCourses();
 	const academicFields = useAcademicFields();
 	const navigate = useNavigate();
@@ -92,6 +88,9 @@ export const Form = () => {
 			(subject.course_id === +course && subject.semester < +semester)
 		//&& subject.semester > +semester
 	);
+	const courseStage = courses?.find(
+		courseFromDB => courseFromDB.id === +course
+	)?.stage_id;
 
 	const canThereBePrecedents = !!selectSubjectOptions?.length;
 
@@ -142,16 +141,6 @@ export const Form = () => {
 						onInputChange={onInputChange}
 					/>
 
-					<InputFormField
-						name="code"
-						type="text"
-						placeholder="Ej. CIC-1"
-						labelText="Código de la materia *"
-						id="code"
-						value={code}
-						onInputChange={onInputChange}
-					/>
-
 					{courses && (
 						<SelectFormField
 							labelText="Curso *"
@@ -190,7 +179,7 @@ export const Form = () => {
 							options={academicFields
 								.filter(
 									academicField =>
-										academicField.stage.id === +course
+										academicField.stage.id === courseStage
 								)
 								.map(academicFieldFromDB => ({
 									content: academicFieldFromDB.description,
