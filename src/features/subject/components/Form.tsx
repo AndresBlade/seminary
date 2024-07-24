@@ -6,7 +6,7 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 import { SelectFormField } from './SelectFormField';
 import { ErrorBox } from './ErrorBox';
 import { FormField } from './FormField';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { createSubject } from '../helpers/createSubject';
 import { AuthContext } from '../../login/context/AuthContext';
 import { useSubjects } from '../hooks/useSubjects';
@@ -94,21 +94,47 @@ export const Form = () => {
 
 	const canThereBePrecedents = !!selectSubjectOptions?.length;
 
+	const { id } = useParams();
+
+	console.log(formState);
+
 	useEffect(() => {
+		if (!subjects) return;
+		const idAsNumber = Number(id);
+		if (isNaN(idAsNumber)) return;
+
+		const subject = subjects.find(subject => subject.id === idAsNumber);
+
+		if (!subject) return;
+
+		console.log(subject);
+
+		setFormState({
+			name: subject.description,
+			academicField: subject.academic_field_id.id.toString(),
+			course: subject.course_id.toString(),
+			precedent: subject.precedent ? subject.precedent.id : null,
+			semester: subject.semester.toString() as '1' | '2',
+		});
+	}, [id, setFormState, subjects]);
+
+	useEffect(() => {
+		if (!isNaN(Number(id))) return;
 		if (courses)
 			setFormState(formState => ({
 				...formState,
 				course: courses[0].id.toString(),
 			}));
-	}, [courses, setFormState]);
+	}, [courses, setFormState, id]);
 
 	useEffect(() => {
+		if (!isNaN(Number(id))) return;
 		if (academicFields)
 			setFormState(formState => ({
 				...formState,
 				course: academicFields[0].id.toString(),
 			}));
-	}, [academicFields, setFormState]);
+	}, [academicFields, setFormState, id]);
 
 	useEffect(() => {
 		if (!canThereBePrecedents)

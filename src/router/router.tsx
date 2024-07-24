@@ -48,6 +48,7 @@ export const router = createBrowserRouter([
 						children: [
 							{ index: true, element: <Subjects /> },
 							{ path: 'new', element: <SubjectForm /> },
+							{ path: ':id', element: <SubjectForm /> },
 						],
 					},
 					{
