@@ -195,13 +195,29 @@ export const SubjectTable = () => {
 									onClick={() => {
 										if (!user) return;
 										deleteSubject(Number(id), user.token)
-											.then(() =>
-												getAllSubjects(user.token)
-											)
+											.then(response => {
+												if (response.status === 403)
+													return Promise.reject(
+														response
+													);
+												return getAllSubjects(
+													user.token
+												);
+											})
 											.then(subjects => {
 												setSubjects(subjects);
 												subjectsSetToDefault.current =
 													false;
+											})
+											.catch((response: Response) =>
+												response.text()
+											)
+											.then(error => {
+												if (!error) return;
+												const errorText = `La materia no puede ser eliminada, puesto que precede a${
+													error.split('precents')[1]
+												}`;
+												alert(errorText);
 											})
 											.catch(error => console.log(error));
 									}}
