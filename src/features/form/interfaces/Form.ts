@@ -62,8 +62,8 @@ export interface personalInfoProps{
     bloodType:string,
     medicalRecord:string,
     rol:string
-    diocese:string,
-    parish: string,
+    diocese?:string,
+    parish?: string,
 }
 
 export interface contactInfoProps{
@@ -83,18 +83,26 @@ export interface seminarianInfo{
     condition:string,
     status:string,
     nameSeminaryExternal?:string,
-    yearOfIncome?:string
+    yearOfIncome?:number
 }
 
 export interface professionalInfo{
     academicTraining:string,
     linkTitle:string,
     startingDate:string,
+    instructorPosition:string
 }
 
 export type blood = Record<string,string>
 
+export type positionInstructor= Record<string,string>
+
 export interface userEditProps{
+    id:string
+    apostleships:string
+    location:string
+    Ministery?:string
+    status:string
     parish_id:number
     diocesi_id:number
     degrees?:[
@@ -105,11 +113,6 @@ export interface userEditProps{
             user_id:string
         }
     ]
-    id:string
-    apostleships:string
-    location:string
-    Ministery?:string
-    status:string
     person:{
         id:string
         profile_picture_path:string
@@ -139,7 +142,7 @@ export interface userEditProps{
     foreing_Data?:{
         seminary_name:string
         stage:string
-        stage_year:4
+        stage_year:number
     }
     
 }

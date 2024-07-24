@@ -24,7 +24,7 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
 
             <div>
                 <LabelForm>Telefono Propio</LabelForm>
-                <InputForm type='text' id='phone' value={phone} onChange={(e)=>{
+                <InputForm type='number' id='phone' value={phone} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,phone:e.target.value}
 
@@ -33,7 +33,7 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
             </div>
             <div>
                 <LabelForm>Descripcion del telefono</LabelForm>
-                <InputForm type="text" id='descriptionPhone' value={description} onChange={(e)=>{
+                <InputForm type="text" id='descriptionPhone' value={description.toLocaleUpperCase()} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact, description:e.target.value}
                     })
@@ -41,7 +41,7 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
             </div>
             <div>
                 <LabelForm>Correo Electronico</LabelForm>
-                <InputForm type='text' id='email' value={email} onChange={(e)=>{
+                <InputForm type='email' id='email' value={email} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,email:e.target.value}
 
@@ -51,7 +51,7 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
 
             <div>
                 <LabelForm>Telefono de contacto familiar</LabelForm>
-                <InputForm type='text' id='phoneFamily' value={phoneFamily} onChange={(e)=>{
+                <InputForm type='number' id='phoneFamily' value={phoneFamily} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,phoneFamily:e.target.value}
 
@@ -61,10 +61,9 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
 
             <div>
                 <LabelForm>Nombre del contacto familiar</LabelForm>
-                <InputForm type='text' id='nameFamily' value={descriptionFamily} onChange={(e)=>{
+                <InputForm type='text' id='nameFamily' value={descriptionFamily.toLocaleUpperCase()} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,descriptionFamily:e.target.value}
-
                     })
                 }}/>
             </div>

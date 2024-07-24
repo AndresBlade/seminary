@@ -46,7 +46,9 @@ export const router = createBrowserRouter([
 								element: <RegisterTable/>
 							},
 							{path: 'new', element:<RegisterForm/>},
-							{path: ':id', element:<RegisterForm/>}
+							
+							{path: 'professor/:id', element:<RegisterForm/>},
+							{path: 'seminarian/:id', element:<RegisterForm/>}
 						]
 					},
 					{

@@ -1,5 +1,10 @@
 
 interface seminarian{
+    id:string
+    apostleships:string
+    location:string
+    Ministery?:string
+    status:string
     parish_id:number
     diocesi_id:number
     degrees?:[
@@ -10,11 +15,6 @@ interface seminarian{
             user_id:string
         }
     ]
-    id:string
-    apostleships:string
-    location:string
-    Ministery?:string
-    status:string
     person:{
         id:string
         profile_picture_path:string
@@ -44,7 +44,7 @@ interface seminarian{
     foreing_Data?:{
         seminary_name:string
         stage:string
-        stage_year:4
+        stage_year:number
     }
 }
 
@@ -56,7 +56,13 @@ export function GetSeminarianEdit(id:string,token:string):Promise<seminarian[]>{
             }
         }
     ).then((response)=>{
-        return response.json()
-    }).then(data => data as seminarian[])
+        if(response.ok){
+            return response.json()
+        }else{
+            throw new Error
+        }
+    }).then(data => data as seminarian[]).catch((error)=>{
+        alert('problema al traer los datos para el seminarista a editar')
+    })
     
 }

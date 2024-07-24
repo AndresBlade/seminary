@@ -20,13 +20,14 @@ interface personalInfoPropsForm{
     bloodType:string
     medicalRecord:string
     rol:string
-    diocese:string
-    parish:string
+    diocese?:string
+    parish?:string
     setPersonalInfo:Dispatch<SetStateAction<personalInfoProps>>
+    idEdit:string | undefined
 }
 
 
-export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRecord,rol,diocese,parish,setPersonalInfo}:personalInfoPropsForm) => {
+export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRecord,rol,diocese,parish,setPersonalInfo,idEdit}:personalInfoPropsForm) => {
     const {user} = useContext(AuthContext)
     const [bloodData,setBloodData] = useState<blood | null>(null);
     const [dioceseData, setDioceseData]= useState<Diocese[]>([]);
@@ -45,6 +46,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
     useEffect(()=>{
         if(!user?.token) return
+        if(!diocese) return
         GetParishByDiocese({dioceseId:diocese,token:user?.token}).then((data)=>{
             setParishByDiocese(data)
         }).catch((error)=>{
@@ -69,7 +71,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
             
             <div>
                 <LabelForm>Nombres</LabelForm>
-                <InputForm type='text' id='name' value={name} onChange={(e)=>{
+                <InputForm type='text' id='name' value={name.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, name:e.target.value}
                         })
@@ -80,7 +82,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Apellidos</LabelForm>
-                <InputForm type='text' id='lastName' value={lastName} onChange={(e)=>{
+                <InputForm type='text' id='lastName' value={lastName.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, lastName:e.target.value}
                         })
@@ -91,7 +93,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Cédula</LabelForm>
-                <InputForm type='text' id='id' value={id} onChange={(e)=>{
+                <InputForm type='number' id='id' minLength={8} value={id} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, id:e.target.value}
                         })
@@ -129,7 +131,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Condicion médica</LabelForm>
-                <InputForm type='text' value={medicalRecord} onChange={(e)=>{
+                <InputForm type='text' value={medicalRecord?.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                         return {...personal, medicalRecord:e.target.value}
                     })
@@ -162,8 +164,8 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
                     )}
                 </SelectForm>
             </div>
-
-            <div>
+            {idEdit === undefined ? (
+                <div>
                 <LabelForm>Rol de usuario</LabelForm>
                 <SelectForm value={rol} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
@@ -175,6 +177,8 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
                     <option value="formador">Formador</option>
                 </SelectForm>
             </div>
+            ):null}
+            
         
         </div>
     )

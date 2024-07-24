@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState } from 'react';
 import FormCSS from '../styles/FormCSS.module.css'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { PersonalInfoForm } from './PersonalInfoForm';
 import { ContactInfoForm } from './ContactInfoForm';
 import { AcademicCareer } from './AcademicCareer';
@@ -13,27 +14,28 @@ import { ProfilePictureForm } from './ProfilePictureForm';
 import { CreateSeminarian } from '../helpers/CreateSeminarian';
 import { AuthContext } from '../../login/context/AuthContext';
 import { CreateProfessor } from '../helpers/CreateProfessor';
-import { useNavigate, useParams } from 'react-router-dom';
-//import UseGet from '../../../shared/hooks/useGet';
+import { useParams } from 'react-router-dom';
 import { userEditProps } from '../interfaces/Form';
 import { EditSeminarian } from '../helpers/EditSeminarian';
 import { GetSeminarianEdit } from '../helpers/GetSeminarianEdit';
-import { ContainerForm } from './small_components/ContainerForm';
+import { GetProfessorEdit, professor } from '../helpers/GetProfessorEdit';
+import { EditProfessor } from '../helpers/EditProfessor';
 type ProfilePicture = File | null;
 
 const RegisterCreate = () => {
 	const {user} =useContext(AuthContext)
 	const [number, setNumber] = useState(1);
 	const [modal, setModal] = useState(false);
-    const [anotherSeminary, setAnotherSeminary]=useState(false)
-	const navigate = useNavigate();
+    const [anotherSeminary, setAnotherSeminary]=useState<boolean>(false)
 	const { id } = useParams();
+	const location = useLocation();
+	const navigate = useNavigate();
 	//const apiUrl = `http:	127.0.0.1:3000/seminarian/getsem?id=${id}`
 	//const {data} = UseGet<userEditProps[]>(apiUrl)
-
+	const [typeUserEdit, setTypeUserEdit]=useState<string | undefined>(undefined)
 	const [data, setData]= useState<userEditProps[]>([])
+	const [dataProfessor, setDataProfessor]=useState<professor[]>([])
 
-	
 	const [personalInfo, setPersonalInfo] = useState<personalInfoProps>({
 		name: '',
 		lastName: '',
@@ -60,96 +62,177 @@ const RegisterCreate = () => {
 		stage: '',
 		linkTitle: '',
 		apostolates: '',
-		ministriesReceived: 'Unkown',
-		condition: 'Interno',
+		ministriesReceived: 'UNKOWN',
+		condition: 'INTERNO',
 		status: '',
 		nameSeminaryExternal: '',
-		yearOfIncome: '',
+		yearOfIncome: 0,
 	});
 
 	const [professionalInfo, setProfessionalInfo] = useState<professionalInfo>({
 		academicTraining: '',
 		linkTitle: '',
 		startingDate: '',
+		instructorPosition:'RECTOR'
 	});
 	const [profilePicture, setProfilePicture]= useState<ProfilePicture>(null);
 
     let rol = personalInfo.rol;
 
+	console.log(seminarianInfo.stage)
+
 	useEffect(()=>{
-		if(id === undefined) return
+	
+		
+		if(location.pathname.includes('seminarian')){
+			setTypeUserEdit('seminarista')
+			console.log('HOLA DESDE SEMINARISTA')
+			return;
+		}
+		if(location.pathname.includes('professor')){
+			setTypeUserEdit('profesor')
+			console.log('JOJOLA DESDE PROFESOR')
+			return;
+			
+		}
+
+	},[location.pathname])
+
+
+	useEffect(()=>{
+		if(!id) return
 		if(!user?.token) return
 
-		GetSeminarianEdit(id,user?.token).then((response)=>{
-			return(
-				setData(response)
-			)
-		}).catch((error)=>{
-			alert('Error al traer la informacion del seminarista para editar')
-			console.log(error)
-		})
+		if(typeUserEdit === 'seminarista'){
+			GetSeminarianEdit(id,user?.token).then((response)=>{
+				if(response)
+				return(
+					setData(response)
+				)
+			}).catch((error)=>{
+				alert('Error al traer la informacion del seminarista para editar')
+				console.log(error)
+				return;
+			})
+		}
+		if(typeUserEdit === 'profesor'){
+			GetProfessorEdit(id,user?.token).then((response)=>{
+				return(
+					setDataProfessor(response)
+				)
+			}).catch((error)=>{
+				alert('Error al traer la informacion del profesor para editar')
+				console.log(error)
+				return;
+			})
+		}
 
-	},[id])
+	},[id,typeUserEdit,user?.token])
 
 	useEffect(() => {
 		if (id === undefined) return;
 		if (!data) return;
 
+		if(typeUserEdit === 'seminarista'){
+			
 
-		data.map((infoUserEdit)=>{
-			setPersonalInfo({
-				id: infoUserEdit.id,
-				name: infoUserEdit.person.forename,
-				lastName:infoUserEdit.person.surname,
-				birthDate:infoUserEdit.person.date_String,
-				bloodType:infoUserEdit.person.BloodType,
-				medicalRecord:infoUserEdit.person.medical_record,
-				rol:'seminarista',
-				diocese:infoUserEdit.diocesi_id.toString(),
-				parish:infoUserEdit.parish_id.toString()
-			})
-			setContactInfo({
-				phone:infoUserEdit.person.cellpones[0].phone_number,
-				description:infoUserEdit.person.cellpones[0].description,
-				phoneFamily:infoUserEdit.person.cellpones[1].phone_number,
-				descriptionFamily:infoUserEdit.person.cellpones[1].phone_number,
-				email:infoUserEdit.person.email
-			})
-			setSocialMedia(
-				infoUserEdit.person.medias.map((user)=>(
-						{
-							category:user.social_media_category,
-							link:user.link
-						}
-					)			
+
+			data.map((infoUserEdit)=>{
+				setPersonalInfo({
+					id: infoUserEdit.id.slice(2),
+					name: infoUserEdit.person.forename,
+					lastName:infoUserEdit.person.surname,
+					birthDate:infoUserEdit.person.date_String,
+					bloodType:infoUserEdit.person.BloodType,
+					medicalRecord:infoUserEdit.person.medical_record,
+					rol:'seminarista',
+					diocese:infoUserEdit.diocesi_id.toString(),
+					parish:infoUserEdit.parish_id.toString()
+				})
+				setContactInfo({
+					phone:infoUserEdit.person.cellpones[0].phone_number,
+					description:infoUserEdit.person.cellpones[0].description,
+					phoneFamily:infoUserEdit.person.cellpones[1].phone_number,
+					descriptionFamily:infoUserEdit.person.cellpones[1].phone_number,
+					email:infoUserEdit.person.email
+				})
+				setSocialMedia(
+					infoUserEdit.person.medias.map((user)=>(
+							{
+								category:user.social_media_category,
+								link:user.link
+							}
+						)			
+					)
 				)
-			)
-			setSeminarianInfo({
-				academicTraining:infoUserEdit.degrees?.[0]?.description,
-				stage:infoUserEdit.foreing_Data?.stage,
-				linkTitle:infoUserEdit.degrees?.[0]?.link,
-				apostolates:infoUserEdit.apostleships,
-				ministriesReceived:infoUserEdit.Ministery,
-				condition:infoUserEdit.location,
-				status:infoUserEdit.status,
-				nameSeminaryExternal:infoUserEdit.foreing_Data?.seminary_name,
-				yearOfIncome:infoUserEdit.foreing_Data?.stage_year.toString()
+				setSeminarianInfo({
+					academicTraining:infoUserEdit.degrees?.[0]?.description,
+					stage:infoUserEdit.foreing_Data?.stage,
+					linkTitle:infoUserEdit.degrees?.[0]?.link,
+					apostolates:infoUserEdit.apostleships,
+					ministriesReceived:infoUserEdit.Ministery,
+					condition:infoUserEdit.location,
+					status:infoUserEdit.status,
+					nameSeminaryExternal:infoUserEdit.foreing_Data?.seminary_name,
+					yearOfIncome:infoUserEdit.foreing_Data?.stage_year
+				})
+				fetch(`${infoUserEdit.person.profile_picture_path}`).then(response => response.blob()).then((myBlob) => {
+					const myFile = new File([myBlob], 'image.jpeg', {type: myBlob.type})
+					setProfilePicture(myFile)
+				}).catch(error => console.log(error))
 			})
-			fetch(`${infoUserEdit.person.profile_picture_path}`).then(response => response.blob()).then((myBlob) => {
-				const myFile = new File([myBlob], 'image.jpeg', {type: myBlob.type})
-				setProfilePicture(myFile)
-			}).catch(error => console.log(error))
-		})
-	}, [data, id,user?.token]);
+		}
+		if(typeUserEdit === 'profesor'){
+			dataProfessor.map((infoProfessorEdit)=>{
+				setPersonalInfo({
+					id: infoProfessorEdit.person.id.slice(2),
+					name: infoProfessorEdit.person.forename,
+					lastName:infoProfessorEdit.person.surname,
+					birthDate:infoProfessorEdit.person.date_String,
+					bloodType:infoProfessorEdit.person.BloodType,
+					medicalRecord:infoProfessorEdit.person.medical_record,
+					rol:infoProfessorEdit.instructor.is_instructor === false ? 'profesor':'formador',
+					parish:infoProfessorEdit.parish.id.toString(),
+					diocese:infoProfessorEdit.parish.diocese_id.toString()
 
+				})
+				setContactInfo({
+					phone:infoProfessorEdit.phone_number[0].phone_number,
+					description:infoProfessorEdit.phone_number[0].description,
+					phoneFamily:infoProfessorEdit.phone_number[1].phone_number,
+					descriptionFamily:infoProfessorEdit.phone_number[1].description,
+					email:infoProfessorEdit.person.email
+				})
+				setSocialMedia(
+					infoProfessorEdit.social.map((user)=>(
+							{
+								category:user.social_media_category,
+								link:user.link
+							}
+						)			
+					)
+				)
+				setProfessionalInfo({
+					academicTraining:infoProfessorEdit.degrees?.[0].description,
+					linkTitle:infoProfessorEdit.degrees?.[0].link,
+					startingDate:infoProfessorEdit.instructor.starting_date_string,
+					instructorPosition:infoProfessorEdit.instructor.instructor_position
+				})
+				fetch(`${infoProfessorEdit.person.profile_picture_path}`).then(response => response.blob()).then((myBlob) => {
+					const myFile = new File([myBlob], 'image.jpeg', {type: myBlob.type})
+					setProfilePicture(myFile)
+				}).catch(error => console.log(error))
+				console.log(dataProfessor)
+		})}
+		
+	}, [data, id,user?.token,dataProfessor,typeUserEdit]);
 
-
-
+	console.log(typeof seminarianInfo.yearOfIncome)
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
 		e.preventDefault()
 		const dataSent= {
 			persona:{
-				id:personalInfo.id,
+				id:'V-'+personalInfo.id,
 				forename:personalInfo.name,
 				surname:personalInfo.lastName,
 				email:contactInfo.email,
@@ -178,7 +261,7 @@ const RegisterCreate = () => {
 			location:personalInfo.rol === 'seminarista' ? '': undefined,
 			apostleships:personalInfo.rol === 'seminarista' ? '': undefined,
 			ministery: seminarianInfo.stage === '3' ? '':undefined,
-			instructor: personalInfo.rol === 'formador' ?{} :undefined,
+			instructor: personalInfo.rol === 'formador' ? {} :undefined,
 			status: personalInfo.rol === 'seminarista' && id ? '':undefined
 		}
 
@@ -222,8 +305,12 @@ const RegisterCreate = () => {
 				CreateSeminarian({data:dataSent,imageFile:imageFile,token:user?.token}).then((response)=>{
 					if(response.ok){
 						alert("Seminarista Creado");
-						navigate('user/list')
-						location.reload()
+						setTimeout(()=>
+						{
+							navigate('/user/list')
+						}
+						,1000)
+						
 					}else{
 						throw new Error();
 					}
@@ -237,7 +324,6 @@ const RegisterCreate = () => {
 				EditSeminarian({data:dataSent,imageFile:imageFile,token:user?.token}).then((response)=>{
 					if(response.ok){
 						alert("Seminarista actualizado");
-						navigate('user/list')
 					}else{
 						throw new Error();
 					}
@@ -248,6 +334,7 @@ const RegisterCreate = () => {
 			}
 
 		}else{
+			console.log('mi rol es'+personalInfo.rol)
 			const dataExtra= {
 					user:{
 						parish_id:1,
@@ -256,18 +343,17 @@ const RegisterCreate = () => {
 							link: professionalInfo.linkTitle
 						}]
 					},
-					instructor:personalInfo.rol === 'formador'?{
+					instructor:personalInfo.rol === 'formador' ? {
 						is_instructor: true,
-						starting_date:'2024-06-11',
-						instructor_position:'RECTOR'
+						starting_date:professionalInfo.startingDate,
+						instructor_position:professionalInfo.instructorPosition
+						
 					}:{
 						is_instructor:false,
-						starting_date:null,
-						instructor_position:null
 					}
 				}
 				dataSent.user = dataExtra.user
-				dataSent.instructor =dataExtra.instructor
+				dataSent.instructor = dataExtra.instructor
 
 				delete dataSent.ForeingSeminarian
 				delete dataSent.location
@@ -278,16 +364,33 @@ const RegisterCreate = () => {
 				if(!profilePicture) return
 				const imageFile = profilePicture;
 				if(!user) return
-
-				CreateProfessor({data:dataSent,imageFile:imageFile,token:user.token}).then((response)=>{
-					if(response.ok){
-						alert("Usuario creado correctamente")
-						navigate('user/list')
-					}
-				}).catch((error)=>{
-					alert('Hubo un problema al crear usuario')
-					console.log(error)
-				})
+				if(!id){
+					CreateProfessor({data:dataSent,imageFile:imageFile,token:user.token}).then((response)=>{
+						if(response.ok){
+							alert("Usuario creado correctamente")
+							console.log(data)
+							return
+						}else{
+							throw new Error
+						}
+					}).catch((error)=>{
+						alert('Hubo un problema al crear usuario')
+						console.log(error)
+						return;
+					})
+				}else{
+					EditProfessor({data:dataSent,imageFile:imageFile,token:user.token}).then((response)=>{
+						if(response.ok){
+							alert("Usuario actualizado correctamente")
+						}else{
+							throw new Error
+						}
+					}).catch((error)=>{
+						alert('Hubo un problema al actualizar usuario')
+						console.log(error)
+					})
+				}
+				
 		}
 	}
 	return (
@@ -299,6 +402,7 @@ const RegisterCreate = () => {
 							name={personalInfo.name}
 							lastName={personalInfo.lastName}
 							id={personalInfo.id}
+							idEdit = {id}
 							birthDate={personalInfo.birthDate}
 							bloodType={personalInfo.bloodType}
 							medicalRecord={personalInfo.medicalRecord}
@@ -360,6 +464,7 @@ const RegisterCreate = () => {
 								startingDate={professionalInfo.startingDate}
                                 rol={personalInfo.rol}
 								setProfessionalInfo={setProfessionalInfo}
+								instructorPosition={professionalInfo.instructorPosition}
 							/>
 						)}
 						<ButtonNextBackForm setNumber={setNumber} />

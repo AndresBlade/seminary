@@ -1,5 +1,3 @@
-import { blood } from "../interfaces/Form"
-
 interface professor{
     persona:{
         id:string

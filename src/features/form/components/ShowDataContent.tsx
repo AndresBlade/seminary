@@ -35,7 +35,7 @@ export interface userProps{
 
 export const ShowDataContent = () => {
   const apiUrl = 'http://127.0.0.1:3000/user/'
-  const {data,error, setData,setError}=UseGet<userProps[] | undefined>(apiUrl)
+  const {data,error, setData}=UseGet<userProps[] | undefined>(apiUrl)
   const [userDelete,setUserDelete] = useState<string>('');
   const [infoUserDelete, setInfoUserDelete] = useState<string | undefined>(undefined);
   const [userFind, setUserFind] = useState<string>('');
@@ -58,7 +58,7 @@ export const ShowDataContent = () => {
         alert('eliminado correctamente')
       }).catch(error => alert('Error al eliminar'+ error))
     }
-    if(getUserByType === 'all')
+    if(getUserByType === 'all' || !userFind)
     { GetUsers(user.token).then(users => setData(users)).catch((error)=>{
       return (
         console.log(error),
@@ -70,15 +70,7 @@ export const ShowDataContent = () => {
         alert('Error al buscar usuarios por tipo' +error),
         console.log(error)
       })
-    }
-    if(!userFind){
-      GetUsers(user.token).then(users => setData(users)).catch((error)=>{
-        return (
-          console.log(error),
-          alert('Error al listar los datos')
-        )
-      })
-      return
+      return;
     }
     if(dataUserFind){
       GetUserFind({data:dataUserFind, token:user.token}).then((response)=>{
@@ -103,7 +95,7 @@ export const ShowDataContent = () => {
     <ContentContainer>
       <TitleForm title={'Lista de usuarios'}/>
       <div className={FormCSS.showDataOptions}>
-        <InputForm placeholder='Buscar por nombre' value={userFind} onChange={(e)=>{
+        <InputForm type='number' placeholder='Buscar por ID' value={userFind} onChange={(e)=>{
           setUserFind(e.target.value)
         }}/> 
         <SelectForm value={getUserByType} onChange={(e)=>{
@@ -133,12 +125,12 @@ export const ShowDataContent = () => {
             ):
             data?.map((user)=>
               <DataContent key={user.person?.id}>
-                <p>V-{user.person?.id}</p>
+                <p>{user.person?.id}</p>
                 <p>{user.person?.forename}</p>
                 <p>{user.seminarian?.status == undefined && user.professor?.status_id == undefined ? 'N/A':
                 user.seminarian?.status ? 'Seminarista' :
                 user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'Profesor' :
-                user.professor?.instructor?.status  ? 'Formador': 'N/A'
+                user.professor?.instructor?.status ? 'Formador': 'N/A'
                 }</p> 
                 <p>{user.seminarian?.status == undefined && user.professor?.status_id == undefined ? 'N/A':
                 user.seminarian?.status ? 'Seminarista' :
@@ -153,19 +145,21 @@ export const ShowDataContent = () => {
                   }</p>
                 <div>
                   <button className={FormCSS.buttonActions} onClick={()=>{
-                    navigate(`../../Profesor/${user.person?.id}`)
-                    {user.seminarian?.status == undefined && user.professor?.status_id == undefined ? setTypeUserUpdate('N/A'):
-                      user.seminarian?.status ? setTypeUserUpdate('seminarista') :
-                      user.professor?.status_id && user.professor?.instructor?.status === undefined ? setTypeUserUpdate('profesor') :
-                      user.professor?.instructor?.status  ? setTypeUserUpdate('formador'): 'N/A'
-                  }}}><img src={editIcon} alt="" /></button>
+                    const userType = user.seminarian?.status ? 'seminarian' :
+                    user.professor?.status_id ? 'professor' : 'N/A'
+                    navigate(
+                      `../../Profesor/${userType}/${user.person?.id.slice(2)}`                  
+                      )
+            
+                    }}><img src={editIcon} alt="" /></button>
                   <button className={FormCSS.buttonActions} onClick={(e)=>{
                     e.preventDefault()
                     setUserDelete(user.person.id)
-                    {
-                      user.seminarian?.status === undefined && user.professor?.status_id && user.professor?.instructor?.status === undefined ? setInfoUserDelete('Profesor') :
-                      user.seminarian?.status && user.professor?.status_id === undefined ? setInfoUserDelete('Seminarista') : user.professor?.instructor.status ? setInfoUserDelete('Formador') : setUserDelete('N/A')
-                    }
+                    setTypeUserUpdate(
+                      user.seminarian?.status ? 'seminarista' :
+                      user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'profesor' :
+                      user.professor?.instructor.status ? 'formador': 'N/A'
+                  )
                     
                   }}><img src={deleteIcon} alt="" /></button>
                 </div>

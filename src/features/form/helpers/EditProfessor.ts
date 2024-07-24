@@ -1,5 +1,4 @@
-
-interface seminarian{
+interface professor{
     persona:{
         id:string
         forename:string
@@ -8,6 +7,7 @@ interface seminarian{
         birthdate:string
         medical_record:string | null
         BloodType:string
+    
         phone:{
             phone_number:string,
             description:string | null
@@ -18,33 +18,31 @@ interface seminarian{
         }[]
     }
     user:{
-        degree:[
-            {
-                description:string
-                link:string
-            }
-        ],
-        parish_id:number
+        parish_id:number,
+        degree:
+        [{
+            description:string
+            link:string
+        }]
     }
-    ForeingSeminarian?:{
-        seminary_name:string
-        stage:string
-        stage_year:number
-    } | null 
-    location:string
-    apostleships:string
-    ministery:string
-    status:string
+    professor:{
+        status_id:number
+    }
+
+    instructor:{
+        is_instructor:boolean
+        starting_date:string | null
+        instructor_position:string | null
+    }
+
 }
 
-
-
-async function EditSeminarian({data, imageFile,token}:{data:seminarian, imageFile:File,token:string}):Promise<Response>{
+async function EditProfessor({data, imageFile,token}:{data:professor, imageFile:File,token:string}):Promise<Response>{
     const formData = new FormData();
-    formData.append('picture',imageFile);
+    formData.append('file',imageFile);
     formData.append('data',JSON.stringify(data))
 
-    const response = await fetch(`http://127.0.0.1:3000/seminarian/update/${data.persona.id}`,{
+    const response = await fetch(`http://127.0.0.1:3000/professor/${data.persona.id}`,{
         method:'PUT',
         mode:'cors',
         credentials:'same-origin',
@@ -57,4 +55,4 @@ async function EditSeminarian({data, imageFile,token}:{data:seminarian, imageFil
     return response
 }
 
-export {EditSeminarian}
+export {EditProfessor}

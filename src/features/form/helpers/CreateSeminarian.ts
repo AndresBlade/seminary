@@ -29,7 +29,7 @@ interface seminarian{
     ForeingSeminarian?:{
         seminary_name:string
         stage:string
-        stage_year:string
+        stage_year:number
     } | null 
     location:string
     apostleships:string

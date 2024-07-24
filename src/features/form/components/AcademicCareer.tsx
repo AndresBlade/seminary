@@ -15,7 +15,7 @@ interface academicCareerPropsForm{
     condition:string
     status:string
     nameSeminaryExternal?:string
-    yearOfIncome?:string
+    yearOfIncome?:number
     setSeminarianInfo:Dispatch<SetStateAction<seminarianInfo>>
     setAnotherSeminary:Dispatch<SetStateAction<boolean>>
     anotherSeminary:boolean
@@ -26,6 +26,8 @@ interface academicCareerPropsForm{
 export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,     ministriesReceived,condition,status,nameSeminaryExternal,yearOfIncome,setSeminarianInfo,setAnotherSeminary,anotherSeminary,id}:academicCareerPropsForm) => {
 
     console.log(nameSeminaryExternal)
+    if(nameSeminaryExternal === undefined) setAnotherSeminary(false)
+    if(nameSeminaryExternal && nameSeminaryExternal?.length > 0) setAnotherSeminary(true)
 
     return (
         <div className={FormCSS.academicCareer}>
@@ -33,7 +35,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
             <div>
                 <LabelForm>Formacion academica</LabelForm>
-                <InputForm type='text' value={academicTraining} onChange={(e)=>{
+                <InputForm type='text' value={academicTraining?.toLocaleUpperCase()} onChange={(e)=>{
                     setSeminarianInfo((seminarian)=>{
                         return {...seminarian, academicTraining:e.target.value}
                     })
@@ -48,10 +50,10 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                             return{...seminarian, status:e.target.value}
                         })
                     }}>
-                        <option value="Activo">Activo</option>
-                        <option value="Retirado">Retirado</option>
-                        <option value="Pastoral">Año Pastoral</option>
-                        <option value="Culminado">Culminado</option>
+                        <option value="ACTIVO">Activo</option>
+                        <option value="RETIRADO">Retirado</option>
+                        <option value="PASTORAL">Año Pastoral</option>
+                        <option value="CULMINADO">Culminado</option>
 
 
                     </SelectForm>
@@ -60,7 +62,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
             <div>
                 <LabelForm>Enlace a titulo</LabelForm>
-                <InputForm type='text' value={linkTitle} onChange={(e)=>{
+                <InputForm type='text' value={linkTitle?.toLocaleUpperCase()} onChange={(e)=>{
                     setSeminarianInfo((seminarian)=>{
                         return{...seminarian, linkTitle:e.target.value}
                     })
@@ -69,7 +71,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
             <div>
                 <LabelForm>Apostolados</LabelForm>
-                <InputForm type='text' value={apostolates} onChange={(e)=>{
+                <InputForm type='text' value={apostolates.toLocaleUpperCase()} onChange={(e)=>{
                     setSeminarianInfo((seminarian)=>{
                         return{...seminarian, apostolates:e.target.value}
                     })
@@ -77,7 +79,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
             </div>
 
             {!stage ? null :
-            stage >= '3' ? (
+            stage === 'CONFIGURATIVA' ? (
                     <div>
                         <LabelForm>Ministerios recibidos</LabelForm>
                         <SelectForm value={ministriesReceived} onChange={(e)=>{
@@ -85,10 +87,10 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                                 return{...seminarian, ministriesReceived:e.target.value}
                             })
                         }}>
-                            <option value="Unkown">Unknow</option>
-                            <option value="Admisión">Admisión</option>
-                            <option value="Lectorado">Lectorado</option>
-                            <option value="Acolitado">Acolitado</option>
+                            <option value="UNKOWN">Unknow</option>
+                            <option value="ADMISION">Admisión</option>
+                            <option value="LECTORADO">Lectorado</option>
+                            <option value="ACOLITADO">Acolitado</option>
                         </SelectForm>
                     </div>
                 ):
@@ -102,8 +104,8 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                                 return{...seminarian, condition:e.target.value}
                             })
                         }}>
-                    <option value="Interno">Interno</option>
-                    <option value="Externo">Externo</option>
+                    <option value="INTERNO">Interno</option>
+                    <option value="EXTERNO">Externo</option>
                 </SelectForm>
             </div>
             
@@ -114,9 +116,9 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                         return{...seminarian, stage:e.target.value}
                     })
                 }}>
-                    <option value="1">PROPEDEUTICO</option>
-                    <option value="2">DISCIPULADO</option>
-                    <option value="3">CONFIGURATIVA</option>
+                    <option value="PROPEDEUTICO">PROPEDEUTICO</option>
+                    <option value="DISCIPULADO">DISCIPULADO</option>
+                    <option value="CONFIGURATIVA">CONFIGURATIVA</option>
                 </SelectForm>
             </div>
 
@@ -125,7 +127,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                     ¿Proviene de otro seminario?
                 </LabelForm>
                 <div className={FormCSS.seminarianExternal}>
-                    <InputForm type='checkbox' id='anotherSeminary' onChange={(e)=>{
+                    <InputForm type='checkbox' id='anotherSeminary' checked={anotherSeminary} onChange={(e)=>{
                         setAnotherSeminary(e.target.checked)
                     }}/>
                     <p>Sí, proviene de otro seminario.</p>
@@ -135,7 +137,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                 <div className={FormCSS.anotherSeminary}>
                     <div>
                         <LabelForm>Nombre del seminario donde proviene</LabelForm>
-                        <InputForm type='text' onChange={(e)=>{
+                        <InputForm type='text' value={nameSeminaryExternal?.toLocaleUpperCase()} onChange={(e)=>{
                             setSeminarianInfo((seminarian)=>{
                                 return{...seminarian, nameSeminaryExternal:e.target.value}
                             })
@@ -144,9 +146,9 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
                     <div>
                         <LabelForm>Año al que ingresa</LabelForm>
-                        <InputForm type='text' value={yearOfIncome} onChange={(e)=>{
+                        <InputForm type='number' value={yearOfIncome} id='yearOfIncome' onChange={(e)=>{
                             setSeminarianInfo((seminarian)=>{
-                                return{...seminarian, yearOfIncome:e.target.value}
+                                return{...seminarian, yearOfIncome:parseInt(e.target.value)}
                             })
                         }}/>
                     </div>
