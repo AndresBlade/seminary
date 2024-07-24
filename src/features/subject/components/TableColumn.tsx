@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import TableCSS from '../styles/Table.module.css';
 import pointingUpArrow from '../../../assets/MaterialSymbolsArrowDropUp.svg';
 import pointingDownArrow from '../../../assets/MaterialSymbolsArrowDropDown.svg';
+import { OrderStage } from '../interfaces/OrderStage';
 
 interface NodeInsideColumn {
 	type: 'element';
@@ -15,6 +16,7 @@ interface ContentInsideColumn {
 
 interface OrderableColumn {
 	orderable: true;
+	stage: OrderStage;
 	onClick: () => void;
 }
 
@@ -37,24 +39,44 @@ export const TableColumn = (props: Props) => {
 		>
 			<div className={TableCSS.header}>
 				<p className={TableCSS.headerText}>{props.title}</p>
-				{props.orderable && (
-					<div className={TableCSS.arrows}>
-						<img
-							src={pointingUpArrow}
-							alt="Ordenar ascendentemente"
-							className={TableCSS.arrow}
-						/>
-						<img
-							src={pointingDownArrow}
-							alt="Ordenar descendentemente"
-							className={TableCSS.arrow}
-						/>
-					</div>
+				{props.orderable ? (
+					props.stage === 0 ? (
+						<div className={TableCSS.arrows}>
+							<img
+								src={pointingUpArrow}
+								alt="Ordenar ascendentemente"
+								className={TableCSS.arrow}
+							/>
+							<img
+								src={pointingDownArrow}
+								alt="Ordenar descendentemente"
+								className={TableCSS.arrow}
+							/>
+						</div>
+					) : props.stage === 1 ? (
+						<div className={TableCSS.arrows}>
+							<img
+								src={pointingUpArrow}
+								alt="Ordenar ascendentemente"
+								className={TableCSS.highlightedArrow}
+							/>
+						</div>
+					) : (
+						<div className={TableCSS.arrows}>
+							<img
+								src={pointingDownArrow}
+								alt="Ordenar descendentemente"
+								className={TableCSS.highlightedArrow}
+							/>
+						</div>
+					)
+				) : (
+					<></>
 				)}
 			</div>
 			{props.type === 'content'
 				? props.content.map((content, key) => (
-						<div key={key} className={TableCSS.content}>
+						<div key={key} className={TableCSS.cell}>
 							<p>{content}</p>
 						</div>
 				  ))
