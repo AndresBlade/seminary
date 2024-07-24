@@ -12,6 +12,7 @@ import { AuthContext } from '../../login/context/AuthContext';
 import { useSubjects } from '../hooks/useSubjects';
 import { useCourses } from '../hooks/useCourses';
 import { useAcademicFields } from '../hooks/useAcademicFields';
+import { editSubject } from '../helpers/editSubject';
 
 interface Form {
 	name: string;
@@ -27,6 +28,7 @@ interface HandleSubmitProps {
 	setError: React.Dispatch<React.SetStateAction<string | null>>;
 	navigate: NavigateFunction;
 	token: string;
+	id: string | undefined;
 }
 
 const handleSubmit = ({
@@ -35,22 +37,36 @@ const handleSubmit = ({
 	setError,
 	navigate,
 	token,
+	id,
 }: HandleSubmitProps) => {
 	e.preventDefault();
 	if (!form.name) return setError('Incluya el nombre de la materia');
 	const semester = +form.semester;
 	if (semester !== 1 && semester !== 2) return;
 
-	createSubject({
-		subject: {
-			description: form.name,
-			academic_field_id: +form.academicField,
-			course_id: +form.course,
-			precedent: form.precedent,
-			semester,
-		},
-		token,
-	})
+	(isNaN(Number(id))
+		? createSubject({
+				subject: {
+					description: form.name,
+					academic_field_id: +form.academicField,
+					course_id: +form.course,
+					precedent: form.precedent,
+					semester,
+				},
+				token,
+		  })
+		: editSubject({
+				subject: {
+					id: Number(id),
+					description: form.name,
+					academic_field_id: +form.academicField,
+					course_id: +form.course,
+					precedent: form.precedent,
+					semester,
+				},
+				token,
+		  })
+	)
 		.then(() => navigate('..'))
 		.catch(err => console.log(err));
 	console.log(form);
@@ -152,6 +168,7 @@ export const Form = () => {
 							setError,
 							navigate,
 							token: user.token,
+							id,
 						});
 				}}
 			>

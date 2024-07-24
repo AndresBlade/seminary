@@ -5,10 +5,13 @@ import EditIcon from '../../../assets/editIcon.svg';
 import { TableColumn } from './TableColumn';
 import TableCSS from '../styles/Table.module.css';
 import { useSubjects } from '../hooks/useSubjects';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useCourses } from '../hooks/useCourses';
 import { useNavigate } from 'react-router-dom';
 import { OrderStage } from '../interfaces/OrderStage';
+import { deleteSubject } from '../helpers/deleteSubject';
+import { getAllSubjects } from '../helpers/getAllSubjects';
+import { AuthContext } from '../../login/context/AuthContext';
 
 interface OrderableColumnValues {
 	name: string | null;
@@ -16,6 +19,7 @@ interface OrderableColumnValues {
 }
 
 export const SubjectTable = () => {
+	const { user } = useContext(AuthContext);
 	const { subjects, setSubjects } = useSubjects();
 	const coursesFromDB = useCourses();
 	const navigate = useNavigate();
@@ -186,7 +190,22 @@ export const SubjectTable = () => {
 										onClick={() => navigate(`${id}`)}
 									/>
 								</button>
-								<button className={TableCSS.action}>
+								<button
+									className={TableCSS.action}
+									onClick={() => {
+										if (!user) return;
+										deleteSubject(Number(id), user.token)
+											.then(() =>
+												getAllSubjects(user.token)
+											)
+											.then(subjects => {
+												setSubjects(subjects);
+												subjectsSetToDefault.current =
+													false;
+											})
+											.catch(error => console.log(error));
+									}}
+								>
 									<img
 										src={DeleteIcon}
 										alt="Eliminar Materia"
