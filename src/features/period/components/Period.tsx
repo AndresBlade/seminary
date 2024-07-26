@@ -6,13 +6,18 @@ import AddIcon from '../../../assets/MaterialSymbolsAddCircleOutline.svg'
 import Input from './Input'
 import editIcon from '../../../assets/editIcon.svg'
 import deleteIcon from '../../../assets/deleteIcon.svg'
-
+import Modal from './Modal'
+import { useState } from 'react'
+import { Label } from '../../subject/components/Label'
 export const Period = () => {
+    const [showModal, setShowModal]=useState(false);
     return (
         <ContentContainer>
             <div className={PeriodCSS.addPeriod}>
                 <h2>Lista periodos académicos</h2>
-                <button className={PeriodCSS.buttonAddPeriod}>
+                <button className={PeriodCSS.buttonAddPeriod} onClick={()=>{
+                    setShowModal(true)
+                }}>
                     <img src={AddIcon} alt="añadir" />
                     Agregar nuevo
                 </button>
@@ -48,7 +53,25 @@ export const Period = () => {
                     </button>
                 </div>
             </DataContent>
+            
+            {
+                showModal ? (
+                    <Modal
+                        setShowModal={setShowModal}
+                    >
+                        <p className={PeriodCSS.titleModal}>Agregar periodo academico</p>
 
+                        <Input type='text' />
+                        <Input type='date'/>
+                        <Input type='date'/>
+
+                        <p>¿Perído actual?</p>
+                        <input type="radio" />
+                        <input type="radio" />
+
+                    </Modal>
+                ):null
+            }
             
         </ContentContainer>
     )
