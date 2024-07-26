@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState } from 'react';
 import FormCSS from '../styles/FormCSS.module.css'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PersonalInfoForm } from './PersonalInfoForm';
 import { ContactInfoForm } from './ContactInfoForm';
 import { AcademicCareer } from './AcademicCareer';
@@ -35,6 +35,7 @@ const RegisterCreate = () => {
 	const [typeUserEdit, setTypeUserEdit]=useState<string | undefined>(undefined)
 	const [data, setData]= useState<userEditProps[]>([])
 	const [dataProfessor, setDataProfessor]=useState<professor[]>([])
+	const [letterId, setLetterId]=useState<string>('V-');
 
 	const [personalInfo, setPersonalInfo] = useState<personalInfoProps>({
 		name: '',
@@ -139,7 +140,7 @@ const RegisterCreate = () => {
 
 			data.map((infoUserEdit)=>{
 				setPersonalInfo({
-					id: infoUserEdit.id.slice(2),
+					id:infoUserEdit.id.slice(2),
 					name: infoUserEdit.person.forename,
 					lastName:infoUserEdit.person.surname,
 					birthDate:infoUserEdit.person.date_String,
@@ -232,7 +233,7 @@ const RegisterCreate = () => {
 		e.preventDefault()
 		const dataSent= {
 			persona:{
-				id:'V-'+personalInfo.id,
+				id: letterId+personalInfo.id,
 				forename:personalInfo.name,
 				surname:personalInfo.lastName,
 				email:contactInfo.email,
@@ -403,6 +404,8 @@ const RegisterCreate = () => {
 							lastName={personalInfo.lastName}
 							id={personalInfo.id}
 							idEdit = {id}
+							setLetterId={setLetterId}
+							letterId={letterId}
 							birthDate={personalInfo.birthDate}
 							bloodType={personalInfo.bloodType}
 							medicalRecord={personalInfo.medicalRecord}

@@ -24,10 +24,12 @@ interface personalInfoPropsForm{
     parish?:string
     setPersonalInfo:Dispatch<SetStateAction<personalInfoProps>>
     idEdit:string | undefined
+    setLetterId:Dispatch<SetStateAction<string>>
+    letterId:string
 }
 
 
-export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRecord,rol,diocese,parish,setPersonalInfo,idEdit}:personalInfoPropsForm) => {
+export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRecord,rol,diocese,parish,setPersonalInfo,idEdit,setLetterId,letterId}:personalInfoPropsForm) => {
     const {user} = useContext(AuthContext)
     const [bloodData,setBloodData] = useState<blood | null>(null);
     const [dioceseData, setDioceseData]= useState<Diocese[]>([]);
@@ -91,15 +93,23 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
                 }/>
             </div>
 
-            <div>
+            <div className={FormCSS.selectIdLetter}>
                 <LabelForm>Cédula</LabelForm>
-                <InputForm type='number' id='id' minLength={8} value={id} onChange={(e)=>{
-                    setPersonalInfo((personal)=>{
-                            return{...personal, id:e.target.value}
-                        })
-                    }
-
-                }/>
+                <div>
+                    <SelectForm value={letterId} onChange={(e)=>{
+                        setLetterId(e.target.value)
+                    }}>
+                        <option value="V-">V-</option>
+                        <option value="E-">E-</option>
+                    </SelectForm>
+                    <InputForm type='number' id='id' minLength={8} value={id} onChange={(e)=>{
+                        setPersonalInfo((personal)=>{
+                                return{...personal, id:e.target.value}
+                            })
+                        }
+                    
+                    }/>
+                </div>
             </div>
 
             <div>

@@ -379,5 +379,18 @@
 		color: white;
 		
 	}
-	
+	.find{
+		width: 100%;
+		gap: 1rem;
+		display: grid;
+		grid-template-columns: 30% 70%;
+
+	}
+	.selectIdLetter div{
+		height: 6rem;
+		width: 100%;
+		gap: 2rem;
+		display: grid;
+		grid-template-columns:20% 75%;
+	}
 }

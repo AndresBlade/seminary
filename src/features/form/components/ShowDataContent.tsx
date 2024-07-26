@@ -40,6 +40,7 @@ export const ShowDataContent = () => {
   const [infoUserDelete, setInfoUserDelete] = useState<string | undefined>(undefined);
   const [userFind, setUserFind] = useState<string>('');
   const [dataUserFind, setDataUserFind] = useState<string>('')
+  const [letterId, setLetterId] = useState<string>('V-')
   const [typeUserUpdate, setTypeUserUpdate]= useState<string>('')
 	const [getUserByType,setGetUserByType]=useState<string>('')
   const {user} = useContext(AuthContext);
@@ -48,14 +49,16 @@ export const ShowDataContent = () => {
   useEffect(()=>{
     if(!user) return
 
-    if(userDelete.length > 0 && infoUserDelete === 'Seminarista'){
+    if(userDelete.length > 0 && infoUserDelete === 'seminarista'){
       DeleteUser({id:userDelete,token:user.token,url:'seminarian'}).then(()=>{
         alert('eliminado correctamente')
+        setUserDelete('')
       }).catch(error => alert('Error al eliminar'+ error))
     }
-    if(userDelete.length > 0 && (infoUserDelete === 'Profesor' || infoUserDelete === 'Formador')){
+    if(userDelete.length > 0 && (infoUserDelete === 'profesor' || infoUserDelete === 'formador')){
       DeleteUser({id:userDelete,token:user.token,url:'professor'}).then(()=>{
         alert('eliminado correctamente')
+        setUserDelete('')
       }).catch(error => alert('Error al eliminar'+ error))
     }
     if(getUserByType === 'all' || !userFind)
@@ -73,7 +76,7 @@ export const ShowDataContent = () => {
       return;
     }
     if(dataUserFind){
-      GetUserFind({data:dataUserFind, token:user.token}).then((response)=>{
+      GetUserFind({data:letterId+dataUserFind, token:user.token}).then((response)=>{
         if(response.user){
           setData([response.user])
         }else{
@@ -86,18 +89,25 @@ export const ShowDataContent = () => {
       setDataUserFind('');
       return;
     }
-  },[infoUserDelete,userDelete,user,setData,getUserByType,userFind,dataUserFind])
-
-  console.log(
-    
-  )
+  },[infoUserDelete,userDelete,user,setData,getUserByType,userFind,dataUserFind,letterId])
+  
   return (
     <ContentContainer>
       <TitleForm title={'Lista de usuarios'}/>
       <div className={FormCSS.showDataOptions}>
-        <InputForm type='number' placeholder='Buscar por ID' value={userFind} onChange={(e)=>{
-          setUserFind(e.target.value)
-        }}/> 
+        <div className={FormCSS.find}>
+          <SelectForm onChange={(e)=>{
+            setLetterId(e.target.value)
+          
+          }}>
+            <option value="V-">V-</option>
+            <option value="E-">E-</option>
+          </SelectForm>
+
+          <InputForm type='number' placeholder='Buscar por ID' value={userFind} onChange={(e)=>{
+            setUserFind(e.target.value)
+          }}/> 
+        </div>
         <SelectForm value={getUserByType} onChange={(e)=>{
           setGetUserByType(e.target.value)
         }}>
@@ -155,7 +165,7 @@ export const ShowDataContent = () => {
                   <button className={FormCSS.buttonActions} onClick={(e)=>{
                     e.preventDefault()
                     setUserDelete(user.person.id)
-                    setTypeUserUpdate(
+                    setInfoUserDelete(
                       user.seminarian?.status ? 'seminarista' :
                       user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'profesor' :
                       user.professor?.instructor.status ? 'formador': 'N/A'
