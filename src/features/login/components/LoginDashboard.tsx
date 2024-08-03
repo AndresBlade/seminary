@@ -6,8 +6,7 @@ const LoginDashboard = () => {
     return (
         <div className={LoginStyles['login-container']}>
             <LoginImg/>
-            <LoginForm
-            />
+            <LoginForm/>
         </div>
     )
 }
