@@ -13,7 +13,7 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 export const SelectFormField = (props: Props) => {
 	const { labelText, options, onSelectChange, id, ...rest } = props;
 	return (
-		<FormField>
+		<FormField className={rest.className}>
 			{labelText && <Label labelText={labelText} htmlFor={id} />}
 			<select
 				{...rest}

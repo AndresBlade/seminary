@@ -1,34 +1,36 @@
-import { ContentContainer } from '../../ui/container/components/ContentContainer';
-
 import DeleteIcon from '../../../assets/deleteIcon.svg';
 import EditIcon from '../../../assets/editIcon.svg';
 import { TableColumn } from './TableColumn';
 import TableCSS from '../styles/Table.module.css';
-import { useSubjects } from '../hooks/useSubjects';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
 import { useCourses } from '../hooks/useCourses';
 import { useNavigate } from 'react-router-dom';
-import { OrderStage } from '../interfaces/OrderStage';
 import { deleteSubject } from '../helpers/deleteSubject';
 import { getAllSubjects } from '../helpers/getAllSubjects';
 import { AuthContext } from '../../login/context/AuthContext';
+import { SubjectFromDB } from '../interfaces/SubjectFromDB';
+import { OrderableColumnValues } from '../interfaces/OrderableColumnValues';
 
-interface OrderableColumnValues {
-	name: string | null;
-	stage: OrderStage;
+interface Props {
+	subjects: SubjectFromDB[] | null;
+	setSubjects: React.Dispatch<React.SetStateAction<SubjectFromDB[] | null>>;
+	handleOrderChange: (name: string) => void;
+	order: OrderableColumnValues;
+	setSubjectsSetToDefault: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const SubjectTable = () => {
+export const SubjectTable = ({
+	subjects,
+	setSubjects,
+	handleOrderChange,
+	order,
+	setSubjectsSetToDefault,
+}: Props) => {
 	const { user } = useContext(AuthContext);
-	const { subjects, setSubjects } = useSubjects();
 	const coursesFromDB = useCourses();
-	const navigate = useNavigate();
-	const subjectsSetToDefault = useRef(false);
 
-	const [order, setOrder] = useState<OrderableColumnValues>({
-		name: '',
-		stage: 0,
-	});
+	const navigate = useNavigate();
+
 	const names = subjects?.map(subject => subject.description);
 	const courses = subjects?.map(
 		subject =>
@@ -41,112 +43,8 @@ export const SubjectTable = () => {
 	);
 	const ids = subjects?.map(subject => subject.id.toString());
 
-	const handleOrderChange = (name: string) => {
-		setOrder(order => ({
-			name,
-			stage: (order.stage !== 2 ? order.stage + 1 : 1) as OrderStage,
-		}));
-	};
-
-	useEffect(() => {
-		if (subjects && !subjectsSetToDefault.current) {
-			setSubjects(subjects => {
-				if (!subjects) return null;
-				const subjectsCopy = [...subjects];
-				subjectsCopy.sort((a, b) =>
-					a.description < b.description
-						? -1
-						: a.description > b.description
-						? 1
-						: 0
-				);
-
-				return subjectsCopy;
-			});
-			subjectsSetToDefault.current = true;
-		}
-	}, [setSubjects, subjects]);
-
-	useEffect(() => {
-		if (order.name !== 'name') return;
-
-		if (order.stage === 1)
-			return setSubjects(subjects => {
-				if (!subjects) return null;
-				const subjectsCopy = [...subjects];
-				subjectsCopy.sort((a, b) =>
-					a.description < b.description
-						? -1
-						: a.description > b.description
-						? 1
-						: 0
-				);
-
-				return subjectsCopy;
-			});
-
-		return setSubjects(subjects => {
-			if (!subjects) return null;
-			const subjectsCopy = [...subjects];
-			subjectsCopy.sort((a, b) =>
-				a.description < b.description
-					? -1
-					: a.description > b.description
-					? 1
-					: 0
-			);
-			subjectsCopy.reverse();
-
-			return subjectsCopy;
-		});
-	}, [order.name, order.stage, setSubjects]);
-
-	useEffect(() => {
-		if (order.name !== 'course') return;
-
-		if (order.stage === 1)
-			return setSubjects(subjects => {
-				if (!subjects) return null;
-				const subjectsCopy = [...subjects];
-				subjectsCopy.sort((a, b) => a.course_id - b.course_id);
-
-				return subjectsCopy;
-			});
-
-		return setSubjects(subjects => {
-			if (!subjects) return null;
-			const subjectsCopy = [...subjects];
-			subjectsCopy.sort((a, b) => a.course_id - b.course_id);
-			subjectsCopy.reverse();
-
-			return subjectsCopy;
-		});
-	}, [order.name, order.stage, setSubjects]);
-
-	useEffect(() => {
-		if (order.name !== 'semester') return;
-
-		if (order.stage === 1)
-			return setSubjects(subjects => {
-				if (!subjects) return null;
-				const subjectsCopy = [...subjects];
-				subjectsCopy.sort((a, b) => a.semester - b.semester);
-
-				return subjectsCopy;
-			});
-
-		return setSubjects(subjects => {
-			if (!subjects) return null;
-			const subjectsCopy = [...subjects];
-			subjectsCopy.sort((a, b) => a.semester - b.semester);
-			subjectsCopy.reverse();
-
-			return subjectsCopy;
-		});
-	}, [order.name, order.stage, setSubjects]);
-
 	return (
-		<ContentContainer>
+		<>
 			<div className={TableCSS.table}>
 				{names && (
 					<TableColumn
@@ -206,8 +104,7 @@ export const SubjectTable = () => {
 											})
 											.then(subjects => {
 												setSubjects(subjects);
-												subjectsSetToDefault.current =
-													false;
+												setSubjectsSetToDefault(false);
 											})
 											.catch((response: Response) =>
 												response.text()
@@ -232,6 +129,6 @@ export const SubjectTable = () => {
 					</TableColumn>
 				)}
 			</div>
-		</ContentContainer>
+		</>
 	);
 };

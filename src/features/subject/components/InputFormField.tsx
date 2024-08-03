@@ -14,12 +14,12 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const InputFormField = (props: Props) => {
 	const { labelText, onInputChange, id, ...rest } = props;
 	return (
-		<FormField>
+		<FormField className={props.className}>
 			{labelText && <Label labelText={labelText} htmlFor={id} />}
 			<input
+				{...rest}
 				className={FormCSS.input}
 				onChange={onInputChange}
-				{...rest}
 			/>
 		</FormField>
 	);
