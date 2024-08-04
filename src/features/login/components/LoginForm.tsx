@@ -23,7 +23,7 @@ export const LoginForm = () => {
 
 	const handleSubmit = ({ e, usuario, password, letterId }: LoginFormProps) => {
 		e.preventDefault();
-		if (usuario.length >= 8 && password.length >= 3) {
+		if (usuario.length >= 1 && password.length >= 3) {
 			LoginUser({ id: letterId+usuario, password: password })
 				.then(response => {
 					const token = response.headers.get('auth');
