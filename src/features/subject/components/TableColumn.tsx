@@ -31,13 +31,13 @@ type Props = {
 
 export const TableColumn = (props: Props) => {
 	return (
-		<div
-			className={TableCSS.column}
-			onClick={() => {
-				if (props.orderable) props.onClick();
-			}}
-		>
-			<div className={TableCSS.header}>
+		<div className={TableCSS.column}>
+			<div
+				className={TableCSS.header}
+				onClick={() => {
+					if (props.orderable) props.onClick();
+				}}
+			>
 				<p className={TableCSS.headerText}>{props.title}</p>
 				{props.orderable ? (
 					props.stage === 0 ? (

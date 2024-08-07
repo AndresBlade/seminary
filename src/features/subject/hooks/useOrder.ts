@@ -27,15 +27,14 @@ export const useOrder = <T>({ value, setValue, name, stage }: Props<T>) => {
 	};
 
 	useEffect(() => {
-		if (originalValue) return;
-		if (value && valueSetToDefault) setOriginalValue(value);
-	}, [value, valueSetToDefault, originalValue]);
+		setOrder(order => ({ ...order, stage: 1 }));
+	}, [order.name]);
 
 	useEffect(() => {
 		if (value && !valueSetToDefault) {
 			setValue(value => {
-				if (!value) return value;
-				const valueCopy = [...value];
+				if (!originalValue) return value;
+				const valueCopy = [...originalValue];
 				valueCopy.sort((a, b) =>
 					a[order.name] < b[order.name]
 						? -1
@@ -48,7 +47,43 @@ export const useOrder = <T>({ value, setValue, name, stage }: Props<T>) => {
 			});
 			setValueSetToDefault(true);
 		}
-	}, [order.name, setValue, value, valueSetToDefault]);
+	}, [order.name, setValue, value, valueSetToDefault, originalValue]);
+
+	useEffect(() => {
+		if (originalValue) return;
+		if (value && valueSetToDefault) setOriginalValue(value);
+	}, [value, valueSetToDefault, originalValue]);
+
+	useEffect(() => {
+		if (order.stage === 1)
+			return setValue(value => {
+				if (!value) return null;
+				const valueCopy = [...value];
+				valueCopy.sort((a, b) =>
+					a[order.name] < b[order.name]
+						? -1
+						: a[order.name] > b[order.name]
+						? 1
+						: 0
+				);
+
+				return valueCopy;
+			});
+
+		setValue(value => {
+			if (!value) return null;
+			const valueCopy = [...value];
+			valueCopy.sort((a, b) =>
+				a[order.name] < b[order.name]
+					? -1
+					: a[order.name] > b[order.name]
+					? 1
+					: 0
+			);
+			valueCopy.reverse();
+			return valueCopy;
+		});
+	}, [order.name, order.stage, setValue]);
 
 	return {
 		value,

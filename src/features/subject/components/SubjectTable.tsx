@@ -43,6 +43,8 @@ export const SubjectTable = ({
 	);
 	const ids = subjects?.map(subject => subject.id.toString());
 
+	console.log(order);
+
 	return (
 		<>
 			<div className={TableCSS.table}>
