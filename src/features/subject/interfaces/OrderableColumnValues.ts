@@ -1,6 +1,6 @@
 import { OrderStage } from './OrderStage';
 
-export interface OrderableColumnValues {
-	name: string | null;
+export interface OrderableColumnValues<T> {
+	name: keyof T;
 	stage: OrderStage;
 }

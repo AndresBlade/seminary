@@ -37,6 +37,7 @@ export const SearchBar = ({
 	});
 
 	console.log(formState);
+	console.log(originalSubjects);
 
 	const courses = useCourses();
 
@@ -93,14 +94,22 @@ export const SearchBar = ({
 					className={SearchBarCSS.sendButton}
 					onClick={() =>
 						setSubjects(
-							originalSubjects?.filter(
-								subject =>
+							originalSubjects?.filter(subject => {
+								console.log(
+									subject.description.includes(
+										name.toUpperCase()
+									) &&
+										subject.course_id === +course &&
+										subject.semester === +semester
+								);
+								return (
 									subject.description.includes(
 										name.toUpperCase()
 									) &&
 									subject.course_id === +course &&
 									subject.semester === +semester
-							) ?? null
+								);
+							}) ?? null
 						)
 					}
 				>

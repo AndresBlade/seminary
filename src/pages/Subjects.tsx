@@ -5,17 +5,26 @@ import { BackgroundColoredSubtitle } from '../features/ui/title/components/Backg
 import { Title } from '../features/ui/title/components/Title';
 import { TitleList } from '../features/ui/title/components/TitleList';
 import FormCSS from '../features/subject/styles/SubjectForm.module.css';
-import { useSubjectOrder } from '../features/subject/hooks/useSubjectOrder';
+import { useOrder } from '../features/subject/hooks/useOrder';
+import { useSubjects } from '../features/subject/hooks/useSubjects';
 
 export const Subjects = () => {
+	const { subjects: subjectsFromDB, setSubjects: setSubjectsFromDB } =
+		useSubjects();
+
 	const {
-		subjects,
-		setSubjects,
+		value: subjects,
+		setValue: setSubjects,
 		handleOrderChange,
-		setSubjectsSetToDefault,
+		setValueSetToDefault: setSubjectsSetToDefault,
 		order,
-		originalSubjects,
-	} = useSubjectOrder();
+		originalValue: originalSubjects,
+	} = useOrder({
+		value: subjectsFromDB,
+		setValue: setSubjectsFromDB,
+		name: 'description',
+		stage: 1,
+	});
 	return (
 		<>
 			<TitleList>

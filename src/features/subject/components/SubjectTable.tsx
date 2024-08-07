@@ -14,8 +14,8 @@ import { OrderableColumnValues } from '../interfaces/OrderableColumnValues';
 interface Props {
 	subjects: SubjectFromDB[] | null;
 	setSubjects: React.Dispatch<React.SetStateAction<SubjectFromDB[] | null>>;
-	handleOrderChange: (name: string) => void;
-	order: OrderableColumnValues;
+	handleOrderChange: (name: keyof SubjectFromDB) => void;
+	order: OrderableColumnValues<SubjectFromDB>;
 	setSubjectsSetToDefault: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -51,9 +51,9 @@ export const SubjectTable = ({
 						title="Nombre"
 						type="content"
 						orderable
-						onClick={() => handleOrderChange('name')}
+						onClick={() => handleOrderChange('description')}
 						content={names}
-						stage={order.name === 'name' ? order.stage : 0}
+						stage={order.name === 'description' ? order.stage : 0}
 					/>
 				)}
 				{courses && (
@@ -62,8 +62,8 @@ export const SubjectTable = ({
 						type="content"
 						content={courses}
 						orderable
-						onClick={() => handleOrderChange('course')}
-						stage={order.name === 'course' ? order.stage : 0}
+						onClick={() => handleOrderChange('course_id')}
+						stage={order.name === 'course_id' ? order.stage : 0}
 					/>
 				)}
 
