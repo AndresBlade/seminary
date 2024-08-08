@@ -89,6 +89,7 @@ export const useOrder = <T>({ value, setValue, name, stage }: Props<T>) => {
 		value,
 		setValue,
 		handleOrderChange,
+		setOriginalValue,
 		order,
 		originalValue,
 		setValueSetToDefault,

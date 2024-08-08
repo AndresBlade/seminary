@@ -10,6 +10,7 @@ import { getAllSubjects } from '../helpers/getAllSubjects';
 import { AuthContext } from '../../login/context/AuthContext';
 import { SubjectFromDB } from '../interfaces/SubjectFromDB';
 import { OrderableColumnValues } from '../interfaces/OrderableColumnValues';
+import { editSubject } from '../helpers/editSubject';
 
 interface Props {
 	subjects: SubjectFromDB[] | null;
@@ -17,6 +18,9 @@ interface Props {
 	handleOrderChange: (name: keyof SubjectFromDB) => void;
 	order: OrderableColumnValues<SubjectFromDB>;
 	setSubjectsSetToDefault: React.Dispatch<React.SetStateAction<boolean>>;
+	setOriginalSubjects: React.Dispatch<
+		React.SetStateAction<SubjectFromDB[] | null>
+	>;
 }
 
 export const SubjectTable = ({
@@ -25,6 +29,7 @@ export const SubjectTable = ({
 	handleOrderChange,
 	order,
 	setSubjectsSetToDefault,
+	setOriginalSubjects,
 }: Props) => {
 	const { user } = useContext(AuthContext);
 	const coursesFromDB = useCourses();
@@ -43,7 +48,9 @@ export const SubjectTable = ({
 	);
 	const ids = subjects?.map(subject => subject.id.toString());
 
-	console.log(order);
+	const classNames = subjects?.map(subject =>
+		subject.status ? TableCSS.cell : TableCSS.deactivatedCell
+	);
 
 	return (
 		<>
@@ -56,6 +63,7 @@ export const SubjectTable = ({
 						onClick={() => handleOrderChange('description')}
 						content={names}
 						stage={order.name === 'description' ? order.stage : 0}
+						classNames={classNames}
 					/>
 				)}
 				{courses && (
@@ -66,6 +74,7 @@ export const SubjectTable = ({
 						orderable
 						onClick={() => handleOrderChange('course_id')}
 						stage={order.name === 'course_id' ? order.stage : 0}
+						classNames={classNames}
 					/>
 				)}
 
@@ -77,55 +86,94 @@ export const SubjectTable = ({
 						orderable
 						onClick={() => handleOrderChange('semester')}
 						stage={order.name === 'semester' ? order.stage : 0}
+						classNames={classNames}
 					/>
 				)}
 				{ids && (
 					<TableColumn type="element" title="Acciones">
-						{ids.map(id => (
-							<div key={id} className={TableCSS.cell}>
-								<button className={TableCSS.action}>
-									<img
-										src={EditIcon}
-										alt="Editar Materia"
-										onClick={() => navigate(`${id}`)}
-									/>
-								</button>
-								<button
-									className={TableCSS.action}
-									onClick={() => {
-										if (!user) return;
-										deleteSubject(Number(id), user.token)
-											.then(response => {
-												if (response.status === 403)
-													return Promise.reject(
-														response
-													);
-												return getAllSubjects(
+						{ids.map((id, index) => (
+							<div key={id} className={classNames?.[index]}>
+								{subjects?.[index].status ? (
+									<>
+										<button className={TableCSS.action}>
+											<img
+												src={EditIcon}
+												alt="Editar Materia"
+												onClick={() =>
+													navigate(`${id}`)
+												}
+											/>
+										</button>
+										<button
+											className={TableCSS.action}
+											onClick={() => {
+												if (!user) return;
+												deleteSubject(
+													Number(id),
 													user.token
-												);
-											})
-											.then(subjects => {
-												setSubjects(subjects);
-												setSubjectsSetToDefault(false);
-											})
-											.catch((response: Response) =>
-												response.text()
-											)
-											.then(error => {
-												if (!error) return;
-												const errorText = `La materia no puede ser eliminada, puesto que precede a${
-													error.split('precents')[1]
-												}`;
-												alert(errorText);
-											})
-											.catch(error => console.log(error));
-									}}
-								>
-									<img
-										src={DeleteIcon}
-										alt="Eliminar Materia"
-									/>
-								</button>
+												)
+													.then(response => {
+														if (
+															response.status ===
+															403
+														)
+															return Promise.reject(
+																response
+															);
+														return getAllSubjects(
+															user.token
+														);
+													})
+													.then(subjects => {
+														setSubjects(subjects);
+														setOriginalSubjects(
+															subjects
+														);
+														setSubjectsSetToDefault(
+															false
+														);
+													})
+													.catch(
+														(response: Response) =>
+															response.text()
+													)
+													.then(error => {
+														if (!error) return;
+														const errorText = `La materia no puede ser eliminada, puesto que precede a${
+															error.split(
+																'precents'
+															)[1]
+														}`;
+														alert(errorText);
+													})
+													.catch(error =>
+														console.log(error)
+													);
+											}}
+										>
+											<img
+												src={DeleteIcon}
+												alt="Eliminar Materia"
+											/>
+										</button>
+									</>
+								) : (
+									<button
+										className={TableCSS.activateAction}
+										onClick={() => {
+											editSubject({
+												subject: {
+													...subjects?.[index],
+													status: true,
+												},
+											}).catch(error =>
+												console.log(error)
+											);
+										}}
+									>
+										ACTIVAR
+									</button>
+								)}
 							</div>
 						))}
 					</TableColumn>

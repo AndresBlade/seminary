@@ -62,6 +62,7 @@ const handleSubmit = ({
 					academic_field_id: +form.academicField,
 					course_id: +form.course,
 					precedent: form.precedent,
+					status: true,
 					semester,
 				},
 				token,

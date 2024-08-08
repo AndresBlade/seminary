@@ -1,7 +1,7 @@
 import { Subject } from '../interfaces/Subject';
 
 interface Props {
-	subject: Subject & { id: number };
+	subject: Subject & { id: number; status: boolean };
 	token: string;
 }
 

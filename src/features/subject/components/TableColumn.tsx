@@ -12,6 +12,7 @@ interface NodeInsideColumn {
 interface ContentInsideColumn {
 	type: 'content';
 	content: string[];
+	classNames?: string[];
 }
 
 interface OrderableColumn {
@@ -75,8 +76,13 @@ export const TableColumn = (props: Props) => {
 				)}
 			</div>
 			{props.type === 'content'
-				? props.content.map((content, key) => (
-						<div key={key} className={TableCSS.cell}>
+				? props.content.map((content, index) => (
+						<div
+							key={index}
+							className={
+								props.classNames?.[index] ?? TableCSS.cell
+							}
+						>
 							<p>{content}</p>
 						</div>
 				  ))

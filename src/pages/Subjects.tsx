@@ -17,6 +17,7 @@ export const Subjects = () => {
 		setValue: setSubjects,
 		handleOrderChange,
 		setValueSetToDefault: setSubjectsSetToDefault,
+		setOriginalValue: setOriginalSubjects,
 		order,
 		originalValue: originalSubjects,
 	} = useOrder({
@@ -44,6 +45,7 @@ export const Subjects = () => {
 						order={order}
 						handleOrderChange={handleOrderChange}
 						setSubjectsSetToDefault={setSubjectsSetToDefault}
+						setOriginalSubjects={setOriginalSubjects}
 					/>
 				</div>
 			</ContentContainer>

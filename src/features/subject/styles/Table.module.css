@@ -16,6 +16,11 @@
 	padding: 0 2rem;
 }
 
+.deactivatedCell {
+	composes: cell;
+	background-color: #dddeee;
+}
+
 .column {
 	display: flex;
 	flex-direction: column;
@@ -54,4 +59,10 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
+}
+
+.activateAction {
+	composes: action;
+	color: #00aa00;
+	font-weight: 700;
 }
