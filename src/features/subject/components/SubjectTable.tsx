@@ -161,14 +161,46 @@ export const SubjectTable = ({
 									<button
 										className={TableCSS.activateAction}
 										onClick={() => {
-											editSubject({
-												subject: {
-													...subjects?.[index],
-													status: true,
-												},
-											}).catch(error =>
-												console.log(error)
-											);
+											const subject = subjects?.[index];
+											if (!subject) return;
+											if (!user) return;
+											deleteSubject(
+												Number(id),
+												user.token
+											)
+												.then(response => {
+													if (response.status === 403)
+														return Promise.reject(
+															response
+														);
+													return getAllSubjects(
+														user.token
+													);
+												})
+												.then(subjects => {
+													setSubjects(subjects);
+													setOriginalSubjects(
+														subjects
+													);
+													setSubjectsSetToDefault(
+														false
+													);
+												})
+												.catch((response: Response) =>
+													response.text()
+												)
+												.then(error => {
+													if (!error) return;
+													const errorText = `La materia no puede ser eliminada, puesto que precede a${
+														error.split(
+															'precents'
+														)[1]
+													}`;
+													alert(errorText);
+												})
+												.catch(error =>
+													console.log(error)
+												);
 										}}
 									>
 										ACTIVAR
