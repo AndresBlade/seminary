@@ -5,7 +5,6 @@ import DataContent from './DataContent'
 import AddIcon from '../../../assets/MaterialSymbolsAddCircleOutline.svg'
 import Input from './Input'
 import editIcon from '../../../assets/editIcon.svg'
-import deleteIcon from '../../../assets/deleteIcon.svg'
 import { useContext, useEffect, useState } from 'react'
 import Modal from './Modal'
 import Label from './Label'
@@ -16,13 +15,24 @@ import useGet from '../../../shared/hooks/useGet';
 import { DeletePeriod } from '../helpers/DeletePeriod';
 import { GetPeriods } from '../helpers/GetPeriods';
 import { UpdateUser } from '../helpers/UpdateUser';
+import { GetPeriodUpdate } from '../helpers/GetPeriodUpdate';
+import { UpdateSemester } from '../helpers/UpdateSemester';
+import { Animation } from '../../../shared/animation/Animation';
+import { ActivateSemester } from '../helpers/ActivateSemester';
+
 export const Period = () => {
     const apiUrl = 'http://127.0.0.1:3000/AcademicTerm'
     const {user} = useContext(AuthContext)
     const [showModal,setShowModal]=useState(false);
-    const [deleteUser, setDeleteUser]= useState(0);
+    const [deletePeriod, setDeletePeriod]= useState(0);
     const {data,loading,error,setData}=useGet<GetPeriod[]>(apiUrl)
     const [updateUser, setUpdateUser]=useState(0);
+    const [updateSemester, setUpdateSemester] = useState(0)
+    const [activateSemester,setActivateSemester]= useState(0)
+    const [semester, setSemester] = useState({
+        semesterNumber:0,
+        semesterId:0
+    })
     const [createPeriod, setCreatePeriod] = useState<CreatePeriod>({
         start_date:'',
         end_date:''
@@ -30,84 +40,161 @@ export const Period = () => {
     )
 
     useEffect(()=>{
+        data?.forEach(semester=>{
+            if(semester.status === 'ACTIVO'){
+                setSemester({
+                    semesterNumber:semester.semester,
+                    semesterId:semester.id
+                })
+                return
+            }
+        })
+    },[data])
+    
+    useEffect(()=>{
         if(!user?.token)return
-        if(deleteUser === 0 || updateUser === 0) return
-        if(deleteUser !== 0){
-            DeletePeriod({id:deleteUser.toString(),token:user?.token,url:apiUrl}).then(()=>{
+        if(deletePeriod !== 0){
+            DeletePeriod({id:deletePeriod.toString(),token:user?.token,url:apiUrl}).then(()=>{
                     alert('Eliminado correctamente')
-                    setDeleteUser(0)
-                    return GetPeriods({id:'0'});
+                    setDeletePeriod(0)
+                    setSemester({
+                        semesterNumber:0,
+                        semesterId:0
+                    })
+                    return GetPeriods();
             }).then(period => setData(period)).catch(error=>{
                 console.log(error)
                 alert('Error al eliminar' + error)
             })
         }
-        if(updateUser !== 0){
-            GetPeriods({id:updateUser.toString()}).then(response=>{
-                response.map(period=>{
-                    setCreatePeriod({
-                        start_date:period.start_strin,
-                        end_date: period.end_string
-                    })
+        if(updateUser > 0){
+            GetPeriodUpdate({id:updateUser}).then(response=>{
+                setCreatePeriod({
+                    start_date:response.start_strin,
+                    end_date:response.end_string
                 })
             }).catch(error=>{
                 console.log(error)
                 alert('Error al traer datos para actualizar')
-                return GetPeriods({id:'0'});
+                return GetPeriods();
             })
         }
-    },[deleteUser,user?.token,setData,updateUser])
+        if(updateSemester > 0){
+            console.log('que quiere el pueblo? Seeeeeeeettttzoooooooooooooo')
+            UpdateSemester(updateSemester,user.token).then(response=>{
+                if(response.ok){
+                    alert('Semestre actualizado correctamente')
+                    setUpdateSemester(0)
+                    return GetPeriods().then(response=>{
+                        setData(response)
+                    }).catch(error=>{
+                        console.error(error)
+                        alert('error al traer datos para listar')
+                    });
+            }})
+            .catch(error=>{
+                setUpdateSemester(0)
+                console.error(error)
+                alert('Error al actualizar semestre')
+            })
+        }
 
+        if(activateSemester > 0){
+            alert('Que quiere el pueblo?? Seeeetttzzzoooooooooooooo')
+            ActivateSemester({id:Number(activateSemester),token:user.token}).then(response=>{
+                if(response.ok){
+                    alert('Activado correctamente');
+                    setActivateSemester(0)
+                    return GetPeriods().then(response=>{
+                        setData(response)
+                    }).catch(error=>{
+                        console.error(error)
+                        alert('error al traer datos para listar')
+                    });
+                }else{
+                    throw new Error
+                }
+            }).catch(error=>{
+                console.error(error)
+                alert('error al activar semestre')
+            })
+        }
+    },[deletePeriod,user?.token,setData,updateUser,updateSemester,activateSemester])
 
+    console.log(updateUser)
     const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        console.log('desde el handle')
         if(!user?.token) return
 
         if(updateUser === 0){
             CreateAcademicPeriod({data:createPeriod,token:user?.token}).then((response)=>{
                 if(response.ok){
-                    alert('Periodo creado exitosamente')
+                        alert('Periodo creado exitosamente'),
+                        setShowModal(false),
+                        GetPeriods().then(response=>{
+                            setData(response)
+                        }).catch(error=>{console.log(error), 
+                        alert('error al listar periodos')})
+                }
+            }).catch((error)=>{
+                console.error(error)
+                alert('Error al crear periodo' + error)
+            })
+        }else{
+            UpdateUser({id:updateUser.toString(), token:user?.token,start_date:createPeriod.start_date,end_date:createPeriod.end_date}).then((response)=>{
+                if(response.ok){
+                    alert('actualizado correctamente')
+                    setUpdateUser(0)
                     setShowModal(false)
-                    return GetPeriods({id:'0'}).then(period=>setData(period)).catch(error=>{
-                        console.log(error)
-                        alert('Error al listar periodos')
-                    })
-                    
+                    return GetPeriods().then(response=>{
+                        setData(response)
+                    }).catch(error=>{console.log(error), 
+                    alert('error al listar periodos')})
                 }
                 else{
                     throw new Error
                 }
             }).catch((error)=>{
-                console.log(createPeriod)
-                alert('Error al crear periodo' + error)
-            })
-        }else{
-            UpdateUser({id:updateUser.toString(), token:user?.token,start_date:createPeriod.start_date,end_date:createPeriod.end_date}).then(()=>{
-                alert('actualizado correctamente')
-                setUpdateUser(0)
-                return GetPeriods({id:'0'});
-            }).catch((error)=>{
-                console.log(error)
+                console.error(error)
                 alert('Error al actualizar')
             })
         }
         
     }
-
     console.log(data)
-
     return (
         <ContentContainer>
             <div className={PeriodCSS.addPeriod}>
                 <h2>Lista periodos académicos</h2>
-                <button className={PeriodCSS.buttonAddPeriod} onClick={(e)=>{
+                {semester.semesterNumber ? <button className={PeriodCSS.buttonAddPeriod} onClick={(e)=>{
                     e.preventDefault()
-                    setShowModal(true)
+                    {semester.semesterNumber === 1 ? 
+                            setUpdateSemester(semester.semesterId)
+                        :
+                            setDeletePeriod(semester.semesterId)
+                    }
                 }}>
-                    <img src={AddIcon} alt="añadir" />
-                    Agregar nuevo
+                    {semester.semesterNumber === 1 ? 'Ir a 2do Semestre' : 'Finalizar semestre'}
                 </button>
+                    :
+                    <button className={PeriodCSS.buttonAddPeriod} onClick={(e)=>{
+                        e.preventDefault()
+                        setShowModal(true)
+                    }}>
+                        <img src={AddIcon} alt="añadir" />
+                        Agregar nuevo
+                    </button>
+                }
+                {semester.semesterNumber === 2 ? 
+                    <button className={PeriodCSS.buttonAddPeriod} onClick={(e)=>{
+                        e.preventDefault()
+                        setUpdateSemester(semester.semesterId)
+                    }}>
+                        Volver a 1er semestre
+                    </button>   :
+                        null
+
+                }
             </div>
             <div className={PeriodCSS.findPeriod}>
                 <Input type='text' placeholder='Busca aquí...'/>
@@ -124,19 +211,18 @@ export const Period = () => {
                 <p>Actual</p>
                 <p className={PeriodCSS.dataHeaderActions}>Acciones</p>
             </DataHeader>
-                {   error ? <p>Error al traer los datos</p>:
-                    data?.length === 0 ? <p>No hay datos</p>:
+                {   error ? (<p>Error al traer los datos</p>):
+                    loading ? (
+                        <Animation></Animation>
+                    ) :
+                    data?.length === 0 ? (<p>No hay datos</p>):
                     data?.map((period)=>(
                         <DataContent key={period.id}>
                             <p>{period.name}</p>
                             <p>{period.start_strin}</p>
                             <p>{period.end_string}</p>
                             <p className={PeriodCSS.dataContentSemester}>{period.semester}</p>
-                            <p>{period.status}</p>
-                            <div className={PeriodCSS.statusPeriodContainer}>
-                                <div className={PeriodCSS.statusPeriod}></div>
-                                
-                            </div>          
+                            <p>{period.status}</p>        
                             <div>
                                 <button className={PeriodCSS.buttonActions} onClick={()=>{
                                     setUpdateUser(period.id)
@@ -146,19 +232,11 @@ export const Period = () => {
                                 }}>
                                     <img src={editIcon} alt="editar" />
                                 </button>
-                                <button className={PeriodCSS.buttonActions} onClick={()=>{
-                                        setDeleteUser(period.id)
-                                    }
-                                }>
-                                    <img src={deleteIcon} alt="eliminar" />
-                                </button>
                             </div>
                         </DataContent>
-
                     ))
                 }
-                
-
+            
             {
                 showModal ? (
                     <Modal
