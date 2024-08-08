@@ -1,0 +1,68 @@
+:root {
+	--font-orange: #e8671e;
+}
+
+.table {
+	display: flex;
+	border-radius: 2rem;
+	border: #dddeee solid 1px;
+	overflow-x: auto;
+}
+
+.cell {
+	height: 5rem;
+	display: flex;
+	align-items: center;
+	padding: 0 2rem;
+}
+
+.deactivatedCell {
+	composes: cell;
+	background-color: #dddeee;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.header {
+	composes: cell;
+	font-weight: 700;
+	cursor: pointer;
+	gap: 1.5rem;
+	color: var(--font-orange);
+	user-select: none;
+	border-bottom: #dddeee solid 1px;
+}
+
+.arrows {
+	display: flex;
+	flex-direction: column;
+}
+
+.arrow {
+	width: 8px;
+	transform: scale(3);
+	filter: contrast(0.2);
+}
+
+.highlightedArrow {
+	composes: arrow;
+	filter: invert(42%) sepia(91%) saturate(810%) hue-rotate(347deg)
+		brightness(94%) contrast(94%);
+}
+
+.action {
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.activateAction {
+	composes: action;
+	color: #00aa00;
+	font-weight: 700;
+}

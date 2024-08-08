@@ -9,6 +9,7 @@
 	padding: 1rem 3.2rem;
 	box-shadow: 0 1px 4px 0 #0000000c;
 	align-items: center;
+	z-index: 1000;
 }
 
 .menuButton {

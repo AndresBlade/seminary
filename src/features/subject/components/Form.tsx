@@ -6,16 +6,16 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 import { SelectFormField } from './SelectFormField';
 import { ErrorBox } from './ErrorBox';
 import { FormField } from './FormField';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { createSubject } from '../helpers/createSubject';
 import { AuthContext } from '../../login/context/AuthContext';
 import { useSubjects } from '../hooks/useSubjects';
 import { useCourses } from '../hooks/useCourses';
 import { useAcademicFields } from '../hooks/useAcademicFields';
+import { editSubject } from '../helpers/editSubject';
 
 interface Form {
 	name: string;
-	code: string;
 	course: string;
 	semester: '1' | '2';
 	precedent: number | null;
@@ -28,6 +28,7 @@ interface HandleSubmitProps {
 	setError: React.Dispatch<React.SetStateAction<string | null>>;
 	navigate: NavigateFunction;
 	token: string;
+	id: string | undefined;
 }
 
 const handleSubmit = ({
@@ -36,23 +37,37 @@ const handleSubmit = ({
 	setError,
 	navigate,
 	token,
+	id,
 }: HandleSubmitProps) => {
 	e.preventDefault();
 	if (!form.name) return setError('Incluya el nombre de la materia');
-	if (!form.code) return setError('Incluya el código de la materia');
 	const semester = +form.semester;
 	if (semester !== 1 && semester !== 2) return;
 
-	createSubject({
-		subject: {
-			description: form.name,
-			academic_field_id: +form.academicField,
-			course_id: +form.course,
-			precedent: form.precedent,
-			semester,
-		},
-		token,
-	})
+	(isNaN(Number(id))
+		? createSubject({
+				subject: {
+					description: form.name,
+					academic_field_id: +form.academicField,
+					course_id: +form.course,
+					precedent: form.precedent,
+					semester,
+				},
+				token,
+		  })
+		: editSubject({
+				subject: {
+					id: Number(id),
+					description: form.name,
+					academic_field_id: +form.academicField,
+					course_id: +form.course,
+					precedent: form.precedent,
+					status: true,
+					semester,
+				},
+				token,
+		  })
+	)
 		.then(() => navigate('..'))
 		.catch(err => console.log(err));
 	console.log(form);
@@ -62,7 +77,6 @@ const handleSubmit = ({
 export const Form = () => {
 	const {
 		name,
-		code,
 		course,
 		semester,
 		precedent,
@@ -73,7 +87,6 @@ export const Form = () => {
 		setFormState,
 	} = useForm<Form>({
 		name: '',
-		code: '',
 		course: '1',
 		semester: '1',
 		precedent: null,
@@ -82,7 +95,7 @@ export const Form = () => {
 
 	const [error, setError] = useState<string | null>(null);
 	const { user } = useContext(AuthContext);
-	const subjects = useSubjects();
+	const { subjects } = useSubjects();
 	const courses = useCourses();
 	const academicFields = useAcademicFields();
 	const navigate = useNavigate();
@@ -92,24 +105,53 @@ export const Form = () => {
 			(subject.course_id === +course && subject.semester < +semester)
 		//&& subject.semester > +semester
 	);
+	const courseStage = courses?.find(
+		courseFromDB => courseFromDB.id === +course
+	)?.stage_id;
 
 	const canThereBePrecedents = !!selectSubjectOptions?.length;
 
+	const { id } = useParams();
+
+	console.log(formState);
+
 	useEffect(() => {
+		if (!subjects) return;
+		const idAsNumber = Number(id);
+		if (isNaN(idAsNumber)) return;
+
+		const subject = subjects.find(subject => subject.id === idAsNumber);
+
+		if (!subject) return;
+
+		console.log(subject);
+
+		setFormState({
+			name: subject.description,
+			academicField: subject.academic_field_id.id.toString(),
+			course: subject.course_id.toString(),
+			precedent: subject.precedent ? subject.precedent.id : null,
+			semester: subject.semester.toString() as '1' | '2',
+		});
+	}, [id, setFormState, subjects]);
+
+	useEffect(() => {
+		if (!isNaN(Number(id))) return;
 		if (courses)
 			setFormState(formState => ({
 				...formState,
 				course: courses[0].id.toString(),
 			}));
-	}, [courses, setFormState]);
+	}, [courses, setFormState, id]);
 
 	useEffect(() => {
+		if (!isNaN(Number(id))) return;
 		if (academicFields)
 			setFormState(formState => ({
 				...formState,
 				course: academicFields[0].id.toString(),
 			}));
-	}, [academicFields, setFormState]);
+	}, [academicFields, setFormState, id]);
 
 	useEffect(() => {
 		if (!canThereBePrecedents)
@@ -127,6 +169,7 @@ export const Form = () => {
 							setError,
 							navigate,
 							token: user.token,
+							id,
 						});
 				}}
 			>
@@ -139,16 +182,6 @@ export const Form = () => {
 						autoComplete="Off"
 						id="code"
 						value={name}
-						onInputChange={onInputChange}
-					/>
-
-					<InputFormField
-						name="code"
-						type="text"
-						placeholder="Ej. CIC-1"
-						labelText="Código de la materia *"
-						id="code"
-						value={code}
 						onInputChange={onInputChange}
 					/>
 
@@ -190,7 +223,7 @@ export const Form = () => {
 							options={academicFields
 								.filter(
 									academicField =>
-										academicField.stage.id === +course
+										academicField.stage.id === courseStage
 								)
 								.map(academicFieldFromDB => ({
 									content: academicFieldFromDB.description,

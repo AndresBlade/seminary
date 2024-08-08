@@ -14,5 +14,5 @@ export const useSubjects = () => {
 			.catch(error => console.log(error));
 	}, [user]);
 
-	return subjects;
+	return { subjects, setSubjects };
 };

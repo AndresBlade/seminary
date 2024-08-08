@@ -10,6 +10,7 @@
 	background-color: #ffffff;
 	padding: 3rem;
 	border-radius: 2rem;
+	overflow-x: auto;
 }
 
 @media (min-width: 480px) {
