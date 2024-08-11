@@ -19,6 +19,7 @@ import { GetPeriodUpdate } from '../helpers/GetPeriodUpdate';
 import { UpdateSemester } from '../helpers/UpdateSemester';
 import { Animation } from '../../../shared/animation/Animation';
 import { ActivateSemester } from '../helpers/ActivateSemester';
+import { FindPeriod } from '../helpers/FindPeriod';
 
 export const Period = () => {
     const apiUrl = 'http://127.0.0.1:3000/AcademicTerm'
@@ -29,6 +30,8 @@ export const Period = () => {
     const [updateUser, setUpdateUser]=useState(0);
     const [updateSemester, setUpdateSemester] = useState(0)
     const [activateSemester,setActivateSemester]= useState(0)
+    const [date, setDate]= useState('');
+    const [dateFind, setDateFind]=useState('');
     const [semester, setSemester] = useState({
         semesterNumber:0,
         semesterId:0
@@ -119,9 +122,27 @@ export const Period = () => {
                 alert('error al activar semestre')
             })
         }
-    },[deletePeriod,user?.token,setData,updateUser,updateSemester,activateSemester])
 
-    console.log(updateUser)
+        if(dateFind.length > 0){
+            FindPeriod({date:dateFind}).then(response=>{
+                console.log(response)
+                setData(response)
+            }).catch(error=>{
+                alert('Error al buscar los datos')
+                console.error(error)
+            })
+        }
+        if(date === ''){
+            GetPeriods().then(response=>{
+                setData(response)
+            }).catch(error=>{
+                console.log(error)
+                alert('error al traer los datos')
+            })
+        }
+
+    },[deletePeriod,user?.token,setData,updateUser,updateSemester,activateSemester,dateFind,date])
+
     const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         if(!user?.token) return
@@ -161,7 +182,7 @@ export const Period = () => {
         }
         
     }
-    console.log(data)
+
     return (
         <ContentContainer>
             <div className={PeriodCSS.addPeriod}>
@@ -197,8 +218,13 @@ export const Period = () => {
                 }
             </div>
             <div className={PeriodCSS.findPeriod}>
-                <Input type='text' placeholder='Busca aquí...'/>
-                <button className={PeriodCSS.buttonFind}>
+                <Input type='date' value={date} onChange={(e)=>{
+                    setDate(e.target.value);
+                }}/>
+                <button className={PeriodCSS.buttonFind} onClick={(e)=>{
+                    e.preventDefault()
+                    setDateFind(date)
+                }}>
                     Buscar
                 </button>
             </div>
@@ -211,10 +237,11 @@ export const Period = () => {
                 <p>Actual</p>
                 <p className={PeriodCSS.dataHeaderActions}>Acciones</p>
             </DataHeader>
-                {   error ? (<p>Error al traer los datos</p>):
+                {   
                     loading ? (
                         <Animation></Animation>
                     ) :
+                    error ? (<p>Error al traer los datos</p>):
                     data?.length === 0 ? (<p>No hay datos</p>):
                     data?.map((period)=>(
                         <DataContent key={period.id}>
@@ -251,14 +278,14 @@ export const Period = () => {
                                 setCreatePeriod((period)=>{
                                     return {...period, start_date:e.target.value}
                                 })
-                            }}/>
+                            }} required/>
                             <Label>Fecha Culminación</Label>
                             <Input type='date' value={createPeriod.end_date} onChange={(e)=>{
                                 e.preventDefault();
                                 setCreatePeriod((period)=>{
                                     return {...period, end_date:e.target.value}
                                 })
-                            }}/>
+                            }} required/>
 
                             <button type='submit' className={PeriodCSS.buttonSave}>Guardar</button>
                         </form>
