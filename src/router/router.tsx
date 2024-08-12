@@ -13,6 +13,7 @@ import RegisterForm from '../pages/RegisterForm';
 import RegisterTable from '../pages/RegisterTable';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
+import { Instructions } from '../pages/Instructions';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -70,6 +71,7 @@ export const router = createBrowserRouter([
 							{ index: true, element: <Subjects /> },
 							{ path: 'new', element: <SubjectForm /> },
 							{ path: ':id', element: <SubjectForm /> },
+							{ path: 'instruction', element: <Instructions /> },
 						],
 					},
 					{

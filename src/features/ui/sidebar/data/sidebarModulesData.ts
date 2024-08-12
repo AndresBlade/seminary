@@ -69,6 +69,10 @@ export const sidebarData: SidebarItemData[] = [
 		children: [
 			{ content: 'Agregar Materia', path: 'subject/new' },
 			{ content: 'Lista de materias', path: 'subject' },
+			{
+				content: 'Asignar profesores a materias',
+				path: 'subject/instruction',
+			},
 		],
 	},
 	{
