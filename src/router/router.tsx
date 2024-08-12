@@ -9,6 +9,8 @@ import { DiocesisCreate } from '../pages/DiocesisCreate';
 import { DiocesisTable } from '../pages/DiocesisTable';
 import { Roles } from '../pages/Roles';
 import { RoleForm } from '../pages/RoleForm';
+import RegisterForm from '../pages/RegisterForm';
+import RegisterTable from '../pages/RegisterTable';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
 
@@ -31,6 +33,25 @@ export const router = createBrowserRouter([
 							{ path: 'new', element: <RoleForm /> },
 							{ path: ':id', element: <RoleForm /> },
 						],
+					},
+					{
+						path:'user',
+						children:[
+							{path:'list',element:<RegisterTable/>}
+						]
+					},
+					{
+						path:'profesor',
+						children:[
+							{
+								index:true,
+								element: <RegisterTable/>
+							},
+							{path: 'new', element:<RegisterForm/>},
+							
+							{path: 'professor/:id', element:<RegisterForm/>},
+							{path: 'seminarian/:id', element:<RegisterForm/>}
+						]
 					},
 					{
 						path: 'diocese',

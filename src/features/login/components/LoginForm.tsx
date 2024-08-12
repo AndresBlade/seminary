@@ -9,7 +9,7 @@ interface LoginFormProps {
 	e: React.FormEvent<HTMLFormElement>;
 	usuario: string;
 	password: string;
-	letterId:string;
+	letterId: string;
 }
 
 export const LoginForm = () => {
@@ -19,12 +19,17 @@ export const LoginForm = () => {
 	const [letterId, setLetterId] = useState('');
 	const navigate = useNavigate();
 
-	console.log(letterId+usuario)
+	console.log(letterId + usuario);
 
-	const handleSubmit = ({ e, usuario, password, letterId }: LoginFormProps) => {
+	const handleSubmit = ({
+		e,
+		usuario,
+		password,
+		letterId,
+	}: LoginFormProps) => {
 		e.preventDefault();
 		if (usuario.length >= 1 && password.length >= 3) {
-			LoginUser({ id: letterId+usuario, password: password })
+			LoginUser({ id: letterId + usuario, password: password })
 				.then(response => {
 					const token = response.headers.get('auth');
 
@@ -63,7 +68,9 @@ export const LoginForm = () => {
 			<h1 className={LoginStyles['login-container__form__title']}>
 				¡Bienvenido!
 			</h1>
-			<h2 className={LoginStyles['login-container__form__subtitle']}>Ingrese sus credenciales para acceder a su cuenta</h2>
+			<h2 className={LoginStyles['login-container__form__subtitle']}>
+				Ingrese sus credenciales para acceder a su cuenta
+			</h2>
 			<form
 				action="POST"
 				onSubmit={e => {

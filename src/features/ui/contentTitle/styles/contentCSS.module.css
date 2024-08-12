@@ -1,5 +1,5 @@
 .title-h1 h1{
-    border-bottom: 0.5rem solid #DC2626;
+    border-bottom: 0.5rem solid #ECAA19;
     width: 22%;
 }
 .title-h2{
@@ -10,10 +10,12 @@
     margin-bottom: 3rem;
 }
 .title-h2 h2{
-    color: var(--textColor);
+    color: #ECAA19;
     font-weight: bold;
     text-align: center;
 }
+
+
 
 @media (min-width: 601px) and (max-width: 1024px){
     .content-title__container{
@@ -23,7 +25,7 @@
         margin-left: 15%
     }
     .title-h1 h1{
-        border-bottom: 0.5rem solid #DC2626;
+        border-bottom: 0.5rem solid #ECAA19;
         width: 8%;
     }
 
@@ -40,7 +42,7 @@
         margin-left: 15%
     }
     .title-h1 h1{
-        border-bottom: 0.5rem solid #DC2626;
+        border-bottom: 0.5rem solid #ECAA19;
         width: 5.5%;
     }
 
