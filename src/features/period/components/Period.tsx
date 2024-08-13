@@ -127,6 +127,7 @@ export const Period = () => {
             FindPeriod({date:dateFind}).then(response=>{
                 console.log(response)
                 setData(response)
+                setDateFind('')
             }).catch(error=>{
                 alert('Error al buscar los datos')
                 console.error(error)
