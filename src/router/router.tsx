@@ -13,6 +13,8 @@ import RegisterForm from '../pages/RegisterForm';
 import RegisterTable from '../pages/RegisterTable';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
+import { PeriodCreate } from '../pages/PeriodCreate';
+
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -83,6 +85,15 @@ export const router = createBrowserRouter([
 							{ path: ':id', element: <ParishCreate /> },
 						],
 					},
+					{
+						path:'periodo',
+						children:[
+							{
+								index:true,
+								element: <PeriodCreate/>
+							}
+						]
+					}
 				],
 			},
 		],
