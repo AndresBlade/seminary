@@ -1,24 +1,50 @@
+import { useContext, useState } from 'react';
 import { TableColumn } from '../../subject/components/TableColumn';
 import { useOrder } from '../../subject/hooks/useOrder';
-import { useSubjects } from '../../subject/hooks/useSubjects';
 import TableCSS from '../../subject/styles/Table.module.css';
 import { ContentContainer } from '../../ui/container/components/ContentContainer';
+import { useInstructions } from '../hooks/useInstructions';
+import { useProfessors } from '../hooks/useProfessors';
 import { AssignButton } from './AssignButton';
+import { ProfessorSelect } from './ProfessorSelect';
+import { useAcademicTerms } from '../hooks/useAcademicTerm';
+import { AuthContext } from '../../login/context/AuthContext';
+import { editInstruction } from '../helpers/editInstruction';
+import { getInstructions } from '../helpers/getInstructions';
 
 export const Table = () => {
-	const { subjects: subjectsFromDB, setSubjects: setSubjectsFromDB } =
-		useSubjects();
+	const { user } = useContext(AuthContext);
+
 	const {
-		value: subjects,
-		handleOrderChange,
+		instructions: instructionsFromDB,
+		setInstructions: setInstructionsFromDB,
+	} = useInstructions();
+
+	const {
+		value: instructions,
+		setValue: setInstructions,
 		order,
+		handleOrderChange,
+		setOriginalValue,
+		setValueSetToDefault,
 	} = useOrder({
-		value: subjectsFromDB,
-		name: 'description',
-		setValue: setSubjectsFromDB,
-		stage: 1,
+		value: instructionsFromDB,
+		setValue: setInstructionsFromDB,
+		name: 'subject',
+		stage: 0,
 	});
-	const names = subjects?.map(subject => subject.description);
+
+	const activeAcademicTerm = useAcademicTerms()?.find(
+		academicTerm => academicTerm.status === 'ACTIVO'
+	);
+
+	const [professorSelect, setProfessorSelect] = useState<{
+		isShowing: boolean;
+		subjectId: number | null;
+	}>({ isShowing: false, subjectId: null });
+
+	const professors = useProfessors();
+	const names = instructions?.map(instruction => instruction.subject);
 	return (
 		<ContentContainer>
 			<div className={TableCSS.table}>
@@ -29,17 +55,67 @@ export const Table = () => {
 						type="content"
 						stage={order.stage}
 						content={names}
-						onClick={() => handleOrderChange('description')}
+						onClick={() => handleOrderChange('subject')}
 					/>
 				)}
-				{subjects && (
+				{instructions && professors && (
 					<TableColumn type="element" title="Profesor">
-						{subjects?.map((subject, index) => (
+						{instructions?.map((instruction, index) => (
 							<div className={TableCSS.cell} key={index}>
-								{index === 0 ? (
-									'Nicolás Maduro Moros (insertado desde el front)'
+								{(professorSelect.isShowing &&
+									instruction.subject_id ===
+										professorSelect.subjectId) ||
+								instruction.professor_id ? (
+									<ProfessorSelect
+										instruction={instruction}
+										professors={professors}
+										handleChange={e => {
+											user &&
+												editInstruction({
+													instruction: {
+														...instruction,
+														professor_id:
+															e.target.value,
+													},
+													token: user.token,
+												})
+													.then(() =>
+														getInstructions(
+															user.token
+														)
+													)
+													.then(instructions => {
+														const activeInstructions =
+															instructions.filter(
+																instruction =>
+																	instruction.academic_term_id ===
+																	activeAcademicTerm?.id
+															);
+														setInstructions(
+															activeInstructions
+														);
+														setOriginalValue(
+															activeInstructions
+														);
+														setValueSetToDefault(
+															false
+														);
+													})
+													.catch(err =>
+														console.log(err)
+													);
+										}}
+									/>
 								) : (
-									<AssignButton />
+									<AssignButton
+										handleClick={() =>
+											setProfessorSelect({
+												isShowing: true,
+												subjectId:
+													instruction.subject_id,
+											})
+										}
+									/>
 								)}
 							</div>
 						))}

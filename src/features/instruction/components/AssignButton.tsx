@@ -1,9 +1,13 @@
 import InstructionCSS from '../styles/Instruction.module.css';
 import AddCircleSVG from '../../../assets/MaterialSymbolsAddCircleOutline.svg';
 
-export const AssignButton = () => {
+interface Props {
+	handleClick: () => void;
+}
+
+export const AssignButton = ({ handleClick }: Props) => {
 	return (
-		<button className={InstructionCSS.assignButton}>
+		<button onClick={handleClick} className={InstructionCSS.assignButton}>
 			<img
 				src={AddCircleSVG}
 				alt="Añadir profesor"
