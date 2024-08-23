@@ -1,0 +1,19 @@
+.assignButton {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 1rem;
+	background-color: #017ae9;
+	color: #ffffff;
+	align-items: center;
+	border: 0;
+	outline: 0;
+	border-radius: 1rem;
+	padding: 0.8rem 1.2rem;
+	cursor: pointer;
+}
+
+.assignButtonImg {
+	filter: contrast(0) brightness(3);
+	width: 2.4rem;
+}
