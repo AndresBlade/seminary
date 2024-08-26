@@ -13,6 +13,8 @@ import RegisterForm from '../pages/RegisterForm';
 import RegisterTable from '../pages/RegisterTable';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
+import { Registration } from '../pages/Registration';
+import { RegistrationTable } from "../pages/RegistrationTable";
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -83,6 +85,15 @@ export const router = createBrowserRouter([
 							{ path: ':id', element: <ParishCreate /> },
 						],
 					},
+					{path:'registration',
+						children:[
+							{
+								index:true,
+								element:<RegistrationTable/>
+							},
+							{path:'new',element:<Registration/>}
+						]
+					}
 				],
 			},
 		],

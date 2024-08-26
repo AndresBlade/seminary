@@ -1,0 +1,274 @@
+:root{
+    --bordeTabla: #DDDEEE;
+    --fondoMaterias: #EFEFEF;
+    --materiaSeleccionada:#BDF6B8;
+    --naranja: #E8671E;
+    --botonInscribirCancelar:#017AE9;
+    --alertaTodoBien:#BDF6B8;
+    --FuenteAlerta:#06520E;
+    --alertaError:#ec5353 ;
+    --FuenteAlertaError:#b81414;
+    --bordeContenidoTabla:rgba(221, 222, 238, .2);
+}
+
+.buttonSearch{
+    width: 100%;
+    height: 5.3rem;
+    color: white;
+    text-align: center;
+    background-color: var(--naranja);
+    border: none;
+    border-radius: 0.5rem;
+}
+.dataHeader{
+    border: 1px solid var(--bordeTabla);
+    border-radius: 1rem 1rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--naranja);
+    font-weight: bold;
+    padding: 1.6rem 2rem;
+    overflow-y: scroll;
+}
+.dataHeader::-webkit-scrollbar{
+    background-color: transparent;
+}
+.dataHeader p{
+    min-width: 10rem;
+    max-width: 10rem;
+}
+.dataContent{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bordeTabla);
+    border-radius:0 0 1rem 1rem;
+    border-top: 0;
+}
+.subject{
+    display: flex;
+    width: 100%;
+    color: var(--naranja);
+    font-weight: bold;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.subjectSelected{
+    display: flex;
+    width: 100%;
+    color: var(--naranja);
+    font-weight: bold;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color:var(--materiaSeleccionada) ;
+}
+.subject:nth-child(odd){
+    background-color: var(--fondoMaterias);
+}
+.textShowNoData{
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--fondoMaterias);
+}
+.buttonActions{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap:2rem;
+
+}
+.buttonCancel{
+    height: 5.4rem;
+    width: 100%;
+    color: var(--botonInscribirCancelar);
+    text-align: center;
+    border: 0.2rem solid var(--botonInscribirCancelar);
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+}
+.buttonSave{
+    composes:buttonCancel;
+    background-color: var(--botonInscribirCancelar);
+    color: #ffffff;
+    border: none;
+}
+.alertSuccess{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    position: absolute;
+    top:85%;
+    left: 40%;
+    width: 90%;
+    background-color: var(--alertaTodoBien);
+    letter-spacing: 0.06rem;
+    color:var(--FuenteAlerta);
+    padding: 1.8rem 1.4rem;
+}
+.alertError{
+    composes:alertSuccess;
+    background-color: var(--alertaError);
+    color: var(--FuenteAlertaError);
+}
+.imgAlert{
+    width: 3rem;
+}
+.showRegistered{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x:scroll ;
+    padding:1rem 2rem;
+    border:1px solid var(--bordeContenidoTabla);
+    border: 0 1px 0 0;
+}
+.showRegistered p{
+    min-width: 10rem;
+    max-width: 10rem;
+    overflow-x: scroll;
+}
+.showRegistered p::-webkit-scrollbar{
+    background-color: transparent;
+}
+.showRegistered::-webkit-scrollbar{
+    background-color: transparent;
+}
+.showRegistered button{
+    background-color: #ffffff;
+    border: none;
+    width: 3rem;
+}
+.modal{
+    position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s;
+}
+.modalBody{
+    position: absolute;
+    background-color: #ffffff;
+    margin: 30% auto;
+    left: 3.5%;
+    border-radius: 1rem;
+    width: 40rem;
+    height: 80%;
+    overflow-y: scroll;
+}
+.modalBody::-webkit-scrollbar{
+    display: none;
+    background-color: transparent;
+}
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    font-size: 1.4rem;
+}
+.modalHeader button{
+    background-color: #ffffff;
+    border: none;
+}
+.showSubjectsRegistered{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    overflow-x: scroll;
+}
+.showSubjectsRegistered:nth-child(odd){
+    background-color: var(--fondoMaterias);
+}
+.showSubjectsRegistered::-webkit-scrollbar{
+    background-color: transparent;
+}
+
+.showSubjectsRegistered button{
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: none;
+    width: 3rem;
+}
+.showSubjectsRegistered:nth-child(odd) button{
+    background-color: var(--fondoMaterias);
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@media (min-width: 1024px) { 
+    .dataHeader{
+        overflow-y: auto;
+        justify-content: space-between;
+        text-align: center;
+    }
+    .containerSearch{
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+    .buttonSearch{
+        margin-bottom: 1rem;
+        width: 50%;
+    }
+    .buttonCancel{
+        width: 17rem;
+    }
+    .buttonSave{
+        width: 17rem;
+    }
+    .dataHeader .dataHeaderSubject:nth-child(1){
+        margin-left: 40%;
+    }
+    .buttonActions{
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 1rem;
+        margin-top: 10%;
+    }
+    .alertSuccess{
+        width: auto;
+    }
+    .alertError{
+        composes:alertSuccess;
+    }
+    .showRegistered{
+        display: flex;
+        justify-content: space-around;
+    }
+    .showRegistered p{
+        max-width: 10rem;
+        min-width: 10rem;
+    }
+    .showRegistered button{
+        background-color: #ffffff;
+        border: none;
+        width: 3rem;
+    }
+    .showRegistered::-webkit-scrollbar{
+        display: none;
+    }
+    .modalBody{
+        width: 60rem;
+        margin: 8% auto;
+        left: 35%;
+    }
+
+}

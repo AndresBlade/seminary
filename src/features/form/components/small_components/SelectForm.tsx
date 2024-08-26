@@ -3,7 +3,7 @@ import FormCSS from '../../styles/FormCSS.module.css'
 export const SelectForm = ({children,...selectProps}:selectProps) => {
     return (
         <select 
-            className={FormCSS['selectForm']}
+            className={FormCSS.selectForm} 
             {
                 ...selectProps
             }

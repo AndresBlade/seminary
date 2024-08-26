@@ -37,8 +37,8 @@ export const sidebarData: SidebarItemData[] = [
 
 		iconPath: professorIcon,
 		children: [
-			{ content: 'Añadir Formador', path: '' },
-			{ content: 'Eliminar Formador', path: '' },
+			{ content: 'Añadir Formador', path: 'registration/new' },
+			{ content: 'Eliminar Formador', path: 'registration/' },
 		],
 	},
 	{
