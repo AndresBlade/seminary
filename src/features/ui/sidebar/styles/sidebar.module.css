@@ -1,9 +1,12 @@
 :root {
 	--svg-grey: invert(50%) sepia(24%) saturate(9%) hue-rotate(126deg)
 		brightness(97%) contrast(91%);
-	--svg-red: invert(31%) sepia(85%) saturate(1684%) hue-rotate(337deg)
+	--svg-blue: invert(31%) sepia(85%) saturate(1684%) hue-rotate(337deg)
 		brightness(81%) contrast(117%);
+	--svg-blue: invert(14%) sepia(46%) saturate(7253%) hue-rotate(230deg)
+		brightness(91%) contrast(103%);
 	--red: #dc2626;
+	--blue: #0c32ba;
 }
 p,
 ul {
@@ -26,7 +29,7 @@ li {
 .headerText {
 	font-weight: 800;
 	font-size: 5rem;
-	color: var(--red);
+	color: var(--blue);
 }
 
 .headerLogo {
@@ -138,6 +141,13 @@ li {
 	padding: 1.2rem 0;
 }
 
+.itemsFlex {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
 .itemContainer {
 	display: flex;
 	flex-direction: column;
@@ -166,12 +176,12 @@ li {
 }
 .clickedItemLogo {
 	composes: itemLogo;
-	filter: var(--svg-red);
+	filter: var(--svg-blue);
 }
 
 .clickedItemWithSubmenu {
 	composes: item;
-	color: var(--red);
+	color: var(--blue);
 }
 
 .itemContent {
@@ -193,7 +203,7 @@ li {
 .rotatedArrow {
 	composes: arrow;
 	transform: rotate(90deg);
-	filter: var(--svg-red);
+	filter: var(--svg-blue);
 }
 
 .submenu > div {
@@ -219,20 +229,20 @@ li {
 	display: flex;
 	align-items: center;
 	gap: 2.6rem;
-	color: var(--red);
+	color: var(--blue);
 	text-decoration: none;
 	transition: background-color 0.5s;
 }
 
 .activeSubmenuItem {
 	composes: submenuItem;
-	background-color: #b21d1d1a;
+	background-color: #9eadf833;
 }
 
 .submenuItemLogo {
 	width: 1.2rem;
 	height: 1.2rem;
-	filter: var(--svg-red);
+	filter: var(--svg-blue);
 }
 
 .closeButton {

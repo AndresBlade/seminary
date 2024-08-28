@@ -7,8 +7,8 @@ const RegisterForm = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Profesor" />
-				<BackgroundColoredSubtitle content="Agregar Profesor" />
+				<Title content="Usuario" />
+				<BackgroundColoredSubtitle content="Crear usuario" />
 			</TitleList>
 			<RegisterCreate />
 		</>
