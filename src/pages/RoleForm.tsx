@@ -143,7 +143,7 @@ export const RoleForm = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Roles" />
+				<Title content="Usuarios" />
 				<BackgroundColoredSubtitle
 					content={`${
 						initialRole ? 'Editar' : 'Agregar'
@@ -192,7 +192,6 @@ export const RoleForm = () => {
 								<Label labelText="Permisos *" />
 								<PermissionsTable
 									tables={tables}
-									permissionsByRoute={permissionsByRoute}
 									checkedPermissions={checkedPermissions}
 									setCheckedPermissions={
 										setCheckedPermissions

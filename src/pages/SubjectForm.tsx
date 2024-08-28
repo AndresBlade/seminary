@@ -9,7 +9,7 @@ export const SubjectForm = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Materia" />
+				<Title content="Académico" />
 				<BackgroundColoredSubtitle
 					content={
 						isNaN(Number(id)) ? 'Crear Materia' : 'Editar materia'

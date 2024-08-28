@@ -40,7 +40,7 @@ export const ParishShowData = () => {
 			deleteData()
 				.then(() => {
 					alert('Parroquia eliminada');
-					setParroquiaDelete(0)
+					setParroquiaDelete(0);
 					return GetParish();
 				})
 				.then(parroquia => setParish(parroquia))
@@ -76,8 +76,8 @@ export const ParishShowData = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Parroquias" />
-				<BackgroundColoredSubtitle content="Agregar parroquia" />
+				<Title content="Eclesiástico" />
+				<BackgroundColoredSubtitle content="Lista de parroquias" />
 			</TitleList>
 
 			<ContentContainer>

@@ -7,7 +7,7 @@ export const Instructions = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Período académico" />
+				<Title content="Académico" />
 				<BackgroundColoredSubtitle content="Asignar profesores a materias" />
 			</TitleList>
 			<Table />

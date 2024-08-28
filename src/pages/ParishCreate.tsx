@@ -6,7 +6,7 @@ export const ParishCreate = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Parroquias" />
+				<Title content="Eclesiástico" />
 				<BackgroundColoredSubtitle content="Agregar parroquia" />
 			</TitleList>
 			<ParishForm />

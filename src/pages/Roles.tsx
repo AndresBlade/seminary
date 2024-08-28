@@ -30,7 +30,7 @@ export const Roles = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Roles" />
+				<Title content="Usuarios" />
 				<BackgroundColoredSubtitle content="Lista de roles" />
 			</TitleList>
 			<ContentContainer>

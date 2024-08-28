@@ -29,7 +29,7 @@ export const Subjects = () => {
 	return (
 		<>
 			<TitleList>
-				<Title content="Materia" />
+				<Title content="Académico" />
 				<BackgroundColoredSubtitle content="Lista de Materias" />
 			</TitleList>
 			<ContentContainer>
