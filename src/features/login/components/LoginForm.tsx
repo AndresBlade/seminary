@@ -16,7 +16,7 @@ export const LoginForm = () => {
 	const { setUser } = useContext(AuthContext);
 	const [usuario, setUsuario] = useState('');
 	const [password, setPassword] = useState('');
-	const [letterId, setLetterId] = useState('');
+	const [letterId, setLetterId] = useState('V-');
 	const navigate = useNavigate();
 
 	console.log(letterId + usuario);
