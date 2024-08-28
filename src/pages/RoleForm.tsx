@@ -187,7 +187,7 @@ export const RoleForm = () => {
 							onInputChange={onInputChange}
 						/>
 
-						{tables && checkedPermissions && (
+						{tables && checkedPermissions && permissions && (
 							<FormField>
 								<Label labelText="Permisos *" />
 								<PermissionsTable
@@ -197,6 +197,7 @@ export const RoleForm = () => {
 									setCheckedPermissions={
 										setCheckedPermissions
 									}
+									permissions={permissions}
 								/>
 							</FormField>
 						)}

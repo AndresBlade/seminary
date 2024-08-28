@@ -21,7 +21,11 @@ export const SelectFormField = (props: Props) => {
 				onChange={onSelectChange}
 			>
 				{options.map(option => (
-					<option key={option.value?.toString()} value={option.value}>
+					<option
+						key={option.value?.toString()}
+						value={option.value}
+						{...option}
+					>
 						{option.content}
 					</option>
 				))}

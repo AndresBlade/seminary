@@ -13,6 +13,9 @@ import RegisterForm from '../pages/RegisterForm';
 import RegisterTable from '../pages/RegisterTable';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
+import { PeriodCreate } from '../pages/PeriodCreate';
+
+import { Instructions } from '../pages/Instructions';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -35,23 +38,29 @@ export const router = createBrowserRouter([
 						],
 					},
 					{
-						path:'user',
-						children:[
-							{path:'list',element:<RegisterTable/>}
-						]
+						path: 'user',
+						children: [
+							{ path: 'list', element: <RegisterTable /> },
+						],
 					},
 					{
-						path:'profesor',
-						children:[
+						path: 'profesor',
+						children: [
 							{
-								index:true,
-								element: <RegisterTable/>
+								index: true,
+								element: <RegisterTable />,
 							},
-							{path: 'new', element:<RegisterForm/>},
-							
-							{path: 'professor/:id', element:<RegisterForm/>},
-							{path: 'seminarian/:id', element:<RegisterForm/>}
-						]
+							{ path: 'new', element: <RegisterForm /> },
+
+							{
+								path: 'professor/:id',
+								element: <RegisterForm />,
+							},
+							{
+								path: 'seminarian/:id',
+								element: <RegisterForm />,
+							},
+						],
 					},
 					{
 						path: 'diocese',
@@ -70,6 +79,7 @@ export const router = createBrowserRouter([
 							{ index: true, element: <Subjects /> },
 							{ path: 'new', element: <SubjectForm /> },
 							{ path: ':id', element: <SubjectForm /> },
+							{ path: 'instruction', element: <Instructions /> },
 						],
 					},
 					{
@@ -81,6 +91,15 @@ export const router = createBrowserRouter([
 							},
 							{ path: 'new', element: <ParishCreate /> },
 							{ path: ':id', element: <ParishCreate /> },
+						],
+					},
+					{
+						path: 'periodo',
+						children: [
+							{
+								index: true,
+								element: <PeriodCreate />,
+							},
 						],
 					},
 				],

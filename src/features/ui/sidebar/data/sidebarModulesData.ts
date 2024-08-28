@@ -69,6 +69,10 @@ export const sidebarData: SidebarItemData[] = [
 		children: [
 			{ content: 'Agregar Materia', path: 'subject/new' },
 			{ content: 'Lista de materias', path: 'subject' },
+			{
+				content: 'Asignar profesores a materias',
+				path: 'subject/instruction',
+			},
 		],
 	},
 	{
@@ -86,6 +90,6 @@ export const sidebarData: SidebarItemData[] = [
 		content: 'Reportes',
 		type: 'submenu',
 		iconPath: graphicIcon,
-		children: [{ content: 'Gestionar diócesis', path: '' }],
+		children: [{ content: 'Gestionar diócesis', path: 'periodo' }],
 	},
 ];
