@@ -56,16 +56,18 @@ export const Sidebar = ({
 		<>
 			<aside className={`${sidebarStyle} ${className}`} ref={sidebarRef}>
 				<SidebarHeader />
-				<ul className={sidebarCSS.items}>
-					{sidebarData.map((sidebarItem, index) => (
-						<ItemContainer key={index} data={sidebarItem} />
-					))}
-				</ul>
-				<ul className={sidebarCSS.items}>
-					{sidebarSpecialActionsData.map((sidebarItem, index) => (
-						<ItemContainer key={index} data={sidebarItem} />
-					))}
-				</ul>
+				<div className={sidebarCSS.itemsFlex}>
+					<ul className={sidebarCSS.items}>
+						{sidebarData.map((sidebarItem, index) => (
+							<ItemContainer key={index} data={sidebarItem} />
+						))}
+					</ul>
+					<ul className={sidebarCSS.items}>
+						{sidebarSpecialActionsData.map((sidebarItem, index) => (
+							<ItemContainer key={index} data={sidebarItem} />
+						))}
+					</ul>
+				</div>
 			</aside>
 			<button className={closeButtonStyle} onClick={onCloseButtonClick}>
 				<img

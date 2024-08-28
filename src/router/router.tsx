@@ -40,7 +40,8 @@ export const router = createBrowserRouter([
 					{
 						path: 'user',
 						children: [
-							{ path: 'list', element: <RegisterTable /> },
+							{ index: true, element: <RegisterTable /> },
+							{ path: 'new', element: <RegisterForm /> },
 						],
 					},
 					{
@@ -94,7 +95,7 @@ export const router = createBrowserRouter([
 						],
 					},
 					{
-						path: 'periodo',
+						path: 'term',
 						children: [
 							{
 								index: true,

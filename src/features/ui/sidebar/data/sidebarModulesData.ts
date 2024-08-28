@@ -1,48 +1,63 @@
 import homeIcon from '../../../../assets/MaterialSymbolsHomeOutlineRounded.svg';
-import graduationCapIcon from '../../../../assets/MaterialSymbolsSchoolOutline.svg';
-import professorIcon from '../../../../assets/MaterialSymbolsInteractiveSpaceOutlineSharp.svg';
 import engineerIcon from '../../../../assets/MaterialSymbolsEngineeringOutline.svg';
 import churchIcon from '../../../../assets/MaterialSymbolsChurchOutline.svg';
-import graphicIcon from '../../../../assets/MaterialSymbolsBarChart4BarsRounded.svg';
 import personIcon from '../../../../assets/MaterialSymbolsPerson.svg';
 import { SidebarItemData } from '../interface/sidebarItemData';
 import subjectIcon from '../../../../assets/MaterialSymbolsBook.svg';
 
+// {
+// 	content: 'Seminarista',
+// 	iconPath: graduationCapIcon,
+// 	type: 'submenu',
+
+// 	children: [
+// 		{ content: 'Añadir seminarista', path: '' },
+// 		{ content: 'Eliminar seminarista', path: '' },
+// 	],
+// },
+// {
+// 	content: 'Profesor',
+// 	type: 'submenu',
+// 	iconPath: professorIcon,
+
+// 	children: [
+// 		{ content: 'Añadir Profesor', path: 'Profesor/new' },
+// 		{ content: 'Eliminar Profesor', path: '' },
+// 	],
+// },
+// {
+// 	content: 'Formador',
+// 	type: 'submenu',
+
+// 	iconPath: professorIcon,
+// 	children: [
+// 		{ content: 'Añadir Formador', path: '' },
+// 		{ content: 'Eliminar Formador', path: '' },
+// 	],
+// },
+
+// {
+// 	content: 'Reportes',
+// 	type: 'submenu',
+// 	iconPath: graphicIcon,
+// 	children: [{ content: 'Gestionar diócesis', path: 'periodo' }],
+// },
+
 export const sidebarData: SidebarItemData[] = [
 	{ content: 'Inicio', path: 'home', iconPath: homeIcon, type: 'item' },
 	{
-		content: 'Seminarista',
-		iconPath: graduationCapIcon,
+		content: 'Usuarios',
+		iconPath: personIcon,
 		type: 'submenu',
-
 		children: [
-			{ content: 'Añadir seminarista', path: '' },
-			{ content: 'Eliminar seminarista', path: '' },
+			{ content: 'Agregar usuario', path: 'user/new' },
+			{ content: 'Lista de usuarios', path: 'user' },
+			{ content: 'Crear rol de usuario', path: 'roles/new' },
+			{ content: 'Lista de roles', path: 'roles' },
 		],
 	},
 	{
-		content: 'Profesor',
-		type: 'submenu',
-		iconPath: professorIcon,
-
-
-		children: [
-			{ content: 'Añadir Profesor', path: 'Profesor/new' },
-			{ content: 'Eliminar Profesor', path: '' },
-		],
-	},
-	{
-		content: 'Formador',
-		type: 'submenu',
-
-		iconPath: professorIcon,
-		children: [
-			{ content: 'Añadir Formador', path: '' },
-			{ content: 'Eliminar Formador', path: '' },
-		],
-	},
-	{
-		content: 'Trabajador',
+		content: 'Trabajadores',
 		type: 'submenu',
 		iconPath: engineerIcon,
 
@@ -51,28 +66,19 @@ export const sidebarData: SidebarItemData[] = [
 			{ content: 'Eliminar Trabajador', path: '' },
 		],
 	},
+
 	{
-		content: 'Usuario',
-		iconPath: personIcon,
-		type: 'submenu',
-		children: [
-			{ content: 'Agregar usuario', path: '' },
-			{ content: 'Lista de usuarios', path: 'user/list' },
-			{ content: 'Crear rol de usuario', path: 'roles/new' },
-			{ content: 'Lista de roles', path: 'roles' },
-		],
-	},
-	{
-		content: 'Materias',
+		content: 'Académico',
 		iconPath: subjectIcon,
 		type: 'submenu',
 		children: [
+			{ content: 'Período académico', path: 'term' },
 			{ content: 'Agregar Materia', path: 'subject/new' },
-			{ content: 'Lista de materias', path: 'subject' },
 			{
-				content: 'Asignar profesores a materias',
+				content: 'Asignación de materias',
 				path: 'subject/instruction',
 			},
+			{ content: 'Lista de materias', path: 'subject' },
 		],
 	},
 	{
@@ -85,11 +91,5 @@ export const sidebarData: SidebarItemData[] = [
 			{ content: 'Lista de parroquias', path: 'parish' },
 			{ content: 'Crear parroquia', path: 'parish/new' },
 		],
-	},
-	{
-		content: 'Reportes',
-		type: 'submenu',
-		iconPath: graphicIcon,
-		children: [{ content: 'Gestionar diócesis', path: 'periodo' }],
 	},
 ];
