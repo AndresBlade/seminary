@@ -1,6 +1,7 @@
 :root {
 	--underline-red: #fb2f30;
 	--subtitle-red: #dc2626;
+	--dark-yellow: #e8671e;
 }
 
 .list {
@@ -32,7 +33,7 @@
 }
 
 .underline {
-	border-bottom: 4px solid var(--underline-red);
+	border-bottom: 4px solid var(--dark-yellow);
 	animation-name: underlineGrow;
 	animation-duration: 0.5s;
 	animation-timing-function: ease-out;
@@ -48,7 +49,7 @@
 }
 
 .subtitle {
-	color: var(--subtitle-red);
+	color: var(--dark-yellow);
 	font-weight: 600;
 }
 

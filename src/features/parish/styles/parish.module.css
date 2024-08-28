@@ -6,6 +6,7 @@
 	--textColor2: #ffffff;
 	--buttonColorSearch: #dc2626;
 	--buttonColorReset: #818181;
+	--dark-yellow: #e8671e;
 }
 .parish-create__container,
 .parish-table__container {
@@ -88,7 +89,7 @@
 	padding: 1rem;
 	border: none;
 	color: var(--textColor2);
-	background-color: var(--buttonColorSearch);
+	background-color: var(--dark-yellow);
 	border-radius: 1rem;
 }
 /*AQUI COMIENZAN LOS ESTILOS DE PARISH SHOW DATA*/
@@ -106,17 +107,16 @@
 	display: flex;
 	font-size: 1rem;
 	font-weight: bold;
-	color: var(--textColor);
+	color: var(--dark-yellow);
 	justify-content: space-between;
 	border: #dddeee 1px solid;
 	border-radius: 1rem 1rem 0 0;
 	padding: 0.5rem;
-	overflow-y:scroll ;
+	overflow-y: scroll;
 }
-.data-show__title h2{
+.data-show__title h2 {
 	min-width: 10rem;
 	max-width: 10rem;
-
 }
 .data-content {
 	display: flex;
@@ -126,12 +126,12 @@
 	border-top: none;
 	border-right: none;
 }
-.data-content p{
+.data-content p {
 	min-width: 10rem;
 	max-width: 10rem;
 	overflow-y: scroll;
 }
-.data-content p::-webkit-scrollbar{
+.data-content p::-webkit-scrollbar {
 	background-color: transparent;
 }
 .data-content__container {
@@ -168,8 +168,8 @@
 	top: 50%;
 	left: 50%;
 	border: solid 0.4rem transparent;
-	border-top-color: #dc2626;
-	border-left-color: #dc2626;
+	border-top-color: var(--dark-yellow);
+	border-left-color: var(--dark-yellow);
 	border-radius: 50%;
 	animation: spin 1.2s linear infinite;
 }
@@ -215,7 +215,7 @@
 	}
 
 	.parish-create__h1-title h1 {
-		border-bottom: 0.5rem solid #dc2626;
+		border-bottom: 0.5rem solid var(--dark-yellow);
 		width: 8%;
 	}
 
@@ -258,7 +258,7 @@
 		margin-left: 15%;
 	}
 	.parish-create__h1-title h1 {
-		border-bottom: 0.5rem solid #dc2626;
+		border-bottom: 0.5rem solid var(--dark-yellow);
 		width: 5.5%;
 	}
 	.parish-create__form {
@@ -316,7 +316,7 @@
 		height: 100%;
 	}
 	.parish-find button {
-		background-color: var(--buttonColorSearch);
+		background-color: var(--dark-yellow);
 		color: var(--textColor2);
 		padding: 1.5rem;
 		width: 30%;

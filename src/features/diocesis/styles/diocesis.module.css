@@ -6,6 +6,7 @@
 	--textColor2: #ffffff;
 	--buttonColorSearch: #dc2626;
 	--buttonColorReset: #818181;
+	--dark-yellow: #e8671e;
 }
 .diocesis-create__container,
 .diocesis-table__container {
@@ -97,7 +98,7 @@
 .diocesis-table__table--thead tr {
 	display: flex;
 	justify-content: space-between;
-	color: var(--textColor);
+	color: var(--dark-yellow);
 	font-weight: bold;
 	padding: 1rem;
 }
@@ -126,7 +127,7 @@
 }
 .diocesis-table__table--tbody-tr-name,
 .diocesis-table__table--tbody-tr-obispo,
-.diocesis-table__button--container{
+.diocesis-table__button--container {
 	min-width: 10rem;
 	max-width: 10rem;
 	overflow-y: scroll;
@@ -134,7 +135,7 @@
 
 .diocesis-table__table--tbody-tr-name::-webkit-scrollbar,
 .diocesis-table__table--tbody-tr-obispo::-webkit-scrollbar,
-.diocesis-table__button--container::-webkit-scrollbar{
+.diocesis-table__button--container::-webkit-scrollbar {
 	background-color: transparent;
 }
 /********ESTILOS DE LA BARRA DE BUSQUEDA***********/
@@ -154,8 +155,8 @@
 	top: 50%;
 	left: 50%;
 	border: solid 0.4rem transparent;
-	border-top-color: #dc2626;
-	border-left-color: #dc2626;
+	border-top-color: var(--dark-yellow);
+	border-left-color: var(--dark-yellow);
 	border-radius: 50%;
 	animation: spin 1.2s linear infinite;
 }
@@ -193,7 +194,7 @@
 	width: 100%;
 	border-radius: 0.5rem;
 	border: none;
-	background-color: var(--buttonColorSearch);
+	background-color: var(--dark-yellow);
 	color: var(--textColor2);
 	cursor: pointer;
 	transition: 0.3s;
