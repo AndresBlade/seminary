@@ -16,6 +16,8 @@ import { SubjectForm } from '../pages/SubjectForm';
 import { PeriodCreate } from '../pages/PeriodCreate';
 
 import { Instructions } from '../pages/Instructions';
+import { Registration } from '../pages/Registration';
+import { RegistrationTable } from '../pages/RegistrationTable';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -101,6 +103,16 @@ export const router = createBrowserRouter([
 								index: true,
 								element: <PeriodCreate />,
 							},
+						],
+					},
+					{
+						path: 'registration',
+						children: [
+							{
+								index: true,
+								element: <RegistrationTable />,
+							},
+							{ path: 'new', element: <Registration /> },
 						],
 					},
 				],
