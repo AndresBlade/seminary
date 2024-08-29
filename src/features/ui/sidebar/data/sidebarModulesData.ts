@@ -79,6 +79,8 @@ export const sidebarData: SidebarItemData[] = [
 				path: 'subject/instruction',
 			},
 			{ content: 'Lista de materias', path: 'subject' },
+			{content: 'Lista inscritos en materia', path: 'enrollment'},
+			{content:'inscribir materia', path:'enrollment/new'}
 		],
 	},
 	{

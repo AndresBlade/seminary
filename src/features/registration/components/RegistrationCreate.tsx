@@ -25,14 +25,11 @@ const RegistrationCreate = () => {
     const [academicTermActive, setAcademicTermActive]=useState<AcademicTerm[]>([])
     const [isLoading, setIsloading]=useState(false)
     const [alertText, setAlertText]=useState<string | null>(null)
-    const academicTermActiveToSend = academicTermActive ? academicTermActive.map(academicTerm=>{
-        if(academicTerm.status === 'ACTIVO'){
-            return academicTerm.id
-        }
-        else{
-            return 0
-        }
-    }): 0;
+    const academicTermActiveToSend = academicTermActive
+    ? academicTermActive
+        .filter((academicTerm) => academicTerm.status === "ACTIVO")
+        .map((academicTerm) => academicTerm.id)
+    : [0];
     
     const courses = subjectsToList ? subjectsToList.course ? subjectsToList.course.map(course=>(
         course.subject
@@ -59,12 +56,15 @@ const RegistrationCreate = () => {
     },[])
     useEffect(()=>{
         if(!user?.token)return
-        GetSeminarianByStage({stage:stageSelected, token:user?.token}).then(response=>{
-            return setSeminarianList(response)
-        }).catch(error=>{
-            console.error(error)
-            alert('Error al listar los seminarista de la etapa ' +stageSelected)
-        })
+        if(stageSelected.length > 0){
+            GetSeminarianByStage({stage:stageSelected, token:user?.token}).then(response=>{
+                return setSeminarianList(response)
+            }).catch(error=>{
+                console.error(error)
+                alert('Error al listar los seminarista de la etapa ' +stageSelected)
+            })
+        }
+        
         if(seminarianSelected !== ''){
             setIsloading(true)
             GetSubjectBySeminarian({id:seminarianSelected,token:user.token}).then(response=>{
@@ -76,11 +76,18 @@ const RegistrationCreate = () => {
                 alert('Error al mostrar las materias')
             }
             );
-            return setSeminarianSelected('')
         }
-        setSubjectToList(null)
+        if(stageSelected.length === 0){
+            setSubjectSelected([])
+            setTimeout(()=>{
+                setSubjectToList(null)
+            },500)
+            setSeminarianList([])
+            setSeminarianSelected('')
+        }
     },[stageSelected,user?.token,seminarianSelected])
 
+    console.log(academicTermActiveToSend)
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         if(!user?.token) return
@@ -90,7 +97,6 @@ const RegistrationCreate = () => {
             if(response.ok){
                 setAlertText('El seminarista fue inscrito correctamente')
                 setTimeout(() => {
-                    setStageSelected(''),
                     setSeminarianSelected(''),
                     setSubjectSelected([]),
                     setSubjectToList(null)
@@ -101,6 +107,12 @@ const RegistrationCreate = () => {
             
         }).catch(error=>{
             console.error(error);
+            setTimeout(() => {
+                setStageSelected(''),
+                setSeminarianSelected(''),
+                setSubjectSelected([]),
+                setSubjectToList(null)
+            }, 2000);
             alert('No se pudo registrar' + error)
         })
     }
@@ -120,10 +132,10 @@ const RegistrationCreate = () => {
                         <option value="DISCIPULAR">Discipular</option>
                         <option value="CONFIGURATIVA">Configurativa</option>
                     </SelectForm>
-                    <SelectForm onChange={(e)=>{
+                    <SelectForm value={seminarianSelected} onChange={(e)=>{
                         setSeminarianSelected(e.target.value)
                     }}>
-                        <option value="" disabled selected>Seleccionar seminarista</option>
+                        <option value="" selected>Seleccionar seminarista</option>
                         {seminarianList.map(seminarianList=>(
                                 <option key={seminarianList.id} value={seminarianList.id}>{seminarianList.name + ' '+ seminarianList.surname+ ' ' + seminarianList.id}</option>
                             ))

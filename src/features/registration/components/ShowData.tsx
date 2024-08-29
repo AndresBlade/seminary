@@ -67,6 +67,13 @@ export const ShowData = () => {
             ActiveSubject({id:activeSubject,token:user.token}).then(response=>{
                 if(response.ok){
                     alert('Activada correctamente')
+                    GetSubjectRegistered(idSeminarian).then(response=>{
+                        setShowSubjectsRegistered(response)
+                        return
+                    }).catch(error=>{
+                        console.log(error)
+                        alert('error al traer las materias registradas del seminarista')
+                    })
                     setActiveSubject(0)
                 }
             }).catch(error=>{

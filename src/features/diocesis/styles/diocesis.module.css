@@ -329,10 +329,12 @@
 		overflow-y: visible;
 	}
 	.diocesis-table__table--tbody-tr-obispo {
-		width: 20%;
+		min-width:30%;
+		max-width: 30%;
 	}
 	.diocesis-table__table--tbody-tr-name {
-		width: 30%;
+		min-width: 30%;
+		max-width: 30%;
 		overflow-x: scroll;
 	}
 	.diocesis-table__table--tbody-tr-obispo::-webkit-scrollbar,

@@ -106,7 +106,7 @@ export const router = createBrowserRouter([
 						],
 					},
 					{
-						path: 'registration',
+						path: 'enrollment',
 						children: [
 							{
 								index: true,

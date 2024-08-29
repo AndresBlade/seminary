@@ -1,5 +1,6 @@
+import { AcademicTerm } from "../interfaces/interfaces"
 
-export async function CreateRegistration({idSeminarian,subjects, AcademicTerm, token}:{idSeminarian:string,subjects:number[],AcademicTerm:number[],token:string}):Promise<Response> {
+export async function CreateRegistration({idSeminarian,subjects, AcademicTerm, token}:{idSeminarian:string,subjects:number[],AcademicTerm:number[] | AcademicTerm[],token:string}):Promise<Response> {
     const response = await fetch('http://127.0.0.1:3000/enrollment/',{
         method:'POST',
         mode:'cors',

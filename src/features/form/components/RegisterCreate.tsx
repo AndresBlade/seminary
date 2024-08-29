@@ -308,7 +308,7 @@ const RegisterCreate = () => {
 						alert("Seminarista Creado");
 						setTimeout(()=>
 						{
-							navigate('/user/list')
+							navigate('../')
 						}
 						,1000)
 						
