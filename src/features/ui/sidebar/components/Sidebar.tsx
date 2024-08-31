@@ -1,4 +1,3 @@
-import { sidebarData } from '../data/sidebarModulesData';
 import { ItemContainer } from './ItemContainer';
 import { SidebarHeader } from './SidebarHeader';
 import sidebarCSS from '../styles/sidebar.module.css';
@@ -6,6 +5,7 @@ import { sidebarSpecialActionsData } from '../data/sidebarSpecialActionsData';
 import closeSVG from '../../../../assets/MaterialSymbolsClose.svg';
 import { ElementRef, useEffect, useRef } from 'react';
 import { useIsDeviceSizeLess } from '../hooks/useIsDeviceSizeLess';
+import { useSidebarData } from '../hooks/useSidebarData';
 
 interface Props {
 	isSidebarOpen: boolean;
@@ -33,6 +33,8 @@ export const Sidebar = ({
 	};
 
 	const sidebarRef = useRef<ElementRef<'aside'>>(null);
+
+	const sidebarData = useSidebarData();
 
 	useEffect(() => {
 		if (isMobile) {
