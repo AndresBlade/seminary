@@ -4,10 +4,10 @@ import exitIcon from '../../../../assets/MaterialSymbolsExitToApp.svg';
 
 export const sidebarSpecialActionsData: SidebarItemData[] = [
 	{
-		content: 'Configuración',
+		content: 'Cambiar contraseña',
 		iconPath: gearIcon,
 		type: 'item',
-		path: '',
+		path: 'change',
 	},
 	{
 		content: 'Salir',

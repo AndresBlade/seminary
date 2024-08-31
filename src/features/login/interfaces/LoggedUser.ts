@@ -1,10 +1,9 @@
-import { Permission } from "../../roles/interfaces/Permission"
+import { Permission } from '../../roles/interfaces/Permission';
 
-export interface LoggedUser{
-    permision_id:string,
-    Permisos: Permission[],
-    password:string,
-    status: boolean,
-    fecha:string
-    token:string
+export interface LoggedUser {
+	Permisos: Permission[];
+	person_id: string;
+	fecha: string;
+	token: string;
+	role: string;
 }

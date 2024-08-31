@@ -18,6 +18,7 @@ import { PeriodCreate } from '../pages/PeriodCreate';
 import { Instructions } from '../pages/Instructions';
 import { Registration } from '../pages/Registration';
 import { RegistrationTable } from '../pages/RegistrationTable';
+import { ChangePassword } from '../pages/ChangePassword';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -114,6 +115,10 @@ export const router = createBrowserRouter([
 							},
 							{ path: 'new', element: <Registration /> },
 						],
+					},
+					{
+						path: 'change',
+						element: <ChangePassword />,
 					},
 				],
 			},
