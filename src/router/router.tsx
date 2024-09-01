@@ -14,10 +14,11 @@ import RegisterTable from '../pages/RegisterTable';
 import { Subjects } from '../pages/Subjects';
 import { SubjectForm } from '../pages/SubjectForm';
 import { PeriodCreate } from '../pages/PeriodCreate';
-
+import { CreateAssessmentsNew } from '../pages/CreateAssessmentsNew';
 import { Instructions } from '../pages/Instructions';
 import { Registration } from '../pages/Registration';
 import { RegistrationTable } from '../pages/RegistrationTable';
+import { ListQualifications } from '../pages/ListQualifications';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -115,6 +116,16 @@ export const router = createBrowserRouter([
 							{ path: 'new', element: <Registration /> },
 						],
 					},
+					{
+						path:'createAssessments',
+						children:[
+							{
+								index:true,
+								element:<ListQualifications/>
+							},
+							{path:'new',element:<CreateAssessmentsNew/>}
+						]
+					}
 				],
 			},
 		],
