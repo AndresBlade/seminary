@@ -36,6 +36,16 @@
 	background-color: #aaaaaa;
 }
 
+.generatePDFButton {
+	composes: button;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	color: #ffffff;
+	background-color: #00aa00;
+}
+
 .sendButton {
 	composes: button;
 	background-color: #e8671e;

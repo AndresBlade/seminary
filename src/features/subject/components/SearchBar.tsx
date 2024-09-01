@@ -84,6 +84,14 @@ export const SearchBar = ({
 			</div>
 
 			<div className={SearchBarCSS.buttons}>
+				<a
+					className={SearchBarCSS.generatePDFButton}
+					target="_blank"
+					rel="noreferrer"
+					href="http://127.0.0.1:3000/subject/pensum"
+				>
+					GENERAR PÉNSUM
+				</a>
 				<button
 					className={SearchBarCSS.resetButton}
 					onClick={() => setSubjectsSetToDefault(false)}
