@@ -54,7 +54,7 @@ async function CreateSeminarian({
 	formData.append('data', JSON.stringify(data));
 
 	const response = await fetch(
-		`http://127.0.0.1:3000/seminarian/create/${data.persona.id}`,
+		`https://wh1372200.ispot.cc/seminarian/create/${data.persona.id}`,
 		{
 			method: 'POST',
 			mode: 'cors',

@@ -49,7 +49,7 @@ async function EditProfessor({
 	formData.append('data', JSON.stringify(data));
 
 	const response = await fetch(
-		`http://127.0.0.1:3000/professor/${data.persona.id}`,
+		`https://wh1372200.ispot.cc/professor/${data.persona.id}`,
 		{
 			method: 'PUT',
 			mode: 'cors',

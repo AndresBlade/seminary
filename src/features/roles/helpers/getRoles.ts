@@ -1,6 +1,6 @@
 import { Role } from '../interfaces/Role';
 export const getRoles = (token: string): Promise<Role[]> =>
-	fetch(`http://127.0.0.1:3000/role/search`, {
+	fetch(`https://wh1372200.ispot.cc/role/search`, {
 		headers: {
 			auth: token,
 		},

@@ -31,7 +31,7 @@ export const DiocesisForm = () => {
 	const [diocesisName, setDiocesisName] = useState('');
 	const [obispoName, setObispoName] = useState('');
 	const { id } = useParams();
-	const apiUrl = `http://localhost:3000/Diocese/${Number(id)}`;
+	const apiUrl = `https://wh1372200.ispot.cc/Diocese/${Number(id)}`;
 	const { data } = useGet<DiocesisData>(apiUrl);
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);

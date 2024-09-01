@@ -34,8 +34,8 @@ interface ParishData {
 }
 export const ParishForm = () => {
 	const { id } = useParams();
-	const apiUrl = 'http://localhost:3000/Diocese/';
-	const apiUrlParish = `http://localhost:3000/parish/${id}`;
+	const apiUrl = 'https://wh1372200.ispot.cc/Diocese/';
+	const apiUrlParish = `https://wh1372200.ispot.cc/parish/${id}`;
 	const [parishName, setParishName] = useState('');
 	const [parroco, setParroco] = useState('');
 	const [diocesis, setDiocesis] = useState(0);

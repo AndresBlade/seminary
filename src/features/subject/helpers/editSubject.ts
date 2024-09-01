@@ -7,7 +7,7 @@ interface Props {
 
 export const editSubject = ({ subject, token }: Props) => {
 	console.log(subject);
-	return fetch('http://127.0.0.1:3000/subject/', {
+	return fetch('https://wh1372200.ispot.cc/subject/', {
 		method: 'PUT',
 		mode: 'cors', // no-cors, *cors, same-origin
 		credentials: 'same-origin',

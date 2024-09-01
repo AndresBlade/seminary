@@ -1,6 +1,6 @@
 import { Course } from '../interfaces/Course';
 
 export const getAllCourses = (): Promise<Course[]> =>
-	fetch('http://127.0.0.1:3000/course').then(
+	fetch('https://wh1372200.ispot.cc/course').then(
 		response => response.json() as Promise<Course[]>
 	);

@@ -12,7 +12,7 @@ import { Title } from '../features/ui/title/components/Title';
 import { BackgroundColoredSubtitle } from '../features/ui/title/components/BackgroundColoredSubtitle';
 import { ContentContainer } from '../features/ui/container/components/ContentContainer';
 
-const apiUrl = 'http://localhost:3000/role/search';
+const apiUrl = 'https://wh1372200.ispot.cc/role/search';
 
 export const Roles = () => {
 	const { name, onInputChange } = useForm({ name: '' });

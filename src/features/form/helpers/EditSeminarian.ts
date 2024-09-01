@@ -54,7 +54,7 @@ async function EditSeminarian({
 	formData.append('data', JSON.stringify(data));
 
 	const response = await fetch(
-		`http://127.0.0.1:3000/seminarian/update/${data.persona.id}`,
+		`https://wh1372200.ispot.cc/seminarian/update/${data.persona.id}`,
 		{
 			method: 'PUT',
 			mode: 'cors',

@@ -15,7 +15,7 @@ export const getDioceseByName = ({
 	name: string;
 	token: string;
 }) => {
-	return fetch(`http://localhost:3000/Diocese/search/${name}`, {
+	return fetch(`https://wh1372200.ispot.cc/Diocese/search/${name}`, {
 		headers: {
 			auth: token,
 		},

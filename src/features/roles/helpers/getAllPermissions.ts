@@ -1,6 +1,6 @@
 import { Permission } from '../interfaces/Permission';
 export const getAllPermissions = async (token: string): Promise<Permission[]> =>
-	fetch('http://127.0.0.1:3000/role/permi', {
+	fetch('https://wh1372200.ispot.cc/role/permi', {
 		headers: {
 			auth: token,
 		},

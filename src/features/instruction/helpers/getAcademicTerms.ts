@@ -1,7 +1,7 @@
 import { AcademicTerm } from '../interfaces/AcademicTerm';
 
 export const getAcademicTerms = (token: string): Promise<AcademicTerm[]> =>
-	fetch('http://127.0.0.1:3000/academicterm', {
+	fetch('https://wh1372200.ispot.cc/academicterm', {
 		headers: {
 			auth: token,
 		},

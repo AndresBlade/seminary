@@ -9,7 +9,7 @@ async function editDiocesis({
 	obispo: string;
 	token: string;
 }): Promise<Response> {
-	const response = await fetch(`http://127.0.0.1:3000/Diocese/${id}`, {
+	const response = await fetch(`https://wh1372200.ispot.cc/Diocese/${id}`, {
 		method: 'PUT',
 		mode: 'cors', // no-cors, *cors, same-origin
 		credentials: 'same-origin',

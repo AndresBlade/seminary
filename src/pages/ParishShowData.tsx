@@ -23,7 +23,7 @@ export interface ParishDataContentPropss {
 }
 
 export const ParishShowData = () => {
-	const apiUrl = 'http://127.0.0.1:3000/parish/';
+	const apiUrl = 'https://wh1372200.ispot.cc/parish/';
 	const {
 		data,
 		loading,

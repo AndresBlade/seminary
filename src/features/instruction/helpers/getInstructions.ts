@@ -1,7 +1,7 @@
 import { Instruction } from '../interfaces/Instruction';
 
 export const getInstructions = (token: string): Promise<Instruction[]> =>
-	fetch('http://127.0.0.1:3000/instruction', {
+	fetch('https://wh1372200.ispot.cc/instruction', {
 		headers: {
 			auth: token,
 		},

@@ -52,7 +52,7 @@ export function GetSeminarianEdit(
 	id: string,
 	token: string
 ): Promise<seminarian[]> {
-	return fetch(`http://127.0.0.1:3000/seminarian/getsem?id=${id}`, {
+	return fetch(`https://wh1372200.ispot.cc/seminarian/getsem?id=${id}`, {
 		headers: {
 			auth: token,
 		},

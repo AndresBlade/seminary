@@ -1,5 +1,5 @@
 export const generateSeminarianDocument = (id: string, token: string) =>
-	fetch(`http://127.0.0.1:3000/seminarian/ficha/${id}`, {
+	fetch(`https://wh1372200.ispot.cc/seminarian/ficha/${id}`, {
 		method: 'GET',
 		headers: {
 			auth: token,

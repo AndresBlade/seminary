@@ -37,7 +37,7 @@ export interface userProps {
 }
 
 export const ShowDataContent = () => {
-	const apiUrl = 'http://127.0.0.1:3000/user/';
+	const apiUrl = 'https://wh1372200.ispot.cc/user/';
 	const { data, error, setData } = UseGet<userProps[] | undefined>(apiUrl);
 	const [userDelete, setUserDelete] = useState<string>('');
 	const [infoUserDelete, setInfoUserDelete] = useState<string | undefined>(
@@ -224,7 +224,7 @@ export const ShowDataContent = () => {
 											}
 											target="_blank"
 											rel="noreferrer"
-											href={`http://127.0.0.1:3000/${
+											href={`https://wh1372200.ispot.cc/${
 												user.seminarian
 													? 'seminarian'
 													: 'instructor'

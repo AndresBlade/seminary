@@ -9,7 +9,7 @@ async function createRole({
 	numbers: number[];
 	token: string;
 }): Promise<void> {
-	const response = await fetch('http://127.0.0.1:3000/role/', {
+	const response = await fetch('https://wh1372200.ispot.cc/role/', {
 		method: 'POST',
 		mode: 'cors', // no-cors, *cors, same-origin
 		credentials: 'same-origin',

@@ -14,7 +14,7 @@ export const editRole = ({
 	token: string;
 }): Promise<Role[]> => {
 	console.log({ id, name, description, numbers, token });
-	return fetch(`http://127.0.0.1:3000/role`, {
+	return fetch(`https://wh1372200.ispot.cc/role`, {
 		method: 'PUT',
 		body: JSON.stringify({ id, name, description, numbers, token }),
 		mode: 'cors',

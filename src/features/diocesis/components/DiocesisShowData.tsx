@@ -17,7 +17,7 @@ interface Diocesis {
 	holder: string;
 }
 const DiocesisShowData = () => {
-	const apiUrl = 'http://127.0.0.1:3000/Diocese/';
+	const apiUrl = 'https://wh1372200.ispot.cc/Diocese/';
 	const [diocesisDelete, setDiocesisDelete] = useState<number>(0); // [1
 	const {
 		data,
