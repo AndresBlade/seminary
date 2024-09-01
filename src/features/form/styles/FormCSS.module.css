@@ -210,8 +210,15 @@
 	border: none;
 	border-radius: 1rem;
 }
+
 .buttonActions img {
 	width: 3rem;
+}
+
+.buttonActionsAsAnchor {
+	composes: buttonActions;
+	display: flex;
+	align-items: center;
 }
 .showDataOptions button {
 	width: 100%;

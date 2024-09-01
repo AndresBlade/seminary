@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { GetUserByType } from '../helpers/GetUserByType';
 import { GetUserFind } from '../helpers/GetUserFind';
 import resetIcon from '../../../assets/MaterialSymbolsLockReset.svg';
+import contactIcon from '../../../assets/MaterialSymbolsIdCardOutline.svg';
 import { changePassword } from '../../changePassword/helpers/changePassword';
 export interface userProps {
 	person: {
@@ -216,6 +217,26 @@ export const ShowDataContent = () => {
 										: user.seminarian?.status}
 								</p>
 								<div>
+									{(user.seminarian ??
+										user.professor?.instructor) && (
+										<a
+											className={
+												FormCSS.buttonActionsAsAnchor
+											}
+											target="_blank"
+											rel="noreferrer"
+											href={`http://127.0.0.1:3000/${
+												user.seminarian
+													? 'seminarian'
+													: 'instructor'
+											}/ficha/${user.person.id}`}
+										>
+											<img
+												src={contactIcon}
+												alt="Generar ficha"
+											/>
+										</a>
+									)}
 									<button
 										className={FormCSS.buttonActions}
 										onClick={() => {
