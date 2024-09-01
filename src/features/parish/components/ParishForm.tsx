@@ -40,8 +40,10 @@ export const ParishForm = () => {
 	const [parroco, setParroco] = useState('');
 	const [diocesis, setDiocesis] = useState(0);
 	const { data } = useGet<DiocesisProps[]>(apiUrl);
-	const { dataEdit,setDataEdit } = useGetEdit<ParishData>(apiUrlParish);
+	const { dataEdit, setDataEdit } = useGetEdit<ParishData>(apiUrlParish);
 	const navigate = useNavigate();
+
+	console.log(setDataEdit);
 
 	useEffect(() => {
 		if (isNaN(Number(id))) return;

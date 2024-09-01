@@ -5,6 +5,8 @@ import { Role } from '../interfaces/Role';
 import { useNavigate } from 'react-router-dom';
 import { deleteRole } from '../helpers/deleteRole';
 import { getRoles } from '../helpers/getRoles';
+import { useContext } from 'react';
+import { AuthContext } from '../../login/context/AuthContext';
 
 interface Props {
 	role: Role;
@@ -16,6 +18,7 @@ export const RoleRow = ({
 	role: { id, name, description },
 	setRoles,
 }: Props) => {
+	const { user } = useContext(AuthContext);
 	const navigate = useNavigate();
 	return (
 		<div className={RolesCSS['roles-table__row']}>
@@ -34,7 +37,7 @@ export const RoleRow = ({
 					className={RolesCSS['roles-table__action']}
 					onClick={() => {
 						deleteRole(id)
-							.then(() => getRoles())
+							.then(() => user && getRoles(user.token))
 							.then(roles => setRoles(roles))
 							.catch(err => console.log(err));
 					}}

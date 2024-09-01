@@ -1,14 +1,11 @@
-import FormCSS from '../styles/FormCSS.module.css'
-import { DataContent } from '../interfaces/Form'
-const DataContent = ({children,...DataContent}:DataContent) => {
-    return (
-        <div className={FormCSS.dataContent}
-            {...DataContent}
+import FormCSS from '../styles/FormCSS.module.css';
+import { DataContent as DataContentInterface } from '../interfaces/Form';
+const DataContent = ({ children, ...DataContent }: DataContentInterface) => {
+	return (
+		<div className={FormCSS.dataContent} {...DataContent}>
+			{children}
+		</div>
+	);
+};
 
-        >
-            {children}
-        </div>
-    )
-}
-
-export default DataContent
+export default DataContent;

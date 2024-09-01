@@ -30,7 +30,6 @@ interface DiocesisData {
 export const DiocesisForm = () => {
 	const [diocesisName, setDiocesisName] = useState('');
 	const [obispoName, setObispoName] = useState('');
-	const [error, setError] = useState<boolean>();
 	const { id } = useParams();
 	const apiUrl = `http://localhost:3000/Diocese/${Number(id)}`;
 	const { data } = useGet<DiocesisData>(apiUrl);
@@ -60,12 +59,7 @@ export const DiocesisForm = () => {
 			if (!user) return;
 			if (isNaN(Number(id))) {
 				CreateDiocesis({ name, obispo, token: user.token })
-					.then(response => {
-						if (response.status === 200) {
-							setError(false);
-						} else {
-							setError(true);
-						}
+					.then(() => {
 						navigate('..');
 					})
 					.catch(error => {
@@ -74,12 +68,7 @@ export const DiocesisForm = () => {
 				return;
 			}
 			editDiocesis({ id: Number(id), name, obispo, token: user.token })
-				.then(response => {
-					if (response.status === 200) {
-						setError(false);
-					} else {
-						setError(true);
-					}
+				.then(() => {
 					navigate('..');
 				})
 				.catch(error => {

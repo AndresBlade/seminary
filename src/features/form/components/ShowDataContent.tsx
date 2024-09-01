@@ -46,7 +46,6 @@ export const ShowDataContent = () => {
 	const [userFind, setUserFind] = useState<string>('');
 	const [dataUserFind, setDataUserFind] = useState<string>('');
 	const [letterId, setLetterId] = useState<string>('V-');
-	const [typeUserUpdate, setTypeUserUpdate] = useState<string>('');
 	const [getUserByType, setGetUserByType] = useState<string>('');
 	const { user } = useContext(AuthContext);
 	const token = user?.token;

@@ -10,7 +10,6 @@ import { getAllSubjects } from '../helpers/getAllSubjects';
 import { AuthContext } from '../../login/context/AuthContext';
 import { SubjectFromDB } from '../interfaces/SubjectFromDB';
 import { OrderableColumnValues } from '../interfaces/OrderableColumnValues';
-import { editSubject } from '../helpers/editSubject';
 
 interface Props {
 	subjects: SubjectFromDB[] | null;
