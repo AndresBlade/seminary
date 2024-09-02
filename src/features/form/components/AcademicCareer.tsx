@@ -145,8 +145,8 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                     </div>
 
                     <div>
-                        <LabelForm>Año al que ingresa</LabelForm>
-                        <InputForm type='number' value={yearOfIncome} id='yearOfIncome' onChange={(e)=>{
+                        <LabelForm>Año donde quedó</LabelForm>
+                        <InputForm type='number' min={1} max={8} pattern='^[1-8]+' maxLength={1} value={yearOfIncome} id='yearOfIncome' onChange={(e)=>{
                             setSeminarianInfo((seminarian)=>{
                                 return{...seminarian, yearOfIncome:parseInt(e.target.value)}
                             })

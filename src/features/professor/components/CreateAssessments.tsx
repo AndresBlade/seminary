@@ -37,8 +37,8 @@ export const CreateAssessments = () => {
     console.log(subjectsProfessor)
     const [showModal, setShowModal] = useState(false)
     const [evaluations, setEvaluations]=useState([
-        {description:"",maximum_score:0},
-        {description:"",maximum_score:0},
+        {description:"".toUpperCase(),maximum_score:0},
+        {description:"".toUpperCase(),maximum_score:0},
     ])
     const [subjectSelected, setSubjectSelected]=useState(0);
     const handleAddEvaluation = ()=>{
@@ -130,6 +130,7 @@ export const CreateAssessments = () => {
         }
     },[subjectSelected])
 
+    console.log({evaluations})
 
     return (
         <ContentContainer>

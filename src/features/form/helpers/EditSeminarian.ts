@@ -27,10 +27,11 @@ interface seminarian{
         parish_id:number
     }
     ForeingSeminarian?:{
-        seminary_name:string
         stage:string
+        seminary_name:string
         stage_year:number
     } | null 
+    stage:string
     location:string
     apostleships:string
     ministery:string

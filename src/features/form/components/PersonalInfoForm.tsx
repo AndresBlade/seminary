@@ -102,7 +102,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
                         <option value="V-">V-</option>
                         <option value="E-">E-</option>
                     </SelectForm>
-                    <InputForm placeholder='000000000' type='number' id='id' minLength={8} value={id} onChange={(e)=>{
+                    <InputForm min={1} placeholder='000000000' type='number' id='id' minLength={6} value={id} onChange={(e)=>{
                         setPersonalInfo((personal)=>{
                                 return{...personal, id:e.target.value}
                             })

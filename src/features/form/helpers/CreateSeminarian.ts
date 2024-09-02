@@ -27,16 +27,15 @@ interface seminarian{
         parish_id:number
     }
     ForeingSeminarian?:{
-        seminary_name:string
         stage:string
+        seminary_name:string
         stage_year:number
     } | null 
+    stage:string
     location:string
     apostleships:string
     ministery:string
 }
-
-
 
 async function CreateSeminarian({data, imageFile,token}:{data:seminarian, imageFile:File,token:string}):Promise<Response>{
     const formData = new FormData();

@@ -60,12 +60,14 @@ export const Qualifications = () => {
                 
             })
             if(!testScores || !user) return
+
             CreateTestScore({data:{tests_score:testScores},token:user?.token}).then(response=>{
                 if(response.ok){
                     alert('Notas guardadas correctamente');
-                    setSubjectSelected(0)
+                    setDisabledEdit(true)
                     GetSeminarianListTestScore({subject_id:subjectSelected,academic_term_id:academicTermActiveToSend[0]}).then(response=>{
                         setShowSeminarianList(response)
+                        setSendTestScores(false)
                     }).catch(error=>{
                         console.log(error)
                         alert('Error al traer la lista de seminarista')
@@ -81,7 +83,6 @@ export const Qualifications = () => {
             setDisabledEdit(true)
         }
     },[sendTestScores,subjectSelected])
-    console.log(disabledEdit)
 
     return (
         <ContentContainer>
@@ -136,9 +137,11 @@ export const Qualifications = () => {
                                             disabled={disabledEdit}
                                             type="number"
                                             value={score ? score.score : 0}
-                                            min={1}
-                                            max={20}
                                             onChange={(e)=>{
+                                                const max_score='20';
+                                                if(e.target.value > max_score){
+                                                    e.target.value = max_score
+                                                }
                                                 setShowSeminarianList(data=>{
                                                     if(!data) return null
                                                     const dataClone = {...data}

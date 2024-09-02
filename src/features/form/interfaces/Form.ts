@@ -102,6 +102,7 @@ export interface userEditProps{
     apostleships:string
     location:string
     Ministery?:string
+    stage:string
     status:string
     parish_id:number
     diocesi_id:number
@@ -141,7 +142,6 @@ export interface userEditProps{
     }
     foreing_Data?:{
         seminary_name:string
-        stage:string
         stage_year:number
     }
     
