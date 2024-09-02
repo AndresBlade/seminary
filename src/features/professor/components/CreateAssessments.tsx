@@ -207,14 +207,16 @@ export const CreateAssessments = () => {
                         )}
                     </div>
                     <Input
+                        placeholder='Exámen'
                         type="text"
-                        value={evaluation.description}
+                        value={evaluation.description.toUpperCase()}
                         onChange={(e) =>
                         handleDescriptionChange(index, e.target.value)
                         }
                     />
                     <p>Ponderación</p>
                     <Input
+                        placeholder='20'
                         type="number"
                         min={0}
                         value={evaluation.maximum_score}
