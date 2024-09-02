@@ -136,21 +136,21 @@ export const ShowDataContent = () => {
             data?.map((user)=>
               <DataContent key={user.person?.id}>
                 <p>{user.person?.id}</p>
-                <p>{user.person?.forename}</p>
+                <p className={FormCSS.nameDataContent}>{user.person?.forename + user.person.surname}</p>
                 <p>{user.seminarian?.status == undefined && user.professor?.status_id == undefined ? 'N/A':
-                user.seminarian?.status ? 'Seminarista' :
-                user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'Profesor' :
-                user.professor?.instructor?.status ? 'Formador': 'N/A'
+                user.seminarian?.status ? 'SEMINARISTA' :
+                user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'PROFESOR' :
+                user.professor?.instructor?.status ? 'FORMADOR': 'N/A'
                 }</p> 
                 <p>{user.seminarian?.status == undefined && user.professor?.status_id == undefined ? 'N/A':
-                user.seminarian?.status ? 'Seminarista' :
-                user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'Profesor' :
-                user.professor?.instructor?.status  ? 'Formador': 'N/A'
+                user.seminarian?.status ? 'SEMINARISTA' :
+                user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'PROFESOR' :
+                user.professor?.instructor?.status  ? 'FORMADOR': 'N/A'
                   }
                 </p>
-                <p className={FormCSS.showDataBodyStatus}>{user.professor?.status_id === 0 ? 'Retirado' : 
-                    user.professor?.instructor?.status === 1 ? 'Activo' :
-                    user.professor?.status_id === 1 ? 'Activo':
+                <p className={FormCSS.showDataBodyStatus}>{user.professor?.status_id === 0 ? 'RETIRADO' : 
+                    user.professor?.instructor?.status === 1 ? 'ACTIVO' :
+                    user.professor?.status_id === 1 ? 'ACTIVO':
                     user.seminarian?.status
                   }</p>
                 <div>

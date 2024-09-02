@@ -35,7 +35,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
             <div>
                 <LabelForm>Formacion academica</LabelForm>
-                <InputForm type='text' value={academicTraining?.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='Ing. Informatica' type='text' value={academicTraining?.toLocaleUpperCase()} onChange={(e)=>{
                     setSeminarianInfo((seminarian)=>{
                         return {...seminarian, academicTraining:e.target.value}
                     })
@@ -62,7 +62,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
             <div>
                 <LabelForm>Enlace a titulo</LabelForm>
-                <InputForm type='text' value={linkTitle?.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='http://googledrive/titulo' type='text' value={linkTitle?.toLocaleUpperCase()} onChange={(e)=>{
                     setSeminarianInfo((seminarian)=>{
                         return{...seminarian, linkTitle:e.target.value}
                     })
@@ -71,7 +71,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
 
             <div>
                 <LabelForm>Apostolados</LabelForm>
-                <InputForm type='text' value={apostolates.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='Musica' type='text' value={apostolates.toLocaleUpperCase()} onChange={(e)=>{
                     setSeminarianInfo((seminarian)=>{
                         return{...seminarian, apostolates:e.target.value}
                     })
@@ -104,8 +104,8 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                                 return{...seminarian, condition:e.target.value}
                             })
                         }}>
-                    <option value="INTERNO">Interno</option>
-                    <option value="EXTERNO">Externo</option>
+                    <option value="INTERNO">INTERNO</option>
+                    <option value="EXTERNO">EXTERNO</option>
                 </SelectForm>
             </div>
             
@@ -137,7 +137,7 @@ export const AcademicCareer = ({academicTraining,stage,linkTitle,apostolates,   
                 <div className={FormCSS.anotherSeminary}>
                     <div>
                         <LabelForm>Nombre del seminario donde proviene</LabelForm>
-                        <InputForm type='text' value={nameSeminaryExternal?.toLocaleUpperCase()} onChange={(e)=>{
+                        <InputForm placeholder='Seminario Carora' type='text' value={nameSeminaryExternal?.toLocaleUpperCase()} onChange={(e)=>{
                             setSeminarianInfo((seminarian)=>{
                                 return{...seminarian, nameSeminaryExternal:e.target.value}
                             })

@@ -321,6 +321,10 @@
 		border-radius: 1rem 1rem 0 0;
 		border-bottom-width: 90%;
 	}
+	.showDataHeader p{
+		min-width: 11rem;
+		max-width: 11rem;
+	}
 	.showDataBody {
 		border-bottom: 1px solid #dddeee;
 		border-left: 1px solid #dddeee;
@@ -329,10 +333,11 @@
 	}
 	.showDataBody p {
 		width: 100%;
-		max-width: 10rem;
+		min-width: 12rem;
+		max-width: 12rem;
 		margin-top: 1rem;
 		overflow-x: scroll;
-		text-align: center;
+		text-align: left;
 	}
 
 	.showDataBody p::-webkit-scrollbar {

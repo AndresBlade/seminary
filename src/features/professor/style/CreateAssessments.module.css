@@ -188,6 +188,7 @@ input::-webkit-inner-spin-button {
 .buttonEditEnable{
     composes:buttonAddNewEvaluation;
 }
+
 .buttonActionsContainer{
     display: flex;
     flex-direction: column;

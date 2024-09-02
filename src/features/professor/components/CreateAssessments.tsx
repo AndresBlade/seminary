@@ -15,6 +15,8 @@ import { GetAcademicTerm } from '../../registration/helpers/GetAcademicTerm'
 import { Subjects } from '../interfaces/CreateAssessmentsInterfaces'
 import { CreateTests } from '../helpers/CreateTests'
 import { GetTestsSubject } from '../helpers/GetTestsSubject'
+
+
 export const CreateAssessments = () => {
     const {user} = useContext(AuthContext)
     const idUser= user?.person_id;
@@ -62,25 +64,18 @@ export const CreateAssessments = () => {
     };
     const calculateTotalScore = (evaluations:Evaluation[] | TestsSubject[])=>{
         let total = 0;
-        evaluations.forEach(evaluations=>{
-            total += evaluations.maximum_score
-        })
+        evaluations.length > 0 ? evaluations.forEach(evaluations=>{
+            if (evaluations?.maximum_score !== undefined){
+                total += evaluations.maximum_score
+            }
+        }): total = 0;
         return total
     }
 
-    const totalScore = ~~calculateTotalScore(evaluations)
-    const TotalScoreSubjectResgistered = calculateTotalScore(evaluationsToShow)
+    const totalScore = ~~calculateTotalScore(evaluations) ?? 0;
+    const TotalScoreSubjectResgistered = calculateTotalScore(evaluationsToShow) ?? 0;
 
-    useEffect(()=>{
-        GetAcademicTerm().then(response=>{
-            setAcademicTermActive(response);
-        }).catch(error=>{
-            console.error(error);
-            alert('Error al traer periodo academico activo');
-            
-        })
-    },[])
-
+    
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         if(!user?.token) return
@@ -88,6 +83,8 @@ export const CreateAssessments = () => {
 
         CreateTests({subject_id:subjectSelected,academic_term_id:academicTermActiveToSend[0],tests:evaluations,token:user.token}).then(response=>{
             if(response.ok){
+                alert('Evaluaciones registradas correctamente')
+                setShowModal(false)
                 GetTestsSubject({id:subjectSelected}).then(response=>{
                     setEvaluationsToShow(response)
                 }).catch(error=>{
@@ -101,22 +98,38 @@ export const CreateAssessments = () => {
             alert('Error al registrar las evaluaciones')
         })
     }
+    useEffect(()=>{
+        GetAcademicTerm().then(response=>{
+            setAcademicTermActive(response);
+        }).catch(error=>{
+            console.error(error);
+            alert('Error al traer periodo academico activo');
+            
+        })
+    },[])
 
     useEffect(()=>{
-        GetTestsSubject({id:subjectSelected}).then(response=>{
-            setEvaluationsToShow(response)
-        }).catch(error=>{
-            setError(true)
-            console.log(error)
-            alert('Error al mostrar las evaluaciones registradas')
-        });
+        if(subjectSelected !== 0){
+            GetTestsSubject({id:subjectSelected}).then(response=>{
+                setEvaluationsToShow(response)
+            }).catch(error=>{
+                setError(true)
+                console.log(error)
+                alert('Error al mostrar las evaluaciones registradas')
+            });
+        }
+        
         GetSubjects().then(response=>{
             setData(response)
         }).catch(error=>{
             console.log(error)
             alert('Error al mostrar las materias que imparte')
         })
+        if(subjectSelected === 0){
+            setEvaluationsToShow([])
+        }
     },[subjectSelected])
+
 
     return (
         <ContentContainer>
@@ -125,7 +138,7 @@ export const CreateAssessments = () => {
                 value={subjectSelected}
                 onChange={(e) => setSubjectSelected(parseInt(e.target.value))}
             >
-                <option value="" selected>
+                <option value="0" selected>
                 Seleccionar materia
                 </option>
                 {subjectsProfessor?.map((subject) => (
@@ -137,8 +150,9 @@ export const CreateAssessments = () => {
             </div>
             <div className={CreateAssessmentsStyles.addNewEvaluationContainer}>
             <h2>Lista de evaluaciones</h2>
+            
             <button
-                disabled={subjectSelected === 0}
+                disabled={subjectSelected === 0 || TotalScoreSubjectResgistered ===100}
                 className={CreateAssessmentsStyles.buttonAddNewEvaluation}
                 onClick={(e) => {
                 e.preventDefault();
@@ -157,7 +171,7 @@ export const CreateAssessments = () => {
             ) : evaluationsToShow.length === 0 ? (
             <p>No hay evaluaciones para mostrar</p>
             ) : (
-            evaluationsToShow.map((test) => (
+            evaluationsToShow?.map((test) => (
                 <DataContent
                 key={test.id}
                 className={CreateAssessmentsStyles.testShow}

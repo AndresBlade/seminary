@@ -29,8 +29,8 @@ export const Qualifications = () => {
         )
     );
     const [showSeminarianList, setShowSeminarianList]=useState<Data | null>(null)
-    const [enableEdit, setEnableEdit]=useState(true);
-
+    const [disabledEdit, setDisabledEdit]=useState(true);
+    const [sendTestScores,setSendTestScores]=useState(false);
     useEffect(()=>{
         GetAcademicTerm().then(response=>{
             setAcademicTermActive(response);
@@ -49,7 +49,39 @@ export const Qualifications = () => {
                 alert('Error al traer la lista de seminarista')
             })
         }
-    },[subjectSelected])
+        if(sendTestScores === true){
+            const testScores=showSeminarianList?.seminarians.map(seminarian=>{
+                return {
+                    enrollment_id:seminarian.enrollment_id,
+                    test: seminarian.test_score.map(testScore=>
+                    ({...testScore, score:+testScore.score})
+                    )
+                }
+                
+            })
+            if(!testScores || !user) return
+            CreateTestScore({data:{tests_score:testScores},token:user?.token}).then(response=>{
+                if(response.ok){
+                    alert('Notas guardadas correctamente');
+                    setSubjectSelected(0)
+                    GetSeminarianListTestScore({subject_id:subjectSelected,academic_term_id:academicTermActiveToSend[0]}).then(response=>{
+                        setShowSeminarianList(response)
+                    }).catch(error=>{
+                        console.log(error)
+                        alert('Error al traer la lista de seminarista')
+                    })
+                }
+            }).catch(error=>{
+                console.log(error)
+                alert(error)
+            })
+        }
+        if(subjectSelected === 0){
+            setShowSeminarianList(null)
+            setDisabledEdit(true)
+        }
+    },[sendTestScores,subjectSelected])
+    console.log(disabledEdit)
 
     return (
         <ContentContainer>
@@ -67,7 +99,7 @@ export const Qualifications = () => {
                 <h3>Lista de estudiantes</h3>
                 <button type='button' disabled={subjectSelected === 0} onClick={(e)=>{
                 e.preventDefault()
-                setEnableEdit(enableEdit ? false : true)
+                setDisabledEdit(disabledEdit ? false :true)
                 }} className={CreateAssessmentsStyles.buttonEditEnable}>
                     Editar notas
                 </button>
@@ -101,7 +133,7 @@ export const Qualifications = () => {
                                     <div key={test.test_id} className={CreateAssessmentsStyles.testsScore}>
                                         <input
                                             key={test.test_id}
-                                            disabled={enableEdit}
+                                            disabled={disabledEdit}
                                             type="number"
                                             value={score ? score.score : 0}
                                             min={1}
@@ -134,44 +166,23 @@ export const Qualifications = () => {
                 }
             </div>
             
-            {enableEdit === false ?
+            {disabledEdit === false ?
                 <div className={CreateAssessmentsStyles.buttonActionsContainer}>
                     <button className={CreateAssessmentsStyles.buttonCancel}
                         onClick={(e)=>{
                             e.preventDefault()
                             setSubjectSelected(0)
-                            setShowSeminarianList(null)
-                            setEnableEdit(true)
+                            setTimeout(()=>{
+                                setShowSeminarianList(null)
+                                setDisabledEdit(true)
+                            },1000)
                         }}
                         >Cancelar
                     </button>
                     <button type='submit' className={CreateAssessmentsStyles.buttonSave}
                         onClick={(e)=>{
-                            e.preventDefault();
-                            const testScores=showSeminarianList?.seminarians.map(seminarian=>{
-                                return {
-                                    enrollment_id:seminarian.enrollment_id,
-                                    test: seminarian.test_score.map(testScore=>
-                                    ({...testScore, score:+testScore.score})
-                                    )
-                                }
-                                
-                            })
-                            if(!testScores) return
-                            if(!user) return
-                            CreateTestScore({data:{tests_score:testScores},token:user?.token}).then(response=>{
-                                if(response.ok){
-                                    GetSeminarianListTestScore({subject_id:subjectSelected,academic_term_id:academicTermActiveToSend[0]}).then(response=>{
-                                        setShowSeminarianList(response)
-                                    }).catch(error=>{
-                                        console.log(error)
-                                        alert('Error al traer la lista de seminarista')
-                                    })
-                                }
-                            }).catch(error=>{
-                                console.log(error)
-                                alert(error)
-                            })
+                            e.preventDefault()
+                            setSendTestScores(true)
                         }}
                         >Guardar
                     </button>
