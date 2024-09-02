@@ -294,7 +294,8 @@
 		padding: 1rem;
 	}
 	.data-content p {
-		width: 30%;
+		min-width: 20rem;
+		max-width: 20rem;
 		text-align: start;
 	}
 	.data-show__title {

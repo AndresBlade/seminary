@@ -164,10 +164,10 @@ export const ShowDataContent = () => {
 				<div className={FormCSS.showDataHeader}>
 					<p>Cédula</p>
 					<p>Nombre</p>
-					<p>Tipo</p>
-					<p>Rol</p>
-					<p>Status</p>
-					<p>Acciones</p>
+					<p className={FormCSS.dataHeaderP}>Tipo</p>
+					<p className={FormCSS.dataHeaderP}>Rol</p>
+					<p className={FormCSS.dataHeaderP}>Status</p>
+					<p className={FormCSS.dataHeaderP}>Acciones</p>
 				</div>
 				<div className={FormCSS.showDataBody}>
 					{error ? (
@@ -236,47 +236,51 @@ export const ShowDataContent = () => {
 											/>
 										</a>
 									)}
-									<button
-										className={FormCSS.buttonActions}
-										onClick={() => {
-											const userType = user.seminarian
-												?.status
-												? 'seminarian'
-												: user.professor?.status_id
-												? 'professor'
-												: 'N/A';
-											navigate(
-												`../../Profesor/${userType}/${user.person?.id.slice(
-													2
-												)}`
-											);
-										}}
-									>
-										<img src={editIcon} alt="" />
-									</button>
-									<button
-										className={FormCSS.buttonActions}
-										onClick={e => {
-											e.preventDefault();
-											setUserDelete(user.person.id);
-											setInfoUserDelete(
-												user.seminarian?.status
-													? 'seminarista'
-													: user.professor
-															?.status_id &&
-													  user.professor?.instructor
-															?.status ===
-															undefined
-													? 'profesor'
-													: user.professor?.instructor
-															.status
-													? 'formador'
-													: 'N/A'
-											);
-										}}
-									>
-										<img src={deleteIcon} alt="" />
-									</button>
+									{user.seminarian?.status !== 'RETIRADO' ? (
+										<div>
+											<button
+												className={FormCSS.buttonActions}
+												onClick={() => {
+													const userType = user.seminarian
+														?.status
+														? 'seminarian'
+														: user.professor?.status_id
+														? 'professor'
+														: 'N/A';
+													navigate(
+														`../../Profesor/${userType}/${user.person?.id.slice(
+															2
+														)}`
+													);
+												}}
+											>
+												<img src={editIcon} alt="" />
+											</button>
+											<button
+												className={FormCSS.buttonActions}
+												onClick={e => {
+													e.preventDefault();
+													setUserDelete(user.person.id);
+													setInfoUserDelete(
+														user.seminarian?.status
+															? 'seminarista'
+															: user.professor
+																	?.status_id &&
+															user.professor?.instructor
+																	?.status ===
+																	undefined
+															? 'profesor'
+															: user.professor?.instructor
+																	.status
+															? 'formador'
+															: 'N/A'
+													);
+												}}
+											>
+												<img src={deleteIcon} alt="" />
+											</button>
+										</div>
+										):null}
 									<button
 										className={FormCSS.buttonActions}
 										onClick={() => {

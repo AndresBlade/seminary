@@ -313,10 +313,10 @@
 	}
 	.showDataHeader {
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		color: var(--dark-yellow);
 		font-weight: bold;
-		padding: 1rem 2rem;
+		padding: 1rem 8rem 1rem 2rem;
 		font-size: 1.8rem;
 		line-height: normal;
 		font-style: normal;
@@ -327,6 +327,9 @@
 		border-left: 1px solid #dddeee;
 		border-radius: 1rem 1rem 0 0;
 		border-bottom-width: 90%;
+	}
+	.dataHeaderP{
+		margin-left: -2rem;
 	}
 	.showDataBody {
 		border-bottom: 1px solid #dddeee;
