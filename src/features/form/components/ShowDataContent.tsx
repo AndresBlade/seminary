@@ -136,7 +136,7 @@ export const ShowDataContent = () => {
             data?.map((user)=>
               <DataContent key={user.person?.id}>
                 <p>{user.person?.id}</p>
-                <p className={FormCSS.nameDataContent}>{user.person?.forename + user.person.surname}</p>
+                <p className={FormCSS.nameDataContent}>{user.person?.forename + ' ' + user.person.surname}</p>
                 <p>{user.seminarian?.status == undefined && user.professor?.status_id == undefined ? 'N/A':
                 user.seminarian?.status ? 'SEMINARISTA' :
                 user.professor?.status_id && user.professor?.instructor?.status === undefined ? 'PROFESOR' :
