@@ -39,7 +39,7 @@ interface seminarian {
 	apostleships: string | undefined;
 	ministery: string | undefined;
 
-	stage: string;
+	stage: string | undefined;
 }
 
 async function EditSeminarian({
