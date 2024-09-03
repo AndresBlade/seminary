@@ -10,7 +10,7 @@ interface parishWrapper {
 }
 
 export const GetParishByName = ({ name }: { name: string }) => {
-	return fetch(`http://localhost:3000/parish/search/${name}`).then(
+	return fetch(`${import.meta.env.VITE_URL}/parish/search/${name}`).then(
 		response => response.json() as Promise<parishWrapper>
 	);
 };

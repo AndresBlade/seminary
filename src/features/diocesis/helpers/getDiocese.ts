@@ -5,7 +5,7 @@ export interface Diocese {
 }
 
 export const getDiocese = (token: string): Promise<Diocese[]> => {
-	return fetch('http://127.0.0.1:3000/Diocese/', {
+	return fetch(`${import.meta.env.VITE_URL}/Diocese/`, {
 		headers: {
 			auth: token,
 		},

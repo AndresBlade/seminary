@@ -1,7 +1,7 @@
 import { Instruction } from '../interfaces/Instruction';
 
 export const getInstructions = (token: string): Promise<Instruction[]> =>
-	fetch('http://127.0.0.1:3000/instruction', {
+	fetch(`${import.meta.env.VITE_URL}/instruction`, {
 		headers: {
 			auth: token,
 		},

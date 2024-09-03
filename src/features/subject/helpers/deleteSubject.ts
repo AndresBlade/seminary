@@ -1,5 +1,5 @@
 export const deleteSubject = (id: number, token: string) => {
-	return fetch(`http://127.0.0.1:3000/subject/${id}`, {
+	return fetch(`${import.meta.env.VITE_URL}/subject/${id}`, {
 		method: 'DELETE',
 		mode: 'cors',
 		credentials: 'same-origin',

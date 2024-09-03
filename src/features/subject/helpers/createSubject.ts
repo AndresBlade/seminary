@@ -7,7 +7,7 @@ interface Props {
 
 export const createSubject = ({ subject, token }: Props) => {
 	console.log(subject);
-	return fetch('http://127.0.0.1:3000/subject/', {
+	return fetch(`${import.meta.env.VITE_URL}/subject/`, {
 		method: 'POST',
 		mode: 'cors', // no-cors, *cors, same-origin
 		credentials: 'same-origin',

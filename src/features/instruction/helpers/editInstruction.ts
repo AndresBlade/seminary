@@ -7,7 +7,7 @@ interface Props {
 
 export const editInstruction = ({ instruction, token }: Props) => {
 	console.log(instruction);
-	return fetch('http://127.0.0.1:3000/instruction/', {
+	return fetch(`${import.meta.env.VITE_URL}/instruction/`, {
 		method: 'PUT',
 		mode: 'cors', // no-cors, *cors, same-origin
 		credentials: 'same-origin',

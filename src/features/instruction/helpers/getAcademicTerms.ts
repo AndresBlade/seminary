@@ -1,7 +1,7 @@
 import { AcademicTerm } from '../interfaces/AcademicTerm';
 
 export const getAcademicTerms = (token: string): Promise<AcademicTerm[]> =>
-	fetch('http://127.0.0.1:3000/academicterm', {
+	fetch(`${import.meta.env.VITE_URL}/academicterm`, {
 		headers: {
 			auth: token,
 		},

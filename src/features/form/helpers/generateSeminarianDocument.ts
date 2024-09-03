@@ -1,5 +1,5 @@
 export const generateSeminarianDocument = (id: string, token: string) =>
-	fetch(`http://127.0.0.1:3000/seminarian/ficha/${id}`, {
+	fetch(`${import.meta.env.VITE_URL}/seminarian/ficha/${id}`, {
 		method: 'GET',
 		headers: {
 			auth: token,

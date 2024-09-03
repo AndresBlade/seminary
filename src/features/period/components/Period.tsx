@@ -22,7 +22,7 @@ import { ActivateSemester } from '../helpers/ActivateSemester';
 import { FindPeriod } from '../helpers/FindPeriod';
 
 export const Period = () => {
-	const apiUrl = 'http://127.0.0.1:3000/AcademicTerm';
+	const apiUrl = `${import.meta.env.VITE_URL}/AcademicTerm`;
 	const { user } = useContext(AuthContext);
 	const [showModal, setShowModal] = useState(false);
 	const [deletePeriod, setDeletePeriod] = useState(0);
