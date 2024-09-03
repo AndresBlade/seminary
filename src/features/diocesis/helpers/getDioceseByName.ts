@@ -15,7 +15,7 @@ export const getDioceseByName = ({
 	name: string;
 	token: string;
 }) => {
-	return fetch(`http://localhost:3000/Diocese/search/${name}`, {
+	return fetch(`${import.meta.env.VITE_URL}/Diocese/search/${name}`, {
 		headers: {
 			auth: token,
 		},

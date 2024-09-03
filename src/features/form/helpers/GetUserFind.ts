@@ -46,7 +46,7 @@ export const GetUserFind = ({
 	data: string;
 	token: string;
 }): Promise<userPropsWrapper> => {
-	return fetch(`http://127.0.0.1:3000/user/${data}`, {
+	return fetch(`${import.meta.env.VITE_URL}/user/${data}`, {
 		method: 'GET',
 		headers: {
 			auth: token,

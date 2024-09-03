@@ -23,7 +23,7 @@ export interface ParishDataContentPropss {
 }
 
 export const ParishShowData = () => {
-	const apiUrl = 'http://127.0.0.1:3000/parish/';
+	const apiUrl = `${import.meta.env.VITE_URL}/parish/`;
 	const {
 		data,
 		loading,

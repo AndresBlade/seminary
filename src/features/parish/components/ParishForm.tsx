@@ -34,8 +34,8 @@ interface ParishData {
 }
 export const ParishForm = () => {
 	const { id } = useParams();
-	const apiUrl = 'http://localhost:3000/Diocese/';
-	const apiUrlParish = `http://localhost:3000/parish/${id}`;
+	const apiUrl = `${import.meta.env.VITE_URL}/Diocese/`;
+	const apiUrlParish = `${import.meta.env.VITE_URL}/parish/${id}`;
 	const [parishName, setParishName] = useState('');
 	const [parroco, setParroco] = useState('');
 	const [diocesis, setDiocesis] = useState(0);

@@ -38,7 +38,7 @@ interface seminarian {
 	location: string | undefined;
 	apostleships: string | undefined;
 	ministery: string | undefined;
-	stage: string;
+	stage: string | undefined;
 }
 
 async function CreateSeminarian({
@@ -55,7 +55,7 @@ async function CreateSeminarian({
 	formData.append('data', JSON.stringify(data));
 
 	const response = await fetch(
-		`http://127.0.0.1:3000/seminarian/create/${data.persona.id}`,
+		`${import.meta.env.VITE_URL}/seminarian/create/${data.persona.id}`,
 		{
 			method: 'POST',
 			mode: 'cors',

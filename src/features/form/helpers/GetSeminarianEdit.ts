@@ -54,7 +54,7 @@ export function GetSeminarianEdit(
 	id: string,
 	token: string
 ): Promise<seminarian[]> {
-	return fetch(`http://127.0.0.1:3000/seminarian/getsem?id=${id}`, {
+	return fetch(`${import.meta.env.VITE_URL}/seminarian/getsem?id=${id}`, {
 		headers: {
 			auth: token,
 		},

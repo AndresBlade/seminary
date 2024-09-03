@@ -6,7 +6,7 @@ interface Parish {
 }
 
 export const GetParish = (): Promise<Parish> => {
-	return fetch('http://127.0.0.1:3000/parish').then(
+	return fetch(`${import.meta.env.VITE_URL}/parish`).then(
 		response => response.json() as Promise<Parish>
 	);
 };

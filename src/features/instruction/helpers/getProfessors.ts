@@ -1,7 +1,7 @@
 import { Professor } from '../interfaces/Professor';
 
 export const getProfessors = (token: string): Promise<Professor[]> =>
-	fetch('http://127.0.0.1:3000/user/user-by-type?type=professor', {
+	fetch(`${import.meta.env.VITE_URL}/user/user-by-type?type=professor`, {
 		headers: {
 			auth: token,
 		},

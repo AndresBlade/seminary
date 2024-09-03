@@ -7,7 +7,7 @@ async function CreateDiocesis({
 	obispo: string;
 	token: string;
 }): Promise<Response> {
-	const response = await fetch('http://127.0.0.1:3000/Diocese/', {
+	const response = await fetch(`${import.meta.env.VITE_URL}/Diocese/`, {
 		method: 'POST',
 		mode: 'cors', // no-cors, *cors, same-origin
 		credentials: 'same-origin',
