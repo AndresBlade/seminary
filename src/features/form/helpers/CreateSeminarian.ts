@@ -38,6 +38,7 @@ interface seminarian {
 	location: string | undefined;
 	apostleships: string | undefined;
 	ministery: string | undefined;
+	stage: string;
 }
 
 async function CreateSeminarian({

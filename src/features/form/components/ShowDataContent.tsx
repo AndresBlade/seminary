@@ -14,9 +14,9 @@ import { GetUsers } from '../helpers/GetUsers';
 import { useNavigate } from 'react-router-dom';
 import { GetUserByType } from '../helpers/GetUserByType';
 import { GetUserFind } from '../helpers/GetUserFind';
-import resetIcon from '../../../assets/MaterialSymbolsLockReset.svg';
-import contactIcon from '../../../assets/MaterialSymbolsIdCardOutline.svg';
 import { changePassword } from '../../changePassword/helpers/changePassword';
+import contactIcon from '../../../assets/MaterialSymbolsIdCardOutline.svg';
+import resetIcon from '../../../assets/MaterialSymbolsLockReset.svg';
 export interface userProps {
 	person: {
 		id: string;
@@ -164,10 +164,10 @@ export const ShowDataContent = () => {
 				<div className={FormCSS.showDataHeader}>
 					<p>Cédula</p>
 					<p>Nombre</p>
-					<p className={FormCSS.dataHeaderP}>Tipo</p>
-					<p className={FormCSS.dataHeaderP}>Rol</p>
-					<p className={FormCSS.dataHeaderP}>Status</p>
-					<p className={FormCSS.dataHeaderP}>Acciones</p>
+					<p>Tipo</p>
+					<p>Rol</p>
+					<p>Status</p>
+					<p>Acciones</p>
 				</div>
 				<div className={FormCSS.showDataBody}>
 					{error ? (
@@ -239,12 +239,15 @@ export const ShowDataContent = () => {
 									{user.seminarian?.status !== 'RETIRADO' ? (
 										<div>
 											<button
-												className={FormCSS.buttonActions}
+												className={
+													FormCSS.buttonActions
+												}
 												onClick={() => {
-													const userType = user.seminarian
-														?.status
+													const userType = user
+														.seminarian?.status
 														? 'seminarian'
-														: user.professor?.status_id
+														: user.professor
+																?.status_id
 														? 'professor'
 														: 'N/A';
 													navigate(
@@ -257,20 +260,26 @@ export const ShowDataContent = () => {
 												<img src={editIcon} alt="" />
 											</button>
 											<button
-												className={FormCSS.buttonActions}
+												className={
+													FormCSS.buttonActions
+												}
 												onClick={e => {
 													e.preventDefault();
-													setUserDelete(user.person.id);
+													setUserDelete(
+														user.person.id
+													);
 													setInfoUserDelete(
 														user.seminarian?.status
 															? 'seminarista'
 															: user.professor
 																	?.status_id &&
-															user.professor?.instructor
+															  user.professor
+																	?.instructor
 																	?.status ===
 																	undefined
 															? 'profesor'
-															: user.professor?.instructor
+															: user.professor
+																	?.instructor
 																	.status
 															? 'formador'
 															: 'N/A'
@@ -280,7 +289,7 @@ export const ShowDataContent = () => {
 												<img src={deleteIcon} alt="" />
 											</button>
 										</div>
-										):null}
+									) : null}
 									<button
 										className={FormCSS.buttonActions}
 										onClick={() => {

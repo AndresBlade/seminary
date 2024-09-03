@@ -150,4 +150,6 @@ export interface userEditProps {
 		stage: string;
 		stage_year: number;
 	};
+
+	stage: string;
 }

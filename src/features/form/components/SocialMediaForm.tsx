@@ -53,7 +53,7 @@ export const SocialMediaForm = ({setModal, modal, setSocialMedia,socialMedia}:so
                                 </button>
                             </div>
                             
-                            <InputForm type='text' id={socialMediaMap.description}
+                            <InputForm placeholder='http://redsocial.com/user' id={socialMediaMap.description}
                                 value={socialMedia.find((socialMediaElement)=>{
                                     return socialMediaElement.category === socialMediaMap.id
                                 })?.link}

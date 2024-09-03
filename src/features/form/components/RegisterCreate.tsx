@@ -166,7 +166,7 @@ const RegisterCreate = () => {
 				);
 				setSeminarianInfo({
 					academicTraining: infoUserEdit.degrees?.[0]?.description,
-					stage: infoUserEdit.foreing_Data?.stage,
+					stage: infoUserEdit.stage,
 					linkTitle: infoUserEdit.degrees?.[0]?.link,
 					apostolates: infoUserEdit.apostleships,
 					ministriesReceived: infoUserEdit.Ministery,
@@ -292,11 +292,12 @@ const RegisterCreate = () => {
 				},
 				ForeingSeminarian: anotherSeminary
 					? {
-							seminary_name: seminarianInfo.nameSeminaryExternal,
 							stage: seminarianInfo.stage,
+							seminary_name: seminarianInfo.nameSeminaryExternal,
 							stage_year: seminarianInfo.yearOfIncome,
 					  }
 					: undefined,
+				stage: seminarianInfo.stage,
 				location: seminarianInfo.condition,
 				apostleships: seminarianInfo.apostolates,
 				ministery: seminarianInfo.ministriesReceived,

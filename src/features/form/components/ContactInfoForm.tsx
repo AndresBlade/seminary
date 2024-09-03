@@ -3,7 +3,7 @@ import { LabelForm } from './small_components/LabelForm'
 import { InputForm } from './small_components/InputForm'
 import { TitleForm } from './small_components/TitleForm'
 import {contactInfoProps} from '../interfaces/Form'
-import { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
 interface contactInfoPropsForm{
     contactInfo:{
@@ -18,22 +18,31 @@ interface contactInfoPropsForm{
 
 
 export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,descriptionFamily,email},setContactInfo}:contactInfoPropsForm) => {
+
+    function max_chars(e:React.ChangeEvent<HTMLInputElement>){
+        const max_chars = 11;
+        if(e.target.value.length > max_chars){
+            e.target.value = e.target.value.substring(0,max_chars)
+        }
+    }
+
     return (
         <div className={FormCSS.contactInfo} >
             <TitleForm title='Información de contacto' />
-
             <div>
                 <LabelForm>Telefono Propio</LabelForm>
-                <InputForm type='number' id='phone' value={phone} onChange={(e)=>{
+                <InputForm placeholder='000000000' type='number' id='phone' value={phone} onChange={(e)=>{
+                    max_chars(e)
                     setContactInfo((contact)=>{
                         return{...contact,phone:e.target.value}
 
                     })
+                    
                 }}/>
             </div>
             <div>
                 <LabelForm>Descripcion del telefono</LabelForm>
-                <InputForm type="text" id='descriptionPhone' value={description.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='Principal' type="text" id='descriptionPhone' value={description.toLocaleUpperCase()} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact, description:e.target.value}
                     })
@@ -41,7 +50,7 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
             </div>
             <div>
                 <LabelForm>Correo Electronico</LabelForm>
-                <InputForm type='email' id='email' value={email} onChange={(e)=>{
+                <InputForm placeholder='Correo@correo.com' type='email' id='email' value={email} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,email:e.target.value}
 
@@ -51,17 +60,17 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
 
             <div>
                 <LabelForm>Telefono de contacto familiar</LabelForm>
-                <InputForm type='number' id='phoneFamily' value={phoneFamily} onChange={(e)=>{
+                <InputForm placeholder='000000000' type='number' id='phoneFamily' value={phoneFamily} onChange={(e)=>{
+                    max_chars(e)
                     setContactInfo((contact)=>{
                         return{...contact,phoneFamily:e.target.value}
-
                     })
                 }}/>
             </div>
 
             <div>
                 <LabelForm>Nombre del contacto familiar</LabelForm>
-                <InputForm type='text' id='nameFamily' value={descriptionFamily.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='Tia' type='text' id='nameFamily' value={descriptionFamily.toLocaleUpperCase()} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,descriptionFamily:e.target.value}
                     })

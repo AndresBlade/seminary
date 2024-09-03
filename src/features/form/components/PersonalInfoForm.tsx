@@ -73,7 +73,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
             
             <div>
                 <LabelForm>Nombres</LabelForm>
-                <InputForm type='text' id='name' value={name.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='PEDRO' type='text' id='name' value={name.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, name:e.target.value}
                         })
@@ -84,7 +84,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Apellidos</LabelForm>
-                <InputForm type='text' id='lastName' value={lastName.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='MENDOZA' type='text' id='lastName' value={lastName.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, lastName:e.target.value}
                         })
@@ -102,7 +102,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
                         <option value="V-">V-</option>
                         <option value="E-">E-</option>
                     </SelectForm>
-                    <InputForm type='number' id='id' minLength={8} value={id} onChange={(e)=>{
+                    <InputForm min={1} placeholder='000000000' type='number' id='id' minLength={6} value={id} onChange={(e)=>{
                         setPersonalInfo((personal)=>{
                                 return{...personal, id:e.target.value}
                             })
@@ -141,7 +141,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Condicion médica</LabelForm>
-                <InputForm type='text' value={medicalRecord?.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='Convulsiones'type='text' value={medicalRecord?.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                         return {...personal, medicalRecord:e.target.value}
                     })

@@ -3,7 +3,7 @@ import { inputProps } from '../../interfaces/Form'
 
 export const InputForm = (inputProps:inputProps) => {
     return (
-        <input className={FormCSS['inputForm']}
+        <input type='text' className={FormCSS.inputForm}
         {...inputProps}
         />
     )
