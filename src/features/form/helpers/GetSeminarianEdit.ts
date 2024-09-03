@@ -46,6 +46,8 @@ interface seminarian {
 		stage: string;
 		stage_year: number;
 	};
+	stage: string;
+
 }
 
 export function GetSeminarianEdit(

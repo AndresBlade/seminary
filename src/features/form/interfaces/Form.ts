@@ -151,5 +151,5 @@ export interface userEditProps {
 		stage_year: number;
 	};
 
-	stage: string;
+	stage: string | undefined;
 }
