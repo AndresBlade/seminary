@@ -166,7 +166,7 @@ const RegisterCreate = () => {
 				);
 				setSeminarianInfo({
 					academicTraining: infoUserEdit.degrees?.[0]?.description,
-					stage: infoUserEdit.stage,
+					stage: infoUserEdit.stage === '1' ? 'PROPEDEUTICO' : infoUserEdit.stage === '2' ? 'DISCIPULADO': 'CONFIGURATIVA',
 					linkTitle: infoUserEdit.degrees?.[0]?.link,
 					apostolates: infoUserEdit.apostleships,
 					ministriesReceived: infoUserEdit.Ministery,
@@ -240,7 +240,7 @@ const RegisterCreate = () => {
 		}
 	}, [data, id, user?.token, dataProfessor, typeUserEdit]);
 
-	console.log(typeof seminarianInfo.yearOfIncome);
+	console.log(seminarianInfo.stage);
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const dataSent = {
@@ -277,6 +277,7 @@ const RegisterCreate = () => {
 			ministery: seminarianInfo.stage === '3' ? '' : undefined,
 			instructor: personalInfo.rol === 'formador' ? {} : undefined,
 			status: personalInfo.rol === 'seminarista' && id ? '' : undefined,
+			stage: seminarianInfo.stage
 		};
 
 		if (personalInfo.rol === 'seminarista') {
@@ -309,6 +310,7 @@ const RegisterCreate = () => {
 			dataSent.apostleships = dataExtra.apostleships;
 			dataSent.ministery = dataExtra.ministery;
 			dataSent.status = dataExtra.status;
+			dataSent.stage = dataExtra.stage
 
 			if (!anotherSeminary) {
 				delete dataSent.ForeingSeminarian;
@@ -320,6 +322,7 @@ const RegisterCreate = () => {
 			if (!user) return;
 
 			if (!id) {
+				console.log(dataSent)
 				CreateSeminarian({
 					data: dataSent,
 					imageFile: imageFile,
