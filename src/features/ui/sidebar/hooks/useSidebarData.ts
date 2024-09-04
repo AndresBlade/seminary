@@ -11,6 +11,7 @@ import professorIcon from '../../../../assets/MaterialSymbolsInteractiveSpaceOut
 import graduationCapIcon from '../../../../assets/MaterialSymbolsSchoolOutline.svg';
 import graphicIcon from '../../../../assets/MaterialSymbolsBarChart4BarsRounded.svg';
 import { IsUserKnownRole } from '../helpers/isUserKnownRole';
+import { ActiveAcademicTermContext } from '../../../period/context/ActiveAcademicTermContext';
 
 // {
 // 	content: 'Seminarista',
@@ -95,23 +96,6 @@ const workerItem: SidebarItemData = {
 	],
 };
 
-const academicItem: SidebarItemData = {
-	content: 'Académico',
-	iconPath: subjectIcon,
-	type: 'submenu',
-	children: [
-		{ content: 'Período académico', path: 'term' },
-		{ content: 'Agregar Materia', path: 'subject/new' },
-		{
-			content: 'Asignación de materias',
-			path: 'subject/instruction',
-		},
-		{ content: 'Lista de materias', path: 'subject' },
-		{ content: 'Lista inscritos en materia', path: 'enrollment' },
-		{ content: 'inscribir materia', path: 'enrollment/new' },
-	],
-};
-
 const ecclesiasticalItem: SidebarItemData = {
 	content: 'Eclesiástico',
 	type: 'submenu',
@@ -145,11 +129,53 @@ export const useSidebarData = () => {
 		homeItem,
 	]);
 
+	const { isThereActiveAcademicTerm } = useContext(ActiveAcademicTermContext);
+
 	useEffect(() => {
 		if (!user) return;
+
+		let academicItem: SidebarItemData;
+
+		if (!isThereActiveAcademicTerm) {
+			academicItem = {
+				content: 'Académico',
+				iconPath: subjectIcon,
+				type: 'submenu',
+				children: [
+					{ content: 'Período académico', path: 'term' },
+					{ content: 'Lista de materias', path: 'subject' },
+					{
+						content: 'Agregar Materia',
+						path: 'subject/new',
+					},
+				],
+			};
+		}
+
+		if (isThereActiveAcademicTerm) {
+			academicItem = {
+				content: 'Académico',
+				iconPath: subjectIcon,
+				type: 'submenu',
+				children: [
+					{ content: 'Período académico', path: 'term' },
+					{ content: 'Lista de materias', path: 'subject' },
+
+					{
+						content: 'Lista inscritos en materia',
+						path: 'enrollment',
+					},
+					{ content: 'Inscripción', path: 'enrollment/new' },
+					{
+						content: 'Asignación de materias',
+						path: 'subject/instruction',
+					},
+				],
+			};
+		}
+
 		if (!IsUserKnownRole(user.role))
-			return setSidebarData(sidebarData => [
-				...sidebarData,
+			return setSidebarData(() => [
 				seminarianItem,
 				professorItem,
 				workerItem,
@@ -158,19 +184,16 @@ export const useSidebarData = () => {
 				statisticsItem,
 			]);
 		if (user.role === 'SEMINARIAN')
-			return setSidebarData(sidebarData => [
-				...sidebarData,
-				seminarianItem,
-			]);
-		if (user.role === 'PROFESOR' || user.role === 'INSTRUCTOR')
-			return setSidebarData(sidebarData => [
-				...sidebarData,
-				professorItem,
-			]);
+			return setSidebarData(() => [seminarianItem]);
+		if (
+			user.role === 'PROFESOR' ||
+			user.role === 'INSTRUCTOR' ||
+			user.role == 'PROPEDEUTICO'
+		)
+			return setSidebarData(() => [professorItem]);
 
 		if (user.role === 'RECTOR' || user.role === 'VICE RECTOR')
-			return setSidebarData(sidebarData => [
-				...sidebarData,
+			return setSidebarData(() => [
 				{
 					content: 'Usuarios',
 					iconPath: personIcon,
@@ -187,8 +210,7 @@ export const useSidebarData = () => {
 				ecclesiasticalItem,
 				statisticsItem,
 			]);
-		return setSidebarData(sidebarData => [
-			...sidebarData,
+		return setSidebarData(() => [
 			userItem,
 			seminarianItem,
 			professorItem,
@@ -197,7 +219,7 @@ export const useSidebarData = () => {
 			ecclesiasticalItem,
 			statisticsItem,
 		]);
-	}, [user]);
+	}, [user, isThereActiveAcademicTerm]);
 
 	return sidebarData;
 };

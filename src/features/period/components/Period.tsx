@@ -20,6 +20,7 @@ import { UpdateSemester } from '../helpers/UpdateSemester';
 import { Animation } from '../../../shared/animation/Animation';
 import { ActivateSemester } from '../helpers/ActivateSemester';
 import { FindPeriod } from '../helpers/FindPeriod';
+import { ActiveAcademicTermContext } from '../context/ActiveAcademicTermContext';
 
 export const Period = () => {
 	const apiUrl = `${import.meta.env.VITE_URL}/AcademicTerm`;
@@ -40,6 +41,10 @@ export const Period = () => {
 		start_date: '',
 		end_date: '',
 	});
+
+	const { setIsThereActiveAcademicTerm } = useContext(
+		ActiveAcademicTermContext
+	);
 
 	useEffect(() => {
 		data?.forEach(semester => {
@@ -63,6 +68,8 @@ export const Period = () => {
 			})
 				.then(() => {
 					alert('Eliminado correctamente');
+					setIsThereActiveAcademicTerm(false);
+					console.log('there isnt');
 					setDeletePeriod(0);
 					setSemester({
 						semesterNumber: 0,
@@ -188,6 +195,8 @@ export const Period = () => {
 							GetPeriods()
 								.then(response => {
 									setData(response);
+									setIsThereActiveAcademicTerm(true);
+									console.log('there is');
 								})
 								.catch(error => {
 									console.log(error),

@@ -5,6 +5,7 @@ export const KnownRoles = [
 	'PROFESOR',
 	'SEMINARIAN',
 	'INSTRUCTOR',
+	'PROPEDEUTICO',
 ] as const;
 
 export type KnownRole = (typeof KnownRoles)[number];
