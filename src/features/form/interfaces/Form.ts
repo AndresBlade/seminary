@@ -55,6 +55,7 @@ export interface titleProps {
 
 export interface buttonNextBackProps {
 	setNumber: Dispatch<SetStateAction<number>>;
+	handleNext?: () => boolean;
 	initial?: boolean;
 	final?: boolean;
 }

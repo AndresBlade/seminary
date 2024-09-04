@@ -266,6 +266,10 @@
 	border: none;
 	color: white;
 }
+
+.buttonSaveForm:disabled {
+	background-color: #017ab444;
+}
 /************************MEDIA QUERY PARA PC************************/
 @media (width >= 1024px) {
 	.containerForm {

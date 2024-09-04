@@ -73,7 +73,7 @@ const RegisterCreate = () => {
 		condition: 'INTERNO',
 		status: '',
 		nameSeminaryExternal: '',
-		yearOfIncome: 0,
+		yearOfIncome: 1,
 	});
 
 	const [professionalInfo, setProfessionalInfo] = useState<professionalInfo>({
@@ -166,7 +166,12 @@ const RegisterCreate = () => {
 				);
 				setSeminarianInfo({
 					academicTraining: infoUserEdit.degrees?.[0]?.description,
-					stage: infoUserEdit.stage === '1' ? 'PROPEDEUTICO' : infoUserEdit.stage === '2' ? 'DISCIPULADO': 'CONFIGURATIVA',
+					stage:
+						infoUserEdit.stage === '1'
+							? 'PROPEDEUTICO'
+							: infoUserEdit.stage === '2'
+							? 'DISCIPULADO'
+							: 'CONFIGURATIVA',
 					linkTitle: infoUserEdit.degrees?.[0]?.link,
 					apostolates: infoUserEdit.apostleships,
 					ministriesReceived: infoUserEdit.Ministery,
@@ -277,7 +282,7 @@ const RegisterCreate = () => {
 			ministery: seminarianInfo.stage === '3' ? '' : undefined,
 			instructor: personalInfo.rol === 'formador' ? {} : undefined,
 			status: personalInfo.rol === 'seminarista' && id ? '' : undefined,
-			stage: seminarianInfo.stage
+			stage: seminarianInfo.stage,
 		};
 
 		if (personalInfo.rol === 'seminarista') {
@@ -310,7 +315,7 @@ const RegisterCreate = () => {
 			dataSent.apostleships = dataExtra.apostleships;
 			dataSent.ministery = dataExtra.ministery;
 			dataSent.status = dataExtra.status;
-			dataSent.stage = dataExtra.stage
+			dataSent.stage = dataExtra.stage;
 
 			if (!anotherSeminary) {
 				delete dataSent.ForeingSeminarian;
@@ -322,7 +327,7 @@ const RegisterCreate = () => {
 			if (!user) return;
 
 			if (!id) {
-				console.log(dataSent)
+				console.log(dataSent);
 				CreateSeminarian({
 					data: dataSent,
 					imageFile: imageFile,
@@ -352,6 +357,7 @@ const RegisterCreate = () => {
 					.then(response => {
 						if (response.ok) {
 							alert('Seminarista actualizado');
+							navigate('../');
 						} else {
 							throw new Error();
 						}
@@ -406,6 +412,8 @@ const RegisterCreate = () => {
 					.then(response => {
 						if (response.ok) {
 							alert('Usuario creado correctamente');
+
+							navigate('../');
 							console.log(data);
 							return;
 						} else {
@@ -426,6 +434,8 @@ const RegisterCreate = () => {
 					.then(response => {
 						if (response.ok) {
 							alert('Usuario actualizado correctamente');
+
+							navigate('../');
 						} else {
 							throw new Error();
 						}
@@ -436,6 +446,73 @@ const RegisterCreate = () => {
 					});
 			}
 		}
+	};
+
+	const handleFirstForm = () => {
+		if (!personalInfo.name) {
+			alert('Debe rellenar el campo de nombre');
+			return false;
+		}
+		if (!personalInfo.lastName) {
+			alert('Debe rellenar el campo de apellido');
+			return false;
+		}
+
+		if (!personalInfo.id) {
+			alert('Debe rellenar la cédula');
+			return false;
+		}
+
+		if (!personalInfo.birthDate) {
+			alert('Debe rellenar la fecha de nacimiento');
+			return false;
+		}
+		return true;
+	};
+
+	const handleSecondForm = () => {
+		if (!contactInfo.phone) {
+			alert('Debe especificar el número de teléfono');
+			return false;
+		}
+		if (!contactInfo.description) {
+			alert('Debe Indicar la descripción del teléfono');
+			return false;
+		}
+
+		if (!contactInfo.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+			alert('Debe ingresar una dirección de correo válida');
+			return false;
+		}
+
+		if (!contactInfo.descriptionFamily) {
+			alert('Debe ingresar la descripción del teléfono familiar');
+			return false;
+		}
+		return true;
+	};
+
+	console.log(profilePicture);
+	const handleThirdForm = () => {
+		if (rol === 'seminarista') {
+			if (anotherSeminary && !seminarianInfo.nameSeminaryExternal) {
+				alert(
+					'Debe ingresar un nombre de Seminario donde proviene válido'
+				);
+				return false;
+			}
+
+			return true;
+		}
+
+		if (rol == 'formador') {
+			if (!professionalInfo.startingDate) {
+				alert('Ingrese la fecha de ordenación');
+				return false;
+			}
+			return true;
+		}
+		return true;
 	};
 	return (
 		<ContentContainer>
@@ -457,7 +534,11 @@ const RegisterCreate = () => {
 							diocese={personalInfo.diocese}
 							parish={personalInfo.parish}
 						/>
-						<ButtonNextBackForm initial setNumber={setNumber} />
+						<ButtonNextBackForm
+							initial
+							setNumber={setNumber}
+							handleNext={handleFirstForm}
+						/>
 					</>
 				) : number === 2 ? (
 					<>
@@ -465,7 +546,10 @@ const RegisterCreate = () => {
 							contactInfo={contactInfo}
 							setContactInfo={setContactInfo}
 						/>
-						<ButtonNextBackForm setNumber={setNumber} />
+						<ButtonNextBackForm
+							setNumber={setNumber}
+							handleNext={handleSecondForm}
+						/>
 					</>
 				) : number === 3 ? (
 					<>
@@ -515,7 +599,10 @@ const RegisterCreate = () => {
 								}
 							/>
 						)}
-						<ButtonNextBackForm setNumber={setNumber} />
+						<ButtonNextBackForm
+							setNumber={setNumber}
+							handleNext={handleThirdForm}
+						/>
 					</>
 				) : number === 5 ? (
 					<>
@@ -529,6 +616,7 @@ const RegisterCreate = () => {
 							<button
 								type="submit"
 								className={FormCSS.buttonSaveForm}
+								disabled={!profilePicture}
 							>
 								Guardar
 							</button>
