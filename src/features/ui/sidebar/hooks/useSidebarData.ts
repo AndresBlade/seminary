@@ -67,10 +67,9 @@ const professorItem: SidebarItemData = {
 	content: 'Profesor',
 	type: 'submenu',
 	iconPath: professorIcon,
-
 	children: [
-		{ content: 'Añadir Profesor', path: 'Profesor/new' },
-		{ content: 'Eliminar Profesor', path: '' },
+		{ content: 'Calificar', path: 'createAssessments' },
+		{ content: 'Crear Evalución', path: 'createAssessments/new' },
 	],
 };
 
