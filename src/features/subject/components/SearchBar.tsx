@@ -88,7 +88,7 @@ export const SearchBar = ({
 					className={SearchBarCSS.generatePDFButton}
 					target="_blank"
 					rel="noreferrer"
-					href="${import.meta.env.VITE_URL}/subject/pensum"
+					href={`${import.meta.env.VITE_URL}/subject/pensum`}
 				>
 					GENERAR PÉNSUM
 				</a>
