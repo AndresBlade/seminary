@@ -49,7 +49,7 @@ import { ActiveAcademicTermContext } from '../../../period/context/ActiveAcademi
 // 	type: 'submenu',
 // 	iconPath: graphicIcon,
 // 	children: [{ content: 'Gestionar diócesis', path: 'periodo' }],
-// },
+// }
 
 const userItem: SidebarItemData = {
 	content: 'Usuarios',
@@ -183,16 +183,17 @@ export const useSidebarData = () => {
 				statisticsItem,
 			]);
 		if (user.role === 'SEMINARIAN')
-			return setSidebarData(() => [seminarianItem]);
+			return setSidebarData(() => [homeItem, seminarianItem]);
 		if (
 			user.role === 'PROFESOR' ||
 			user.role === 'INSTRUCTOR' ||
 			user.role == 'PROPEDEUTICO'
 		)
-			return setSidebarData(() => [professorItem]);
+			return setSidebarData(() => [homeItem, professorItem]);
 
 		if (user.role === 'RECTOR' || user.role === 'VICE RECTOR')
 			return setSidebarData(() => [
+				homeItem,
 				{
 					content: 'Usuarios',
 					iconPath: personIcon,
@@ -210,6 +211,7 @@ export const useSidebarData = () => {
 				statisticsItem,
 			]);
 		return setSidebarData(() => [
+			homeItem,
 			userItem,
 			seminarianItem,
 			professorItem,
