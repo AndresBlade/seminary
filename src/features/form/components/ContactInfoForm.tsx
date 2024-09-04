@@ -20,7 +20,7 @@ interface contactInfoPropsForm{
 export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,descriptionFamily,email},setContactInfo}:contactInfoPropsForm) => {
 
     function max_chars(e:React.ChangeEvent<HTMLInputElement>){
-        const max_chars = 11;
+        const max_chars = 15;
         if(e.target.value.length > max_chars){
             e.target.value = e.target.value.substring(0,max_chars)
         }
@@ -30,9 +30,10 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
         <div className={FormCSS.contactInfo} >
             <TitleForm title='Información de contacto' />
             <div>
-                <LabelForm>Telefono Propio</LabelForm>
-                <InputForm placeholder='000000000' type='number' id='phone' value={phone} onChange={(e)=>{
+                <LabelForm>Telefono Propio*</LabelForm>
+                <InputForm placeholder='000000000' required pattern="[0-9]" type='number' id='phone' value={phone} onChange={(e)=>{
                     max_chars(e)
+                    e.target.replace
                     setContactInfo((contact)=>{
                         return{...contact,phone:e.target.value}
 
@@ -41,16 +42,16 @@ export const ContactInfoForm = ({contactInfo:{phone,phoneFamily,description,desc
                 }}/>
             </div>
             <div>
-                <LabelForm>Descripcion del telefono</LabelForm>
-                <InputForm placeholder='Principal' type="text" id='descriptionPhone' value={description.toLocaleUpperCase()} onChange={(e)=>{
+                <LabelForm>Descripcion del telefono*</LabelForm>
+                <InputForm placeholder='Principal' required type="text" id='descriptionPhone' value={description.toLocaleUpperCase()} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact, description:e.target.value}
                     })
                 }} />
             </div>
             <div>
-                <LabelForm>Correo Electronico</LabelForm>
-                <InputForm placeholder='Correo@correo.com' type='email' id='email' value={email} onChange={(e)=>{
+                <LabelForm>Correo Electronico*</LabelForm>
+                <InputForm placeholder='Correo@correo.com' required type='email' id='email' value={email} onChange={(e)=>{
                     setContactInfo((contact)=>{
                         return{...contact,email:e.target.value}
 

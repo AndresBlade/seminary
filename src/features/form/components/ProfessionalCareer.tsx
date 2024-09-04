@@ -42,7 +42,7 @@ export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
 
             <div className={FormCSS['']}>
                 <LabelForm>Estudios realizados</LabelForm>
-                <InputForm type='text' value={academicTraining} onChange={(e)=>{
+                <InputForm type='text' value={academicTraining.toUpperCase()} onChange={(e)=>{
                     setProfessionalInfo((professional)=>{
                         return{...professional, academicTraining:e.target.value}
                     })

@@ -266,8 +266,15 @@
 	border: none;
 	color: white;
 }
+input:invalid{
+	border: 1px solid var(--textColor);
+}
+
 /************************MEDIA QUERY PARA PC************************/
 @media (width >= 1024px) {
+	input:invalid{
+		border: 1px solid var(--textColor);
+	}
 	.containerForm {
 		width: 70%;
 	}

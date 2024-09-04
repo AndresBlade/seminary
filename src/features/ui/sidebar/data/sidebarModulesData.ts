@@ -82,7 +82,8 @@ export const sidebarData: SidebarItemData[] = [
 			{content: 'Lista inscritos en materia', path: 'enrollment'},
 			{content:'inscribir materia', path:'enrollment/new'},
 			{content:'Calificar', path:'createAssessments'},
-			{content:'Crear Evalución', path:'createAssessments/new'}			
+			{content:'Crear Evalución', path:'createAssessments/new'},
+			{content:'Tus notas', path:'seminarianNotes'}		
 		],
 	},
 	{

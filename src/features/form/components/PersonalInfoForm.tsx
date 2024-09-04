@@ -73,7 +73,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
             
             <div>
                 <LabelForm>Nombres</LabelForm>
-                <InputForm placeholder='PEDRO' type='text' id='name' value={name.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='PEDRO' required type='text' id='name' value={name.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, name:e.target.value}
                         })
@@ -84,7 +84,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Apellidos</LabelForm>
-                <InputForm placeholder='MENDOZA' type='text' id='lastName' value={lastName.toLocaleUpperCase()} onChange={(e)=>{
+                <InputForm placeholder='MENDOZA' required type='text' id='lastName' value={lastName.toLocaleUpperCase()} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, lastName:e.target.value}
                         })
@@ -102,7 +102,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
                         <option value="V-">V-</option>
                         <option value="E-">E-</option>
                     </SelectForm>
-                    <InputForm min={1} placeholder='000000000' type='number' id='id' minLength={6} value={id} onChange={(e)=>{
+                    <InputForm min={1} required placeholder='000000000' type='number' id='id' minLength={6} value={id} onChange={(e)=>{
                         setPersonalInfo((personal)=>{
                                 return{...personal, id:e.target.value}
                             })
@@ -114,7 +114,7 @@ export const PersonalInfoForm = ({name,lastName,id,birthDate,bloodType,medicalRe
 
             <div>
                 <LabelForm>Fecha de nacimiento</LabelForm>
-                <InputForm type='date' id='date' value={birthDate} onChange={(e)=>{
+                <InputForm required type='date' id='date' value={birthDate} onChange={(e)=>{
                     setPersonalInfo((personal)=>{
                             return{...personal, birthDate:e.target.value}
                         })
