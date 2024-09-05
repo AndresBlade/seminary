@@ -78,10 +78,7 @@ const seminarianItem: SidebarItemData = {
 	iconPath: graduationCapIcon,
 	type: 'submenu',
 
-	children: [
-		{ content: 'Añadir seminarista', path: '' },
-		{ content: 'Eliminar seminarista', path: '' },
-	],
+	children: [{ content: 'Tus notas', path: 'seminarianNotes' }],
 };
 
 const workerItem: SidebarItemData = {
@@ -203,7 +200,6 @@ export const useSidebarData = () => {
 						{ content: 'Lista de usuarios', path: 'user' },
 					],
 				},
-				seminarianItem,
 				professorItem,
 				workerItem,
 				academicItem,
