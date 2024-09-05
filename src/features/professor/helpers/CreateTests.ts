@@ -11,6 +11,7 @@ export async function CreateTests({
 	tests: Evaluation[];
 	token: string;
 }): Promise<Response> {
+	console.log(tests);
 	const response = await fetch(`${import.meta.env.VITE_URL}/test`, {
 		method: 'POST',
 		mode: 'cors',
