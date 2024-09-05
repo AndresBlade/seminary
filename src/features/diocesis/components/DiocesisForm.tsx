@@ -51,7 +51,7 @@ export const DiocesisForm = () => {
 		obispoName,
 	}: DiocesisFormProps) => {
 		e.preventDefault();
-		if (diocesisName.length === 0 && obispoName.length === 0) {
+		if (diocesisName.length === 0 || obispoName.length === 0) {
 			return alert('Por favor llene los campos');
 		} else {
 			const name = diocesisName;
@@ -110,6 +110,7 @@ export const DiocesisForm = () => {
 				</FormFields>
 				<div className={Diocesis['diocesis-create__form-group']}>
 					<button
+						disabled={diocesisName.length === 0 || obispoName.length === 0}
 						type="submit"
 						className={
 							Diocesis['diocesis-create__form-button--save']

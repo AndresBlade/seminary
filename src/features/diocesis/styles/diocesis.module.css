@@ -203,7 +203,9 @@
 .tableContainer {
 	overflow: auto;
 }
-
+.diocesis-create__form-button--save:disabled{
+	background-color: rgba(221, 230, 250, 1);
+}
 @keyframes spin {
 	0% {
 		transform: translate(-50%, -50%) rotate(0deg);
