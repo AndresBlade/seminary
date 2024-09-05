@@ -20,6 +20,7 @@ import { Registration } from '../pages/Registration';
 import { RegistrationTable } from '../pages/RegistrationTable';
 import { ChangePassword } from '../pages/ChangePassword';
 import { ListQualifications } from '../pages/ListQualifications';
+import { Seminarian } from '../pages/Seminarian';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -131,6 +132,10 @@ export const router = createBrowserRouter([
 							{ path: 'new', element: <CreateAssessmentsNew /> },
 						],
 					},
+					{
+						path:'seminarianNotes',
+						element:<Seminarian/>
+					}
 				],
 			},
 		],

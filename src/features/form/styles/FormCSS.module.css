@@ -270,8 +270,15 @@
 .buttonSaveForm:disabled {
 	background-color: #017ab444;
 }
+input:invalid {
+	border: 1px solid var(--textColor);
+}
+
 /************************MEDIA QUERY PARA PC************************/
 @media (width >= 1024px) {
+	input:invalid {
+		border: 1px solid var(--textColor);
+	}
 	.containerForm {
 		width: 70%;
 	}
