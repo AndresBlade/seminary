@@ -6,4 +6,7 @@ export interface LoggedUser {
 	fecha: string;
 	token: string;
 	role: string;
+	surname: string;
+	forename: string;
+	profile_picture: string | null;
 }

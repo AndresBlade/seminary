@@ -1,6 +1,8 @@
 import headerCSS from '../styles/header.module.css';
 import menuSVG from '../../../../assets/MaterialSymbolsMenuRounded.svg';
 import profilePictureSvg from '../../../../assets/MaterialSymbolsAccountCircle.svg';
+import { useContext } from 'react';
+import { AuthContext } from '../../../login/context/AuthContext';
 
 interface Props {
 	className: string;
@@ -8,6 +10,10 @@ interface Props {
 }
 
 export const Header = ({ className, setIsSidebarOpen }: Props) => {
+	const { user } = useContext(AuthContext);
+	const profilePictureStyle = user?.profile_picture
+		? headerCSS.profilePicture
+		: headerCSS.defaultProfilePicture;
 	return (
 		<header className={`${headerCSS.header} ${className}`}>
 			<button
@@ -21,14 +27,21 @@ export const Header = ({ className, setIsSidebarOpen }: Props) => {
 				/>
 			</button>
 			<div className={headerCSS.personalInformation}>
-				<p className={headerCSS.username}>Vicerrector Frank</p>
-				<img
-					src={profilePictureSvg}
-					alt="Foto de perfil"
-					className={headerCSS.profilePicture}
-				/>
+				{user && (
+					<p className={headerCSS.username}>
+						{user.forename === 'None' && user.surname === 'Nobody'
+							? 'SUPERUSUARIO'
+							: `${user.forename} ${user.surname}`}
+					</p>
+				)}
+				{user && (
+					<img
+						src={user.profile_picture ?? profilePictureSvg}
+						alt="Foto de perfil"
+						className={profilePictureStyle}
+					/>
+				)}
 			</div>
-			{/*Aquí va el src de la foto de perfil*/}
 		</header>
 	);
 };

@@ -36,7 +36,11 @@
 .profilePicture {
 	border-radius: 100%;
 	width: 5rem;
-	filter: contrast(0); /*While we add the new profile pictures*/
+}
+
+.defaultProfilePicture {
+	composes: profilePicture;
+	filter: contrast(0);
 }
 
 .username {
