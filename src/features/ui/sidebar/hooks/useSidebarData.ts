@@ -87,8 +87,8 @@ const workerItem: SidebarItemData = {
 	iconPath: engineerIcon,
 
 	children: [
-		{ content: 'Añadir Trabajador', path: '' },
-		{ content: 'Eliminar Trabajador', path: '' },
+		{ content: 'Añadir Trabajador', path: 'worker/new' },
+		{ content: 'Lista Trabajadores', path: 'worker' },
 	],
 };
 

@@ -1,0 +1,88 @@
+:root {
+	--backgroundColor: rgba(221, 222, 238, 0.5);
+	--backgroundCard: #fafafa;
+	--textColor: #dc2626;
+	--dark-yellow: #e8671e;
+	--buttonColor: #017ae9;
+	--textColor2: #ffffff;
+	--buttonColorSearch: #dc2626;
+	--buttonColorReset: #818181;
+}
+.titleForm{
+    width: 100%;
+}
+.buttonSend{
+    width: 100%;
+    background-color: var(--buttonColor);
+    border: none;
+    border-radius: 1rem;
+    color: var(--textColor2);
+    height: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.dataWorker{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding:1rem 1rem 1rem 1rem;
+    border: 1px solid var(--backgroundColor);
+    overflow-y: scroll;
+}
+.buttonsActions{
+    max-width: 10rem;
+    min-width:10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.buttonsActions button{
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+    background-color: #ffffff;
+    border: none;
+}
+.buttonsActions button img{
+    width: 3rem;
+}
+p{
+    min-width: 13rem;
+    max-width: 13rem;
+    overflow-y: scroll;
+}
+p::-webkit-scrollbar{
+    background-color: transparent;
+}
+@media (width > 1024px) { 
+    .personalInfoContainer{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 2rem;
+    }
+    .contactInfoContainer{
+        composes:personalInfoContainer;
+    }
+    .idAndLetterIdContainer{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    .idAndLetterIdContainer select{
+        background-color: var(--backgroundColor);
+        width: 20%;
+        height: 5rem;
+        padding: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+    }
+    .buttonSend{
+        margin-left: 80%;
+        width: 20%;
+    }
+    p{
+        min-width: 16rem;
+        max-width: 16rem;
+    }
+}

@@ -21,6 +21,8 @@ import { RegistrationTable } from '../pages/RegistrationTable';
 import { ChangePassword } from '../pages/ChangePassword';
 import { ListQualifications } from '../pages/ListQualifications';
 import { Seminarian } from '../pages/Seminarian';
+import WorkerCreate from '../pages/WorkerCreate';
+import WorkerList from '../pages/WorkerList';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -135,6 +137,14 @@ export const router = createBrowserRouter([
 					{
 						path:'seminarianNotes',
 						element:<Seminarian/>
+					},
+					{
+						path:'worker',
+						children:[
+							{index:true,element:<WorkerList/>},
+							{path:'new',element:<WorkerCreate/>}
+						]
+
 					}
 				],
 			},
