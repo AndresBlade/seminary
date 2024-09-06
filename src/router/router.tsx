@@ -21,6 +21,7 @@ import { RegistrationTable } from '../pages/RegistrationTable';
 import { ChangePassword } from '../pages/ChangePassword';
 import { ListQualifications } from '../pages/ListQualifications';
 import { Seminarian } from '../pages/Seminarian';
+import Equivalences from '../pages/Equivalences';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -135,6 +136,10 @@ export const router = createBrowserRouter([
 					{
 						path:'seminarianNotes',
 						element:<Seminarian/>
+					},
+					{
+						path:'equivalences',
+						element:<Equivalences/>
 					}
 				],
 			},
