@@ -142,9 +142,9 @@ const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,
                             })
                         }}
                     >
-                        <option value="Mantenimiento">MANTENIMIENTO</option>
-                        <option value="Cocinero">COCINERO</option>
-                        <option value="Transportista">TRANSPORTISTA</option>
+                        <option value="MANTENIMIENTO">MANTENIMIENTO</option>
+                        <option value="COCINERO">COCINERO</option>
+                        <option value="TRANSPORTISTA">TRANSPORTISTA</option>
                     </SelectForm>
                 </div>
             </div>

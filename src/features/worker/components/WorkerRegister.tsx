@@ -27,7 +27,7 @@ export const WorkerRegister = () => {
         birthDate:'',
         blood:'A_POSITIVO',
         medicalRecord:'',
-        position:'Mantenimiento'
+        position:'MANTENIMIENTO'
     })
     const [contactInfo,setContactInfo]=useState<contactInfoInterface>({
         phoneNumber:'',
@@ -88,7 +88,7 @@ export const WorkerRegister = () => {
             })
         }
     },[data,id])
-
+    console.log(personalInfo.position.charAt(0).toUpperCase() + personalInfo.position.slice(1).toLowerCase())
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         if(!user?.token)return
@@ -119,7 +119,7 @@ export const WorkerRegister = () => {
 					};
 				})
             },
-            job_position:personalInfo.position
+            job_position:personalInfo.position.charAt(0).toUpperCase() + personalInfo.position.slice(1).toLowerCase()
         }
         console.log(dataSent)
         if(!id){
