@@ -10,6 +10,7 @@ import { SocialMediaForm } from '../../form/components/SocialMediaForm';
 import { ProfilePictureForm } from '../../form/components/ProfilePictureForm';
 import { AuthContext } from '../../login/context/AuthContext';
 import { CreateWorker } from '../helpers/CreateWorker';
+import { useNavigate } from 'react-router-dom';
 
 type ProfilePicture = File | null;
 
@@ -36,6 +37,8 @@ export const WorkerRegister = () => {
     const [letterId, setLetterId]=useState('V-');
     const [number, setNumber]=useState(1)
     const [modal, setModal]=useState(false)
+    const navigate = useNavigate();
+
 
 
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
@@ -71,7 +74,12 @@ export const WorkerRegister = () => {
             job_position:personalInfo.position
         }
         console.log(dataSent)
-        CreateWorker({data:dataSent,imageFile:profilePicture,token:user?.token}).catch(error=>{
+        CreateWorker({data:dataSent,imageFile:profilePicture,token:user?.token}).then(response=>{
+            if(response.ok){
+                alert('Trabajador creado correctamente')
+                navigate('..')
+            }
+        }).catch(error=>{
             console.log(error)
             alert('Error al crear trabajador')
         })

@@ -42,6 +42,7 @@ const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,
                 <div>
                     <p>Nombres</p>
                     <InputForm
+                        placeholder='PEDRO ALVAREZ'
                         type='text'
                         value={forename}
                         onChange={(e)=>{
@@ -54,6 +55,7 @@ const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,
                 <div>
                     <p>Apellidos</p>
                     <InputForm
+                        placeholder='PEREZ PEREZ'
                         value={surename}
                         type='text'
                         onChange={(e)=>{
@@ -75,6 +77,7 @@ const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,
                             <option value="E-">E-</option>
                         </select>
                         <InputForm
+                            placeholder='00000000'
                             value={id}
                             type='number'
                             onChange={(e)=>{
@@ -119,6 +122,7 @@ const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,
                 <div>
                     <p>Condicion medica</p>
                     <InputForm
+                        placeholder='MIGRAÑA'
                         value={medicalRecord}
                         type='text'
                         onChange={(e)=>{

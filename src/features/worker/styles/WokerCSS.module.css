@@ -47,12 +47,12 @@
 .buttonsActions button img{
     width: 3rem;
 }
-p{
+.dataWorkerContainer p{
     min-width: 13rem;
     max-width: 13rem;
     overflow-y: scroll;
 }
-p::-webkit-scrollbar{
+.dataWorkerContainer p::-webkit-scrollbar{
     background-color: transparent;
 }
 @media (width > 1024px) { 
@@ -81,7 +81,7 @@ p::-webkit-scrollbar{
         margin-left: 80%;
         width: 20%;
     }
-    p{
+    .dataWorkerContainer p{
         min-width: 16rem;
         max-width: 16rem;
     }

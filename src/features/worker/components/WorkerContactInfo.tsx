@@ -18,7 +18,8 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
             <div className={WorkerCSS.contactInfoContainer}>
                 <div>
                     <p>Telefono principal</p>
-                    <InputForm 
+                    <InputForm
+                        placeholder='00000000' 
                         value={phoneNumber}
                         type='number'
                         onChange={(e)=>{
@@ -30,7 +31,8 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
                 </div>
                 <div>
                     <p>Descripción del Telefono</p>
-                    <InputForm 
+                    <InputForm
+                        placeholder='Mio'
                         value={descriptionNumber}
                         type='text'
                         onChange={(e)=>{
@@ -43,6 +45,7 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
                 <div>
                     <p>Telefono familiar</p>
                     <InputForm 
+                        placeholder='00000000'
                         value={phoneNumberFamily}
                         type='number'
                         onChange={(e)=>{
@@ -55,6 +58,7 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
                 <div>
                     <p>Descripción telefono familiar</p>
                     <InputForm 
+                        placeholder='Tia'
                         value={descriptionNumberFamily}
                         type='text'
                         onChange={(e)=>{
@@ -67,6 +71,7 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
                 <div>
                     <p>Correo electronico</p>
                     <InputForm 
+                        placeholder='correo@correo.com'
                         value={email}
                         type='text'
                         onChange={(e)=>{

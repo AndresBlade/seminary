@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import WorkerCSS from '../styles/WokerCSS.module.css'
 import { dataGetWorker } from '../interfaces/worker'
 import deleteIcon from '../../../assets/deleteIcon.svg'
 import editIcon from '../../../assets/editIcon.svg'
 interface dataWorkerProps{
     dataWorkerToList:dataGetWorker[] | null;
+    setWorkerDelete:React.Dispatch<SetStateAction<string>>
 }
 
-export const DataWorker = ({dataWorkerToList}:dataWorkerProps) => {
+export const DataWorker = ({dataWorkerToList,setWorkerDelete}:dataWorkerProps) => {
+    
     return (
         <div className={WorkerCSS.dataWorkerContainer}>
             {dataWorkerToList === null ? <p>No hay datos para mostrar</p>:
@@ -20,7 +22,14 @@ export const DataWorker = ({dataWorkerToList}:dataWorkerProps) => {
                         <button>
                             <img src={editIcon} alt="Editar" />
                         </button>
-                        <button><img src={deleteIcon} alt="Eliminar" /></button>
+                        <button type='button'
+                            onClick={(e)=>{
+                                e.preventDefault()
+                                setWorkerDelete(worker.person.id)
+                            }}
+                        >
+                            <img src={deleteIcon} alt="Eliminar" />
+                        </button>
                     </div>
                 </div>
                 
