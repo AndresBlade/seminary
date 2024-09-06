@@ -6,7 +6,6 @@ import { SelectSubjectAndSeminarian } from './SelectSubjectAndSeminarian'
 import { GetSeminariansToEquivalences } from '../helpers/GetSeminariansToEquivalences'
 import { GetSubjectToEquivalences } from '../helpers/GetSubjectToEquivalences'
 import { AuthContext } from '../../login/context/AuthContext'
-import { InputForm } from '../../form/components/small_components/InputForm'
 import { CreateEquivalences } from '../helpers/CreateEquivalences'
 
 const EquivalencesCreate = () => {
