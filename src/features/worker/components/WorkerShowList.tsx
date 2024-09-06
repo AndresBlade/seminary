@@ -47,7 +47,7 @@ export const WorkerShowList = () => {
             <DataHeader>
                 <p>Cedula</p>
                 <p>Nombres</p>
-                <p>Posicion</p>
+                <p>Cargo</p>
                 <p>Acciones</p>
             </DataHeader>
             <DataWorker

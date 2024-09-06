@@ -49,8 +49,8 @@ export interface dataGetWorker{
             phone_number:string
             description:string
         }[]
-        social:{
-            id:number
+        medias:{
+            category:number
             link:string
         }[]
     }

@@ -19,7 +19,6 @@ export const SocialMediaForm = ({
 	const { data } = UseGet<SocialMediaInputProps[]>(apiUrl);
 	const [input, setInput] = useState<SocialMediaInputProps[]>([]);
 
-	console.log(input);
 	useEffect(() => {
 		const newInputs = data?.filter(socialCategory => {
 			return socialMedia.some(

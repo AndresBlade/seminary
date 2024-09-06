@@ -8,7 +8,7 @@ const WorkerList = () => {
         <div>
             <TitleList>
                     <Title content={'Trabajador'}/>
-                    <BackgroundColoredSubtitle content={'Registrar trabajador'}/>
+                    <BackgroundColoredSubtitle content={'Lista trabajadores'}/>
             </TitleList>
             <WorkerShowList/>
         </div>

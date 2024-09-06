@@ -3,13 +3,14 @@ import WorkerCSS from '../styles/WokerCSS.module.css'
 import { dataGetWorker } from '../interfaces/worker'
 import deleteIcon from '../../../assets/deleteIcon.svg'
 import editIcon from '../../../assets/editIcon.svg'
+import { useNavigate } from 'react-router-dom'
 interface dataWorkerProps{
     dataWorkerToList:dataGetWorker[] | null;
     setWorkerDelete:React.Dispatch<SetStateAction<string>>
 }
 
 export const DataWorker = ({dataWorkerToList,setWorkerDelete}:dataWorkerProps) => {
-    
+    const navigate = useNavigate()
     return (
         <div className={WorkerCSS.dataWorkerContainer}>
             {dataWorkerToList === null ? <p>No hay datos para mostrar</p>:
@@ -19,7 +20,11 @@ export const DataWorker = ({dataWorkerToList,setWorkerDelete}:dataWorkerProps) =
                     <p>{worker.person.forename + ' '+ worker.person.surname}</p>   
                     <p>{worker.position}</p>
                     <div className={WorkerCSS.buttonsActions}>
-                        <button>
+                        <button
+                            onClick={()=>{
+                                navigate(`${worker.person.id}`)            
+                            }}
+                        >
                             <img src={editIcon} alt="Editar" />
                         </button>
                         <button type='button'

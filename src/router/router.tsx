@@ -142,6 +142,7 @@ export const router = createBrowserRouter([
 						path:'worker',
 						children:[
 							{index:true,element:<WorkerList/>},
+							{path:':id',element:<WorkerCreate/>},
 							{path:'new',element:<WorkerCreate/>}
 						]
 
