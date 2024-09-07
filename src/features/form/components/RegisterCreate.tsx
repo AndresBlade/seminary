@@ -159,7 +159,7 @@ const RegisterCreate = () => {
 					email: infoUserEdit.person.email,
 				});
 				setSocialMedia(
-					infoUserEdit.person.medias.map(user => ({
+					infoUserEdit.person?.medias?.map(user => ({
 						category: user.social_media_category,
 						link: user.link,
 					}))
