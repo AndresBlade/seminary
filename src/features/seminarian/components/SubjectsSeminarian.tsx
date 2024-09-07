@@ -11,7 +11,6 @@ interface SubjectsSeminarianProps {
 	setShowModal: React.Dispatch<SetStateAction<boolean>>;
 	dataAcademicTerm: GetAcademicTermSeminarianInterfaces | null;
 }
-
 const SubjectsSeminarian = ({
 	notesByPeriod,
 	setScoreDetailsBySubject,
@@ -29,15 +28,15 @@ const SubjectsSeminarian = ({
 			{notesByPeriod && (
 				<div className={SeminarianCSS.stagePeriod}>
 					<p>
-						{notesByPeriod[0].enrollment[0].start_date.slice(0, 4) +
+						{notesByPeriod[0]?.enrollment[0]?.start_date?.slice(0, 4) +
 							'-' +
-							notesByPeriod[0].enrollment[0].end_date.slice(0, 4)}
+							notesByPeriod[0]?.enrollment[0]?.end_date?.slice(0, 4)}
 					</p>
 				</div>
 			)}
 			{notesByPeriod === null ? (
 				<p>No hay materias para mostrar</p>
-			) : (
+			) : notesByPeriod.length === 0 ? <p>No inscribio materias</p>:(
 				notesByPeriod.map(enrollment =>
 					enrollment.enrollment.map(subject => (
 						<div

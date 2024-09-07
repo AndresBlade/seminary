@@ -15,6 +15,8 @@ export const SeminarianNotes = () => {
     const [notesByPeriod, setNotesByPeriod]=useState<NotesBySubjectSeminarianInterfaces[] | null>(null)
     const [showModal,setShowModal]=useState(false)
     const [scoreDetailsBySubject,setScoreDetailsBySubject]=useState(0);
+    
+    console.log(dataAcademicterm)
 
     useEffect(()=>{
         if(!user)return
