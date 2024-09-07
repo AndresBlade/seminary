@@ -31,7 +31,7 @@ const RegistrationCreate = () => {
         .map((academicTerm) => academicTerm.id)
     : [0];
     
-    const courses = subjectsToList ? subjectsToList.course ? subjectsToList.course.map(course=>(
+    const courses = subjectsToList !== null ? subjectsToList.course ? subjectsToList.course.map(course=>(
         course.subject
     )):[]:[];
     
@@ -55,6 +55,13 @@ const RegistrationCreate = () => {
             
         })
     },[])
+    useEffect(()=>{
+        setSubjectToList(null)
+        setSeminarianSelected('')
+        setSubjectSelected([])
+        console.log('desde el useEffect')
+    },[stageSelected])
+    console.log(subjectsToList)
     useEffect(()=>{
         if(!user?.token)return
         if(stageSelected.length > 0){
@@ -88,7 +95,8 @@ const RegistrationCreate = () => {
         }
     },[stageSelected,user?.token,seminarianSelected])
 
-    console.log(academicTermActiveToSend)
+
+
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         if(!user?.token) return
@@ -151,12 +159,12 @@ const RegistrationCreate = () => {
                         </DataHeader>        
                         <DataContent>
                             {isLoading ? <Animation></Animation>:
-                            courses.length === 0 ? 
+                            courses.length === 0 || courses === null ? 
                                 <div className={registrationCSS.textShowNoData}>
                                     <p >No hay datos</p>
                                 </div>:              
                             courses?.map(subjects=>(
-                                subjects.map(subject=>(
+                                subjects?.map(subject=>(
                                     <Subject key={subject.id} subjectName={subject.name} idSubject={subject.id}
                                     setSubjectSelected={setSubjectSelected}
                                     subjectSelect={subjectSelectedToSend}
@@ -173,7 +181,7 @@ const RegistrationCreate = () => {
                                 setSubjectSelected([])
                                 setSubjectToList(null)
                             }}>Cancelar</button>
-                            <button className={registrationCSS.buttonSave} type="submit">Guardar</button>
+                            <button className={registrationCSS.buttonSave} disabled={seminarianSelected === ''} type="submit">Guardar</button>
                         </div>
                     </form>
                 </div>

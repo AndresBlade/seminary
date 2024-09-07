@@ -10,7 +10,9 @@
     --FuenteAlertaError:#b81414;
     --bordeContenidoTabla:rgba(221, 222, 238, .2);
 }
-
+.buttonSave:disabled{
+    background-color: var(--bordeTabla);
+}
 .buttonSearch{
     width: 100%;
     height: 5.3rem;

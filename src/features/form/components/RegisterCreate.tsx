@@ -151,11 +151,11 @@ const RegisterCreate = () => {
 					parish: infoUserEdit.parish_id.toString(),
 				});
 				setContactInfo({
-					phone: infoUserEdit.person.cellpones[0].phone_number,
-					description: infoUserEdit.person.cellpones[0].description,
-					phoneFamily: infoUserEdit.person.cellpones[1].phone_number,
+					phone: infoUserEdit.person?.cellpones[0]?.phone_number,
+					description: infoUserEdit.person?.cellpones[0]?.description,
+					phoneFamily: infoUserEdit.person?.cellpones[1]?.phone_number,
 					descriptionFamily:
-						infoUserEdit.person.cellpones[1].phone_number,
+						infoUserEdit.person?.cellpones[1]?.phone_number,
 					email: infoUserEdit.person.email,
 				});
 				setSocialMedia(
@@ -245,7 +245,7 @@ const RegisterCreate = () => {
 		}
 	}, [data, id, user?.token, dataProfessor, typeUserEdit]);
 
-	console.log(seminarianInfo.stage);
+	console.log({socialMedia});
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const dataSent = {
