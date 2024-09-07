@@ -18,14 +18,14 @@ export const SeminarianNotes = () => {
 
     useEffect(()=>{
         if(!user)return
-        GetAcademicTermSeminarian(user?.person_id).then(response=>{
+        GetAcademicTermSeminarian({id:user?.person_id,token:user.token}).then(response=>{
             setDataAcademicTerm(response)
         }).catch(error=>{
             alert('Error al consultar los periodos academicos')
             console.log(error)
         })
         if(period !== 0){
-            GetNotesByPeriod({id:user.person_id,period:period}).then(response=>{
+            GetNotesByPeriod({id:user.person_id,period:period,token:user.token}).then(response=>{
                 setNotesByPeriod(response)
             }).catch(error=>{
                 alert('Error al mostrar las notas')

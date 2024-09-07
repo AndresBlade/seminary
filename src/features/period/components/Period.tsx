@@ -75,7 +75,7 @@ export const Period = () => {
 						semesterNumber: 0,
 						semesterId: 0,
 					});
-					return GetPeriods();
+					return GetPeriods(user.token);
 				})
 				.then(period => setData(period))
 				.catch(error => {
@@ -84,7 +84,7 @@ export const Period = () => {
 				});
 		}
 		if (updateUser > 0) {
-			GetPeriodUpdate({ id: updateUser })
+			GetPeriodUpdate({ id: updateUser,token:user.token })
 				.then(response => {
 					setCreatePeriod({
 						start_date: response.start_strin,
@@ -94,7 +94,7 @@ export const Period = () => {
 				.catch(error => {
 					console.log(error);
 					alert('Error al traer datos para actualizar');
-					return GetPeriods();
+					return GetPeriods(user.token);
 				});
 		}
 		if (updateSemester > 0) {
@@ -104,7 +104,7 @@ export const Period = () => {
 					if (response.ok) {
 						alert('Semestre actualizado correctamente');
 						setUpdateSemester(0);
-						return GetPeriods()
+						return GetPeriods(user.token)
 							.then(response => {
 								setData(response);
 							})
@@ -131,7 +131,7 @@ export const Period = () => {
 					if (response.ok) {
 						alert('Activado correctamente');
 						setActivateSemester(0);
-						return GetPeriods()
+						return GetPeriods(user.token)
 							.then(response => {
 								setData(response);
 							})
@@ -150,7 +150,7 @@ export const Period = () => {
 		}
 
 		if (dateFind.length > 0) {
-			FindPeriod({ date: dateFind })
+			FindPeriod({ date: dateFind,token:user.token })
 				.then(response => {
 					console.log(response);
 					setData(response);
@@ -162,7 +162,7 @@ export const Period = () => {
 				});
 		}
 		if (date === '') {
-			GetPeriods()
+			GetPeriods(user.token)
 				.then(response => {
 					setData(response);
 				})
@@ -192,7 +192,7 @@ export const Period = () => {
 					if (response.ok) {
 						alert('Periodo creado exitosamente'),
 							setShowModal(false),
-							GetPeriods()
+							GetPeriods(user.token)
 								.then(response => {
 									setData(response);
 									setIsThereActiveAcademicTerm(true);
@@ -220,7 +220,7 @@ export const Period = () => {
 						alert('actualizado correctamente');
 						setUpdateUser(0);
 						setShowModal(false);
-						return GetPeriods()
+						return GetPeriods(user.token)
 							.then(response => {
 								setData(response);
 							})

@@ -52,7 +52,7 @@ const SubjectsSeminarian = ({
 									{subject.subject_total_score_out_of_graded_score
 										? parseFloat(
 												subject.subject_total_score_out_of_graded_scored_20_scale
-										  ).toFixed(2)
+										).toFixed(2)
 										: 0}
 								</p>
 								<button

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Parish from '../styles/parish.module.css';
 import useGet from '../../../shared/hooks/useGet';
 import { CreateParish } from '../helpers/CreateParish';
@@ -10,6 +10,7 @@ import { FormFields } from '../../subject/components/FormFields';
 import { InputFormField } from '../../subject/components/InputFormField';
 import { SelectFormField } from '../../subject/components/SelectFormField';
 import FormCSS from '../../subject/styles/SubjectForm.module.css';
+import { AuthContext } from '../../login/context/AuthContext';
 
 interface ParishFormProps {
 	e: React.FormEvent<HTMLFormElement>;
@@ -33,6 +34,7 @@ interface ParishData {
 	};
 }
 export const ParishForm = () => {
+	const {user} = useContext(AuthContext)
 	const { id } = useParams();
 	const apiUrl = `${import.meta.env.VITE_URL}/Diocese/`;
 	const apiUrlParish = `${import.meta.env.VITE_URL}/parish/${id}`;
@@ -61,6 +63,7 @@ export const ParishForm = () => {
 		diocesis,
 	}: ParishFormProps) => {
 		e.preventDefault();
+		if(!user?.token)return
 		if (parishName === '' || diocesis === 0 || parroco === '') {
 			alert('Faltan campos por llenar');
 			return;
@@ -70,6 +73,7 @@ export const ParishForm = () => {
 					dioceseId: diocesis,
 					name: parishName,
 					parishPriest: parroco,
+					token:user?.token
 				})
 					.then(response => {
 						if (response.ok) {
@@ -91,6 +95,7 @@ export const ParishForm = () => {
 					diocesesId: diocesis,
 					name: parishName,
 					parishPriest: parroco,
+					token:user.token
 				})
 					.then(response => {
 						if (response.ok) {

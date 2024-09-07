@@ -26,7 +26,8 @@ export const ShowData = () => {
     const [activeSubject, setActiveSubject]=useState(0);
 
     useEffect(()=>{      
-        GetAllRegistration().then(response=>{
+        if(!user?.token)return
+        GetAllRegistration(user?.token).then(response=>{
             setData(response)
         }).catch(error=>{
             alert('error al mostrar los seminaristas registrados')
@@ -36,7 +37,7 @@ export const ShowData = () => {
     useEffect(()=>{
         if(!user?.token)return
         if(idSeminarian.length>0){
-            GetSubjectRegistered(idSeminarian).then(response=>{
+            GetSubjectRegistered({id:idSeminarian,token:user.token}).then(response=>{
                 setShowSubjectsRegistered(response)
                 return
             }).catch(error=>{
@@ -48,7 +49,7 @@ export const ShowData = () => {
             DeleteSubjectsRegistered({id:subjectDelete,token:user.token}).then(response=>{
                 if(response.ok){
                     alert('Eliminado correctamente')
-                    GetSubjectRegistered(idSeminarian).then(response=>{
+                    GetSubjectRegistered({id:idSeminarian,token:user.token}).then(response=>{
                         setShowSubjectsRegistered(response)
                         return
                     }).catch(error=>{
@@ -67,7 +68,7 @@ export const ShowData = () => {
             ActiveSubject({id:activeSubject,token:user.token}).then(response=>{
                 if(response.ok){
                     alert('Activada correctamente')
-                    GetSubjectRegistered(idSeminarian).then(response=>{
+                    GetSubjectRegistered({id:idSeminarian,token:user.token}).then(response=>{
                         setShowSubjectsRegistered(response)
                         return
                     }).catch(error=>{

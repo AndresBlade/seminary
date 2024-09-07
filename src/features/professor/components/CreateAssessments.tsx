@@ -111,6 +111,7 @@ export const CreateAssessments = () => {
 					GetTestsSubject({
 						id: subjectSelected,
 						academic_term_id: academicTermActiveToSend,
+						token:user.token
 					})
 						.then(response => {
 							setEvaluationsToShow(response);
@@ -131,11 +132,13 @@ export const CreateAssessments = () => {
 	};
 
 	useEffect(() => {
+		if(!user?.token)return
 		if (subjectSelected !== 0) {
 			if (!academicTermActiveToSend) return;
 			GetTestsSubject({
 				id: subjectSelected,
 				academic_term_id: academicTermActiveToSend,
+				token:user.token
 			})
 				.then(response => {
 					setEvaluationsToShow(response);
@@ -147,7 +150,7 @@ export const CreateAssessments = () => {
 				});
 		}
 
-		GetSubjects()
+		GetSubjects(user.token)
 			.then(response => {
 				setData(response);
 			})

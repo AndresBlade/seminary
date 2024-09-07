@@ -5,8 +5,12 @@ interface Parish {
 	parishrepository: ParishDataContentPropss[];
 }
 
-export const GetParish = (): Promise<Parish> => {
-	return fetch(`${import.meta.env.VITE_URL}/parish`).then(
+export const GetParish = (token:string): Promise<Parish> => {
+	return fetch(`${import.meta.env.VITE_URL}/parish`,{
+		headers:{
+			auth:token
+		}
+	}).then(
 		response => response.json() as Promise<Parish>
 	);
 };

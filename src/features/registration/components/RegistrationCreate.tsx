@@ -46,7 +46,8 @@ const RegistrationCreate = () => {
     },[alertText])
 
     useEffect(()=>{
-        GetAcademicTerm().then(response=>{
+        if(!user?.token)return
+        GetAcademicTerm(user?.token).then(response=>{
             setAcademicTermActive(response);
         }).catch(error=>{
             console.error(error);

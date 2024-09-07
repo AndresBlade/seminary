@@ -48,10 +48,12 @@ export const Qualifications = () => {
 			});
 	}, []);
 	useEffect(() => {
+		if(!user?.token)return
 		if (subjectSelected !== 0) {
 			GetSeminarianListTestScore({
 				subject_id: subjectSelected,
 				academic_term_id: academicTermActiveToSend[0],
+				token:user?.token
 			})
 				.then(response => {
 					setShowSeminarianList(response);
@@ -86,6 +88,7 @@ export const Qualifications = () => {
 						GetSeminarianListTestScore({
 							subject_id: subjectSelected,
 							academic_term_id: academicTermActiveToSend[0],
+							token:user.token
 						})
 							.then(response => {
 								setShowSeminarianList(response);
