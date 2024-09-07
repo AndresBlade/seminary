@@ -6,12 +6,14 @@ import { dataGetWorker } from '../interfaces/worker'
 import { GetWorker } from '../helpers/GetWorkers'
 import { AuthContext } from '../../login/context/AuthContext'
 import { DeleteWorker } from '../helpers/DeleteWorker'
+import { InputForm } from '../../form/components/small_components/InputForm'
+import { GetWorkerFound } from '../helpers/GetWorkerFound'
 
 export const WorkerShowList = () => {
     const {user}= useContext(AuthContext)
     const [dataWorkerToList, setDataWorkerToList]=useState<dataGetWorker[] | null>(null)
     const [workerDelete, setWorkerDelete]=useState('');
-
+    const [workerToFind,setWorkerToFind]=useState('');
     useEffect(()=>{
         if(!user?.token)return
         GetWorker(user?.token).then(response=>{
@@ -42,8 +44,24 @@ export const WorkerShowList = () => {
         }
     },[workerDelete])
 
+    useEffect(()=>{
+        if(!user?.token)return
+        GetWorkerFound({id:workerToFind,token:user?.token}).then(response=>{
+            setDataWorkerToList(response)
+        }).catch(error=>{
+            console.log(error)
+            alert('Error al buscar el trabajador')
+        }
+        )
+    },[workerToFind])
     return (
         <ContentContainer>
+            <InputForm type='text'
+                placeholder='Buscar trabajador por id. Ejemplo: V-0000000'
+                onChange={(e)=>{
+                    setWorkerToFind(e.target.value)
+                }}
+            />
             <DataHeader>
                 <p>Cedula</p>
                 <p>Nombres</p>
