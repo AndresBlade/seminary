@@ -209,11 +209,11 @@ const RegisterCreate = () => {
 					diocese: infoProfessorEdit.parish.diocese_id.toString(),
 				});
 				setContactInfo({
-					phone: infoProfessorEdit.phone_number[0].phone_number,
-					description: infoProfessorEdit.phone_number[0].description,
-					phoneFamily: infoProfessorEdit.phone_number[1].phone_number,
+					phone: infoProfessorEdit?.phone_number[0]?.phone_number,
+					description: infoProfessorEdit?.phone_number[0]?.description,
+					phoneFamily: infoProfessorEdit?.phone_number[1]?.phone_number,
 					descriptionFamily:
-						infoProfessorEdit.phone_number[1].description,
+						infoProfessorEdit?.phone_number[1]?.description,
 					email: infoProfessorEdit.person.email,
 				});
 				setSocialMedia(
