@@ -157,6 +157,15 @@ export const PersonalInfoForm = ({
 								};
 							});
 						}}
+						onKeyDown={(event) => {
+							const allowedKeys = [
+								'ArrowLeft', 'ArrowRight', 'Delete', 'Enter', 'Backspace',
+								'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+							];
+							if (!allowedKeys.includes(event.key)) {
+								event.preventDefault();
+							}
+						}}
 					/>
 				</div>
 			</div>
