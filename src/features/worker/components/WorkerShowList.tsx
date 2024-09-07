@@ -61,6 +61,15 @@ export const WorkerShowList = () => {
                 onChange={(e)=>{
                     setWorkerToFind(e.target.value)
                 }}
+                onKeyDown={(event) => {
+                    const allowedKeys = [
+                        'ArrowLeft', 'ArrowRight', 'Delete', 'Enter',
+                        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'V', 'v','-'
+                    ];
+                    if (!allowedKeys.includes(event.key)) {
+                        event.preventDefault();
+                    }
+                }}
             />
             <DataHeader>
                 <p>Cedula</p>
