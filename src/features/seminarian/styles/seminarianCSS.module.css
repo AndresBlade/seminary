@@ -90,6 +90,10 @@
     composes:scoreHeader;
     gap: 3rem;
 }
+.scoreSubject p{
+    min-width: 5rem;
+    max-width: 5rem;
+}
 .stagePeriod{
     display: flex;
     justify-content: center;
@@ -129,6 +133,10 @@
     }
     .subjectListHeader{
         width: 100%;
+    }
+    .subjectName{
+        min-width: 40rem;
+        max-width: 40rem;
     }
     .subjectName::-webkit-scrollbar{
         display: none;
