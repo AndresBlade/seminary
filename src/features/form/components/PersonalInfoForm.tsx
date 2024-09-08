@@ -34,6 +34,13 @@ interface personalInfoPropsForm {
 	letterId: string;
 }
 
+function max_chars(e: React.ChangeEvent<HTMLInputElement>) {
+	const max_chars = 8;
+	if (e.target.value.length > max_chars) {
+		e.target.value = e.target.value.substring(0, max_chars);
+	}
+}
+
 export const PersonalInfoForm = ({
 	name,
 	lastName,
@@ -69,7 +76,7 @@ export const PersonalInfoForm = ({
 				setDioceseData(data);
 			})
 			.catch(error => console.log(error));
-	}, []);
+	}, [user?.token]);
 
 	useEffect(() => {
 		if (!user?.token) return;
@@ -90,7 +97,7 @@ export const PersonalInfoForm = ({
 				alert(error);
 				console.log(error);
 			});
-	}, [diocese]);
+	}, [diocese, user?.token]);
 
 	console.log(diocese);
 	return (
@@ -150,6 +157,7 @@ export const PersonalInfoForm = ({
 						minLength={6}
 						value={id}
 						onChange={e => {
+							max_chars(e);
 							setPersonalInfo(personal => {
 								return {
 									...personal,
@@ -157,15 +165,28 @@ export const PersonalInfoForm = ({
 								};
 							});
 						}}
-						onKeyDown={(event) => {
-							const allowedKeys = [
-								'ArrowLeft', 'ArrowRight', 'Delete', 'Enter', 'Backspace',
-								'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-							];
-							if (!allowedKeys.includes(event.key)) {
-								event.preventDefault();
-							}
-						}}
+						// onKeyDown={event => {
+						// 	const allowedKeys = [
+						// 		'ArrowLeft',
+						// 		'ArrowRight',
+						// 		'Delete',
+						// 		'Enter',
+						// 		'Backspace',
+						// 		'0',
+						// 		'1',
+						// 		'2',
+						// 		'3',
+						// 		'4',
+						// 		'5',
+						// 		'6',
+						// 		'7',
+						// 		'8',
+						// 		'9',
+						// 	];
+						// 	if (!allowedKeys.includes(event.key)) {
+						// 		event.preventDefault();
+						// 	}
+						// }}
 					/>
 				</div>
 			</div>
