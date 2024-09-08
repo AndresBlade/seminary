@@ -70,6 +70,7 @@ const professorItem: SidebarItemData = {
 	children: [
 		{ content: 'Calificar', path: 'createAssessments' },
 		{ content: 'Crear Evalución', path: 'createAssessments/new' },
+		{content: 'Equivalencias', path:'equivalences'}
 	],
 };
 

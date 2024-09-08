@@ -26,6 +26,7 @@ import { SeminarianByGrades } from '../pages/SeminarianByGrades';
 import WorkerCreate from '../pages/WorkerCreate';
 import WorkerList from '../pages/WorkerList';
 import { Schedules } from '../pages/Schedules';
+import Equivalences from '../pages/Equivalences';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -169,6 +170,10 @@ export const router = createBrowserRouter([
 					{
 						path: 'schedules',
 						children: [{ index: true, element: <Schedules /> }],
+					},
+					{
+						path: 'equivalences',
+						element: <Equivalences />,
 					},
 				],
 			},
