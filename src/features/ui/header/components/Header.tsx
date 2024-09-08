@@ -14,6 +14,10 @@ export const Header = ({ className, setIsSidebarOpen }: Props) => {
 	const profilePictureStyle = user?.profile_picture
 		? headerCSS.profilePicture
 		: headerCSS.defaultProfilePicture;
+
+	const profilePictureURL = user?.profile_picture?.includes('http')
+		? user.profile_picture
+		: `https://${user?.profile_picture}`;
 	return (
 		<header className={`${headerCSS.header} ${className}`}>
 			<button
@@ -36,7 +40,7 @@ export const Header = ({ className, setIsSidebarOpen }: Props) => {
 				)}
 				{user && (
 					<img
-						src={user.profile_picture ?? profilePictureSvg}
+						src={profilePictureURL ?? profilePictureSvg}
 						alt="Foto de perfil"
 						className={profilePictureStyle}
 					/>
