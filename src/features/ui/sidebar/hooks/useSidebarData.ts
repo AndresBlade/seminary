@@ -113,6 +113,10 @@ const statisticsItem: SidebarItemData = {
 			content: 'Lista de seminarista por geografía',
 			path: 'report/seminarian-by-geography',
 		},
+		{
+			content: 'Lista de seminaristas por notas',
+			path: 'report/seminarian-by-grades',
+		},
 	],
 };
 

@@ -22,6 +22,7 @@ import { ChangePassword } from '../pages/ChangePassword';
 import { ListQualifications } from '../pages/ListQualifications';
 import { Seminarian } from '../pages/Seminarian';
 import { SeminarianByGeography } from '../pages/SeminarianByGeography';
+import { SeminarianByGrades } from '../pages/SeminarianByGrades';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -143,6 +144,10 @@ export const router = createBrowserRouter([
 							{
 								path: 'seminarian-by-geography',
 								element: <SeminarianByGeography />,
+							},
+							{
+								path: 'seminarian-by-grades',
+								element: <SeminarianByGrades />,
 							},
 						],
 					},
