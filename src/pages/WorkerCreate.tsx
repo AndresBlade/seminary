@@ -10,8 +10,8 @@ const WorkerCreate = () => {
             <TitleList>
                 <Title content={'Trabajador'}/>
                 <BackgroundColoredSubtitle content={'Registrar trabajador'}/>
+                <WorkerRegister/>
             </TitleList>
-            <WorkerRegister/>
         </div>
         
     )

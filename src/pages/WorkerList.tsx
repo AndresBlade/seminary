@@ -7,10 +7,10 @@ const WorkerList = () => {
     return (
         <div>
             <TitleList>
-                    <Title content={'Trabajador'}/>
-                    <BackgroundColoredSubtitle content={'Lista trabajadores'}/>
+                <Title content={'Trabajador'}/>
+                <BackgroundColoredSubtitle content={'Lista trabajadores'}/>
+                <WorkerShowList/>
             </TitleList>
-            <WorkerShowList/>
         </div>
     )
     }

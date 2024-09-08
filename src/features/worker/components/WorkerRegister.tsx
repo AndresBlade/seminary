@@ -99,7 +99,7 @@ export const WorkerRegister = () => {
                 forename:personalInfo.forename,
                 surname:personalInfo.surename,
                 email:contactInfo.email,
-                birthdate:'2001-01-01',
+                birthdate:personalInfo.birthDate,
                 medical_record:personalInfo.medicalRecord,
                 BloodType:personalInfo.blood,
                 phone: [
@@ -144,7 +144,52 @@ export const WorkerRegister = () => {
             })
         }
     }
+    const handleFirstForm = () => {
+		if (!personalInfo.forename) {
+			alert('Debe rellenar el campo de nombre');
+			return false;
+		}
+		if (!personalInfo.surename) {
+			alert('Debe rellenar el campo de apellido');
+			return false;
+		}
 
+		if (!personalInfo.id) {
+			alert('Debe rellenar la cédula');
+			return false;
+		}
+
+		if (!personalInfo.birthDate) {
+			alert('Debe rellenar la fecha de nacimiento');
+			return false;
+		}
+		return true;
+	};
+
+	const handleSecondForm = () => {
+		if (!contactInfo.phoneNumber) {
+			alert('Debe especificar el número de teléfono');
+			return false;
+		}
+		if (!contactInfo.descriptionNumber) {
+			alert('Debe Indicar la descripción del teléfono');
+			return false;
+		}
+
+		if (!contactInfo.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+			alert('Debe ingresar una dirección de correo válida');
+			return false;
+		}
+        if (!contactInfo.phoneNumberFamily) {
+			alert('Debe especificar el número de teléfono');
+			return false;
+		}
+		if (!contactInfo.descriptionNumberFamily) {
+			alert('Debe Indicar la descripción del teléfono');
+			return false;
+		}
+		return true;
+	};
     return (
         <ContentContainer>
             <form action="POST" onSubmit={handleSubmit}>
@@ -154,7 +199,7 @@ export const WorkerRegister = () => {
                         forename={personalInfo.forename}
                         surename={personalInfo.surename}
                         id={personalInfo.id}
-                        birthdate={personalInfo.birthDate}
+                        birthDate={personalInfo.birthDate}
                         blood={personalInfo.blood}
                         medicalRecord={personalInfo.medicalRecord}
                         position={personalInfo.position}
@@ -165,6 +210,7 @@ export const WorkerRegister = () => {
                     <ButtonNextBackForm 
                         initial
                         setNumber={setNumber}
+                        handleNext={handleFirstForm}
                     />
                 </>:null
                 }
@@ -181,6 +227,7 @@ export const WorkerRegister = () => {
                         />
                     <ButtonNextBackForm
                         setNumber={setNumber}
+                        handleNext={handleSecondForm}
                     />
                 </>:null
                 }
@@ -209,7 +256,9 @@ export const WorkerRegister = () => {
                         
                         <button 
                         className={WorkerCSS.buttonSend}
-                        type='submit'>Guardar</button>
+                        type='submit'
+                        disabled={!profilePicture}
+                        >Guardar</button>
 
                         <ButtonNextBackForm
                             final

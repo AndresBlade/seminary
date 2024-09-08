@@ -8,8 +8,8 @@ export const PeriodCreate = () => {
 			<TitleList>
 				<Title content="Académico" />
 				<BackgroundColoredSubtitle content="Período académico" />
+				<Period />
 			</TitleList>
-			<Period />
 		</>
 	);
 };

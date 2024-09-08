@@ -108,7 +108,9 @@ const statisticsItem: SidebarItemData = {
 	content: 'Reportes',
 	type: 'submenu',
 	iconPath: graphicIcon,
-	children: [{ content: 'Gestionar diócesis', path: 'periodo' }],
+	children: [{ content: 'Gestionar diócesis', path: 'periodo' },
+		{content:'horarios',path:'schedules'}
+	],
 };
 
 const homeItem: SidebarItemData = {

@@ -12,7 +12,7 @@ interface WorkerPersonalInfoProps{
     forename:string
     surename:string
     id:string
-    birthdate:string
+    birthDate:string
     blood:string
     medicalRecord:string
     position:string
@@ -20,7 +20,7 @@ interface WorkerPersonalInfoProps{
     setLetterId: React.Dispatch<SetStateAction<string>>
     letterId:string
 }
-const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,setPersonalInfo,setLetterId,letterId,position}:WorkerPersonalInfoProps) => {
+const WorkerPersonalInfo = ({forename,surename,id,birthDate,blood,medicalRecord,setPersonalInfo,setLetterId,letterId,position}:WorkerPersonalInfoProps) => {
     const {user} = useContext(AuthContext)
     const [bloodList, setBloodList]=useState<blood | null>(null)
 
@@ -101,12 +101,14 @@ const WorkerPersonalInfo = ({forename,surename,id,birthdate,blood,medicalRecord,
                 <div>
                     <p>Fecha de nacimiento</p>
                     <InputForm
-                        value={birthdate}
-                        type='date'
-                        onChange={(e)=>{
-                            setPersonalInfo(info=>{
-                                return {...info, birthdate:e.target.value}
-                            })
+                        required
+                        type="date"
+                        id="date"
+                        value={birthDate}
+                        onChange={e => {
+                            setPersonalInfo(personal => {
+                                return { ...personal, birthDate: e.target.value };
+                            });
                         }}
                     />
                 </div>

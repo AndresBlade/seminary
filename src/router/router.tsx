@@ -23,6 +23,7 @@ import { ListQualifications } from '../pages/ListQualifications';
 import { Seminarian } from '../pages/Seminarian';
 import WorkerCreate from '../pages/WorkerCreate';
 import WorkerList from '../pages/WorkerList';
+import { Schedules } from '../pages/Schedules';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -146,6 +147,12 @@ export const router = createBrowserRouter([
 							{path:'new',element:<WorkerCreate/>}
 						]
 
+					},
+					{
+						path:'schedules',
+						children:[
+							{index:true,element:<Schedules/>}
+						]
 					}
 				],
 			},

@@ -21,6 +21,9 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+.buttonSend:disabled{
+    background-color: var(--buttonColorReset);
+}
 .dataWorker{
     display: flex;
     align-items: center;

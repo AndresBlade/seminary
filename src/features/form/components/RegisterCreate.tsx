@@ -484,7 +484,10 @@ const RegisterCreate = () => {
 			alert('Debe ingresar una dirección de correo válida');
 			return false;
 		}
-
+		if(!contactInfo.phoneFamily){
+			alert('Debe ingresar el número de telefono familiar')
+			return false
+		}
 		if (!contactInfo.descriptionFamily) {
 			alert('Debe ingresar la descripción del teléfono familiar');
 			return false;

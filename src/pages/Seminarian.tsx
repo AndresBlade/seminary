@@ -8,8 +8,9 @@ export const Seminarian = () => {
             <TitleList>
                 <Title content={"Seminarista"}/>
                 <BackgroundColoredSubtitle content={"Historial académico"} />
+                
+                <SeminarianNotes/>
             </TitleList>
-            <SeminarianNotes/>
         </div>
     )
 }
