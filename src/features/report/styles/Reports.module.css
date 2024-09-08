@@ -1,0 +1,22 @@
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+}
+
+.sendButton {
+	display: block;
+	padding: 1rem 2rem;
+	border: none;
+	outline: none;
+	font-size: 2rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	background-color: #e8671e;
+	color: #fff;
+}
+
+.sendButton:disabled {
+	background-color: #aaaaaa;
+	cursor: not-allowed;
+}

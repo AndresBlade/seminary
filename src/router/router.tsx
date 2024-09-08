@@ -21,6 +21,7 @@ import { RegistrationTable } from '../pages/RegistrationTable';
 import { ChangePassword } from '../pages/ChangePassword';
 import { ListQualifications } from '../pages/ListQualifications';
 import { Seminarian } from '../pages/Seminarian';
+import { SeminarianByGeography } from '../pages/SeminarianByGeography';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -133,9 +134,18 @@ export const router = createBrowserRouter([
 						],
 					},
 					{
-						path:'seminarianNotes',
-						element:<Seminarian/>
-					}
+						path: 'seminarianNotes',
+						element: <Seminarian />,
+					},
+					{
+						path: 'report',
+						children: [
+							{
+								path: 'seminarian-by-geography',
+								element: <SeminarianByGeography />,
+							},
+						],
+					},
 				],
 			},
 		],
