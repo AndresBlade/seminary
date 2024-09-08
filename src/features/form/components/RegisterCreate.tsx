@@ -153,7 +153,8 @@ const RegisterCreate = () => {
 				setContactInfo({
 					phone: infoUserEdit.person?.cellpones[0]?.phone_number,
 					description: infoUserEdit.person?.cellpones[0]?.description,
-					phoneFamily: infoUserEdit.person?.cellpones[1]?.phone_number,
+					phoneFamily:
+						infoUserEdit.person?.cellpones[1]?.phone_number,
 					descriptionFamily:
 						infoUserEdit.person?.cellpones[1]?.phone_number,
 					email: infoUserEdit.person.email,
@@ -181,7 +182,8 @@ const RegisterCreate = () => {
 						infoUserEdit.foreing_Data?.seminary_name,
 					yearOfIncome: infoUserEdit.foreing_Data?.stage_year,
 				});
-				fetch(`http://${infoUserEdit.person.profile_picture_path}`)
+
+				fetch(`${infoUserEdit.person.profile_picture_path}`)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {
@@ -210,8 +212,10 @@ const RegisterCreate = () => {
 				});
 				setContactInfo({
 					phone: infoProfessorEdit?.phone_number[0]?.phone_number,
-					description: infoProfessorEdit?.phone_number[0]?.description,
-					phoneFamily: infoProfessorEdit?.phone_number[1]?.phone_number,
+					description:
+						infoProfessorEdit?.phone_number[0]?.description,
+					phoneFamily:
+						infoProfessorEdit?.phone_number[1]?.phone_number,
 					descriptionFamily:
 						infoProfessorEdit?.phone_number[1]?.description,
 					email: infoProfessorEdit.person.email,
@@ -231,7 +235,8 @@ const RegisterCreate = () => {
 					instructorPosition:
 						infoProfessorEdit.instructor.instructor_position,
 				});
-				fetch(`http://${infoProfessorEdit.person.profile_picture_path}`)
+				console.log(infoProfessorEdit.person.profile_picture_path);
+				fetch(`${infoProfessorEdit.person.profile_picture_path}`)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {
@@ -245,7 +250,7 @@ const RegisterCreate = () => {
 		}
 	}, [data, id, user?.token, dataProfessor, typeUserEdit]);
 
-	console.log({socialMedia});
+	console.log({ socialMedia });
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const dataSent = {
@@ -484,9 +489,9 @@ const RegisterCreate = () => {
 			alert('Debe ingresar una dirección de correo válida');
 			return false;
 		}
-		if(!contactInfo.phoneFamily){
-			alert('Debe ingresar el número de telefono familiar')
-			return false
+		if (!contactInfo.phoneFamily) {
+			alert('Debe ingresar el número de telefono familiar');
+			return false;
 		}
 		if (!contactInfo.descriptionFamily) {
 			alert('Debe ingresar la descripción del teléfono familiar');
