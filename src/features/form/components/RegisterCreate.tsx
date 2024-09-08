@@ -181,7 +181,7 @@ const RegisterCreate = () => {
 						infoUserEdit.foreing_Data?.seminary_name,
 					yearOfIncome: infoUserEdit.foreing_Data?.stage_year,
 				});
-				fetch(`${infoUserEdit.person.profile_picture_path}`)
+				fetch(`http://${infoUserEdit.person.profile_picture_path}`)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {
@@ -231,7 +231,7 @@ const RegisterCreate = () => {
 					instructorPosition:
 						infoProfessorEdit.instructor.instructor_position,
 				});
-				fetch(`${infoProfessorEdit.person.profile_picture_path}`)
+				fetch(`http://${infoProfessorEdit.person.profile_picture_path}`)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {
