@@ -184,9 +184,9 @@ const RegisterCreate = () => {
 				});
 
 				const pictureLink =
-					infoUserEdit.person.profile_picture_path.includes('http://')
+					infoUserEdit.person.profile_picture_path.includes('http')
 						? infoUserEdit.person.profile_picture_path
-						: `http://${infoUserEdit.person.profile_picture_path}`;
+						: `https://${infoUserEdit.person.profile_picture_path}`;
 
 				fetch(pictureLink)
 					.then(response => response.blob())
@@ -242,14 +242,12 @@ const RegisterCreate = () => {
 				});
 				console.log(infoProfessorEdit.person.profile_picture_path);
 
-				infoProfessorEdit;
-
 				const pictureLink =
 					infoProfessorEdit.person.profile_picture_path.includes(
-						'http://'
+						'http'
 					)
 						? infoProfessorEdit.person.profile_picture_path
-						: `http://${infoProfessorEdit.person.profile_picture_path}`;
+						: `https://${infoProfessorEdit.person.profile_picture_path}`;
 
 				fetch(pictureLink)
 					.then(response => response.blob())
