@@ -151,15 +151,15 @@ const RegisterCreate = () => {
 					parish: infoUserEdit.parish_id.toString(),
 				});
 				setContactInfo({
-					phone: infoUserEdit.person.cellpones[0].phone_number,
-					description: infoUserEdit.person.cellpones[0].description,
-					phoneFamily: infoUserEdit.person.cellpones[1].phone_number,
+					phone: infoUserEdit.person?.cellpones[0]?.phone_number,
+					description: infoUserEdit.person?.cellpones[0]?.description,
+					phoneFamily: infoUserEdit.person?.cellpones[1]?.phone_number,
 					descriptionFamily:
-						infoUserEdit.person.cellpones[1].phone_number,
+						infoUserEdit.person?.cellpones[1]?.phone_number,
 					email: infoUserEdit.person.email,
 				});
 				setSocialMedia(
-					infoUserEdit.person.medias.map(user => ({
+					infoUserEdit.person?.medias?.map(user => ({
 						category: user.social_media_category,
 						link: user.link,
 					}))
@@ -209,11 +209,11 @@ const RegisterCreate = () => {
 					diocese: infoProfessorEdit.parish.diocese_id.toString(),
 				});
 				setContactInfo({
-					phone: infoProfessorEdit.phone_number[0].phone_number,
-					description: infoProfessorEdit.phone_number[0].description,
-					phoneFamily: infoProfessorEdit.phone_number[1].phone_number,
+					phone: infoProfessorEdit?.phone_number[0]?.phone_number,
+					description: infoProfessorEdit?.phone_number[0]?.description,
+					phoneFamily: infoProfessorEdit?.phone_number[1]?.phone_number,
 					descriptionFamily:
-						infoProfessorEdit.phone_number[1].description,
+						infoProfessorEdit?.phone_number[1]?.description,
 					email: infoProfessorEdit.person.email,
 				});
 				setSocialMedia(
@@ -245,7 +245,7 @@ const RegisterCreate = () => {
 		}
 	}, [data, id, user?.token, dataProfessor, typeUserEdit]);
 
-	console.log(seminarianInfo.stage);
+	console.log({socialMedia});
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const dataSent = {
@@ -484,7 +484,10 @@ const RegisterCreate = () => {
 			alert('Debe ingresar una dirección de correo válida');
 			return false;
 		}
-
+		if(!contactInfo.phoneFamily){
+			alert('Debe ingresar el número de telefono familiar')
+			return false
+		}
 		if (!contactInfo.descriptionFamily) {
 			alert('Debe ingresar la descripción del teléfono familiar');
 			return false;

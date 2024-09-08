@@ -9,8 +9,12 @@ interface parishWrapper {
 	parish: Parish[];
 }
 
-export const GetParishByName = ({ name }: { name: string }) => {
-	return fetch(`${import.meta.env.VITE_URL}/parish/search/${name}`).then(
+export const GetParishByName = ({ name,token }: { name: string,token:string }) => {
+	return fetch(`${import.meta.env.VITE_URL}/parish/search/${name}`,{
+		headers:{
+			auth:token
+		}
+	}).then(
 		response => response.json() as Promise<parishWrapper>
 	);
 };

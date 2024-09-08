@@ -49,6 +49,7 @@ export const CreateAssessments = () => {
 		{ description: ''.toUpperCase(), maximum_score: 0 },
 		{ description: ''.toUpperCase(), maximum_score: 0 },
 	]);
+	const [descriptionIsNull, setDescriptionIsNull]=useState(true)
 	const [subjectSelected, setSubjectSelected] = useState(0);
 	const handleAddEvaluation = () => {
 		if (evaluations.length < 6) {
@@ -92,12 +93,15 @@ export const CreateAssessments = () => {
 	const TotalScoreSubjectResgistered =
 		calculateTotalScore(evaluationsToShow) ?? 0;
 
+	useEffect(()=>{
+		setDescriptionIsNull(evaluations.some(evaluation=>
+			!evaluation.description
+		))
+	},[evaluations])
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!user?.token) return;
 		if (!academicTermActiveToSend) return;
-		console.log(evaluations);
-
 		CreateTests({
 			subject_id: subjectSelected,
 			academic_term_id: academicTermActiveToSend,
@@ -111,6 +115,7 @@ export const CreateAssessments = () => {
 					GetTestsSubject({
 						id: subjectSelected,
 						academic_term_id: academicTermActiveToSend,
+						token:user.token
 					})
 						.then(response => {
 							setEvaluationsToShow(response);
@@ -131,11 +136,13 @@ export const CreateAssessments = () => {
 	};
 
 	useEffect(() => {
+		if(!user?.token)return
 		if (subjectSelected !== 0) {
 			if (!academicTermActiveToSend) return;
 			GetTestsSubject({
 				id: subjectSelected,
 				academic_term_id: academicTermActiveToSend,
+				token:user.token
 			})
 				.then(response => {
 					setEvaluationsToShow(response);
@@ -147,7 +154,7 @@ export const CreateAssessments = () => {
 				});
 		}
 
-		GetSubjects()
+		GetSubjects(user.token)
 			.then(response => {
 				setData(response);
 			})
@@ -287,7 +294,7 @@ export const CreateAssessments = () => {
 						)}
 						<button
 							type="submit"
-							disabled={totalScore !== 100}
+							disabled={totalScore !== 100 || descriptionIsNull}
 							className={CreateAssessmentsStyles.buttonSave}
 							onClick={() => {
 								console.log('sexo');

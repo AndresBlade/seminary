@@ -2,10 +2,12 @@ async function CreateParish({
 	dioceseId,
 	name,
 	parishPriest,
+	token
 }: {
 	dioceseId: number;
 	name: string;
 	parishPriest: string;
+	token:string
 }): Promise<Response> {
 	const response = await fetch(`${import.meta.env.VITE_URL}/parish/`, {
 		method: 'POST',
@@ -13,6 +15,8 @@ async function CreateParish({
 		credentials: 'same-origin',
 		headers: {
 			'Content-Type': 'application/json',
+			auth:token
+			
 		},
 		body: JSON.stringify({
 			diocese_id: dioceseId,

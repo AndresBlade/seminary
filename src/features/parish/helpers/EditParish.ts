@@ -3,11 +3,13 @@ async function EditParish({
 	diocesesId,
 	name,
 	parishPriest,
+	token
 }: {
 	id: number;
 	diocesesId: number;
 	name: string;
 	parishPriest: string;
+	token:string
 }): Promise<Response> {
 	const response = await fetch(
 		`${import.meta.env.VITE_URL}/parish/${id.toString()}`,
@@ -17,6 +19,7 @@ async function EditParish({
 			credentials: 'same-origin',
 			headers: {
 				'Content-Type': 'application/json',
+				auth:token
 			},
 			body: JSON.stringify({
 				diocese_id: diocesesId,

@@ -2,7 +2,7 @@ import Parish from '../features/parish/styles/parish.module.css';
 import ParisDataContent from '../features/parish/components/ParisDataContent';
 import UseGet from '../shared/hooks/useGet';
 import { GetParish } from '../features/parish/helpers/GetParish';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useDelete from '../shared/hooks/useDelete';
 import { GetParishByName } from '../features/parish/helpers/GetParishByName';
 import { TitleList } from '../features/ui/title/components/TitleList';
@@ -10,6 +10,7 @@ import { Title } from '../features/ui/title/components/Title';
 import { BackgroundColoredSubtitle } from '../features/ui/title/components/BackgroundColoredSubtitle';
 import { ContentContainer } from '../features/ui/container/components/ContentContainer';
 import { Input } from '../features/subject/components/FormInput';
+import { AuthContext } from '../features/login/context/AuthContext';
 
 interface ParishDataProps {
 	msj: string;
@@ -24,6 +25,7 @@ export interface ParishDataContentPropss {
 
 export const ParishShowData = () => {
 	const apiUrl = `${import.meta.env.VITE_URL}/parish/`;
+	const {user}=useContext(AuthContext)
 	const {
 		data,
 		loading,
@@ -36,12 +38,13 @@ export const ParishShowData = () => {
 	const [find, setFind] = useState<string>('');
 
 	useEffect(() => {
+		if(!user?.token)return
 		if (parroquiaDelete !== 0) {
 			deleteData()
 				.then(() => {
 					alert('Parroquia eliminada');
 					setParroquiaDelete(0);
-					return GetParish();
+					return GetParish(user?.token);
 				})
 				.then(parroquia => setParish(parroquia))
 				.catch(error => {
@@ -49,7 +52,7 @@ export const ParishShowData = () => {
 				});
 		}
 		if (!parishFind) {
-			GetParish()
+			GetParish(user.token)
 				.then(parroquia => {
 					setParish(parroquia);
 				})
@@ -59,7 +62,7 @@ export const ParishShowData = () => {
 			return;
 		}
 		if (find) {
-			GetParishByName({ name: find })
+			GetParishByName({ name: find, token:user.token })
 				.then(parroquia =>
 					setParish({
 						msj: parroquia.msj,

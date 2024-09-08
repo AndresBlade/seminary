@@ -87,8 +87,8 @@ const workerItem: SidebarItemData = {
 	iconPath: engineerIcon,
 
 	children: [
-		{ content: 'Añadir Trabajador', path: '' },
-		{ content: 'Eliminar Trabajador', path: '' },
+		{ content: 'Añadir Trabajador', path: 'worker/new' },
+		{ content: 'Lista Trabajadores', path: 'worker' },
 	],
 };
 
@@ -117,6 +117,7 @@ const statisticsItem: SidebarItemData = {
 			content: 'Lista de seminaristas por notas',
 			path: 'report/seminarian-by-grades',
 		},
+		{ content: 'horarios', path: 'schedules' },
 	],
 };
 

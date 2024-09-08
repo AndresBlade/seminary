@@ -8,8 +8,8 @@ const RegisterTable = () => {
 			<TitleList>
 				<Title content="Usuarios" />
 				<BackgroundColoredSubtitle content="Lista de Usuarios" />
+				<ShowDataContent />
 			</TitleList>
-			<ShowDataContent />
 		</>
 	);
 };

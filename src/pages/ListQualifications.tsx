@@ -11,8 +11,8 @@ export const ListQualifications = () => {
                 <TitleList>
                     <Title content="Profesor" />
                     <BackgroundColoredSubtitle content="Crear evaluación" />
+                    <Qualifications/>
                 </TitleList>
-                <Qualifications/>
         </>
     )
 }

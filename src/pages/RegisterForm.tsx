@@ -9,8 +9,8 @@ const RegisterForm = () => {
 			<TitleList>
 				<Title content="Usuarios" />
 				<BackgroundColoredSubtitle content="Crear usuario" />
+				<RegisterCreate />
 			</TitleList>
-			<RegisterCreate />
 		</>
 	);
 };

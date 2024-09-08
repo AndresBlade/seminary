@@ -23,6 +23,9 @@ import { ListQualifications } from '../pages/ListQualifications';
 import { Seminarian } from '../pages/Seminarian';
 import { SeminarianByGeography } from '../pages/SeminarianByGeography';
 import { SeminarianByGrades } from '../pages/SeminarianByGrades';
+import WorkerCreate from '../pages/WorkerCreate';
+import WorkerList from '../pages/WorkerList';
+import { Schedules } from '../pages/Schedules';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <Login /> },
@@ -150,6 +153,22 @@ export const router = createBrowserRouter([
 								element: <SeminarianByGrades />,
 							},
 						],
+					},
+					{
+						path: 'seminarianNotes',
+						element: <Seminarian />,
+					},
+					{
+						path: 'worker',
+						children: [
+							{ index: true, element: <WorkerList /> },
+							{ path: ':id', element: <WorkerCreate /> },
+							{ path: 'new', element: <WorkerCreate /> },
+						],
+					},
+					{
+						path: 'schedules',
+						children: [{ index: true, element: <Schedules /> }],
 					},
 				],
 			},

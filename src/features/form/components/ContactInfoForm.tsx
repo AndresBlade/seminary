@@ -8,9 +8,9 @@ import React, { Dispatch, SetStateAction } from 'react';
 interface contactInfoPropsForm {
 	contactInfo: {
 		phone: string;
-		phoneFamily: string;
+		phoneFamily: string | undefined;
 		description: string;
-		descriptionFamily: string;
+		descriptionFamily: string | undefined;
 		email: string;
 	};
 	setContactInfo: Dispatch<SetStateAction<contactInfoProps>>;
@@ -55,7 +55,7 @@ export const ContactInfoForm = ({
 					placeholder="Principal"
 					type="text"
 					id="descriptionPhone"
-					value={description.toLocaleUpperCase()}
+					value={description?.toLocaleUpperCase()}
 					onChange={e => {
 						setContactInfo(contact => {
 							return { ...contact, description: e.target.value };
@@ -105,7 +105,7 @@ export const ContactInfoForm = ({
 					placeholder="Tia"
 					type="text"
 					id="nameFamily"
-					value={descriptionFamily.toLocaleUpperCase()}
+					value={descriptionFamily?.toLocaleUpperCase()}
 					onChange={e => {
 						setContactInfo(contact => {
 							return {

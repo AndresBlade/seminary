@@ -1,0 +1,44 @@
+:root{
+    --bordeTabla: #DDDEEE;
+    --fondoMaterias: #EFEFEF;
+    --materiaSeleccionada:#BDF6B8;
+    --naranja: #E8671E;
+    --botonInscribirCancelar:#017AE9;
+    --alertaTodoBien:#BDF6B8;
+    --FuenteAlerta:#06520E;
+    --alertaError:#ec5353 ;
+    --FuenteAlertaError:#b81414;
+    --bordeContenidoTabla:rgba(221, 222, 238, .2);
+    --ColorPonderacion:#818181;
+}
+.buttonsContainer{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 2rem;
+}
+.buttonSave{
+    width: 100%;
+    background-color: var(--botonInscribirCancelar);
+    border: none;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    height: 5rem;
+}
+.buttonSave:disabled{
+    background-color: var(--bordeTabla);
+}
+.buttonCancel{
+    composes:buttonSave;
+    background-color: #ffffff;
+    border: 2px solid var(--botonInscribirCancelar);
+    color:  var(--botonInscribirCancelar);
+}
+@media (width > 1024px) { 
+    .buttonSave{
+        width: 20%;
+    }
+    .buttonCancel{
+        width: 20%;
+    }
+}
