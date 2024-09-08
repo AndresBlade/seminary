@@ -21,12 +21,6 @@ interface WorkerPersonalInfoProps {
 	letterId: string;
 }
 
-function max_chars(e: React.ChangeEvent<HTMLInputElement>) {
-	const max_chars = 8;
-	if (e.target.value.length > max_chars) {
-		e.target.value = e.target.value.substring(0, max_chars);
-	}
-}
 const WorkerPersonalInfo = ({
 	forename,
 	surename,
@@ -53,6 +47,12 @@ const WorkerPersonalInfo = ({
 				alert('Error al mostrar los tipos de sangre');
 			});
 	}, [user?.token]);
+	function max_chars(e: React.ChangeEvent<HTMLInputElement>) {
+		const max_chars = 8;
+		if (e.target.value.length > max_chars) {
+			e.target.value = e.target.value.substring(0, max_chars);
+		}
+	}
 	return (
 		<div>
 			<TitleForm title={'Información Personal'} />

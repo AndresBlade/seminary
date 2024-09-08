@@ -12,6 +12,12 @@ interface WorkerContactInfoProps{
     setContactInfo:React.Dispatch<SetStateAction<contactInfoInterface>>
 }
 const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descriptionNumberFamily,descriptionNumber,email}:WorkerContactInfoProps) => {
+    function max_chars(e: React.ChangeEvent<HTMLInputElement>) {
+		const max_chars = 11;
+		if (e.target.value.length > max_chars) {
+			e.target.value = e.target.value.substring(0, max_chars);
+		}
+	}
     return (
         <div>
             <TitleForm title={'Información de contacto'}/>
@@ -23,6 +29,7 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
                         value={phoneNumber}
                         type='number'
                         onChange={(e)=>{
+                            max_chars(e)
                             setContactInfo(contact=>{
                                 return{...contact,phoneNumber:e.target.value}
                             })
@@ -49,6 +56,7 @@ const WorkerContactInfo = ({phoneNumber,phoneNumberFamily,setContactInfo,descrip
                         value={phoneNumberFamily}
                         type='number'
                         onChange={(e)=>{
+                            max_chars(e)
                             setContactInfo(contact=>{
                                 return{...contact,phoneNumberFamily:e.target.value}
                             })
