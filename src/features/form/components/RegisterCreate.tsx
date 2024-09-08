@@ -183,7 +183,12 @@ const RegisterCreate = () => {
 					yearOfIncome: infoUserEdit.foreing_Data?.stage_year,
 				});
 
-				fetch(`${infoUserEdit.person.profile_picture_path}`)
+				const pictureLink =
+					infoUserEdit.person.profile_picture_path.includes('http://')
+						? infoUserEdit.person.profile_picture_path
+						: `http://${infoUserEdit.person.profile_picture_path}`;
+
+				fetch(pictureLink)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {
@@ -236,7 +241,17 @@ const RegisterCreate = () => {
 						infoProfessorEdit.instructor.instructor_position,
 				});
 				console.log(infoProfessorEdit.person.profile_picture_path);
-				fetch(`${infoProfessorEdit.person.profile_picture_path}`)
+
+				infoProfessorEdit;
+
+				const pictureLink =
+					infoProfessorEdit.person.profile_picture_path.includes(
+						'http://'
+					)
+						? infoProfessorEdit.person.profile_picture_path
+						: `http://${infoProfessorEdit.person.profile_picture_path}`;
+
+				fetch(pictureLink)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {
