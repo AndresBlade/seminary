@@ -91,7 +91,7 @@ export const DiocesisForm = () => {
 				<FormFields>
 					<InputFormField
 						onInputChange={e => {
-							setDiocesisName(e.target.value);
+							setDiocesisName(e.target.value.toUpperCase());
 						}}
 						labelText="Nombre de la diócesis *"
 						value={diocesisName}
@@ -100,7 +100,7 @@ export const DiocesisForm = () => {
 					/>
 					<InputFormField
 						onInputChange={e => {
-							setObispoName(e.target.value);
+							setObispoName(e.target.value.toUpperCase());
 						}}
 						labelText="Obispo que la dirige"
 						value={obispoName}

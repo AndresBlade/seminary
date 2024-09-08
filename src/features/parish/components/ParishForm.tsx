@@ -40,7 +40,7 @@ export const ParishForm = () => {
 	const apiUrlParish = `${import.meta.env.VITE_URL}/parish/${id}`;
 	const [parishName, setParishName] = useState('');
 	const [parroco, setParroco] = useState('');
-	const [diocesis, setDiocesis] = useState(0);
+	const [diocesis, setDiocesis] = useState(1);
 	const { data } = useGet<DiocesisProps[]>(apiUrl);
 	const { dataEdit, setDataEdit } = useGetEdit<ParishData>(apiUrlParish);
 	const navigate = useNavigate();
@@ -112,6 +112,7 @@ export const ParishForm = () => {
 			}
 		}
 	};
+	console.log(diocesis)
 	return (
 		<ContentContainer>
 			<form
@@ -127,7 +128,7 @@ export const ParishForm = () => {
 						type="text"
 						value={parishName}
 						onInputChange={e => {
-							setParishName(e.target.value);
+							setParishName(e.target.value.toUpperCase());
 						}}
 					/>
 
@@ -137,12 +138,13 @@ export const ParishForm = () => {
 						type="text"
 						value={parroco}
 						onInputChange={e => {
-							setParroco(e.target.value);
+							setParroco(e.target.value.toUpperCase());
 						}}
 					/>
 
 					{data && (
 						<SelectFormField
+							value={diocesis}
 							labelText="Diócesis a la que pertenece"
 							options={data?.map(diocesis => ({
 								content: diocesis.name,
