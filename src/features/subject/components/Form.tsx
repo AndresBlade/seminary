@@ -182,7 +182,10 @@ export const Form = () => {
 						autoComplete="Off"
 						id="code"
 						value={name}
-						onInputChange={onInputChange}
+						onInputChange={e => {
+							e.target.value = e.target.value.toUpperCase();
+							onInputChange(e);
+						}}
 					/>
 
 					{courses && (

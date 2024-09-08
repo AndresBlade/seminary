@@ -43,7 +43,7 @@ export const SubjectTable = ({
 	) as string[];
 
 	const semesters = subjects?.map(subject =>
-		subject.semester === 1 ? 'Primero' : 'Segundo'
+		subject.semester === 1 ? 'PRIMERO' : 'SEGUNDO'
 	);
 	const ids = subjects?.map(subject => subject.id.toString());
 
