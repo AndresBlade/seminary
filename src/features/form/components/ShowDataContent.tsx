@@ -17,6 +17,7 @@ import { GetUserFind } from '../helpers/GetUserFind';
 import { changePassword } from '../../changePassword/helpers/changePassword';
 import contactIcon from '../../../assets/MaterialSymbolsIdCardOutline.svg';
 import resetIcon from '../../../assets/MaterialSymbolsLockReset.svg';
+import { getCardFromUser } from '../helpers/getCardFromUser';
 export interface userProps {
 	person: {
 		id: string;
@@ -216,28 +217,33 @@ export const ShowDataContent = () => {
 										: user.seminarian?.status}
 								</p>
 								<div>
-									{(user.seminarian ??
-										user.professor?.instructor) && (
-										<a
+									{
+										<button
 											className={
 												FormCSS.buttonActionsAsAnchor
 											}
-											target="_blank"
-											rel="noreferrer"
-											href={`${
-												import.meta.env.VITE_URL
-											}/${
-												user.seminarian
-													? 'seminarian'
-													: 'instructor'
-											}/ficha/${user.person.id}`}
+											onClick={() => {
+												token &&
+													getCardFromUser(
+														token,
+														user.person.id,
+														user.seminarian
+															? 'seminarian'
+															: user.professor
+																	?.instructor
+															? 'instructor'
+															: 'professor'
+													).catch(err =>
+														console.log(err)
+													);
+											}}
 										>
 											<img
 												src={contactIcon}
 												alt="Generar ficha"
 											/>
-										</a>
-									)}
+										</button>
+									}
 									{user.seminarian?.status !== 'RETIRADO' ? (
 										<div>
 											<button
