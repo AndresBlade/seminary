@@ -38,7 +38,8 @@ export const Qualifications = () => {
 	const [disabledEdit, setDisabledEdit] = useState(true);
 	const [sendTestScores, setSendTestScores] = useState(false);
 	useEffect(() => {
-		GetAcademicTerm()
+		if (!user) return;
+		GetAcademicTerm(user?.token)
 			.then(response => {
 				setAcademicTermActive(response);
 			})
@@ -48,12 +49,12 @@ export const Qualifications = () => {
 			});
 	}, []);
 	useEffect(() => {
-		if(!user?.token)return
+		if (!user?.token) return;
 		if (subjectSelected !== 0) {
 			GetSeminarianListTestScore({
 				subject_id: subjectSelected,
 				academic_term_id: academicTermActiveToSend[0],
-				token:user?.token
+				token: user?.token,
 			})
 				.then(response => {
 					setShowSeminarianList(response);
@@ -88,7 +89,7 @@ export const Qualifications = () => {
 						GetSeminarianListTestScore({
 							subject_id: subjectSelected,
 							academic_term_id: academicTermActiveToSend[0],
-							token:user.token
+							token: user.token,
 						})
 							.then(response => {
 								setShowSeminarianList(response);
