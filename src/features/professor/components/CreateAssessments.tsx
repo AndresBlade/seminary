@@ -297,7 +297,7 @@ export const CreateAssessments = () => {
 							disabled={totalScore !== 100 || descriptionIsNull}
 							className={CreateAssessmentsStyles.buttonSave}
 							onClick={() => {
-								console.log('sexo');
+								setShowModal(false)
 							}}
 						>
 							Guardar
