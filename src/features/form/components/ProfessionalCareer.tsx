@@ -15,15 +15,16 @@ interface professionaInfoPropsForm{
     setProfessionalInfo: Dispatch<SetStateAction<professionalInfo>>
     rol:string
     instructorPosition:string
+    id:string | undefined
 }
 
 export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
-    setProfessionalInfo,rol,instructorPosition}:professionaInfoPropsForm) => {
+    setProfessionalInfo,rol,instructorPosition,id}:professionaInfoPropsForm) => {
     
     const {user}=useContext(AuthContext)
 
-    
-    const [positionInstructor,setPositionInstructor]=useState<positionInstructor | null>()
+    console.log(instructorPosition)
+    const [positionInstructor,setPositionInstructor]=useState<positionInstructor | null>(null)
 
     useEffect(()=>{
         if(!user?.token) return
@@ -34,7 +35,15 @@ export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
         }).catch((error)=>{
             alert(error)
         })
-    },[])
+    },[user?.token])
+
+    useEffect(()=>{
+        if(positionInstructor === null)return
+
+        setProfessionalInfo(e=>{
+            return {...e, instructorPosition:Object.entries(positionInstructor).length > 0 || Object.entries(positionInstructor).length === 0 ?  instructorPosition ? instructorPosition : Object.entries(positionInstructor)[0][0] : Object.entries(positionInstructor)?.[0]?.[0]}
+        })
+    },[instructorPosition, positionInstructor, setProfessionalInfo])
 
     return (
         <div className={FormCSS.professionalCareer}>
@@ -74,7 +83,9 @@ export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
                                 return{...professional, instructorPosition:e.target.value}
                             })
                         
-                        }}>
+                        }}> 
+                            {id && <option value={instructorPosition}>{instructorPosition}</option>
+                            }
                             {
                                 positionInstructor && Object.entries(positionInstructor).map((position)=>
                                     <option value={position[0]} key={position[1]}>{position[1]}</option>

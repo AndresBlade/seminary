@@ -11,12 +11,13 @@ import {
 	useState,
 } from 'react';
 import { getDiocese, Diocese } from '../../diocesis/helpers/getDiocese';
-import { blood } from '../interfaces/Form';
+import { blood, positionInstructor } from '../interfaces/Form';
 import { personalInfoProps } from '../interfaces/Form';
 import { GetBlood } from '../helpers/GetBlood';
 import { AuthContext } from '../../login/context/AuthContext';
 import { GetParishByDiocese } from '../helpers/GetParishByDiocese';
 import { getParishByDioceseProps } from '../interfaces/Form';
+import { GetPositionInstructor } from '../helpers/GetPositionInstructor';
 
 interface personalInfoPropsForm {
 	name: string;
@@ -62,6 +63,17 @@ export const PersonalInfoForm = ({
 	const [parishByDiocese, setParishByDiocese] = useState<
 		getParishByDioceseProps[]
 	>([]);
+	const [positionInstructor,setPositionInstructor]=useState<positionInstructor | null>(null)
+	useEffect(()=>{
+        if(!user?.token) return
+        GetPositionInstructor(user?.token).then((response)=>{
+            return(
+                setPositionInstructor(response)
+            )
+        }).catch((error)=>{
+            alert(error)
+        })
+    },[user?.token])
 
 	useEffect(() => {
 		if (!user?.token) return;
@@ -289,8 +301,13 @@ export const PersonalInfoForm = ({
 						}}
 					>
 						<option value="seminarista">Seminarista</option>
+						{
+							positionInstructor &&
+							Object.entries(positionInstructor).length > 0 ? 
+								<option value="formador">Formador</option>
+							: null
+						}
 						<option value="profesor">Profesor</option>
-						<option value="formador">Formador</option>
 					</SelectForm>
 				</div>
 			) : null}

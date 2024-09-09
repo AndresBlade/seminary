@@ -80,7 +80,7 @@ const RegisterCreate = () => {
 		academicTraining: '',
 		linkTitle: '',
 		startingDate: '',
-		instructorPosition: 'RECTOR',
+		instructorPosition: '',
 	});
 	const [profilePicture, setProfilePicture] = useState<ProfilePicture>(null);
 
@@ -131,6 +131,7 @@ const RegisterCreate = () => {
 		}
 	}, [id, typeUserEdit, user?.token]);
 
+console.log({professionalInfo})
 	useEffect(() => {
 		if (id === undefined) return;
 		if (!data) return;
@@ -618,6 +619,7 @@ const RegisterCreate = () => {
 								instructorPosition={
 									professionalInfo.instructorPosition
 								}
+								id={id}
 							/>
 						)}
 						<ButtonNextBackForm
