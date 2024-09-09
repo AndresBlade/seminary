@@ -183,13 +183,13 @@ export const ShowDataContent = () => {
 									user.professor?.status_id == undefined
 										? 'N/A'
 										: user.seminarian?.status
-										? 'Seminarista'
+										? 'SEMINARISTA'
 										: user.professor?.status_id &&
 										  user.professor?.instructor?.status ===
 												undefined
-										? 'Profesor'
+										? 'PROFESOR'
 										: user.professor?.instructor?.status
-										? 'Formador'
+										? 'FORMADOR'
 										: 'N/A'}
 								</p>
 								<p>
@@ -197,13 +197,13 @@ export const ShowDataContent = () => {
 									user.professor?.status_id == undefined
 										? 'N/A'
 										: user.seminarian?.status
-										? 'Seminarista'
+										? 'SEMINARISTA'
 										: user.professor?.status_id &&
 										  user.professor?.instructor?.status ===
 												undefined
-										? 'Profesor'
+										? 'PROFESOR'
 										: user.professor?.instructor?.status
-										? 'Formador'
+										? 'FORMADOR'
 										: 'N/A'}
 								</p>
 								<p className={FormCSS.showDataBodyStatus}>
