@@ -15,6 +15,7 @@ import Modal from "./Modal"
 import { GetSubjectRegistered } from "../helpers/GetSubjectRegistered"
 import { DeleteSubjectsRegistered } from "../helpers/DeleteSubjectRegistered"
 import { ActiveSubject } from "../helpers/ActiveSubject"
+import { useAcademicTerms } from "../../instruction/hooks/useAcademicTerm"
 
 export const ShowData = () => {
     const {user} = useContext(AuthContext)
@@ -24,7 +25,10 @@ export const ShowData = () => {
     const [subjectDelete, setSubjectDelete]=useState(0);
     const [showSubjectsRegistered,setShowSubjectsRegistered]=useState<SubjectsRegistered[]>([]);
     const [activeSubject, setActiveSubject]=useState(0);
-
+    const academicTerm = useAcademicTerms();
+    const academicTermActive = academicTerm?.find(academicTerm =>{
+        return (academicTerm.status === 'ACTIVO')
+    })?.id
     useEffect(()=>{      
         if(!user?.token)return
         GetAllRegistration(user?.token).then(response=>{
@@ -36,8 +40,9 @@ export const ShowData = () => {
     },[])
     useEffect(()=>{
         if(!user?.token)return
+        if(!academicTermActive)return
         if(idSeminarian.length>0){
-            GetSubjectRegistered({id:idSeminarian,token:user.token}).then(response=>{
+            GetSubjectRegistered({id:idSeminarian,token:user.token,academicTerm:academicTermActive}).then(response=>{
                 setShowSubjectsRegistered(response)
                 return
             }).catch(error=>{
@@ -49,7 +54,7 @@ export const ShowData = () => {
             DeleteSubjectsRegistered({id:subjectDelete,token:user.token}).then(response=>{
                 if(response.ok){
                     alert('Eliminado correctamente')
-                    GetSubjectRegistered({id:idSeminarian,token:user.token}).then(response=>{
+                    GetSubjectRegistered({id:idSeminarian,token:user.token,academicTerm:academicTermActive}).then(response=>{
                         setShowSubjectsRegistered(response)
                         return
                     }).catch(error=>{
@@ -68,7 +73,7 @@ export const ShowData = () => {
             ActiveSubject({id:activeSubject,token:user.token}).then(response=>{
                 if(response.ok){
                     alert('Activada correctamente')
-                    GetSubjectRegistered({id:idSeminarian,token:user.token}).then(response=>{
+                    GetSubjectRegistered({id:idSeminarian,token:user.token,academicTerm:academicTermActive}).then(response=>{
                         setShowSubjectsRegistered(response)
                         return
                     }).catch(error=>{
