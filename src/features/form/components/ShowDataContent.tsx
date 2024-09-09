@@ -273,25 +273,32 @@ export const ShowDataContent = () => {
 												}
 												onClick={e => {
 													e.preventDefault();
-													setUserDelete(
-														user.person.id
-													);
-													setInfoUserDelete(
-														user.seminarian?.status
-															? 'seminarista'
-															: user.professor
-																	?.status_id &&
-															  user.professor
-																	?.instructor
-																	?.status ===
-																	undefined
-															? 'profesor'
-															: user.professor
-																	?.instructor
-																	.status
-															? 'formador'
-															: 'N/A'
-													);
+													if (
+														confirm(
+															'Estás seguro de querer eliminar a este usuario?'
+														)
+													) {
+														setUserDelete(
+															user.person.id
+														);
+														setInfoUserDelete(
+															user.seminarian
+																?.status
+																? 'seminarista'
+																: user.professor
+																		?.status_id &&
+																  user.professor
+																		?.instructor
+																		?.status ===
+																		undefined
+																? 'profesor'
+																: user.professor
+																		?.instructor
+																		.status
+																? 'formador'
+																: 'N/A'
+														);
+													}
 												}}
 											>
 												<img src={deleteIcon} alt="" />
@@ -301,25 +308,30 @@ export const ShowDataContent = () => {
 									<button
 										className={FormCSS.buttonActions}
 										onClick={() => {
-											token &&
-												changePassword(
-													user.person.id,
-													user.person.id,
-													token
+											if (
+												confirm(
+													'Estás seguro de reiniciar la contraseña de este usuario?'
 												)
-													.then(response => {
-														if (response.ok) {
-															return alert(
-																`Contraseña de ${user.person.id} reiniciada exitosamente`
+											)
+												token &&
+													changePassword(
+														user.person.id,
+														user.person.id,
+														token
+													)
+														.then(response => {
+															if (response.ok) {
+																return alert(
+																	`Contraseña de ${user.person.id} reiniciada exitosamente`
+																);
+															}
+															alert(
+																'Hubo un error, inténtelo más tarde'
 															);
-														}
-														alert(
-															'Hubo un error, inténtelo más tarde'
+														})
+														.catch(err =>
+															console.log(err)
 														);
-													})
-													.catch(err =>
-														console.log(err)
-													);
 										}}
 									>
 										<img

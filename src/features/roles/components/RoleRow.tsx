@@ -35,11 +35,15 @@ export const RoleRow = ({
 				</button>
 				<button
 					className={RolesCSS['roles-table__action']}
-					onClick={() => {
-						deleteRole(id)
-							.then(() => user && getRoles(user.token))
-							.then(roles => setRoles(roles))
-							.catch(err => console.log(err));
+					onClick={e => {
+						e.preventDefault();
+						if (
+							confirm('Estás seguro de querer eliminar este rol?')
+						)
+							deleteRole(id)
+								.then(() => user && getRoles(user.token))
+								.then(roles => setRoles(roles))
+								.catch(err => console.log(err));
 					}}
 				>
 					<img src={DeleteIcon} alt="Eliminar" />

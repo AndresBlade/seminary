@@ -90,7 +90,14 @@ export const WorkerRegister = () => {
 					}))
 				);
 				setLetterId(worker.person.id.slice(0, 2));
-				fetch(`${worker.person.profile_picture_path}`)
+
+				const workerImageURL =
+					worker.person.profile_picture_path.includes('http')
+						? worker.person.profile_picture_path
+						: `https://${worker.person.profile_picture_path}`;
+
+				console.log(workerImageURL);
+				fetch(workerImageURL)
 					.then(response => response.blob())
 					.then(myBlob => {
 						const myFile = new File([myBlob], 'image.jpeg', {

@@ -174,9 +174,14 @@ const DiocesisShowData = () => {
 														]
 													}
 													onClick={() => {
-														setDiocesisDelete(
-															diocesis.id
-														);
+														if (
+															confirm(
+																'Estás seguro de querer eliminar este registro?'
+															)
+														)
+															setDiocesisDelete(
+																diocesis.id
+															);
 													}}
 												>
 													<img
