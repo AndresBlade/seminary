@@ -63,7 +63,7 @@ export const WorkerShowList = () => {
                 }}
                 onKeyDown={(event) => {
                     const allowedKeys = [
-                        'ArrowLeft', 'ArrowRight', 'Delete', 'Enter',
+                        'ArrowLeft', 'ArrowRight', 'Delete', 'Enter', 'Backspace',
                         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'V', 'v','-'
                     ];
                     if (!allowedKeys.includes(event.key)) {
