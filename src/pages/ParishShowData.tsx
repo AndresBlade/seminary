@@ -25,7 +25,7 @@ export interface ParishDataContentPropss {
 
 export const ParishShowData = () => {
 	const apiUrl = `${import.meta.env.VITE_URL}/parish/`;
-	const {user}=useContext(AuthContext)
+	const { user } = useContext(AuthContext);
 	const {
 		data,
 		loading,
@@ -38,7 +38,7 @@ export const ParishShowData = () => {
 	const [find, setFind] = useState<string>('');
 
 	useEffect(() => {
-		if(!user?.token)return
+		if (!user?.token) return;
 		if (parroquiaDelete !== 0) {
 			deleteData()
 				.then(() => {
@@ -62,7 +62,7 @@ export const ParishShowData = () => {
 			return;
 		}
 		if (find) {
-			GetParishByName({ name: find, token:user.token })
+			GetParishByName({ name: find, token: user.token })
 				.then(parroquia =>
 					setParish({
 						msj: parroquia.msj,
@@ -75,7 +75,7 @@ export const ParishShowData = () => {
 			setFind('');
 			return;
 		}
-	}, [parroquiaDelete, setParish, deleteData, find, parishFind]);
+	}, [parroquiaDelete, setParish, deleteData, find, parishFind, user?.token]);
 	return (
 		<>
 			<TitleList>
