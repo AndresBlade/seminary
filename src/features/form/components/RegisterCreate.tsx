@@ -66,7 +66,7 @@ const RegisterCreate = () => {
 	const [socialMedia, setSocialMedia] = useState<SocialMediaProps[]>([]);
 	const [seminarianInfo, setSeminarianInfo] = useState<seminarianInfo>({
 		academicTraining: '',
-		stage: '',
+		stage: 'PROPEDEUTICO',
 		linkTitle: '',
 		apostolates: '',
 		ministriesReceived: 'UNKOWN',
@@ -261,7 +261,7 @@ const RegisterCreate = () => {
 		}
 	}, [data, id, user?.token, dataProfessor, typeUserEdit]);
 
-	console.log({ socialMedia });
+	console.log({ seminarianInfo });
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const dataSent = {
