@@ -91,12 +91,10 @@ const RegisterCreate = () => {
 	useEffect(() => {
 		if (location.pathname.includes('seminarian')) {
 			setTypeUserEdit('seminarista');
-			console.log('HOLA DESDE SEMINARISTA');
 			return;
 		}
 		if (location.pathname.includes('professor')) {
 			setTypeUserEdit('profesor');
-			console.log('JOJOLA DESDE PROFESOR');
 			return;
 		}
 	}, [location.pathname]);
@@ -278,7 +276,7 @@ const RegisterCreate = () => {
 				phone: [
 					{
 						phone_number: contactInfo.phone,
-						description: 'hola',
+						description: contactInfo.description,
 					},
 					{
 						phone_number: contactInfo.phone,
