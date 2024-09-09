@@ -86,7 +86,7 @@ const RegisterCreate = () => {
 
 	const rol = personalInfo.rol;
 
-	console.log(seminarianInfo.stage);
+	console.log(personalInfo.parish);
 
 	useEffect(() => {
 		if (location.pathname.includes('seminarian')) {
@@ -313,7 +313,7 @@ console.log({professionalInfo})
 							link: seminarianInfo.linkTitle,
 						},
 					],
-					parish_id: 1,
+					parish_id: personalInfo.parish,
 				},
 				ForeingSeminarian: anotherSeminary
 					? {

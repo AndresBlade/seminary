@@ -64,6 +64,9 @@ export const PersonalInfoForm = ({
 		getParishByDioceseProps[]
 	>([]);
 	const [positionInstructor,setPositionInstructor]=useState<positionInstructor | null>(null)
+
+	
+	
 	useEffect(()=>{
         if(!user?.token) return
         GetPositionInstructor(user?.token).then((response)=>{
@@ -110,8 +113,11 @@ export const PersonalInfoForm = ({
 				console.log(error);
 			});
 	}, [diocese, user?.token]);
-
-	console.log(diocese);
+	useEffect(()=>{
+		setPersonalInfo(personalInfo=>{
+			return {...personalInfo, parish:[...parishByDiocese].shift()?.id.toString() }
+		})
+	},[parishByDiocese])
 	return (
 		<div className={FormCSS.personalInfo}>
 			<TitleForm title="Información General" />
