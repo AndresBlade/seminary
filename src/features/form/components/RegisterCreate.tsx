@@ -279,7 +279,7 @@ const RegisterCreate = () => {
 						description: contactInfo.description,
 					},
 					{
-						phone_number: contactInfo.phone,
+						phone_number: contactInfo.phoneFamily,
 						description: contactInfo.descriptionFamily,
 					},
 				],
