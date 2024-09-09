@@ -216,7 +216,7 @@ export const ShowDataContent = () => {
 										? 'ACTIVO'
 										: user.seminarian?.status}
 								</p>
-								<div>
+								<div className={FormCSS.buttonsContainer}>
 									{
 										<button
 											className={
