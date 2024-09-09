@@ -208,12 +208,12 @@ export const ShowDataContent = () => {
 								</p>
 								<p className={FormCSS.showDataBodyStatus}>
 									{user.professor?.status_id === 0
-										? 'Retirado'
+										? 'RETIRADO'
 										: user.professor?.instructor?.status ===
 										  1
-										? 'Activo'
+										? 'ACTIVO'
 										: user.professor?.status_id === 1
-										? 'Activo'
+										? 'ACTIVO'
 										: user.seminarian?.status}
 								</p>
 								<div>
