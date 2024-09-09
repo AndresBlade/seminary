@@ -301,6 +301,8 @@ const RegisterCreate = () => {
 			stage: seminarianInfo.stage,
 		};
 
+		console.log(seminarianInfo.stage);
+
 		if (personalInfo.rol === 'seminarista') {
 			const dataExtra = {
 				user: {
