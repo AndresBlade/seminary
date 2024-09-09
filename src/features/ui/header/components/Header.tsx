@@ -15,9 +15,12 @@ export const Header = ({ className, setIsSidebarOpen }: Props) => {
 		? headerCSS.profilePicture
 		: headerCSS.defaultProfilePicture;
 
-	const profilePictureURL = user?.profile_picture?.includes('http')
-		? user.profile_picture
-		: `https://${user?.profile_picture}`;
+	const profilePictureURL =
+		user?.profile_picture === null
+			? null
+			: user?.profile_picture?.includes('http')
+			? user.profile_picture
+			: `https://${user?.profile_picture}`;
 	return (
 		<header className={`${headerCSS.header} ${className}`}>
 			<button
