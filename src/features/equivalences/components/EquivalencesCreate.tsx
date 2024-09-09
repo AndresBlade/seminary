@@ -16,6 +16,13 @@ const EquivalencesCreate = () => {
     const [subjectSelect, setSubjectSelect]=useState(0)
     const [score, setScore]=useState(0);
 
+    function max_chars(e: React.ChangeEvent<HTMLInputElement>) {
+		const max_chars = 3;
+		if (e.target.value.length > max_chars) {
+			e.target.value = e.target.value.substring(0, max_chars);
+		}
+	}
+
     useEffect(()=>{
         if(!user?.token) return
         GetSeminariansToEquivalences(user?.token).then(response=>{
@@ -84,13 +91,13 @@ const EquivalencesCreate = () => {
                         min={0}
                         max={100}
                         onChange={(e)=>{{
+                            max_chars(e)
                             if(+e.target.value < 0){ e.target.value = '0'}
-                            
                             setScore(parseFloat(parseFloat(e.target.value).toFixed(2)))
                         }}}
                         onKeyDown={(event) => {
                             const allowedKeys = [
-                                'ArrowLeft', 'ArrowRight', 'Delete', 'Enter',
+                                'ArrowLeft', 'ArrowRight', 'Delete', 'Enter', 'Backspace',
                                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'
                             ];
                             if (!allowedKeys.includes(event.key)) {

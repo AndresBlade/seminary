@@ -41,7 +41,7 @@ export const ProfessionalCareer = ({academicTraining,linkTitle,startingDate,
         if(positionInstructor === null)return
 
         setProfessionalInfo(e=>{
-            return {...e, instructorPosition:Object.entries(positionInstructor).length > 0 || Object.entries(positionInstructor).length === 0 ?  instructorPosition ? instructorPosition : Object.entries(positionInstructor)[0][0] : Object.entries(positionInstructor)?.[0]?.[0]}
+            return {...e, instructorPosition:Object.entries(positionInstructor).length > 0 || Object.entries(positionInstructor).length === 0 ?  instructorPosition ? instructorPosition : Object.entries(positionInstructor)?.[0]?.[0] : Object.entries(positionInstructor)?.[0]?.[0]}
         })
     },[instructorPosition, positionInstructor, setProfessionalInfo])
 
