@@ -29,8 +29,9 @@ const EquivalencesCreate = () => {
     },[])
 
     useEffect(()=>{
+        if(!user?.token) return
         if(seminarianSelect !== ''){
-            GetSubjectToEquivalences(seminarianSelect).then(response=>
+            GetSubjectToEquivalences({id:seminarianSelect,token:user?.token}).then(response=>
                 setSubjectsToSelect(response)
             ).catch(error=>{
                 console.log(error)
@@ -42,7 +43,7 @@ const EquivalencesCreate = () => {
             setScore(0)
             setSubjectsToSelect(null)
         }
-    },[seminarianSelect])
+    },[user?.token, seminarianSelect])
 
     const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
