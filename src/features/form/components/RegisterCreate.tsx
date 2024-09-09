@@ -154,7 +154,7 @@ const RegisterCreate = () => {
 					phoneFamily:
 						infoUserEdit.person?.cellpones[1]?.phone_number,
 					descriptionFamily:
-						infoUserEdit.person?.cellpones[1]?.phone_number,
+						infoUserEdit.person?.cellpones[1]?.description,
 					email: infoUserEdit.person.email,
 				});
 				setSocialMedia(
