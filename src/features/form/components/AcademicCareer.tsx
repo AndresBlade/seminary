@@ -77,10 +77,10 @@ export const AcademicCareer = ({
 							});
 						}}
 					>
-						<option value="ACTIVO">Activo</option>
-						<option value="RETIRADO">Retirado</option>
-						<option value="PASTORAL">Año Pastoral</option>
-						<option value="CULMINADO">Culminado</option>
+						<option value="ACTIVO">ACTIVO</option>
+						<option value="RETIRADO">RETIRADO</option>
+						<option value="PASTORAL">AÑO PASTORAL</option>
+						<option value="CULMINADO">CULMINADO</option>
 					</SelectForm>
 				</div>
 			) : null}
@@ -130,10 +130,10 @@ export const AcademicCareer = ({
 							});
 						}}
 					>
-						<option value="UNKOWN">Unknow</option>
-						<option value="ADMISION">Admisión</option>
-						<option value="LECTORADO">Lectorado</option>
-						<option value="ACOLITADO">Acolitado</option>
+						<option value="UNKOWN">UNKOWN</option>
+						<option value="ADMISION">ADMISIÓN</option>
+						<option value="LECTORADO">LECTORADO</option>
+						<option value="ACOLITADO">ACOLITADO</option>
 					</SelectForm>
 				</div>
 			) : null}

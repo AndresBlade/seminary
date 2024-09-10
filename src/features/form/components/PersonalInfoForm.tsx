@@ -306,14 +306,14 @@ export const PersonalInfoForm = ({
 							});
 						}}
 					>
-						<option value="seminarista">Seminarista</option>
+						<option value="seminarista">SEMINARISTA</option>
 						{
 							positionInstructor &&
 							Object.entries(positionInstructor).length > 0 ? 
-								<option value="formador">Formador</option>
+								<option value="formador">FORMADOR</option>
 							: null
 						}
-						<option value="profesor">Profesor</option>
+						<option value="profesor">PROFESOR</option>
 					</SelectForm>
 				</div>
 			) : null}

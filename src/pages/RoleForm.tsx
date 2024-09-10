@@ -174,7 +174,10 @@ export const RoleForm = () => {
 							placeholder="Ej: Supervisor estudiantil"
 							id="name"
 							value={roleName}
-							onInputChange={onInputChange}
+							onInputChange={(e)=>{
+								e.target.value = e.target.value.toUpperCase()
+								onInputChange(e)
+							}}
 							autoFocus
 						/>
 						<InputFormField
@@ -184,7 +187,10 @@ export const RoleForm = () => {
 							id="description"
 							placeholder="Ej: Supervisa las notas de nuevo ingreso"
 							value={roleDescription}
-							onInputChange={onInputChange}
+							onInputChange={(e)=>{
+								e.target.value = e.target.value.toUpperCase()
+								onInputChange(e)
+							}}
 						/>
 
 						{tables && checkedPermissions && permissions && (
