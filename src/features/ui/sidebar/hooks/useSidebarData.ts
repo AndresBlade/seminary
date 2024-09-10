@@ -70,7 +70,6 @@ const professorItem: SidebarItemData = {
 	children: [
 		{ content: 'Calificar', path: 'createAssessments' },
 		{ content: 'Crear Evalución', path: 'createAssessments/new' },
-		{content: 'Equivalencias', path:'equivalences'}
 	],
 };
 
@@ -155,6 +154,8 @@ export const useSidebarData = () => {
 						content: 'Agregar Materia',
 						path: 'subject/new',
 					},
+
+					{ content: 'Equivalencias', path: 'equivalences' },
 				],
 			};
 		}
@@ -177,6 +178,8 @@ export const useSidebarData = () => {
 						content: 'Asignación de materias',
 						path: 'subject/instruction',
 					},
+
+					{ content: 'Equivalencias', path: 'equivalences' },
 				],
 			};
 		}
