@@ -49,7 +49,7 @@ export const CreateAssessments = () => {
 		{ description: ''.toUpperCase(), maximum_score: 0 },
 		{ description: ''.toUpperCase(), maximum_score: 0 },
 	]);
-	const [descriptionIsNull, setDescriptionIsNull]=useState(true)
+	const [descriptionIsNull, setDescriptionIsNull] = useState(true);
 	const [subjectSelected, setSubjectSelected] = useState(0);
 	const handleAddEvaluation = () => {
 		if (evaluations.length < 6) {
@@ -93,11 +93,11 @@ export const CreateAssessments = () => {
 	const TotalScoreSubjectResgistered =
 		calculateTotalScore(evaluationsToShow) ?? 0;
 
-	useEffect(()=>{
-		setDescriptionIsNull(evaluations.some(evaluation=>
-			!evaluation.description
-		))
-	},[evaluations])
+	useEffect(() => {
+		setDescriptionIsNull(
+			evaluations.some(evaluation => !evaluation.description)
+		);
+	}, [evaluations]);
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!user?.token) return;
@@ -115,7 +115,7 @@ export const CreateAssessments = () => {
 					GetTestsSubject({
 						id: subjectSelected,
 						academic_term_id: academicTermActiveToSend,
-						token:user.token
+						token: user.token,
 					})
 						.then(response => {
 							setEvaluationsToShow(response);
@@ -136,13 +136,13 @@ export const CreateAssessments = () => {
 	};
 
 	useEffect(() => {
-		if(!user?.token)return
+		if (!user?.token) return;
 		if (subjectSelected !== 0) {
 			if (!academicTermActiveToSend) return;
 			GetTestsSubject({
 				id: subjectSelected,
 				academic_term_id: academicTermActiveToSend,
-				token:user.token
+				token: user.token,
 			})
 				.then(response => {
 					setEvaluationsToShow(response);
@@ -296,9 +296,6 @@ export const CreateAssessments = () => {
 							type="submit"
 							disabled={totalScore !== 100 || descriptionIsNull}
 							className={CreateAssessmentsStyles.buttonSave}
-							onClick={() => {
-								setShowModal(false)
-							}}
 						>
 							Guardar
 						</button>
