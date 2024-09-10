@@ -130,10 +130,10 @@ export const AcademicCareer = ({
 							});
 						}}
 					>
-						<option value="UNKOWN">UNKOWN</option>
-						<option value="ADMISION">ADMISIÓN</option>
-						<option value="LECTORADO">LECTORADO</option>
-						<option value="ACOLITADO">ACOLITADO</option>
+						<option value="UNKOWN">Unknow</option>
+						<option value="ADMISI_N">Admisión</option>
+						<option value="LECTORADO">Lectorado</option>
+						<option value="ACOLITADO">Acolitado</option>
 					</SelectForm>
 				</div>
 			) : null}

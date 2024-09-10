@@ -3,6 +3,11 @@ export const getSeminarianList = (
 	diocese_id: number,
 	location: 'INTERNO' | 'EXTERNO'
 ) => {
+	console.log(
+		`${
+			import.meta.env.VITE_URL
+		}/seminarian/seminarianlist?diocese_id=${diocese_id}&location=${location}`
+	);
 	return fetch(
 		`${
 			import.meta.env.VITE_URL
