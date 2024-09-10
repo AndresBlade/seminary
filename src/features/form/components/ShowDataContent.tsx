@@ -18,6 +18,12 @@ import { changePassword } from '../../changePassword/helpers/changePassword';
 import contactIcon from '../../../assets/MaterialSymbolsIdCardOutline.svg';
 import resetIcon from '../../../assets/MaterialSymbolsLockReset.svg';
 import { getCardFromUser } from '../helpers/getCardFromUser';
+import ConstanciaSVG from '../../../assets/constancia.svg';
+import { getConstancia } from '../helpers/getConstancia';
+import { getNotas } from '../helpers/getNotas';
+import gradeSVG from '../../../assets/grade.svg';
+import { getCartaCulminacion } from '../helpers/getCartaCulminacion';
+import CartaCulminacionSVG from '../../../assets/award.svg';
 export interface userProps {
 	person: {
 		id: string;
@@ -217,6 +223,66 @@ export const ShowDataContent = () => {
 										: user.seminarian?.status}
 								</p>
 								<div className={FormCSS.buttonsContainer}>
+									{user.seminarian?.status ===
+										'CULMINADO' && (
+										<button
+											className={FormCSS.buttonActions}
+											onClick={() => {
+												token &&
+													getCartaCulminacion(
+														user.person.id,
+														token
+													).catch(error =>
+														console.log(error)
+													);
+											}}
+										>
+											<img
+												src={CartaCulminacionSVG}
+												alt="Carta de culminación"
+											/>
+										</button>
+									)}
+									{(user.seminarian?.status === 'ACTIVO' ||
+										user.seminarian?.status ===
+											'CULMINADO') && (
+										<button
+											className={FormCSS.buttonActions}
+											onClick={() => {
+												token &&
+													getNotas(
+														token,
+														user.person.id
+													).catch(error =>
+														console.log(error)
+													);
+											}}
+										>
+											<img
+												src={gradeSVG}
+												alt="Notas certificadas"
+											/>
+										</button>
+									)}
+									{user.seminarian?.status === 'ACTIVO' && (
+										<button
+											className={FormCSS.buttonActions}
+											onClick={() => {
+												token &&
+													getConstancia(
+														user.person.id,
+														token
+													).catch(error =>
+														console.log(error)
+													);
+											}}
+										>
+											<img
+												src={ConstanciaSVG}
+												alt="Constancia de estudio"
+											/>
+										</button>
+									)}
 									{
 										<button
 											className={

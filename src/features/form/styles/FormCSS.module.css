@@ -273,12 +273,12 @@
 input:invalid {
 	border: 1px solid var(--textColor);
 }
-.buttonsContainer{
-	min-width: 17rem;
-	max-width: 17rem;
-	overflow-x:scroll;
+.buttonsContainer {
+	min-width: 25rem;
+	max-width: 25rem;
+	overflow-x: scroll;
 }
-.buttonsContainer::-webkit-scrollbar{
+.buttonsContainer::-webkit-scrollbar {
 	background-color: transparent;
 }
 /************************MEDIA QUERY PARA PC************************/
