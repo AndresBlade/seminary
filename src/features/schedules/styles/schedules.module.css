@@ -34,7 +34,24 @@
     border: 2px solid var(--botonInscribirCancelar);
     color:  var(--botonInscribirCancelar);
 }
+.buttonsSchedulesHome{
+    width: 100%;
+    background-color: var(--botonInscribirCancelar);
+    border: none;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    height: 5rem;
+    margin-bottom: 1rem;
+}
+.buttonsSchedulesHome:disabled{
+    background-color: var(--ColorPonderacion);
+}
 @media (width > 1024px) { 
+    .buttonsSchedulesHomeContainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
     .buttonSave{
         width: 20%;
     }
