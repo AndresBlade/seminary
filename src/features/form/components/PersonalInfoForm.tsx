@@ -63,20 +63,19 @@ export const PersonalInfoForm = ({
 	const [parishByDiocese, setParishByDiocese] = useState<
 		getParishByDioceseProps[]
 	>([]);
-	const [positionInstructor,setPositionInstructor]=useState<positionInstructor | null>(null)
+	const [positionInstructor, setPositionInstructor] =
+		useState<positionInstructor | null>(null);
 
-	
-	
-	useEffect(()=>{
-        if(!user?.token) return
-        GetPositionInstructor(user?.token).then((response)=>{
-            return(
-                setPositionInstructor(response)
-            )
-        }).catch((error)=>{
-            alert(error)
-        })
-    },[user?.token])
+	useEffect(() => {
+		if (!user?.token) return;
+		GetPositionInstructor(user?.token)
+			.then(response => {
+				return setPositionInstructor(response);
+			})
+			.catch(error => {
+				alert(error);
+			});
+	}, [user?.token]);
 
 	useEffect(() => {
 		if (!user?.token) return;
@@ -113,11 +112,13 @@ export const PersonalInfoForm = ({
 				console.log(error);
 			});
 	}, [diocese, user?.token]);
-	useEffect(()=>{
-		setPersonalInfo(personalInfo=>{
-			return {...personalInfo, parish:[...parishByDiocese].shift()?.id.toString() }
-		})
-	},[parishByDiocese])
+	useEffect(() => {
+		setPersonalInfo(personalInfo => {
+			const shiftedElement = [...parishByDiocese].shift()?.id.toString();
+			if (!shiftedElement) return personalInfo;
+			return { ...personalInfo, parish: shiftedElement };
+		});
+	}, [parishByDiocese, setPersonalInfo]);
 	return (
 		<div className={FormCSS.personalInfo}>
 			<TitleForm title="Información General" />
@@ -307,12 +308,10 @@ export const PersonalInfoForm = ({
 						}}
 					>
 						<option value="seminarista">SEMINARISTA</option>
-						{
-							positionInstructor &&
-							Object.entries(positionInstructor).length > 0 ? 
-								<option value="formador">FORMADOR</option>
-							: null
-						}
+						{positionInstructor &&
+						Object.entries(positionInstructor).length > 0 ? (
+							<option value="formador">FORMADOR</option>
+						) : null}
 						<option value="profesor">PROFESOR</option>
 					</SelectForm>
 				</div>
