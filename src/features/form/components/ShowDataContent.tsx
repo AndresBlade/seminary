@@ -222,190 +222,235 @@ export const ShowDataContent = () => {
 										? 'ACTIVO'
 										: user.seminarian?.status}
 								</p>
-								<div className={FormCSS.buttonsContainer}>
-									{user.seminarian?.status ===
-										'CULMINADO' && (
-										<button
-											className={FormCSS.buttonActions}
-											onClick={() => {
-												token &&
-													getCartaCulminacion(
-														user.person.id,
-														token
-													).catch(error =>
-														console.log(error)
-													);
-											}}
+								{user.seminarian?.status !== 'RETIRADO' &&
+									user.professor?.status_id !== 0 && (
+										<div
+											className={FormCSS.buttonsContainer}
 										>
-											<img
-												src={CartaCulminacionSVG}
-												alt="Carta de culminación"
-											/>
-										</button>
-									)}
-									{(user.seminarian?.status === 'ACTIVO' ||
-										user.seminarian?.status ===
-											'CULMINADO') && (
-										<button
-											className={FormCSS.buttonActions}
-											onClick={() => {
-												token &&
-													getNotas(
-														token,
-														user.person.id
-													).catch(error =>
-														console.log(error)
-													);
-											}}
-										>
-											<img
-												src={gradeSVG}
-												alt="Notas certificadas"
-											/>
-										</button>
-									)}
-									{user.seminarian?.status === 'ACTIVO' && (
-										<button
-											className={FormCSS.buttonActions}
-											onClick={() => {
-												token &&
-													getConstancia(
-														user.person.id,
-														token
-													).catch(error =>
-														console.log(error)
-													);
-											}}
-										>
-											<img
-												src={ConstanciaSVG}
-												alt="Constancia de estudio"
-											/>
-										</button>
-									)}
-									{
-										<button
-											className={
-												FormCSS.buttonActionsAsAnchor
+											{user.seminarian?.status ===
+												'CULMINADO' && (
+												<button
+													className={
+														FormCSS.buttonActions
+													}
+													onClick={() => {
+														token &&
+															getCartaCulminacion(
+																user.person.id,
+																token
+															).catch(error =>
+																console.log(
+																	error
+																)
+															);
+													}}
+												>
+													<img
+														src={
+															CartaCulminacionSVG
+														}
+														alt="Carta de culminación"
+													/>
+												</button>
+											)}
+											{(user.seminarian?.status ===
+												'ACTIVO' ||
+												user.seminarian?.status ===
+													'CULMINADO') && (
+												<button
+													className={
+														FormCSS.buttonActions
+													}
+													onClick={() => {
+														token &&
+															getNotas(
+																token,
+																user.person.id
+															).catch(error =>
+																console.log(
+																	error
+																)
+															);
+													}}
+												>
+													<img
+														src={gradeSVG}
+														alt="Notas certificadas"
+													/>
+												</button>
+											)}
+											{user.seminarian?.status ===
+												'ACTIVO' && (
+												<button
+													className={
+														FormCSS.buttonActions
+													}
+													onClick={() => {
+														token &&
+															getConstancia(
+																user.person.id,
+																token
+															).catch(error =>
+																console.log(
+																	error
+																)
+															);
+													}}
+												>
+													<img
+														src={ConstanciaSVG}
+														alt="Constancia de estudio"
+													/>
+												</button>
+											)}
+											{
+												<button
+													className={
+														FormCSS.buttonActionsAsAnchor
+													}
+													onClick={() => {
+														console.log(user);
+														token &&
+															getCardFromUser(
+																token,
+																user.person.id,
+																user.seminarian
+																	? 'seminarian'
+																	: user
+																			.professor
+																			?.instructor
+																	? 'instructor'
+																	: 'professor'
+															).catch(err =>
+																console.log(err)
+															);
+													}}
+												>
+													<img
+														src={contactIcon}
+														alt="Generar ficha"
+													/>
+												</button>
 											}
-											onClick={() => {
-												token &&
-													getCardFromUser(
-														token,
-														user.person.id,
-														user.seminarian
-															? 'seminarian'
-															: user.professor
-																	?.instructor
-															? 'instructor'
-															: 'professor'
-													).catch(err =>
-														console.log(err)
-													);
-											}}
-										>
-											<img
-												src={contactIcon}
-												alt="Generar ficha"
-											/>
-										</button>
-									}
-									{user.seminarian?.status !== 'RETIRADO' ? (
-										<div>
+											{user.seminarian?.status !==
+											'RETIRADO' ? (
+												<div>
+													<button
+														className={
+															FormCSS.buttonActions
+														}
+														onClick={() => {
+															const userType =
+																user.seminarian
+																	?.status
+																	? 'seminarian'
+																	: user
+																			.professor
+																			?.status_id
+																	? 'professor'
+																	: 'N/A';
+															navigate(
+																`../../Profesor/${userType}/${user.person?.id.slice(
+																	2
+																)}`
+															);
+														}}
+													>
+														<img
+															src={editIcon}
+															alt=""
+														/>
+													</button>
+													<button
+														className={
+															FormCSS.buttonActions
+														}
+														onClick={e => {
+															e.preventDefault();
+															if (
+																confirm(
+																	'Estás seguro de querer eliminar a este usuario?'
+																)
+															) {
+																setUserDelete(
+																	user.person
+																		.id
+																);
+																setInfoUserDelete(
+																	user
+																		.seminarian
+																		?.status
+																		? 'seminarista'
+																		: user
+																				.professor
+																				?.status_id &&
+																		  user
+																				.professor
+																				?.instructor
+																				?.status ===
+																				undefined
+																		? 'profesor'
+																		: user
+																				.professor
+																				?.instructor
+																				.status
+																		? 'formador'
+																		: 'N/A'
+																);
+															}
+														}}
+													>
+														<img
+															src={deleteIcon}
+															alt=""
+														/>
+													</button>
+												</div>
+											) : null}
 											<button
 												className={
 													FormCSS.buttonActions
 												}
 												onClick={() => {
-													const userType = user
-														.seminarian?.status
-														? 'seminarian'
-														: user.professor
-																?.status_id
-														? 'professor'
-														: 'N/A';
-													navigate(
-														`../../Profesor/${userType}/${user.person?.id.slice(
-															2
-														)}`
-													);
-												}}
-											>
-												<img src={editIcon} alt="" />
-											</button>
-											<button
-												className={
-													FormCSS.buttonActions
-												}
-												onClick={e => {
-													e.preventDefault();
 													if (
 														confirm(
-															'Estás seguro de querer eliminar a este usuario?'
+															'Estás seguro de reiniciar la contraseña de este usuario?'
 														)
-													) {
-														setUserDelete(
-															user.person.id
-														);
-														setInfoUserDelete(
-															user.seminarian
-																?.status
-																? 'seminarista'
-																: user.professor
-																		?.status_id &&
-																  user.professor
-																		?.instructor
-																		?.status ===
-																		undefined
-																? 'profesor'
-																: user.professor
-																		?.instructor
-																		.status
-																? 'formador'
-																: 'N/A'
-														);
-													}
+													)
+														token &&
+															changePassword(
+																user.person.id,
+																user.person.id,
+																token
+															)
+																.then(
+																	response => {
+																		if (
+																			response.ok
+																		) {
+																			return alert(
+																				`Contraseña de ${user.person.id} reiniciada exitosamente`
+																			);
+																		}
+																		alert(
+																			'Hubo un error, inténtelo más tarde'
+																		);
+																	}
+																)
+																.catch(err =>
+																	console.log(
+																		err
+																	)
+																);
 												}}
 											>
-												<img src={deleteIcon} alt="" />
+												<img
+													src={resetIcon}
+													alt="cambiar contraseña"
+												/>
 											</button>
 										</div>
-									) : null}
-									<button
-										className={FormCSS.buttonActions}
-										onClick={() => {
-											if (
-												confirm(
-													'Estás seguro de reiniciar la contraseña de este usuario?'
-												)
-											)
-												token &&
-													changePassword(
-														user.person.id,
-														user.person.id,
-														token
-													)
-														.then(response => {
-															if (response.ok) {
-																return alert(
-																	`Contraseña de ${user.person.id} reiniciada exitosamente`
-																);
-															}
-															alert(
-																'Hubo un error, inténtelo más tarde'
-															);
-														})
-														.catch(err =>
-															console.log(err)
-														);
-										}}
-									>
-										<img
-											src={resetIcon}
-											alt="cambiar contraseña"
-										/>
-									</button>
-								</div>
+									)}
 							</DataContent>
 						))
 					)}

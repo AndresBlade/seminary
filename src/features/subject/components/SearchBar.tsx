@@ -3,8 +3,10 @@ import SearchBarCSS from '../styles/SearchBar.module.css';
 import { InputFormField } from './InputFormField';
 import { SelectFormField } from './SelectFormField';
 import { useCourses } from '../hooks/useCourses';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { SubjectFromDB } from '../interfaces/SubjectFromDB';
+import { getPensum } from '../helpers/getPensum';
+import { AuthContext } from '../../login/context/AuthContext';
 
 const semesters = [
 	{ name: 'Primero', value: 1 },
@@ -26,7 +28,6 @@ export const SearchBar = ({
 		name,
 		course,
 		semester,
-		formState,
 		setFormState,
 		onInputChange,
 		onSelectChange,
@@ -36,8 +37,7 @@ export const SearchBar = ({
 		semester: semesters[0].value.toString(),
 	});
 
-	console.log(formState);
-	console.log(originalSubjects);
+	const { user } = useContext(AuthContext);
 
 	const courses = useCourses();
 
@@ -84,14 +84,17 @@ export const SearchBar = ({
 			</div>
 
 			<div className={SearchBarCSS.buttons}>
-				<a
+				<button
 					className={SearchBarCSS.generatePDFButton}
-					target="_blank"
-					rel="noreferrer"
-					href={`${import.meta.env.VITE_URL}/subject/pensum`}
+					onClick={() => {
+						user &&
+							getPensum(user.token).catch(error =>
+								console.log(error)
+							);
+					}}
 				>
 					GENERAR PÉNSUM
-				</a>
+				</button>
 				<button
 					className={SearchBarCSS.resetButton}
 					onClick={() => setSubjectsSetToDefault(false)}
