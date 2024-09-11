@@ -313,7 +313,7 @@ console.log({professionalInfo})
 							link: seminarianInfo.linkTitle,
 						},
 					],
-					parish_id: personalInfo.parish,
+					parish_id: +personalInfo.parish,
 				},
 				ForeingSeminarian: anotherSeminary
 					? {
@@ -387,10 +387,9 @@ console.log({professionalInfo})
 					});
 			}
 		} else {
-			console.log('mi rol es' + personalInfo.rol);
 			const dataExtra = {
 				user: {
-					parish_id: 1,
+					parish_id: +personalInfo.parish,
 					degree: [
 						{
 							description: professionalInfo.academicTraining,

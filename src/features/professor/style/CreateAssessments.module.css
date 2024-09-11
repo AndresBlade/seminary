@@ -137,7 +137,7 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 7rem;
+    height: 10rem;
     padding: 1rem 2rem 1rem 2rem;
     overflow-x: scroll;
     overflow-y: none;
@@ -155,8 +155,8 @@ input::-webkit-inner-spin-button {
     background-color: var(--fondoMaterias);
 }
 .dataSeminarian p{
-    min-width: 11rem;
-    max-width: 11rem;
+    min-width: 12rem;
+    max-width: 12rem;
 }
 .nose{
     display: flex;

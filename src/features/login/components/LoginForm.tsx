@@ -49,13 +49,11 @@ export const LoginForm = () => {
 							.catch(error => {
 								alert(error);
 							});
-					} else {
-						alert('verifique sus datos');
-						return;
 					}
 				})
 				.catch(error => {
-					alert(error);
+					alert('Credenciales invalidas');
+					console.log(error)
 					return;
 				});
 		} else {

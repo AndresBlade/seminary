@@ -69,7 +69,7 @@ export interface personalInfoProps {
 	medicalRecord: string;
 	rol: string;
 	diocese?: string;
-	parish?: string;
+	parish: string;
 }
 
 export interface contactInfoProps {
